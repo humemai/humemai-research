@@ -4,7 +4,6 @@ The trained neural network policies are not implemented yet.
 """
 
 import random
-from typing import Literal
 
 import numpy as np
 import torch
@@ -253,22 +252,24 @@ def manage_memory(
 
     def action_number_0():
         if hasattr(memory_systems, "episodic"):
-            assert memory_systems.episodic.capacity != 0
-            if memory_systems.episodic.is_full:
-                memory_systems.episodic.forget_oldest()
+            assert memory_systems.episodic.capacity > 0
+
             mem_short = memory_systems.short.get_oldest_memory()
             mem_epi = ShortMemory.short2epi(mem_short)
+            if not memory_systems.episodic.can_be_added(mem_epi)[0]:
+                memory_systems.episodic.forget_oldest()
             memory_systems.episodic.add(mem_epi)
 
     def action_number_1():
         if hasattr(memory_systems, "semantic"):
-            assert memory_systems.semantic.capacity != 0
-            if memory_systems.semantic.is_full:
-                memory_systems.semantic.forget_weakest()
+            assert memory_systems.semantic.capacity > 0
+
             mem_short = memory_systems.short.get_oldest_memory()
             mem_sem = ShortMemory.short2sem(
                 mem_short, split_possessive=split_possessive
             )
+            if not memory_systems.semantic.can_be_added(mem_sem)[0]:
+                memory_systems.semantic.forget_weakest()
             memory_systems.semantic.add(mem_sem)
 
     assert not memory_systems.short.is_empty
@@ -287,9 +288,10 @@ def manage_memory(
             if "agent" != mem_short[0]:
                 raise ValueError("This is not an agent location related memory!")
             assert memory_systems.episodic_agent.capacity > 0
-            if memory_systems.episodic_agent.is_full:
-                memory_systems.episodic_agent.forget_oldest()
+
             mem_epi = ShortMemory.short2epi(mem_short)
+            if not memory_systems.episodic_agent.can_be_added(mem_epi)[0]:
+                memory_systems.episodic_agent.forget_oldest()
             memory_systems.episodic_agent.add(mem_epi)
 
     elif policy.lower() == "semantic_map":
@@ -298,11 +300,12 @@ def manage_memory(
             if mem_short[1] not in ["north", "east", "south", "west"]:
                 raise ValueError("This is not a room-map-related memory.")
             assert memory_systems.semantic_map.capacity > 0
-            if memory_systems.semantic_map.is_full:
-                memory_systems.semantic_map.forget_weakest()
+
             mem_sem = ShortMemory.short2sem(
                 mem_short, split_possessive=split_possessive
             )
+            if not memory_systems.semantic_map.can_be_added(mem_sem)[0]:
+                memory_systems.semantic_map.forget_weakest()
             memory_systems.semantic_map.add(mem_sem)
 
     elif policy.lower() == "episodic":

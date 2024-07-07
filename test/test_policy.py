@@ -54,7 +54,7 @@ class PolicyTest(unittest.TestCase):
         self.assertTrue(action in ["north", "east", "south", "west", "stay"])
 
     def test_explore_avoid_walls(self):
-        with self.assertRaises(IndexError):
+        with self.assertRaises(ValueError):
             explore(self.memory_systems, "avoid_walls")
 
         obs = ["livingroom", "north", "wall", 1]

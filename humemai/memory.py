@@ -1,6 +1,5 @@
 """Memory system classes."""
 
-import logging
 import os
 import random
 from pprint import pformat
@@ -8,12 +7,6 @@ from pprint import pformat
 import numpy as np
 
 from .utils import list_duplicates_of, remove_posession, remove_timestamp
-
-logging.basicConfig(
-    level=os.environ.get("LOGLEVEL", "INFO").upper(),
-    format="%(asctime)s.%(msecs)03d %(levelname)s %(module)s - %(funcName)s: %(message)s",
-    datefmt="%Y-%m-%d %H:%M:%S",
-)
 
 
 class Memory:
@@ -40,14 +33,11 @@ class Memory:
                 then it's an empty memory system.
 
         """
-        logging.debug(f"instantiating a memory object with size {capacity} ...")
 
         self.entries = []
         self.capacity = capacity
         assert self.capacity >= 0
         self._frozen = False
-
-        logging.debug(f"Memory systrem with size {capacity} instantiated!")
 
         if memories is not None:
             for mem in memories:
@@ -91,15 +81,9 @@ class Memory:
         """
         check, error_msg = self.can_be_added(mem)
         if not check:
-            logging.error(error_msg)
             raise ValueError(error_msg)
 
-        logging.debug(f"Adding a new memory entry {mem} ...")
         self.entries.append(mem)
-        logging.info(
-            f"memory entry {mem} added. Now there are in total of "
-            f"{len(self.entries)} memories!"
-        )
 
         # sort ascending
         self.entries.sort(key=lambda x: x[-1])
@@ -140,27 +124,21 @@ class Memory:
         """
         check, error_msg = self.can_be_forgotten(mem)
         if not check:
-            logging.error(error_msg)
             raise ValueError(error_msg)
 
-        logging.debug(f"Forgetting {mem} ...")
         self.entries.remove(mem)
-        logging.info(f"{mem} forgotten!")
 
     def forget_all(self) -> None:
         """Forget everything in the memory system!"""
         if self.capacity == 0:
             error_msg = "The memory system capacity is 0. Can't forget all."
-            logging.warning(error_msg)
             raise ValueError(error_msg)
 
         if self.is_frozen:
             error_msg = "The memory system is frozen. Can't forget all. Unfreeze first."
-            logging.warning(error_msg)
             raise ValueError(error_msg)
 
         else:
-            logging.warning("EVERYTHING IN THE MEMORY SYSTEM WILL BE FORGOTTEN!")
             self.entries = []
 
     def get_first_memory(self) -> None:
@@ -194,7 +172,6 @@ class Memory:
 
         """
         if self.is_empty:
-            logging.warning("Memory is empty. I can't answer any questions!")
             pred = None
             num = None
 
@@ -203,8 +180,6 @@ class Memory:
             pred_idx = query.index("?")
             pred = mem[pred_idx]
             num = mem[-1]
-
-        logging.info(f"pred: {pred}, num: {num}")
 
         return pred, num
 
@@ -223,13 +198,9 @@ class Memory:
         candidates = self.find_memory(query[:-1] + ["?"])
 
         if len(candidates) == 0:
-            logging.info("no relevant memories found.")
             pred = None
             num = None
         else:
-            logging.info(
-                f"{len(candidates)} relevant memories were found in the entries!"
-            )
             candidates.sort(key=lambda x: x[-1])
             candidate = candidates[0]
             query_idx = query.index("?")
@@ -253,13 +224,9 @@ class Memory:
         candidates = self.find_memory(query[:-1] + ["?"])
 
         if len(candidates) == 0:
-            logging.info("no relevant memories found.")
             pred = None
             num = None
         else:
-            logging.info(
-                f"{len(candidates)} relevant memories were found in the entries!"
-            )
             candidates.sort(key=lambda x: x[-1])
             candidate = candidates[-1]
             query_idx = query.index("?")
@@ -298,7 +265,6 @@ class Memory:
 
     def forget_random(self) -> None:
         """Forget a memory in the memory system in a uniform-randomly."""
-        logging.warning("forgetting a memory uniformly at random ...")
         mem = random.choice(self.entries)
         self.forget(mem)
 
@@ -310,12 +276,7 @@ class Memory:
 
         """
         assert isinstance(increase, int) and (not self.is_frozen)
-        logging.debug(f"Increasing the memory capacity by {increase} ...")
         self.capacity += increase
-        logging.info(
-            f"The memory capacity has been increased by {increase} and now it's "
-            f"{self.capacity}!"
-        )
 
     def decrease_capacity(self, decrease: int) -> None:
         """decrease the capacity.
@@ -329,12 +290,7 @@ class Memory:
             and (self.capacity - decrease >= 0)
             and (not self.is_frozen)
         )
-        logging.debug(f"Decreasing the memory capacity by {decrease} ...")
         self.capacity -= decrease
-        logging.info(
-            f"The memory capacity has been decreased by {decrease} and now it's "
-            f"{self.capacity}!"
-        )
 
     def return_as_list(self) -> list[list]:
         """
@@ -374,7 +330,6 @@ class EpisodicMemory(Memory):
         self,
         capacity: int,
         memories: list | None = None,
-        remove_duplicates: bool = False,
     ) -> None:
         """Init an episodic memory system.
 
@@ -382,13 +337,10 @@ class EpisodicMemory(Memory):
             capacity: capacity of the memory system (i.e., number of entries)
             memories: memories that can already be added from the beginning, if None,
                 then it's an empty memory system.
-            remove_duplicates: if True, it'll remove the same memories with the older
-                timestamps.
 
         """
         super().__init__(capacity, memories)
         self.type = "episodic"
-        self.remove_duplicates = remove_duplicates
 
     def add(self, mem: list[str]) -> None:
         """Append a memory to the episodic memory system.
@@ -398,14 +350,47 @@ class EpisodicMemory(Memory):
 
         """
         super().add(mem)
-        if self.remove_duplicates:
-            self.clean_old_memories()
 
     def get_oldest_memory(self) -> list:
-        return self.get_first_memory()
+        """This should return the oldest memory in the memory system.
+
+        If there are multiple memories with the same timestamp, then it should return
+        a memory chosen randomly uniformly.
+
+        Returns:
+            mem: the oldest memory as a quadruple
+        """
+        if self.is_empty:
+            raise ValueError("The memory system is empty!")
+
+        # Sort entries by the timestamp (last element)
+        oldest_timestamp = min(self.entries, key=lambda x: x[-1])[-1]
+        oldest_memories = [mem for mem in self.entries if mem[-1] == oldest_timestamp]
+
+        # Randomly select one if there are multiple memories with the same oldest
+        # timestamp
+        return random.choice(oldest_memories)
 
     def get_latest_memory(self) -> list:
-        return self.get_last_memory()
+        """This should return the latest memory in the memory system.
+
+        If there are multiple memories with the same timestamp, then it should return
+        a memory chosen randomly uniformly.
+
+        Returns:
+            mem: the latest memory as a quadruple
+        """
+        if self.is_empty:
+            raise ValueError("The memory system is empty!")
+
+        # Find the maximum timestamp in the entries
+        latest_timestamp = max(self.entries, key=lambda x: x[-1])[-1]
+
+        # Filter entries to get all memories with the maximum timestamp
+        latest_memories = [mem for mem in self.entries if mem[-1] == latest_timestamp]
+
+        # Randomly select one if there are multiple memories with the same latest timestamp
+        return random.choice(latest_memories)
 
     def forget_oldest(self) -> None:
         """Forget the oldest entry in the memory system.
@@ -414,7 +399,6 @@ class EpisodicMemory(Memory):
         them.
 
         """
-        logging.debug("forgetting the oldest memory (FIFO)...")
 
         mem = self.get_oldest_memory()
         self.forget(mem)
@@ -426,7 +410,6 @@ class EpisodicMemory(Memory):
         them.
 
         """
-        logging.debug("forgetting the oldest memory (FIFO)...")
 
         mem = self.get_latest_memory()
         self.forget(mem)
@@ -473,22 +456,17 @@ class EpisodicMemory(Memory):
             mem: An episodic memory as a quadruple: [head, relation, tail, timestamp]
 
         """
-        logging.debug(f"Turning an observation {ob} into a episodic memory ...")
 
         mem = ob
-
-        logging.info(f"Observation {ob} is now a episodic memory {mem}")
 
         return mem
 
     def clean_old_memories(self) -> list:
         """Find if there are duplicate memories with different timestamps."""
-        logging.debug("finding if duplicate memories exist ...")
 
         MARKER = "^^^"  # to allow hashing.
         entries = [MARKER.join(target[:-1]) for target in self.entries]
 
-        logging.debug(f"There are {len(entries)} episodic memories before cleaning")
         uniques = set(entries)
 
         locs_all = [
@@ -504,8 +482,6 @@ class EpisodicMemory(Memory):
 
         self.entries = entries_cleaned
         self.entries.sort(key=lambda x: x[-1])
-
-        logging.debug(f"There are {len(self.entries)} episodic memories after cleaning")
 
     def find_similar_memories(self, split_possessive: bool = True) -> list:
         """Find N episodic memories that can be compressed into one semantic.
@@ -523,7 +499,6 @@ class EpisodicMemory(Memory):
                 (i.e., (head, relation, tail, num_generalized_memories))
 
         """
-        logging.debug("looking for episodic entries that can be compressed ...")
         MARKER = "^^^"  # to allow hashing.
 
         semantic_possibles = [
@@ -545,11 +520,9 @@ class EpisodicMemory(Memory):
         )
 
         if len(semantic_possibles) == len(self.entries):
-            logging.info("no episodic memories found to be compressible.")
             return None, None
 
         elif len(semantic_possibles) < len(self.entries):
-            logging.debug("some episodic memories found to be compressible.")
 
             lens = [len(foo) for foo in list(semantic_possibles.values())]
             selected = np.argwhere(lens == np.max(lens)).flatten().tolist()
@@ -570,10 +543,6 @@ class EpisodicMemory(Memory):
             for mem in episodic_memories:
                 assert len(mem) == 4
 
-            logging.info(
-                f"{len(indexes)} episodic memories can be compressed "
-                f"into one semantic memory: {semantic_memory}."
-            )
             return episodic_memories, semantic_memory
         else:
             raise ValueError("Something is wrong!")
@@ -587,7 +556,24 @@ class ShortMemory(Memory):
         self.type = "short"
 
     def get_oldest_memory(self) -> list:
-        return self.get_first_memory()
+        """This should return the oldest memory in the memory system.
+
+        If there are multiple memories with the same timestamp, then it should return
+        a memory chosen randomly uniformly.
+
+        Returns:
+            mem: the oldest memory as a quadruple
+        """
+        if self.is_empty:
+            raise ValueError("The memory system is empty!")
+
+        # Sort entries by the timestamp (last element)
+        oldest_timestamp = min(self.entries, key=lambda x: x[-1])[-1]
+        oldest_memories = [mem for mem in self.entries if mem[-1] == oldest_timestamp]
+
+        # Randomly select one if there are multiple memories with the same oldest
+        # timestamp
+        return random.choice(oldest_memories)
 
     def get_latest_memory(self) -> list:
         return self.get_last_memory()
@@ -599,7 +585,6 @@ class ShortMemory(Memory):
         them.
 
         """
-        logging.debug("forgetting the oldest memory (FIFO)...")
 
         mem = self.get_oldest_memory()
         self.forget(mem)
@@ -611,7 +596,6 @@ class ShortMemory(Memory):
         them.
 
         """
-        logging.debug("forgetting the oldest memory (FIFO)...")
 
         mem = self.get_latest_memory()
         self.forget(mem)
@@ -630,11 +614,8 @@ class ShortMemory(Memory):
             mem: A short-term memory as a quadruple: [head, relation, tail, timestamp]
 
         """
-        logging.debug(f"Turning an observation {ob} into a short memory ...")
 
         mem = ob
-
-        logging.info(f"Observation {ob} is now a short-term memory {mem}")
 
         return mem
 
@@ -678,17 +659,29 @@ class ShortMemory(Memory):
 class SemanticMemory(Memory):
     """Semantic memory class."""
 
-    def __init__(self, capacity: int, memories: list | None = None) -> None:
+    def __init__(
+        self,
+        capacity: int,
+        memories: list | None = None,
+        decay_factor: float = 1.0,
+        min_strength: int = 1,
+    ) -> None:
         """Init a semantic memory system.
 
         Args:
             capacity: capacity of the memory system (i.e., number of entries)
             memories: memories that can already be added from the beginning, if None,
                 then it's an empty memory system.
+            decay_factor: the decay factor for the strength of the memory
+            min_strength: the minimum strength of the memory
 
         """
         super().__init__(capacity, memories)
         self.type = "semantic"
+
+        assert 0.0 <= decay_factor <= 1.0, "Decay factor should be in [0, 1]"
+        self.decay_factor = decay_factor
+        self.min_strength = min_strength
 
     def can_be_added(self, mem: list[str]) -> bool:
         """Checks if a memory can be added to the system or not.
@@ -715,7 +708,7 @@ class SemanticMemory(Memory):
         else:
             return True, ""
 
-    def add(self, mem: dict):
+    def add(self, mem: list):
         """Append a memory to the semantic memory system.
 
         Args:
@@ -724,6 +717,17 @@ class SemanticMemory(Memory):
         """
         super().add(mem)
         self.clean_same_memories()
+
+        if self.size > self.capacity:
+            raise ValueError(f"Something went wrong. {self.size} > {self.capacity}.")
+
+    def decay(self) -> None:
+        """Decay the strength of the memory. The strength is always integer."""
+        if self.decay_factor < 1.0:
+            for mem in self.entries:
+                mem[-1] *= self.decay_factor
+                if mem[-1] < 1.0:
+                    mem[-1] = self.min_strength
 
     def pretrain_semantic(
         self,
@@ -752,31 +756,53 @@ class SemanticMemory(Memory):
             if self.is_full:
                 break
             mem = [*triple, 1]  # num_generalized = 1
-            logging.debug(f"adding a pretrained semantic knowledge {mem}")
             self.add(mem)
 
         if return_remaining_space:
             free_space = self.capacity - len(self.entries)
             self.decrease_capacity(free_space)
-            logging.info(
-                f"The remaining space {free_space} will be returned. Now "
-                f"the capacity of the semantic memory system is {self.capacity}"
-            )
 
         else:
             free_space = None
 
         if freeze:
             self.freeze()
-            logging.info("The semantic memory system is frozen!")
 
         return free_space
 
     def get_weakest_memory(self) -> list:
-        return self.get_first_memory()
+        """Get the weakest memory in the semantic memory system.
+
+        If there are multiple memories with the same num_generalized, then it should
+        return a memory chosen randomly uniformly.
+        """
+        if self.is_empty:
+            raise ValueError("The memory system is empty!")
+
+        # Find the smallest num_generalized
+        weakest_value = min(self.entries, key=lambda x: x[-1])[-1]
+        weakest_memories = [mem for mem in self.entries if mem[-1] == weakest_value]
+
+        # Randomly select one if there are multiple memories with the same
+        # num_generalized value
+        return random.choice(weakest_memories)
 
     def get_strongest_memory(self) -> list:
-        return self.get_last_memory()
+        """Get the strongest memory in the semantic memory system.
+
+        If there are multiple memories with the same num_generalized, then it should
+        return a memory chosen randomly uniformly.
+        """
+        if self.is_empty:
+            raise ValueError("The memory system is empty!")
+
+        # Find the largest num_generalized
+        strongest_value = max(self.entries, key=lambda x: x[-1])[-1]
+        strongest_memories = [mem for mem in self.entries if mem[-1] == strongest_value]
+
+        # Randomly select one if there are multiple memories with the same
+        # num_generalized value
+        return random.choice(strongest_memories)
 
     def forget_weakest(self) -> None:
         """Forget the weakest entry in the semantic memory system.
@@ -785,17 +811,13 @@ class SemanticMemory(Memory):
         memories and comparing them.
 
         """
-        logging.debug("forgetting the weakest memory ...")
         mem = self.get_weakest_memory()
         self.forget(mem)
-        logging.info(f"{mem} is forgotten!")
 
     def forget_strongest(self) -> None:
         """Forget the strongest entry in the semantic memory system."""
-        logging.debug("forgetting the strongest memory ...")
         mem = self.get_strongest_memory()
         self.forget(mem)
-        logging.info(f"{mem} is forgotten!")
 
     def answer_weakest(
         self, query: list, split_possessive: bool = True
@@ -811,7 +833,6 @@ class SemanticMemory(Memory):
             num_generalized: number of generalized samples.
 
         """
-        logging.debug("answering a question with the answer_strongest policy ...")
 
         if split_possessive:
             query = [remove_posession(e) for e in query[:-1]] + [query[-1]]
@@ -832,7 +853,6 @@ class SemanticMemory(Memory):
             num_generalized: number of generalized samples.
 
         """
-        logging.debug("answering a question with the answer_strongest policy ...")
 
         if split_possessive:
             query = [remove_posession(e) for e in query[:-1]] + [query[-1]]
@@ -856,7 +876,6 @@ class SemanticMemory(Memory):
         """
 
         assert len(ob) == 4
-        logging.debug(f"Turning an observation {ob} into a semantic memory ...")
         # split to remove the name
         if split_possessive:
             head, relation, tail = (
@@ -869,7 +888,6 @@ class SemanticMemory(Memory):
 
         # 1 stands for the 1 generalized.
         mem = [head, relation, tail, 1]
-        logging.info(f"Observation {ob} is now a semantic memory {mem}")
 
         return mem
 
@@ -879,11 +897,8 @@ class SemanticMemory(Memory):
         At the moment, this is simply done by matching string values.
 
         """
-        logging.debug("finding if duplicate memories exist ...")
 
         entries = ["".join(target[:-1]) for target in self.entries]
-
-        logging.debug(f"There are {len(entries)} semantic memories before cleaning")
 
         entries = ["".join(mem) for mem in entries]  # to make list hashable
         uniques = set(entries)
@@ -901,15 +916,6 @@ class SemanticMemory(Memory):
 
         self.entries = entries_cleaned
         self.entries.sort(key=lambda x: x[-1])
-        logging.debug(f"There are {len(self.entries)} episodic memories after cleaning")
-
-
-class WorkingMemory(Memory):
-    """Working memory class."""
-
-    def __init__(self, capacity: int, memories: list | None = None) -> None:
-        super().__init__(capacity)
-        self.type = "working"
 
 
 class MemorySystems:
