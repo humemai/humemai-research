@@ -70,7 +70,7 @@ class Memory:
         if self._frozen:
             return False, "The memory system is frozen!"
 
-        return True, ""
+        return True, None
 
     def add(self, mem: list) -> None:
         """Add memory to the memory system.
@@ -78,7 +78,7 @@ class Memory:
         There is no sorting done. It's just appended to the end.
 
         Args:
-           mem: A memory as a quadraple: [head, relation, tail, num]
+           mem: A memory as a quadruple: [head, relation, tail, num]
 
         """
         check, error_msg = self.can_be_added(mem)
@@ -93,7 +93,7 @@ class Memory:
         """Check if a memory can be added to the system or not.
 
         Args:
-            mem: A memory as a quadraple: [head, relation, tail, num]
+            mem: A memory as a quadruple: [head, relation, tail, num]
 
         Returns:
             True or False
@@ -118,10 +118,13 @@ class Memory:
         """forget the given memory.
 
         Args:
-            mem: A memory as a quadraple: [head, relation, tail, num], where `num` is
+            mem: A memory as a quadruple: [head, relation, tail, num], where `num` is
                 either a list of an int.
 
         """
+        check, error_msg = self.can_be_forgotten(mem)
+        if not check:
+            raise ValueError(error_msg)
         self.entries.remove(mem)
 
     def forget_all(self) -> None:
@@ -141,7 +144,7 @@ class Memory:
         """Check if a memory is in the memory system.
 
         Args:
-            mem: A memory as a quadraple: [head, relation, tail, object]
+            mem: A memory as a quadruple: [head, relation, tail, object]
 
         Returns:
             True or False
@@ -269,29 +272,23 @@ class Memory:
 
         """
 
+        if qualifier_object_type == "list" and list_select_by is None:
+            raise ValueError(
+                "The list_select_by parameter must be provided when the qualifier "
+                "object type is a list."
+            )
+
         def get_qualifier_value(memory):
             for element in memory:
                 if isinstance(element, dict) and qualifier in element:
                     return element[qualifier]
             return None
 
-        # Initialize variables to track the memory with the desired qualifier value
-        if select_by == "min":
-            desired_value = float("inf")
-        elif select_by == "max":
-            desired_value = float("-inf")
-        desired_memory = None
+        # Initialize variables to track the memories with the desired qualifier value
+        desired_value = None
+        candidates = []
 
-        # Comparison function to update the desired memory and value
-        def compare_and_update(value, memory):
-            nonlocal desired_value, desired_memory
-            if (select_by == "min" and value < desired_value) or (
-                select_by == "max" and value > desired_value
-            ):
-                desired_value = value
-                desired_memory = memory
-
-        # Iterate over each memory and update the desired memory based on the qualifier type
+        # Iterate over each memory and update the candidates based on the qualifier
         for memory in self.to_list():
             qualifier_value = get_qualifier_value(memory)
             if qualifier_value is not None:
@@ -300,11 +297,23 @@ class Memory:
                         value = max(qualifier_value)
                     elif list_select_by == "min":
                         value = min(qualifier_value)
+                    else:
+                        continue  # Handle cases where list_select_by is not provided
                 else:  # qualifier_object_type == "int"
                     value = qualifier_value
-                compare_and_update(value, memory)
 
-        return desired_memory
+                if desired_value is None or (
+                    (select_by == "min" and value < desired_value)
+                    or (select_by == "max" and value > desired_value)
+                ):
+                    desired_value = value
+                    candidates = [memory]
+                elif value == desired_value:
+                    candidates.append(memory)
+
+        if candidates:
+            return random.choice(candidates)
+        return None
 
 
 class ShortMemory(Memory):
@@ -317,7 +326,7 @@ class ShortMemory(Memory):
         """Check if a memory can be added to the short-term memory system.
 
         Args:
-            mem: A memory as a quadraple: [head, relation, tail, current_time]
+            mem: A memory as a quadruple: [head, relation, tail, current_time]
 
         Returns:
             True or False, error_msg
@@ -332,16 +341,33 @@ class ShortMemory(Memory):
 
         if self.is_full:
             for entry in self.entries:
-                if entry[:-1] == mem[:-1]:
+                if entry == mem:
                     return True, None
 
             return False, "The memory system is full!"
 
         return True, None
 
+    def add(self, mem: list) -> None:
+        """Append a memory to the short-term memory system.
+
+        Args:
+            mem: A memory as a quadruple: [head, relation, tail, qualifiers]
+        """
+        assert self.can_be_added(mem)[0]
+
+        added = False
+
+        for entry in self.entries:
+            if entry == mem:
+                added = True
+
+        if not added:
+            super().add(mem)
+
     @staticmethod
     def ob2short(ob: list) -> list:
-        """Turn an observation into an short memory.
+        """Turn an observation into a short memory.
 
         This is done by adding the qualifier "current_time" to the observation.
 
@@ -353,13 +379,14 @@ class ShortMemory(Memory):
                 {"current_time": int}]
 
         """
+        assert len(ob) == 4, "The observation should be a quadruple."
         mem = ob[:-1] + [{"current_time": ob[-1]}]
 
         return mem
 
     @staticmethod
     def short2epi(short: list) -> list:
-        """Turn a short memory into a episodic memory.
+        """Turn a short memory into an episodic memory.
 
         This is done by simply copying the short memory, and changing the qualifier
         "current_time" to "timestamp".
@@ -398,14 +425,34 @@ class ShortMemory(Memory):
 class LongMemory(Memory):
     """Long-term memory class."""
 
-    def __init__(self, capacity: int, memories: list[list] | None = None) -> None:
+    def __init__(
+        self,
+        capacity: int,
+        memories: list[list] | None = None,
+        semantic_decay_factor: float = 1.0,
+        min_strength: int = 1,
+    ) -> None:
+        """Initialize the long-term memory system.
+
+        Args:
+            capacity: memory capacity
+            memories: memories that can already be added from the beginning, if None,
+                then it's an empty memory system.
+            semantic_decay_factor: The decay factor for semantic memories. The lower
+                the value, the faster the decay. The value should be between 0 and 1.
+            min_strength: The minimum strength value for a memory. If the strength
+                becomes less than this value, it is set to this value.
+        """
         super().__init__(capacity, memories)
+        assert 0.0 <= semantic_decay_factor <= 1.0, "Decay factor should be in [0, 1]"
+        self.semantic_decay_factor = semantic_decay_factor
+        self.min_strength = min_strength
 
     def can_be_added(self, mem: list) -> tuple[bool, str | None]:
         """Check if a memory can be added to the long-term memory system.
 
         Args:
-            mem: A memory as a quadraple: [head, relation, tail, qualifiers]
+            mem: A memory as a quadruple: [head, relation, tail, qualifiers]
             type: "episodic" or "semantic"
 
         Returns:
@@ -416,7 +463,11 @@ class LongMemory(Memory):
         if not check:
             return check, error_msg
 
-        if not set(mem[-1]).issubset(set(["timestamp", "strength"])):
+        # Check if the memory has "timestamp" or "strength" qualifiers
+        if (
+            not set(mem[-1]).issubset(set(["timestamp", "strength"]))
+            or set(mem[-1]) == set()
+        ):
             return False, "The memory should have timestamp or strength!"
 
         if self.is_full:
@@ -433,7 +484,7 @@ class LongMemory(Memory):
         """Append a memory to the long-term memory system.
 
         Args:
-            mem: A memory as a quadraple: [head, relation, tail, qualifiers]
+            mem: A memory as a quadruple: [head, relation, tail, qualifiers]
         """
         assert self.can_be_added(mem)[0]
 
@@ -511,6 +562,15 @@ class LongMemory(Memory):
                 "Invalid selection. Please choose from "
                 "'oldest', 'latest', 'weakest', 'strongest'."
             )
+
+    def decay(self) -> None:
+        """Decay the strength of the memory. The strength is always integer."""
+        if self.semantic_decay_factor < 1.0:
+            for mem in self.entries:
+                if "strength" in mem[-1]:
+                    mem[-1]["strength"] *= self.semantic_decay_factor
+                    if mem[-1]["strength"] < 1:
+                        mem[-1]["strength"] = self.min_strength
 
     def count_memories(self) -> tuple[int, int]:
         """Count the memories with qualifiers, "timestamp" and "strength", respectively.
