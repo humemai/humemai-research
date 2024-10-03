@@ -1,10 +1,12 @@
 """Memory Class with RDFLib"""
 
-import logging
-from rdflib import Graph, URIRef, BNode, Literal, Namespace
-from rdflib.namespace import RDF, XSD
-from datetime import datetime
 import collections
+import logging
+import os
+from datetime import datetime
+
+from rdflib import BNode, Graph, Literal, Namespace, URIRef
+from rdflib.namespace import RDF, XSD
 
 from .utils import validate_iso_format
 
@@ -237,10 +239,13 @@ class Memory:
         if not currentTime:
             raise ValueError("Missing required qualifier: currentTime")
 
-        qualifiers = {
-            humemai.currentTime: currentTime,
-            humemai.location: location,
-        }
+        if location is None:
+            qualifiers = {humemai.currentTime: currentTime}
+        else:
+            qualifiers = {
+                humemai.currentTime: currentTime,
+                humemai.location: location,
+            }
 
         self.add_memory(triples, qualifiers)
 
@@ -283,10 +288,15 @@ class Memory:
                     "Invalid qualifiers for episodic memory. Use 'semantic' memory type instead."
                 )
 
+            # Add required qualifiers
             qualifiers[humemai.location] = location
             qualifiers[humemai.time] = time
-            qualifiers[humemai.emotion] = emotion
-            qualifiers[humemai.event] = event
+
+            # Add optional qualifiers
+            if emotion is not None:
+                qualifiers[humemai.emotion] = emotion
+            if event is not None:
+                qualifiers[humemai.event] = event
 
         elif memory_type == "semantic":
             # Required qualifiers for semantic memories
@@ -295,8 +305,11 @@ class Memory:
                     "Invalid qualifiers for semantic memory. Use 'episodic' memory type instead."
                 )
 
-            qualifiers[humemai.strength] = strength
-            qualifiers[humemai.derivedFrom] = derivedFrom
+            # Add optional qualifiers
+            if strength is not None:
+                qualifiers[humemai.strength] = strength
+            if derivedFrom is not None:
+                qualifiers[humemai.derivedFrom] = derivedFrom
 
         else:
             raise ValueError("memory_type must be either 'episodic' or 'semantic'")
@@ -478,17 +491,78 @@ class Memory:
         """
         Count the number of reified statements (RDF statements) in the graph.
         This counts the reified statements instead of just the main triples.
+        """
+        return sum(1 for _ in self.graph.subjects(RDF.type, RDF.Statement))
+
+    def get_short_term_memory_count(self) -> int:
+        """
+        Count the number of short-term memories in the graph.
+        Short-term memories are reified statements that have the 'currentTime' qualifier.
 
         Returns:
-            int: The count of reified statements.
+            int: The count of short-term memories.
         """
-        statement_count = 0
+        short_term_count = 0
+        for statement in self.graph.subjects(RDF.type, RDF.Statement):
+            if self.graph.value(
+                statement, URIRef("https://humem.ai/ontology/currentTime")
+            ):
+                short_term_count += 1
+        return short_term_count
 
-        # Iterate over all subjects of type rdf:Statement (reified statements)
-        for _ in self.graph.subjects(RDF.type, RDF.Statement):
-            statement_count += 1
+    def get_long_term_memory_count(self) -> int:
+        """
+        Count the number of long-term memories in the graph.
+        Long-term memories are reified statements that do NOT have the 'currentTime' qualifier.
 
-        return statement_count
+        Returns:
+            int: The count of long-term memories.
+        """
+        long_term_count = 0
+        for statement in self.graph.subjects(RDF.type, RDF.Statement):
+            if not self.graph.value(
+                statement, URIRef("https://humem.ai/ontology/currentTime")
+            ):
+                long_term_count += 1
+        return long_term_count
+
+    def get_long_term_episodic_memory_count(self) -> int:
+        """
+        Count the number of long-term episodic memories in the graph.
+        Long-term episodic memories are reified statements that have the 'time' qualifier.
+
+        Returns:
+            int: The count of long-term episodic memories.
+        """
+        episodic_count = 0
+        for statement in self.graph.subjects(RDF.type, RDF.Statement):
+            if not self.graph.value(
+                statement, URIRef("https://humem.ai/ontology/currentTime")
+            ):
+                if self.graph.value(
+                    statement, URIRef("https://humem.ai/ontology/time")
+                ):
+                    episodic_count += 1
+        return episodic_count
+
+    def get_long_term_semantic_memory_count(self) -> int:
+        """
+        Count the number of long-term semantic memories in the graph.
+        Long-term semantic memories are reified statements that do NOT have the 'time' qualifier.
+
+        Returns:
+            int: The count of long-term semantic memories.
+        """
+        semantic_count = 0
+        for statement in self.graph.subjects(RDF.type, RDF.Statement):
+            if not self.graph.value(
+                statement, URIRef("https://humem.ai/ontology/currentTime")
+            ):
+                if not self.graph.value(
+                    statement, URIRef("https://humem.ai/ontology/time")
+                ):
+                    semantic_count += 1
+        return semantic_count
 
     def modify_strength(
         self, filters: dict, increment_by: int = None, multiply_by: float = None
@@ -885,7 +959,7 @@ class Memory:
                             f"Added reified statement triple to working memory: ({statement}, {stmt_p}, {stmt_o})"
                         )
 
-    def _get_short_term_memories_with_current_time(self) -> "Memory":
+    def get_short_term_memories(self) -> "Memory":
         """
         Query the RDF graph to retrieve all short-term memories with a currentTime qualifier
         and include all associated qualifiers (e.g., location, emotion, etc.).
@@ -966,3 +1040,149 @@ class Memory:
                 )
 
         return short_term_memory
+
+    def get_long_term_memories(self) -> "Memory":
+        """
+        Retrieve all long-term memories from the RDF graph.
+        Long-term memories are identified by the absence of a 'currentTime' qualifier.
+
+        Returns:
+            Memory: A new Memory object containing all long-term memories (episodic and semantic).
+        """
+        long_term_memory = Memory(self.verbose_repr)
+
+        # SPARQL query to retrieve all reified statements that do not have a currentTime qualifier
+        query = """
+        PREFIX humemai: <https://humem.ai/ontology/>
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+        SELECT ?statement ?subject ?predicate ?object
+        WHERE {
+            ?statement rdf:type rdf:Statement ;
+                    rdf:subject ?subject ;
+                    rdf:predicate ?predicate ;
+                    rdf:object ?object .
+            FILTER NOT EXISTS { ?statement humemai:currentTime ?currentTime }
+        }
+        """
+
+        logger.debug(f"Executing SPARQL query to retrieve long-term memories:\n{query}")
+        results = self.graph.query(query)
+
+        # Add the resulting triples to the new Memory object (long-term memory)
+        for row in results:
+            subj = row.subject
+            pred = row.predicate
+            obj = row.object
+
+            # Add the main triple to the long-term memory graph
+            long_term_memory.graph.add((subj, pred, obj))
+
+            # Create a reified statement and add it
+            reified_statement = BNode()
+            long_term_memory.graph.add((reified_statement, RDF.type, RDF.Statement))
+            long_term_memory.graph.add((reified_statement, RDF.subject, subj))
+            long_term_memory.graph.add((reified_statement, RDF.predicate, pred))
+            long_term_memory.graph.add((reified_statement, RDF.object, obj))
+
+            # Now, add all qualifiers (excluding 'currentTime')
+            for qualifier_pred, qualifier_obj in self.graph.predicate_objects(
+                row.statement
+            ):
+                if qualifier_pred != humemai.currentTime:
+                    long_term_memory.graph.add(
+                        (reified_statement, qualifier_pred, qualifier_obj)
+                    )
+
+        return long_term_memory
+
+    def load_from_ttl(self, ttl_file: str):
+        """
+        Load memory data from a Turtle (.ttl) file into the RDF graph.
+
+        Args:
+            ttl_file (str): Path to the Turtle file to load.
+        """
+        if not os.path.exists(ttl_file):
+            raise FileNotFoundError(f"Turtle file not found: {ttl_file}")
+
+        logger.info(f"Loading memory from TTL file: {ttl_file}")
+        self.graph.parse(ttl_file, format="ttl")
+        logger.info(f"Memory loaded from {ttl_file} successfully.")
+
+    def save_to_ttl(self, ttl_file: str):
+        """
+        Save the current memory graph to a Turtle (.ttl) file.
+
+        Args:
+            ttl_file (str): Path to the Turtle file to save.
+        """
+        logger.info(f"Saving memory to TTL file: {ttl_file}")
+        with open(ttl_file, "w") as f:
+            f.write(self.graph.serialize(format="ttl"))
+        logger.info(f"Memory saved to {ttl_file} successfully.")
+
+    def iterate_memories(self, memory_type=None):
+        """
+        Iterate over memories in the graph, filtered by memory type (short-term, long-term, episodic, semantic, or all).
+
+        Args:
+            memory_type (str, optional): The type of memory to iterate over.
+            Valid values: "short_term", "long_term", "episodic", "semantic", or "all".
+            - "short_term": Short-term memories (with 'currentTime').
+            - "long_term": Long-term memories (without 'currentTime').
+            - "episodic": Long-term episodic memories (with 'time').
+            - "semantic": Long-term semantic memories (without 'time' and 'currentTime').
+            - "all": Iterate over all memories (both short-term and long-term).
+            If None, defaults to "all".
+
+        Yields:
+            tuple: (subject, predicate, object, qualifiers) for each memory that matches the criteria.
+        """
+        valid_types = ["all", "short_term", "long_term", "episodic", "semantic"]
+
+        # Default to "all" if no memory_type is provided
+        if memory_type is None:
+            memory_type = "all"
+
+        assert (
+            memory_type in valid_types
+        ), f"Invalid memory_type. Valid values: {valid_types}"
+
+        for statement in self.graph.subjects(RDF.type, RDF.Statement):
+            subj = self.graph.value(statement, RDF.subject)
+            pred = self.graph.value(statement, RDF.predicate)
+            obj = self.graph.value(statement, RDF.object)
+
+            # Retrieve qualifiers for the statement
+            qualifiers = {}
+            for q_pred, q_obj in self.graph.predicate_objects(statement):
+                if q_pred not in (RDF.type, RDF.subject, RDF.predicate, RDF.object):
+                    qualifiers[str(q_pred)] = str(q_obj)
+
+            # Determine the type of memory
+            current_time = self.graph.value(statement, humemai.currentTime)
+            time = self.graph.value(statement, humemai.time)
+            derived_from = self.graph.value(statement, humemai.derivedFrom)
+
+            # Filter based on the memory_type argument
+            if memory_type == "short_term" and current_time:
+                # Short-term memory has currentTime
+                yield (subj, pred, obj, qualifiers)
+            elif memory_type == "long_term" and not current_time:
+                # Long-term memory does not have currentTime
+                yield (subj, pred, obj, qualifiers)
+            elif memory_type == "episodic" and not current_time and time:
+                # Episodic memory is long-term (no currentTime) and has time
+                yield (subj, pred, obj, qualifiers)
+            elif (
+                memory_type == "semantic"
+                and not current_time
+                and not time
+                and derived_from
+            ):
+                # Semantic memory is long-term (no currentTime, no time) and has derivedFrom
+                yield (subj, pred, obj, qualifiers)
+            elif memory_type == "all":
+                # All memories, regardless of type
+                yield (subj, pred, obj, qualifiers)

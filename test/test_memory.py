@@ -1,11 +1,13 @@
 """Test Memory class"""
 
+import os
 import unittest
-from unittest.mock import MagicMock
 from datetime import datetime
-from rdflib import URIRef, Literal, Namespace, RDF, BNode, XSD, Graph
-from humemai import Memory
+from unittest.mock import MagicMock
 
+from rdflib import RDF, XSD, BNode, Graph, Literal, Namespace, URIRef
+
+from humemai import Memory
 
 # Define custom namespace for humemai ontology
 humemai = Namespace("https://humem.ai/ontology/")
@@ -2630,10 +2632,10 @@ class TestGetShortTerm(unittest.TestCase):
             (self.reified_statement, self.emotion_qualifier, self.emotion_literal)
         )
 
-    def test_get_short_term_memories_with_current_time(self):
+    def testget_short_term_memories(self):
         """Test that short-term memories with currentTime are correctly retrieved and added to the Memory object."""
         # Call the method to retrieve short-term memories
-        short_term_memory = self.memory._get_short_term_memories_with_current_time()
+        short_term_memory = self.memory.get_short_term_memories()
 
         # Assertions to check if the triples and their qualifiers were added to the short-term memory
         # Check if the triple (Alice, met, Bob) was added
@@ -2678,7 +2680,7 @@ class TestGetShortTerm(unittest.TestCase):
         self.memory.graph = Graph()
 
         # Call the method to retrieve short-term memories
-        short_term_memory = self.memory._get_short_term_memories_with_current_time()
+        short_term_memory = self.memory.get_short_term_memories()
 
         # Ensure the graph is empty in this case
         self.assertEqual(
@@ -2707,7 +2709,7 @@ class TestGetShortTerm(unittest.TestCase):
         )
 
         # Call the method to retrieve short-term memories
-        short_term_memory = self.memory._get_short_term_memories_with_current_time()
+        short_term_memory = self.memory.get_short_term_memories()
 
         # Assertions to check if the triple and available qualifiers were added
         reified_statements = list(
@@ -2743,3 +2745,496 @@ class TestGetShortTerm(unittest.TestCase):
             (reified_statement, self.emotion_qualifier, self.emotion_literal),
             short_term_memory.graph,
         )
+
+
+class TestMemorySaveLoad(unittest.TestCase):
+    def setUp(self):
+        """Set up a Memory object and add some test data"""
+        # Create an instance of the Memory class
+        self.memory = Memory(verbose_repr=True)
+        self.test_file = "test_memory.ttl"
+
+        # Define the humemai and example namespaces
+        humemai = Namespace("https://humem.ai/ontology/")
+        ex = Namespace("https://example.org/")
+
+        # Add multiple short-term memories
+        self.memory.add_short_term_memory(
+            [(ex.Alice, ex.met, ex.Bob)],
+            location="New York",
+            currentTime="2024-04-27T15:00:00",
+        )
+        self.memory.add_short_term_memory(
+            [(ex.Alice, ex.met, ex.Bob)],
+            location="New York",
+            currentTime="2024-04-27T16:00:00",
+        )
+
+        self.memory.add_short_term_memory(
+            [(ex.Bob, ex.knows, ex.Alice)],
+            location="Paris",
+            currentTime="2024-05-01T10:00:00",
+        )
+
+        # Add multiple long-term episodic memories
+        self.memory.add_long_term_memory(
+            "episodic",
+            [(ex.Alice, ex.attended, ex.Conference)],
+            location="London",
+            time="2023-09-15T10:00:00",
+            emotion="excited",
+            event="AI Conference",
+        )
+        self.memory.add_long_term_memory(
+            "episodic",
+            [(ex.Alice, ex.spokeWith, ex.Charlie)],
+            location="London",
+            time="2023-09-15T11:00:00",
+            emotion="happy",
+            event="AI Conference",
+        )
+        self.memory.add_long_term_memory(
+            "episodic",
+            [(ex.Alice, ex.spokeWith, ex.Charlie)],
+            location="London",
+            time="2023-09-15T11:00:00",
+            emotion="sad",
+            event="AI Conference",
+        )
+
+        # Add multiple long-term semantic memories
+        self.memory.add_long_term_memory(
+            "semantic",
+            [(ex.Dog, ex.hasType, ex.Animal)],
+            derivedFrom="research_paper_1",
+            strength=5,
+        )
+        self.memory.add_long_term_memory(
+            "semantic",
+            [(ex.Cat, ex.hasType, ex.Animal)],
+            derivedFrom="research_paper_2",
+            strength=4,
+        )
+        self.memory.add_long_term_memory(
+            "semantic",
+            [(ex.Cat, ex.hasType, ex.Animal)],
+            derivedFrom="research_paper_2",
+            strength=4,
+        )
+        self.memory.add_long_term_memory(
+            "semantic",
+            [(ex.Cat, ex.hasType, ex.Animal)],
+            derivedFrom="research_paper_2",
+            strength=4,
+        )
+
+        # Store the triples before wiping
+        self.original_triples = self._get_triples_without_bnodes(self.memory.graph)
+
+    def _get_triples_without_bnodes(self, graph):
+        """
+        Get a set of triples from the graph, with BNodes replaced by a generic placeholder.
+        This is to ignore the differences in BNode IDs.
+        """
+        triples_without_bnodes = set()
+        for s, p, o in graph:
+            s = "BNode" if isinstance(s, BNode) else s
+            o = "BNode" if isinstance(o, BNode) else o
+            triples_without_bnodes.add((s, p, o))
+        return triples_without_bnodes
+
+    def test_save_and_load_ttl(self):
+        """Test saving and loading memory to/from TTL"""
+        # Step 1: Save the memory to a TTL file
+        self.memory.save_to_ttl(self.test_file)
+
+        # Step 2: Wipe the memory (clear the graph)
+        self.memory.graph = self.memory.graph.__class__()
+
+        # Ensure the memory is wiped
+        self.assertEqual(
+            len(self.memory.graph), 0, "Memory should be empty after wiping."
+        )
+
+        # Step 3: Load the memory back from the TTL file
+        self.memory.load_from_ttl(self.test_file)
+
+        # Step 4: Compare the triples before and after loading
+        loaded_triples = self._get_triples_without_bnodes(self.memory.graph)
+        self.assertEqual(
+            self.original_triples,
+            loaded_triples,
+            "Memory mismatch after loading from TTL",
+        )
+
+    def tearDown(self):
+        """Clean up after tests"""
+        # Remove the test file if it exists
+        if os.path.exists(self.test_file):
+            os.remove(self.test_file)
+
+
+class TestMemoryCounts(unittest.TestCase):
+
+    def setUp(self):
+        """
+        Set up a fresh Memory instance for each test.
+        """
+        self.memory = Memory(verbose_repr=False)
+
+    def test_memory_counts(self):
+        """
+        Test to verify memory counts and ensure relationships between total, short-term,
+        and long-term memories are consistent.
+        """
+        # Add some short-term memories
+        triples_1 = [
+            (
+                URIRef("https://example.org/Alice"),
+                URIRef("https://example.org/knows"),
+                URIRef("https://example.org/Bob"),
+            )
+        ]
+        triples_2 = [
+            (
+                URIRef("https://example.org/Charlie"),
+                URIRef("https://example.org/spokeWith"),
+                URIRef("https://example.org/Alice"),
+            )
+        ]
+
+        self.memory.add_short_term_memory(
+            triples_1, location="Paris", currentTime="2024-05-01T10:00:00"
+        )
+        self.memory.add_short_term_memory(
+            triples_2, location="London", currentTime="2024-05-02T12:00:00"
+        )
+
+        # Add some long-term episodic memories
+        self.memory.add_long_term_memory(
+            memory_type="episodic",
+            triples=triples_1,
+            location="Paris",
+            time="2024-05-01T10:00:00",
+            emotion="happy",
+            event="AI Conference",
+        )
+
+        # Add some long-term semantic memories
+        self.memory.add_long_term_memory(
+            memory_type="semantic",
+            triples=triples_2,
+            derivedFrom="research_paper_1",
+            strength=5,
+        )
+
+        # Retrieve counts
+        total_memories = self.memory.get_memory_count()
+        short_term_memories = self.memory.get_short_term_memory_count()
+        long_term_memories = self.memory.get_long_term_memory_count()
+        episodic_memories = self.memory.get_long_term_episodic_memory_count()
+        semantic_memories = self.memory.get_long_term_semantic_memory_count()
+
+        # Check that total memory count matches the sum of short-term and long-term memories
+        self.assertEqual(
+            total_memories,
+            short_term_memories + long_term_memories,
+            "Total memory count should equal short-term + long-term memory count",
+        )
+
+        # Check that long-term memory count matches the sum of episodic and semantic memories
+        self.assertEqual(
+            long_term_memories,
+            episodic_memories + semantic_memories,
+            "Long-term memory count should equal episodic + semantic memory count",
+        )
+
+
+class TestMemoryRetrievalMethods(unittest.TestCase):
+
+    def setUp(self):
+        """
+        Set up a memory object with both short-term and long-term memories
+        for testing.
+        """
+        self.memory = Memory()
+
+        # Add short-term memory
+        triples_short = [
+            (
+                URIRef("https://example.org/Alice"),
+                URIRef("https://example.org/meet"),
+                URIRef("https://example.org/Bob"),
+            )
+        ]
+        current_time = datetime.now().isoformat()
+        location = "Paris"
+        self.memory.add_short_term_memory(
+            triples_short, location, currentTime=current_time
+        )
+
+        # Add long-term episodic memory
+        triples_episodic = [
+            (
+                URIRef("https://example.org/Bob"),
+                URIRef("https://example.org/visit"),
+                URIRef("https://example.org/Paris"),
+            )
+        ]
+        time_episodic = "2022-05-05T10:00:00"
+        location_episodic = "Paris"
+        self.memory.add_long_term_memory(
+            memory_type="episodic",
+            triples=triples_episodic,
+            time=time_episodic,
+            location=location_episodic,
+        )
+
+        # Add long-term semantic memory
+        triples_semantic = [
+            (
+                URIRef("https://example.org/Charlie"),
+                URIRef("https://example.org/hasType"),
+                URIRef("https://example.org/Human"),
+            )
+        ]
+        derived_from = "research_paper_1"
+        strength = 5
+        self.memory.add_long_term_memory(
+            memory_type="semantic",
+            triples=triples_semantic,
+            derivedFrom=derived_from,
+            strength=strength,
+        )
+
+    def test_get_short_term_memories(self):
+        """
+        Test that get_short_term_memories() retrieves only short-term memories.
+        """
+        short_term_memories = self.memory.get_short_term_memories()
+        short_term_count = short_term_memories.get_memory_count()
+
+        # Check that the short-term memory count is 1
+        self.assertEqual(short_term_count, 1)
+
+        # Iterate over reified statements and validate that we get the correct subject, predicate, object
+        for statement in short_term_memories.graph.subjects(RDF.type, RDF.Statement):
+            subj = short_term_memories.graph.value(statement, RDF.subject)
+            pred = short_term_memories.graph.value(statement, RDF.predicate)
+            obj = short_term_memories.graph.value(statement, RDF.object)
+            current_time = short_term_memories.graph.value(
+                statement, humemai.currentTime
+            )
+
+            # Ensure this is a short-term memory
+            self.assertIsNotNone(current_time)
+
+            # Validate that the subject, predicate, and object are correctly extracted
+            self.assertEqual(subj, URIRef("https://example.org/Alice"))
+            self.assertEqual(pred, URIRef("https://example.org/meet"))
+            self.assertEqual(obj, URIRef("https://example.org/Bob"))
+
+    def test_get_long_term_memories(self):
+        """
+        Test that get_long_term_memories() retrieves only long-term memories.
+        """
+        long_term_memories = self.memory.get_long_term_memories()
+        long_term_count = long_term_memories.get_memory_count()
+
+        # Check that the long-term memory count matches the expected number
+        self.assertEqual(long_term_count, 2)
+
+        # Validate the presence of episodic and semantic memories
+        episodic_found = False
+        semantic_found = False
+
+        # Iterate over reified statements and check qualifiers to determine episodic vs. semantic
+        for statement in long_term_memories.graph.subjects(RDF.type, RDF.Statement):
+            subj = long_term_memories.graph.value(statement, RDF.subject)
+            pred = long_term_memories.graph.value(statement, RDF.predicate)
+            obj = long_term_memories.graph.value(statement, RDF.object)
+            time = long_term_memories.graph.value(statement, humemai.time)
+            current_time = long_term_memories.graph.value(
+                statement, humemai.currentTime
+            )
+            derived_from = long_term_memories.graph.value(
+                statement, humemai.derivedFrom
+            )
+
+            # Debug print to inspect the triples and qualifiers
+            print(f"Statement: {statement}")
+            print(f"Subject: {subj}, Predicate: {pred}, Object: {obj}")
+            print(f"Time (episodic): {time}")
+            print(f"DerivedFrom (semantic): {derived_from}")
+            print(f"CurrentTime (should be None for long-term): {current_time}")
+            print("---")
+
+            # Ensure that there is no currentTime for long-term memories
+            self.assertIsNone(current_time)
+
+            if time:
+                episodic_found = True
+                self.assertEqual(subj, URIRef("https://example.org/Bob"))
+                self.assertEqual(pred, URIRef("https://example.org/visit"))
+                self.assertEqual(obj, URIRef("https://example.org/Paris"))
+            if derived_from:
+                semantic_found = True
+                self.assertEqual(subj, URIRef("https://example.org/Charlie"))
+                self.assertEqual(pred, URIRef("https://example.org/hasType"))
+                self.assertEqual(obj, URIRef("https://example.org/Human"))
+
+        # Assert that we found both an episodic and a semantic memory
+        self.assertTrue(episodic_found, "Episodic memory not found.")
+        self.assertTrue(semantic_found, "Semantic memory not found.")
+
+    def test_memory_counts(self):
+        """
+        Test that the memory counts align correctly.
+        """
+        short_term_count = self.memory.get_short_term_memories().get_memory_count()
+        long_term_count = self.memory.get_long_term_memories().get_memory_count()
+        total_count = self.memory.get_memory_count()
+
+        # Ensure the total count matches short-term + long-term
+        self.assertEqual(total_count, short_term_count + long_term_count)
+
+
+class TestMemoryIteration(unittest.TestCase):
+
+    def setUp(self):
+        """
+        Set up the Memory object and add short-term, episodic, and semantic memories.
+        """
+        self.memory = Memory()
+
+        # Add a short-term memory
+        triples_short_term = [
+            (
+                URIRef("https://example.org/Alice"),
+                URIRef("https://example.org/meet"),
+                URIRef("https://example.org/Bob"),
+            )
+        ]
+        self.memory.add_short_term_memory(
+            triples=triples_short_term,
+            location="Paris",
+            currentTime="2023-05-05T10:00:00",
+        )
+
+        # Add a long-term episodic memory
+        triples_episodic = [
+            (
+                URIRef("https://example.org/Bob"),
+                URIRef("https://example.org/visit"),
+                URIRef("https://example.org/Paris"),
+            )
+        ]
+        self.memory.add_long_term_memory(
+            memory_type="episodic",
+            triples=triples_episodic,
+            location="Paris",
+            time="2023-05-06T10:00:00",
+            emotion="happy",
+        )
+
+        # Add a long-term semantic memory
+        triples_semantic = [
+            (
+                URIRef("https://example.org/Charlie"),
+                URIRef("https://example.org/hasType"),
+                URIRef("https://example.org/Human"),
+            )
+        ]
+        self.memory.add_long_term_memory(
+            memory_type="semantic",
+            triples=triples_semantic,
+            derivedFrom="research_paper_1",
+            strength=5,
+        )
+
+    def test_iterate_short_term_memories(self):
+        """
+        Test iteration over short-term memories.
+        """
+        short_term_count = 0
+        for subj, pred, obj, qualifiers in self.memory.iterate_memories(
+            memory_type="short_term"
+        ):
+            short_term_count += 1
+            self.assertEqual(subj, URIRef("https://example.org/Alice"))
+            self.assertEqual(pred, URIRef("https://example.org/meet"))
+            self.assertEqual(obj, URIRef("https://example.org/Bob"))
+            self.assertIn("https://humem.ai/ontology/currentTime", qualifiers)
+
+        self.assertEqual(
+            short_term_count, 1, "There should be exactly 1 short-term memory."
+        )
+
+    def test_iterate_long_term_memories(self):
+        """
+        Test iteration over long-term memories.
+        """
+        long_term_count = 0
+        for subj, pred, obj, qualifiers in self.memory.iterate_memories(
+            memory_type="long_term"
+        ):
+            long_term_count += 1
+            self.assertIn(
+                subj,
+                [
+                    URIRef("https://example.org/Bob"),
+                    URIRef("https://example.org/Charlie"),
+                ],
+            )
+
+        self.assertEqual(
+            long_term_count, 2, "There should be exactly 2 long-term memories."
+        )
+
+    def test_iterate_episodic_memories(self):
+        """
+        Test iteration over episodic long-term memories.
+        """
+        episodic_count = 0
+        for subj, pred, obj, qualifiers in self.memory.iterate_memories(
+            memory_type="episodic"
+        ):
+            episodic_count += 1
+            self.assertEqual(subj, URIRef("https://example.org/Bob"))
+            self.assertEqual(pred, URIRef("https://example.org/visit"))
+            self.assertEqual(obj, URIRef("https://example.org/Paris"))
+            self.assertIn("https://humem.ai/ontology/time", qualifiers)
+
+        self.assertEqual(
+            episodic_count, 1, "There should be exactly 1 episodic memory."
+        )
+
+    def test_iterate_semantic_memories(self):
+        """
+        Test iteration over semantic long-term memories.
+        """
+        semantic_count = 0
+        for subj, pred, obj, qualifiers in self.memory.iterate_memories(
+            memory_type="semantic"
+        ):
+            semantic_count += 1
+            self.assertEqual(subj, URIRef("https://example.org/Charlie"))
+            self.assertEqual(pred, URIRef("https://example.org/hasType"))
+            self.assertEqual(obj, URIRef("https://example.org/Human"))
+            self.assertIn("https://humem.ai/ontology/derivedFrom", qualifiers)
+
+        self.assertEqual(
+            semantic_count, 1, "There should be exactly 1 semantic memory."
+        )
+
+    def test_iterate_all_memories(self):
+        """
+        Test iteration over all memories (short-term + long-term).
+        """
+        all_count = 0
+        for subj, pred, obj, qualifiers in self.memory.iterate_memories(
+            memory_type="all"
+        ):
+            all_count += 1
+
+        self.assertEqual(all_count, 3, "There should be exactly 3 memories in total.")
