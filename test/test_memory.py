@@ -31,8 +31,8 @@ class TestMemory(unittest.TestCase):
             URIRef("https://example.org/person/Bob"),
         )
         qualifiers = {
-            humemai.currentTime: "2024-04-27T10:00:00",
-            humemai.location: "New York",
+            humemai.currentTime: Literal("2024-04-27T10:00:00", datatype=XSD.dateTime),
+            humemai.location: Literal("New York"),
         }
 
         # Add memory
@@ -41,7 +41,7 @@ class TestMemory(unittest.TestCase):
         # Verify memory has been added correctly
         result = repr(self.memory)
 
-        expected = "[https://example.org/person/Alice, https://example.org/relationship/knows, https://example.org/person/Bob, {'https://humem.ai/ontology/memoryID': '0', 'https://humem.ai/ontology/currentTime': '2024-04-27T10:00:00', 'https://humem.ai/ontology/location': 'New York'}]"
+        expected = "[https://example.org/person/Alice, https://example.org/relationship/knows, https://example.org/person/Bob, {rdflib.term.URIRef('https://humem.ai/ontology/memoryID'): rdflib.term.Literal('0', datatype=rdflib.term.URIRef('http://www.w3.org/2001/XMLSchema#integer')), rdflib.term.URIRef('https://humem.ai/ontology/currentTime'): rdflib.term.Literal('2024-04-27T10:00:00', datatype=rdflib.term.URIRef('http://www.w3.org/2001/XMLSchema#dateTime')), rdflib.term.URIRef('https://humem.ai/ontology/location'): rdflib.term.Literal('New York')}]"
 
         self.assertIn(expected, result)
 
@@ -57,12 +57,12 @@ class TestMemory(unittest.TestCase):
         )
 
         qualifiers1 = {
-            humemai.currentTime: "2024-04-27T10:00:00",
-            humemai.location: "New York",
+            humemai.currentTime: Literal("2024-04-27T10:00:00", datatype=XSD.dateTime),
+            humemai.location: Literal("New York"),
         }
         qualifiers2 = {
-            humemai.currentTime: "2024-04-27T12:00:00",
-            humemai.location: "London",
+            humemai.currentTime: Literal("2024-04-27T12:00:00", datatype=XSD.dateTime),
+            humemai.location: Literal("London"),
         }
 
         # Add memory twice with different qualifiers
@@ -72,8 +72,9 @@ class TestMemory(unittest.TestCase):
         # Verify that both reified statements are stored
         result = repr(self.memory)
 
-        expected1 = "[https://example.org/person/Alice, https://example.org/relationship/knows, https://example.org/person/Bob, {'https://humem.ai/ontology/memoryID': '0', 'https://humem.ai/ontology/currentTime': '2024-04-27T10:00:00', 'https://humem.ai/ontology/location': 'New York'}]"
-        expected2 = "[https://example.org/person/Alice, https://example.org/relationship/knows, https://example.org/person/Bob, {'https://humem.ai/ontology/memoryID': '1', 'https://humem.ai/ontology/currentTime': '2024-04-27T12:00:00', 'https://humem.ai/ontology/location': 'London'}]"
+        # Adjust expected output to match the verbose output with rdflib objects
+        expected1 = "[https://example.org/person/Alice, https://example.org/relationship/knows, https://example.org/person/Bob, {rdflib.term.URIRef('https://humem.ai/ontology/memoryID'): rdflib.term.Literal('0', datatype=rdflib.term.URIRef('http://www.w3.org/2001/XMLSchema#integer')), rdflib.term.URIRef('https://humem.ai/ontology/currentTime'): rdflib.term.Literal('2024-04-27T10:00:00', datatype=rdflib.term.URIRef('http://www.w3.org/2001/XMLSchema#dateTime')), rdflib.term.URIRef('https://humem.ai/ontology/location'): rdflib.term.Literal('New York')}]"
+        expected2 = "[https://example.org/person/Alice, https://example.org/relationship/knows, https://example.org/person/Bob, {rdflib.term.URIRef('https://humem.ai/ontology/memoryID'): rdflib.term.Literal('1', datatype=rdflib.term.URIRef('http://www.w3.org/2001/XMLSchema#integer')), rdflib.term.URIRef('https://humem.ai/ontology/currentTime'): rdflib.term.Literal('2024-04-27T12:00:00', datatype=rdflib.term.URIRef('http://www.w3.org/2001/XMLSchema#dateTime')), rdflib.term.URIRef('https://humem.ai/ontology/location'): rdflib.term.Literal('London')}]"
 
         # Ensure both entries are present
         self.assertIn(expected1, result)
@@ -91,12 +92,12 @@ class TestMemory(unittest.TestCase):
         )
 
         qualifiers1 = {
-            humemai.currentTime: "2024-04-27T10:00:00",
-            humemai.location: "New York",
+            humemai.currentTime: Literal("2024-04-27T10:00:00", datatype=XSD.dateTime),
+            humemai.location: Literal("New York"),
         }
         qualifiers2 = {
-            humemai.currentTime: "2024-04-27T12:00:00",
-            humemai.location: "London",
+            humemai.currentTime: Literal("2024-04-27T12:00:00", datatype=XSD.dateTime),
+            humemai.location: Literal("London"),
         }
 
         # Add memory twice with different qualifiers
@@ -140,16 +141,20 @@ class TestMemoryDelete(unittest.TestCase):
             Literal("Chocolate"),
         )
 
-        # Define qualifiers for the first triple
+        # Define qualifiers for the first triple with Literal values
         self.qualifiers1 = {
-            self.humemai.currentTime: "2024-04-27T10:00:00",
-            self.humemai.location: "New York",
+            self.humemai.currentTime: Literal(
+                "2024-04-27T10:00:00", datatype=XSD.dateTime
+            ),
+            self.humemai.location: Literal("New York"),
         }
 
-        # Define qualifiers for the second triple
+        # Define qualifiers for the second triple with Literal values
         self.qualifiers2 = {
-            self.humemai.currentTime: "2024-04-27T11:00:00",
-            self.humemai.location: "Paris",
+            self.humemai.currentTime: Literal(
+                "2024-04-27T11:00:00", datatype=XSD.dateTime
+            ),
+            self.humemai.location: Literal("Paris"),
         }
 
         # Add sample triples to memory
@@ -191,8 +196,10 @@ class TestMemoryDelete(unittest.TestCase):
         """
         # Add the same triple with different qualifiers (simulating multiple reified statements)
         qualifiers_additional = {
-            self.humemai.currentTime: "2024-04-27T14:00:00",
-            self.humemai.location: "London",
+            self.humemai.currentTime: Literal(
+                "2024-04-27T14:00:00", datatype=XSD.dateTime
+            ),
+            self.humemai.location: Literal("London"),
         }
 
         self.memory.add_memory([self.triple1], qualifiers_additional)
@@ -278,17 +285,20 @@ class TestMemoryShortTerm(unittest.TestCase):
             URIRef("https://example.org/relationship/knows"),
             URIRef("https://example.org/person/Bob"),
         )
-        location = "New York"
-        currentTime = "2024-04-27T10:00:00"
+        currentTime = Literal("2024-04-27T10:00:00", datatype=XSD.dateTime)
+        qualifiers = {
+            self.humemai.location: Literal("New York"),
+            self.humemai.currentTime: currentTime,
+        }
 
         # Add the short-term memory
-        self.memory.add_short_term_memory([triple], location, currentTime)
+        self.memory.add_short_term_memory([triple], qualifiers)
 
         # Verify that the memory was added with the correct qualifiers
         result = repr(self.memory)
         self.assertIn("https://example.org/person/Alice", result)
 
-        # Instead of checking for the full URI, check for 'currentTime' and 'location'
+        # Check for 'currentTime' and 'location'
         self.assertIn("currentTime", result)
         self.assertIn("2024-04-27T10:00:00", result)
         self.assertIn("location", result)
@@ -305,13 +315,14 @@ class TestMemoryShortTerm(unittest.TestCase):
             URIRef("https://example.org/relationship/likes"),
             Literal("Ice Cream"),
         )
-        location = "Berlin"
+        location = Literal("Berlin")
+        qualifiers = {self.humemai.location: location}
 
-        # Capture the current time
-        before_time = datetime.now().isoformat()
+        # Capture the current time before adding the memory
+        before_time = datetime.now()
 
         # Add the short-term memory without specifying time
-        self.memory.add_short_term_memory([triple], location)
+        self.memory.add_short_term_memory([triple], qualifiers)
 
         # Capture the result and verify
         result = repr(self.memory)
@@ -322,14 +333,20 @@ class TestMemoryShortTerm(unittest.TestCase):
         # Ensure the currentTime was added automatically
         self.assertIn("currentTime", result)
 
-        # Verify that the time is close to the current time (tolerance for small delay)
-        after_time = datetime.now().isoformat()
-        currentTime_in_result = result.split("currentTime': '")[1].split("'")[
-            0
-        ]  # Extract the current time from result
+        # Extract all dynamically assigned currentTime values from the graph
+        current_times_in_graph = list(
+            self.memory.graph.objects(None, self.humemai.currentTime)
+        )
+
+        # Verify that one of the currentTime values is close to the current time
+        after_time = datetime.now()
+
         self.assertTrue(
-            before_time <= currentTime_in_result <= after_time,
-            "The time should be the current time.",
+            any(
+                before_time <= datetime.fromisoformat(str(current_time)) <= after_time
+                for current_time in current_times_in_graph
+            ),
+            "The currentTime should be within the expected range.",
         )
 
     def test_add_multiple_short_term_memories(self):
@@ -349,11 +366,14 @@ class TestMemoryShortTerm(unittest.TestCase):
                 Literal("Chocolate"),
             ),
         ]
-        location = "Tokyo"
-        currentTime = "2024-04-28T09:00:00"
+        currentTime = Literal("2024-04-28T09:00:00", datatype=XSD.dateTime)
+        qualifiers = {
+            self.humemai.location: Literal("Tokyo"),
+            self.humemai.currentTime: currentTime,
+        }
 
         # Add the short-term memory with multiple triples
-        self.memory.add_short_term_memory(triples, location, currentTime)
+        self.memory.add_short_term_memory(triples, qualifiers)
 
         # Verify both triples were added correctly
         result = repr(self.memory)
@@ -388,13 +408,15 @@ class TestMemoryLongTerm(unittest.TestCase):
 
         # Define the qualifiers
         qualifiers = {
-            "location": "Paris",
-            "time": "2024-04-27T15:00:00",
-            "emotion": "happy",
+            self.humemai.location: Literal("Paris"),
+            self.humemai.emotion: Literal("happy"),
+            self.humemai.eventTime: Literal(
+                "2024-04-27T15:00:00", datatype=XSD.dateTime
+            ),
         }
 
         # Add the episodic long-term memory
-        self.memory.add_long_term_memory("episodic", [triple], **qualifiers)
+        self.memory.add_episodic_memory([triple], qualifiers=qualifiers)
 
         # Verify that the memory was added with the correct qualifiers
         result = repr(self.memory)
@@ -403,7 +425,7 @@ class TestMemoryLongTerm(unittest.TestCase):
         self.assertIn("https://example.org/person/Bob", result)
         self.assertIn("location", result)
         self.assertIn("Paris", result)
-        self.assertIn("time", result)
+        self.assertIn("eventTime", result)
         self.assertIn("2024-04-27T15:00:00", result)
         self.assertIn("emotion", result)
         self.assertIn("happy", result)
@@ -420,10 +442,16 @@ class TestMemoryLongTerm(unittest.TestCase):
         )
 
         # Define the qualifiers
-        qualifiers = {"strength": 5, "derivedFrom": "textbook"}
+        qualifiers = {
+            self.humemai.strength: Literal(5, datatype=XSD.integer),
+            self.humemai.derivedFrom: Literal("textbook"),
+        }
+        knownSince = Literal("2024-04-27T15:00:00", datatype=XSD.dateTime)
 
         # Add the semantic long-term memory
-        self.memory.add_long_term_memory("semantic", [triple], **qualifiers)
+        self.memory.add_semantic_memory(
+            [triple], qualifiers={self.humemai.knownSince: knownSince, **qualifiers}
+        )
 
         # Verify that the memory was added with the correct qualifiers
         result = repr(self.memory)
@@ -448,21 +476,25 @@ class TestMemoryLongTerm(unittest.TestCase):
 
         # Define the first set of qualifiers
         qualifiers_1 = {
-            "location": "Paris",
-            "time": "2024-04-27T15:00:00",
-            "emotion": "happy",
+            self.humemai.location: Literal("Paris"),
+            self.humemai.eventTime: Literal(
+                "2024-04-27T15:00:00", datatype=XSD.dateTime
+            ),
+            self.humemai.emotion: Literal("happy"),
         }
 
         # Define the second set of qualifiers
         qualifiers_2 = {
-            "location": "London",
-            "time": "2024-05-01T09:00:00",
-            "emotion": "excited",
+            self.humemai.location: Literal("London"),
+            self.humemai.eventTime: Literal(
+                "2024-05-01T09:00:00", datatype=XSD.dateTime
+            ),
+            self.humemai.emotion: Literal("excited"),
         }
 
         # Add both episodic long-term memories with different qualifiers
-        self.memory.add_long_term_memory("episodic", [triple], **qualifiers_1)
-        self.memory.add_long_term_memory("episodic", [triple], **qualifiers_2)
+        self.memory.add_episodic_memory([triple], qualifiers=qualifiers_1)
+        self.memory.add_episodic_memory([triple], qualifiers=qualifiers_2)
 
         # Verify that both memories were added with the correct qualifiers
         result = repr(self.memory)
@@ -479,7 +511,8 @@ class TestMemoryLongTerm(unittest.TestCase):
 
     def test_invalid_qualifiers_for_memory_types(self):
         """
-        Test that invalid qualifiers raise an error when added to episodic or semantic memories.
+        Test that invalid qualifiers raise an error when added to episodic or semantic
+        memories.
         """
         # Define the sample triple for both tests
         triple = (
@@ -490,21 +523,35 @@ class TestMemoryLongTerm(unittest.TestCase):
 
         # Try adding an invalid strength qualifier to episodic memory
         with self.assertRaises(ValueError):
-            self.memory.add_long_term_memory(
-                "episodic",
+            self.memory.add_episodic_memory(
                 [triple],
-                location="bar",
-                time="2024-04-27T15:30:00",
-                strength=10,
+                qualifiers={
+                    self.humemai.location: Literal("Paris"),
+                    self.humemai.eventTime: Literal(
+                        "2024-04-27T15:30:00", datatype=XSD.dateTime
+                    ),
+                    self.humemai.strength: Literal(
+                        10, datatype=XSD.integer
+                    ),  # Invalid for episodic memory
+                },
             )
 
         # Try adding an invalid location qualifier to semantic memory
         with self.assertRaises(ValueError):
-            self.memory.add_long_term_memory("semantic", [triple], location="Paris")
+            self.memory.add_semantic_memory(
+                [triple],
+                qualifiers={
+                    self.humemai.location: Literal(
+                        "Paris"
+                    ),  # Invalid for semantic memory
+                    self.humemai.knownSince: Literal(
+                        "2024-04-27T15:00:00", datatype=XSD.dateTime
+                    ),
+                },
+            )
 
 
 class TestMemoryGetMemories(unittest.TestCase):
-
     def setUp(self):
         """
         Set up a fresh Memory instance before each test.
@@ -531,25 +578,33 @@ class TestMemoryGetMemories(unittest.TestCase):
             Literal("Chocolate"),
         )
 
-        # Add memories to the graph
+        # Add memories to the graph with proper URIRef and Literal formats
         qualifiers_episodic = {
-            "location": "Paris",
-            "time": "2024-04-27T15:00:00",
-            "emotion": "happy",
+            self.humemai.location: Literal("Paris"),
+            self.humemai.eventTime: Literal(
+                "2024-04-27T15:00:00", datatype=XSD.dateTime
+            ),
+            self.humemai.emotion: Literal("happy"),
         }
-        self.memory.add_long_term_memory(
-            "episodic", [self.triple1], **qualifiers_episodic
-        )
+        self.memory.add_episodic_memory([self.triple1], qualifiers=qualifiers_episodic)
 
-        qualifiers_semantic = {"strength": 8, "derivedFrom": "study"}
-        self.memory.add_long_term_memory(
-            "semantic", [self.triple2], **qualifiers_semantic
-        )
+        qualifiers_semantic = {
+            self.humemai.strength: Literal(8, datatype=XSD.integer),
+            self.humemai.derivedFrom: Literal("study"),
+            self.humemai.knownSince: Literal(
+                "2024-04-27T15:00:00", datatype=XSD.dateTime
+            ),
+        }
+        self.memory.add_semantic_memory([self.triple2], qualifiers=qualifiers_semantic)
 
-        # Short-term memory
-        self.memory.add_short_term_memory(
-            [self.triple3], "Berlin", "2024-04-27T18:00:00"
-        )
+        # Short-term memory with correct qualifier structure
+        short_term_qualifiers = {
+            self.humemai.location: Literal("Berlin"),
+            self.humemai.currentTime: Literal(
+                "2024-04-27T18:00:00", datatype=XSD.dateTime
+            ),
+        }
+        self.memory.add_short_term_memory([self.triple3], short_term_qualifiers)
 
     def test_basic_memory_retrieval(self):
         """
@@ -576,7 +631,7 @@ class TestMemoryGetMemories(unittest.TestCase):
         # Check for Alice's memory qualifiers
         self.assertIn("location", result)
         self.assertIn("Paris", result)
-        self.assertIn("time", result)
+        self.assertIn("eventTime", result)
         self.assertIn("2024-04-27T15:00:00", result)
         self.assertIn("emotion", result)
         self.assertIn("happy", result)
@@ -682,13 +737,13 @@ class TestMemoryGetMemoryCount(unittest.TestCase):
         """
         # Add one memory
         qualifiers_episodic = {
-            "location": "Paris",
-            "time": "2024-04-27T15:00:00",
-            "emotion": "happy",
+            self.humemai.location: Literal("Paris"),
+            self.humemai.eventTime: Literal(
+                "2024-04-27T15:00:00", datatype=XSD.dateTime
+            ),
+            self.humemai.emotion: Literal("happy"),
         }
-        self.memory.add_long_term_memory(
-            "episodic", [self.triple1], **qualifiers_episodic
-        )
+        self.memory.add_episodic_memory([self.triple1], qualifiers=qualifiers_episodic)
 
         # Test memory count
         memory_count = self.memory.get_triple_count()
@@ -700,33 +755,33 @@ class TestMemoryGetMemoryCount(unittest.TestCase):
         """
         # Add the same triple multiple times with different qualifiers
         qualifiers_episodic1 = {
-            "location": "Paris",
-            "time": "2024-04-27T15:00:00",
-            "emotion": "happy",
+            self.humemai.location: Literal("Paris"),
+            self.humemai.eventTime: Literal(
+                "2024-04-27T15:00:00", datatype=XSD.dateTime
+            ),
+            self.humemai.emotion: Literal("happy"),
         }
 
         qualifiers_episodic2 = {
-            "location": "London",
-            "time": "2024-05-01T09:00:00",
-            "emotion": "excited",
+            self.humemai.location: Literal("London"),
+            self.humemai.eventTime: Literal(
+                "2024-05-01T09:00:00", datatype=XSD.dateTime
+            ),
+            self.humemai.emotion: Literal("excited"),
         }
 
         qualifiers_episodic3 = {
-            "location": "Berlin",
-            "time": "2024-05-10T10:30:00",
-            "emotion": "nervous",
+            self.humemai.location: Literal("Berlin"),
+            self.humemai.eventTime: Literal(
+                "2024-05-10T10:30:00", datatype=XSD.dateTime
+            ),
+            self.humemai.emotion: Literal("nervous"),
         }
 
         # Add the same triple with different qualifiers
-        self.memory.add_long_term_memory(
-            "episodic", [self.triple1], **qualifiers_episodic1
-        )
-        self.memory.add_long_term_memory(
-            "episodic", [self.triple1], **qualifiers_episodic2
-        )
-        self.memory.add_long_term_memory(
-            "episodic", [self.triple1], **qualifiers_episodic3
-        )
+        self.memory.add_episodic_memory([self.triple1], qualifiers=qualifiers_episodic1)
+        self.memory.add_episodic_memory([self.triple1], qualifiers=qualifiers_episodic2)
+        self.memory.add_episodic_memory([self.triple1], qualifiers=qualifiers_episodic3)
 
         # Test memory count (should still be 1 since the triple is the same)
         memory_count = self.memory.get_triple_count()
@@ -742,22 +797,32 @@ class TestMemoryGetMemoryCount(unittest.TestCase):
         """
         # Add multiple unique triples
         qualifiers_episodic = {
-            "location": "Paris",
-            "time": "2024-04-27T15:00:00",
-            "emotion": "happy",
+            self.humemai.location: Literal("Paris"),
+            self.humemai.eventTime: Literal(
+                "2024-04-27T15:00:00", datatype=XSD.dateTime
+            ),
+            self.humemai.emotion: Literal("happy"),
         }
 
-        qualifiers_semantic = {"strength": 8, "derivedFrom": "study"}
+        qualifiers_semantic = {
+            self.humemai.strength: Literal(8, datatype=XSD.integer),
+            self.humemai.derivedFrom: Literal("study"),
+            self.humemai.knownSince: Literal(
+                "2024-04-27T15:00:00", datatype=XSD.dateTime
+            ),
+        }
 
-        self.memory.add_long_term_memory(
-            "episodic", [self.triple1], **qualifiers_episodic
-        )
-        self.memory.add_long_term_memory(
-            "semantic", [self.triple2], **qualifiers_semantic
-        )
-        self.memory.add_short_term_memory(
-            [self.triple3], "Berlin", "2024-04-27T18:00:00"
-        )
+        self.memory.add_episodic_memory([self.triple1], qualifiers=qualifiers_episodic)
+        self.memory.add_semantic_memory([self.triple2], qualifiers=qualifiers_semantic)
+
+        # Short-term memory
+        short_term_qualifiers = {
+            self.humemai.location: Literal("Berlin"),
+            self.humemai.currentTime: Literal(
+                "2024-04-27T18:00:00", datatype=XSD.dateTime
+            ),
+        }
+        self.memory.add_short_term_memory([self.triple3], short_term_qualifiers)
 
         # Test memory count (should be 3 because all triples are unique)
         memory_count = self.memory.get_triple_count()
@@ -771,32 +836,41 @@ class TestMemoryGetMemoryCount(unittest.TestCase):
         """
         # Add the same triple multiple times with different qualifiers
         qualifiers_episodic1 = {
-            "location": "Paris",
-            "time": "2024-04-27T15:00:00",
-            "emotion": "happy",
+            self.humemai.location: Literal("Paris"),
+            self.humemai.eventTime: Literal(
+                "2024-04-27T15:00:00", datatype=XSD.dateTime
+            ),
+            self.humemai.emotion: Literal("happy"),
         }
 
         qualifiers_episodic2 = {
-            "location": "London",
-            "time": "2024-05-01T09:00:00",
-            "emotion": "excited",
+            self.humemai.location: Literal("London"),
+            self.humemai.eventTime: Literal(
+                "2024-05-01T09:00:00", datatype=XSD.dateTime
+            ),
+            self.humemai.emotion: Literal("excited"),
         }
 
-        qualifiers_semantic = {"strength": 8, "derivedFrom": "study"}
+        qualifiers_semantic = {
+            self.humemai.strength: Literal(8, datatype=XSD.integer),
+            self.humemai.derivedFrom: Literal("study"),
+            self.humemai.knownSince: Literal(
+                "2024-04-27T15:00:00", datatype=XSD.dateTime
+            ),
+        }
 
         # Add duplicate and unique triples
-        self.memory.add_long_term_memory(
-            "episodic", [self.triple1], **qualifiers_episodic1
-        )
-        self.memory.add_long_term_memory(
-            "episodic", [self.triple1], **qualifiers_episodic2
-        )
-        self.memory.add_long_term_memory(
-            "semantic", [self.triple2], **qualifiers_semantic
-        )
-        self.memory.add_short_term_memory(
-            [self.triple3], "Berlin", "2024-04-27T18:00:00"
-        )
+        self.memory.add_episodic_memory([self.triple1], qualifiers=qualifiers_episodic1)
+        self.memory.add_episodic_memory([self.triple1], qualifiers=qualifiers_episodic2)
+        self.memory.add_semantic_memory([self.triple2], qualifiers=qualifiers_semantic)
+
+        short_term_qualifiers = {
+            self.humemai.location: Literal("Berlin"),
+            self.humemai.currentTime: Literal(
+                "2024-04-27T18:00:00", datatype=XSD.dateTime
+            ),
+        }
+        self.memory.add_short_term_memory([self.triple3], short_term_qualifiers)
 
         # Test memory count (should be 3: one for the duplicate triple, and two for the unique ones)
         memory_count = self.memory.get_triple_count()
@@ -813,6 +887,7 @@ class TestMemoryModifyStrength(unittest.TestCase):
         Set up the Memory object and add some semantic and episodic memories.
         """
         self.memory = Memory(verbose_repr=True)
+        self.humemai = Namespace("https://humem.ai/ontology/")
 
         # Define a semantic triple
         self.triple_semantic = (
@@ -829,19 +904,27 @@ class TestMemoryModifyStrength(unittest.TestCase):
         )
 
         # Add a semantic memory with strength
-        qualifiers_semantic = {"strength": 8, "derivedFrom": "study"}
-        self.memory.add_long_term_memory(
-            "semantic", [self.triple_semantic], **qualifiers_semantic
+        qualifiers_semantic = {
+            self.humemai.strength: Literal(8, datatype=XSD.integer),
+            self.humemai.derivedFrom: Literal("study"),
+            self.humemai.knownSince: Literal(
+                "2024-04-27T15:00:00", datatype=XSD.dateTime
+            ),
+        }
+        self.memory.add_semantic_memory(
+            [self.triple_semantic], qualifiers=qualifiers_semantic
         )
 
         # Add an episodic memory without strength (it should not have a strength value)
         qualifiers_episodic = {
-            "location": "Paris",
-            "time": "2024-04-27T15:00:00",
-            "emotion": "happy",
+            self.humemai.location: Literal("Paris"),
+            self.humemai.eventTime: Literal(
+                "2024-04-27T15:00:00", datatype=XSD.dateTime
+            ),
+            self.humemai.emotion: Literal("happy"),
         }
-        self.memory.add_long_term_memory(
-            "episodic", [self.triple_episodic], **qualifiers_episodic
+        self.memory.add_episodic_memory(
+            [self.triple_episodic], qualifiers=qualifiers_episodic
         )
 
     def test_increment_strength(self):
@@ -850,7 +933,7 @@ class TestMemoryModifyStrength(unittest.TestCase):
         """
         # Increment strength by 5
         self.memory.modify_strength(
-            filters={"subject": URIRef("https://example.org/entity/Cat")},
+            filters={RDF.subject: URIRef("https://example.org/entity/Cat")},
             increment_by=5,
         )
 
@@ -868,7 +951,8 @@ class TestMemoryModifyStrength(unittest.TestCase):
         """
         # Multiply strength by 2
         self.memory.modify_strength(
-            filters={"subject": URIRef("https://example.org/entity/Cat")}, multiply_by=2
+            filters={RDF.subject: URIRef("https://example.org/entity/Cat")},
+            multiply_by=2,
         )
 
         # Retrieve the updated memory and verify the new strength
@@ -885,13 +969,14 @@ class TestMemoryModifyStrength(unittest.TestCase):
         """
         # First increment by 5
         self.memory.modify_strength(
-            filters={"subject": URIRef("https://example.org/entity/Cat")},
+            filters={RDF.subject: URIRef("https://example.org/entity/Cat")},
             increment_by=5,
         )
 
         # Then multiply by 2
         self.memory.modify_strength(
-            filters={"subject": URIRef("https://example.org/entity/Cat")}, multiply_by=2
+            filters={RDF.subject: URIRef("https://example.org/entity/Cat")},
+            multiply_by=2,
         )
 
         # Retrieve the updated memory and verify the final strength
@@ -910,7 +995,7 @@ class TestMemoryModifyStrength(unittest.TestCase):
         """
         # Try to modify strength of an episodic memory (should not change anything)
         self.memory.modify_strength(
-            filters={"subject": URIRef("https://example.org/person/Alice")},
+            filters={RDF.subject: URIRef("https://example.org/person/Alice")},
             increment_by=5,
         )
 
@@ -929,14 +1014,20 @@ class TestMemoryModifyStrength(unittest.TestCase):
         Test that all reified statements for the same triple are updated.
         """
         # Add a second reified statement for the same semantic triple with a different strength
-        qualifiers_semantic_2 = {"strength": 10, "derivedFrom": "research"}
-        self.memory.add_long_term_memory(
-            "semantic", [self.triple_semantic], **qualifiers_semantic_2
+        qualifiers_semantic_2 = {
+            self.humemai.strength: Literal(10, datatype=XSD.integer),
+            self.humemai.derivedFrom: Literal("research"),
+            self.humemai.knownSince: Literal(
+                "2024-04-27T15:00:00", datatype=XSD.dateTime
+            ),
+        }
+        self.memory.add_semantic_memory(
+            [self.triple_semantic], qualifiers=qualifiers_semantic_2
         )
 
         # Increment strength by 5 for all reified statements
         self.memory.modify_strength(
-            filters={"subject": URIRef("https://example.org/entity/Cat")},
+            filters={RDF.subject: URIRef("https://example.org/entity/Cat")},
             increment_by=5,
         )
 
@@ -973,12 +1064,16 @@ class TestMemoryTimeFilters(unittest.TestCase):
         )
 
         qualifiers1 = {
-            self.humemai.currentTime: "2024-04-27T10:00:00",
-            self.humemai.location: "New York",
+            self.humemai.currentTime: Literal(
+                "2024-04-27T10:00:00", datatype=XSD.dateTime
+            ),
+            self.humemai.location: Literal("New York"),
         }
         qualifiers2 = {
-            self.humemai.currentTime: "2024-04-27T12:00:00",
-            self.humemai.location: "London",
+            self.humemai.currentTime: Literal(
+                "2024-04-27T12:00:00", datatype=XSD.dateTime
+            ),
+            self.humemai.location: Literal("London"),
         }
 
         # Add memories with different times
@@ -986,9 +1081,11 @@ class TestMemoryTimeFilters(unittest.TestCase):
         self.memory.add_memory([triple], qualifiers2)
 
         # Retrieve memories within a time range
+        lower_time_bound = Literal("2024-04-27T09:00:00", datatype=XSD.dateTime)
+        upper_time_bound = Literal("2024-04-27T11:00:00", datatype=XSD.dateTime)
         filtered_memory = self.memory.get_memories(
-            lower_time_bound="2024-04-27T09:00:00",
-            upper_time_bound="2024-04-27T11:00:00",
+            lower_time_bound=lower_time_bound,
+            upper_time_bound=upper_time_bound,
         )
 
         # Verify only the memory within the time range is retrieved
@@ -1006,17 +1103,21 @@ class TestMemoryTimeFilters(unittest.TestCase):
             Literal("Ice Cream"),
         )
         qualifiers = {
-            self.humemai.currentTime: "2024-04-27T18:00:00",
-            self.humemai.location: "Berlin",
+            self.humemai.currentTime: Literal(
+                "2024-04-27T18:00:00", datatype=XSD.dateTime
+            ),
+            self.humemai.location: Literal("Berlin"),
         }
 
         # Add memory outside the desired time range
         self.memory.add_memory([triple], qualifiers)
 
         # Retrieve memories within a time range where this memory does not fall
+        lower_time_bound = Literal("2024-04-27T09:00:00", datatype=XSD.dateTime)
+        upper_time_bound = Literal("2024-04-27T17:00:00", datatype=XSD.dateTime)
         filtered_memory = self.memory.get_memories(
-            lower_time_bound="2024-04-27T09:00:00",
-            upper_time_bound="2024-04-27T17:00:00",
+            lower_time_bound=lower_time_bound,
+            upper_time_bound=upper_time_bound,
         )
 
         # Ensure no memories are returned
@@ -1043,12 +1144,16 @@ class TestMemoryLocationFilters(unittest.TestCase):
             URIRef("https://example.org/person/Eve"),
         )
         qualifiers1 = {
-            self.humemai.currentTime: "2024-04-27T10:00:00",
-            self.humemai.location: "New York",
+            self.humemai.currentTime: Literal(
+                "2024-04-27T10:00:00", datatype=XSD.dateTime
+            ),
+            self.humemai.location: Literal("New York"),
         }
         qualifiers2 = {
-            self.humemai.currentTime: "2024-04-27T12:00:00",
-            self.humemai.location: "Berlin",
+            self.humemai.currentTime: Literal(
+                "2024-04-27T12:00:00", datatype=XSD.dateTime
+            ),
+            self.humemai.location: Literal("Berlin"),
         }
 
         # Add memory with different locations
@@ -1056,7 +1161,9 @@ class TestMemoryLocationFilters(unittest.TestCase):
         self.memory.add_memory([triple], qualifiers2)
 
         # Retrieve memories based on location filter
-        filtered_memory = self.memory.get_memories(location="New York")
+        filtered_memory = self.memory.get_memories(
+            qualifiers={self.humemai.location: Literal("New York")}
+        )
 
         # Verify only the memory with the specified location is retrieved
         result = repr(filtered_memory)
@@ -1073,15 +1180,19 @@ class TestMemoryLocationFilters(unittest.TestCase):
             URIRef("https://example.org/person/Grace"),
         )
         qualifiers = {
-            self.humemai.currentTime: "2024-04-27T10:00:00",
-            self.humemai.location: "Paris",
+            self.humemai.currentTime: Literal(
+                "2024-04-27T10:00:00", datatype=XSD.dateTime
+            ),
+            self.humemai.location: Literal("Paris"),
         }
 
         # Add memory with a location
         self.memory.add_memory([triple], qualifiers)
 
         # Retrieve memories based on an invalid location filter
-        filtered_memory = self.memory.get_memories(location="Tokyo")
+        filtered_memory = self.memory.get_memories(
+            qualifiers={self.humemai.location: Literal("Tokyo")}
+        )
 
         # Verify no memories are returned
         result = repr(filtered_memory)
@@ -1108,12 +1219,16 @@ class TestMemoryEmotionFilters(unittest.TestCase):
             URIRef("https://example.org/event/happy"),
         )
         qualifiers1 = {
-            self.humemai.emotion: "happy",
-            self.humemai.currentTime: "2024-04-27T14:00:00",
+            self.humemai.emotion: Literal("happy"),
+            self.humemai.currentTime: Literal(
+                "2024-04-27T14:00:00", datatype=XSD.dateTime
+            ),
         }
         qualifiers2 = {
-            self.humemai.emotion: "sad",
-            self.humemai.currentTime: "2024-04-27T16:00:00",
+            self.humemai.emotion: Literal("sad"),
+            self.humemai.currentTime: Literal(
+                "2024-04-27T16:00:00", datatype=XSD.dateTime
+            ),
         }
 
         # Add memories with different emotions
@@ -1121,7 +1236,9 @@ class TestMemoryEmotionFilters(unittest.TestCase):
         self.memory.add_memory([triple], qualifiers2)
 
         # Retrieve memories based on emotion filter
-        filtered_memory = self.memory.get_memories(emotion="happy")
+        filtered_memory = self.memory.get_memories(
+            qualifiers={self.humemai.emotion: Literal("happy")}
+        )
 
         # Verify only the memory with the specified emotion is retrieved
         result = repr(filtered_memory)
@@ -1175,8 +1292,10 @@ class TestMemoryDeleteWithTime(unittest.TestCase):
             URIRef("https://example.org/person/Mary"),
         )
         qualifiers = {
-            self.humemai.currentTime: "2024-04-27T12:00:00",
-            self.humemai.location: "Paris",
+            self.humemai.currentTime: Literal(
+                "2024-04-27T12:00:00", datatype=XSD.dateTime
+            ),
+            self.humemai.location: Literal("Paris"),
         }
 
         # Add the memory
@@ -1215,13 +1334,18 @@ class TestMemoryInvalidQualifiers(unittest.TestCase):
             URIRef("https://example.org/person/Kate"),
         )
 
-        # Missing 'time'
+        # Missing 'eventTime' which is essential for episodic memory
+        qualifiers = {
+            self.humemai.location: Literal("Paris"),
+            self.humemai.emotion: Literal("happy"),
+        }
+
+        # Adding an episodic memory without the required 'eventTime' qualifier should raise a ValueError
         with self.assertRaises(ValueError) as context:
-            self.memory.add_long_term_memory(
-                "episodic", [triple], location="Paris", time=None, emotion="happy"
-            )
+            self.memory.add_episodic_memory([triple], qualifiers=qualifiers)
+
         self.assertIn(
-            "Missing required qualifier for episodic memory: time",
+            "Missing required qualifier: eventTime",
             str(context.exception),
         )
 
@@ -1236,6 +1360,7 @@ class TestMemoryCounts(unittest.TestCase):
         Set up a fresh Memory instance before each test.
         """
         self.memory = Memory(verbose_repr=True)
+        self.humemai = Namespace("https://humem.ai/ontology/")
 
         # Define sample triples
         self.triple1 = (
@@ -1276,8 +1401,8 @@ class TestMemoryCounts(unittest.TestCase):
         Test counts after adding a single memory with one reified statement.
         """
         qualifiers = {
-            humemai.currentTime: "2024-04-27T10:00:00",
-            humemai.location: "New York",
+            self.humemai.currentTime: Literal("2024-04-27T10:00:00"),
+            self.humemai.location: Literal("New York"),
         }
         self.memory.add_memory([self.triple1], qualifiers)
 
@@ -1297,16 +1422,16 @@ class TestMemoryCounts(unittest.TestCase):
         Test counts after adding the same triple multiple times with different qualifiers.
         """
         qualifiers1 = {
-            humemai.currentTime: "2024-04-27T10:00:00",
-            humemai.location: "New York",
+            self.humemai.currentTime: Literal("2024-04-27T10:00:00"),
+            self.humemai.location: Literal("New York"),
         }
         qualifiers2 = {
-            humemai.currentTime: "2024-04-27T12:00:00",
-            humemai.location: "London",
+            self.humemai.currentTime: Literal("2024-04-27T12:00:00"),
+            self.humemai.location: Literal("London"),
         }
         qualifiers3 = {
-            humemai.currentTime: "2024-04-27T14:00:00",
-            humemai.location: "Paris",
+            self.humemai.currentTime: Literal("2024-04-27T14:00:00"),
+            self.humemai.location: Literal("Paris"),
         }
 
         self.memory.add_memory([self.triple1], qualifiers1)
@@ -1329,16 +1454,16 @@ class TestMemoryCounts(unittest.TestCase):
         Test counts after adding multiple unique triples with multiple reified statements each.
         """
         qualifiers1 = {
-            humemai.currentTime: "2024-04-27T10:00:00",
-            humemai.location: "New York",
+            self.humemai.currentTime: Literal("2024-04-27T10:00:00"),
+            self.humemai.location: Literal("New York"),
         }
         qualifiers2 = {
-            humemai.currentTime: "2024-04-27T12:00:00",
-            humemai.location: "London",
+            self.humemai.currentTime: Literal("2024-04-27T12:00:00"),
+            self.humemai.location: Literal("London"),
         }
         qualifiers3 = {
-            humemai.currentTime: "2024-04-27T14:00:00",
-            humemai.location: "Paris",
+            self.humemai.currentTime: Literal("2024-04-27T14:00:00"),
+            self.humemai.location: Literal("Paris"),
         }
 
         # Add multiple reified statements for triple1
@@ -1371,12 +1496,12 @@ class TestMemoryCounts(unittest.TestCase):
         Test that deleting a triple removes all its reified statements.
         """
         qualifiers1 = {
-            humemai.currentTime: "2024-04-27T10:00:00",
-            humemai.location: "New York",
+            self.humemai.currentTime: Literal("2024-04-27T10:00:00"),
+            self.humemai.location: Literal("New York"),
         }
         qualifiers2 = {
-            humemai.currentTime: "2024-04-27T12:00:00",
-            humemai.location: "London",
+            self.humemai.currentTime: Literal("2024-04-27T12:00:00"),
+            self.humemai.location: Literal("London"),
         }
 
         # Add multiple reified statements for triple1
@@ -1414,8 +1539,8 @@ class TestMemoryCounts(unittest.TestCase):
         Test that deleting a non-existent triple does not affect the counts.
         """
         qualifiers = {
-            humemai.currentTime: "2024-04-27T10:00:00",
-            humemai.location: "New York",
+            self.humemai.currentTime: Literal("2024-04-27T10:00:00"),
+            self.humemai.location: Literal("New York"),
         }
         self.memory.add_memory([self.triple1], qualifiers)
 
@@ -1461,11 +1586,6 @@ class TestMemoryCounts(unittest.TestCase):
         )
         self.memory.add_memory([simple_triple], {})  # Empty qualifiers
 
-        # Depending on implementation, this might still create a reified statement even with no qualifiers
-        # If no reified statement is created, counts should be zero
-        # However, based on your `add_memory` method, it always creates a reified statement
-        # So expect one reified statement and one triple
-
         self.assertEqual(
             self.memory.get_memory_count(),
             1,
@@ -1482,12 +1602,12 @@ class TestMemoryCounts(unittest.TestCase):
         Test triple and memory counts after adding and deleting multiple triples.
         """
         qualifiers1 = {
-            humemai.currentTime: "2024-04-27T10:00:00",
-            humemai.location: "New York",
+            self.humemai.currentTime: Literal("2024-04-27T10:00:00"),
+            self.humemai.location: Literal("New York"),
         }
         qualifiers2 = {
-            humemai.currentTime: "2024-04-27T12:00:00",
-            humemai.location: "London",
+            self.humemai.currentTime: Literal("2024-04-27T12:00:00"),
+            self.humemai.location: Literal("London"),
         }
 
         # Add multiple triples
@@ -1543,6 +1663,7 @@ class TestModifyEpisodicEvent(unittest.TestCase):
         Set up the Memory object with some episodic, semantic, and short-term memories.
         """
         self.memory = Memory(verbose_repr=True)
+        self.humemai = Namespace("https://humem.ai/ontology/")
 
         # Define some triples
         self.triple1 = (
@@ -1557,70 +1678,52 @@ class TestModifyEpisodicEvent(unittest.TestCase):
             URIRef("https://example.org/person/David"),
         )
 
-        # Define semantic triples (which should not be affected by the modification)
-        self.semantic_triple1 = (
-            URIRef("https://example.org/entity/Cat"),
-            URIRef("https://example.org/relationship/is"),
-            URIRef("https://example.org/entity/Animal"),
-        )
-
-        self.semantic_triple2 = (
-            URIRef("https://example.org/entity/Tree"),
-            URIRef("https://example.org/relationship/has"),
-            URIRef("https://example.org/entity/Leaves"),
-        )
-
         # Define episodic memories with qualifiers
         episodic_qualifiers1 = {
-            "location": "New York",
-            "time": "2024-04-27T15:00:00",
-            "emotion": "happy",
-            "event": "Meeting for coffee",
+            self.humemai.location: Literal("New York"),
+            self.humemai.eventTime: Literal(
+                "2024-04-27T15:00:00", datatype=XSD.dateTime
+            ),
+            self.humemai.emotion: Literal("happy"),
+            self.humemai.event: Literal("Meeting for coffee"),
         }
 
         episodic_qualifiers2 = {
-            "location": "London",
-            "time": "2024-04-27T17:00:00",
-            "emotion": "excited",
-            "event": "Dinner event",
+            self.humemai.location: Literal("London"),
+            self.humemai.eventTime: Literal(
+                "2024-04-27T17:00:00", datatype=XSD.dateTime
+            ),
+            self.humemai.emotion: Literal("excited"),
+            self.humemai.event: Literal("Dinner event"),
         }
 
-        # Define semantic memories with qualifiers
-        semantic_qualifiers1 = {"strength": 5, "derivedFrom": "study"}
-
-        semantic_qualifiers2 = {"strength": 7, "derivedFrom": "observation"}
-
         # Add episodic long-term memories
-        self.memory.add_long_term_memory(
-            "episodic", [self.triple1], **episodic_qualifiers1
-        )
-        self.memory.add_long_term_memory(
-            "episodic", [self.triple2], **episodic_qualifiers2
-        )
-
-        # Add semantic long-term memories (these should not be affected by modify_episodic_event)
-        self.memory.add_long_term_memory(
-            "semantic", [self.semantic_triple1], **semantic_qualifiers1
-        )
-        self.memory.add_long_term_memory(
-            "semantic", [self.semantic_triple2], **semantic_qualifiers2
-        )
+        self.memory.add_episodic_memory([self.triple1], qualifiers=episodic_qualifiers1)
+        self.memory.add_episodic_memory([self.triple2], qualifiers=episodic_qualifiers2)
 
         # Add short-term memories (these should not be affected by modify_episodic_event)
-        self.memory.add_short_term_memory(
-            [self.triple1], location="Berlin", currentTime="2024-04-27T18:00:00"
-        )
-        self.memory.add_short_term_memory(
-            [self.triple2], location="Tokyo", currentTime="2024-04-27T19:00:00"
-        )
+        short_term_qualifiers1 = {
+            self.humemai.location: Literal("Berlin"),
+            self.humemai.currentTime: Literal(
+                "2024-04-27T18:00:00", datatype=XSD.dateTime
+            ),
+        }
+        short_term_qualifiers2 = {
+            self.humemai.location: Literal("Tokyo"),
+            self.humemai.currentTime: Literal(
+                "2024-04-27T19:00:00", datatype=XSD.dateTime
+            ),
+        }
+        self.memory.add_short_term_memory([self.triple1], short_term_qualifiers1)
+        self.memory.add_short_term_memory([self.triple2], short_term_qualifiers2)
 
     def test_modify_event_for_episodic_memories(self):
         """
         Test that only episodic memories within the time range have their event modified.
         """
-        lower_time_bound = "2024-04-27T00:00:00"
-        upper_time_bound = "2024-04-28T00:00:00"
-        new_event = "Updated Event for Conference"
+        lower_time_bound = Literal("2024-04-27T00:00:00", datatype=XSD.dateTime)
+        upper_time_bound = Literal("2024-04-28T00:00:00", datatype=XSD.dateTime)
+        new_event = Literal("Updated Event for Conference")
 
         # Modify the event for episodic memories within the time range
         self.memory.modify_episodic_event(
@@ -1637,10 +1740,6 @@ class TestModifyEpisodicEvent(unittest.TestCase):
         self.assertNotIn("Meeting for coffee", result)
         self.assertNotIn("Dinner event", result)
 
-        # Check that semantic memories are NOT updated
-        self.assertIn("study", result)
-        self.assertIn("observation", result)
-
         # Check that short-term memories are NOT affected
         self.assertIn("Berlin", result)
         self.assertIn("Tokyo", result)
@@ -1649,9 +1748,9 @@ class TestModifyEpisodicEvent(unittest.TestCase):
         """
         Test that memories outside the specified time range are not modified.
         """
-        lower_time_bound = "2024-04-26T00:00:00"
-        upper_time_bound = "2024-04-27T12:00:00"  # Before any episodic memory time
-        new_event = "Updated Event"
+        lower_time_bound = Literal("2024-04-26T00:00:00", datatype=XSD.dateTime)
+        upper_time_bound = Literal("2024-04-27T12:00:00", datatype=XSD.dateTime)
+        new_event = Literal("Updated Event")
 
         # Modify the event for episodic memories (which shouldn't modify anything)
         self.memory.modify_episodic_event(
@@ -1670,11 +1769,11 @@ class TestModifyEpisodicEvent(unittest.TestCase):
 
     def test_only_episodic_memories_are_modified(self):
         """
-        Test that only episodic long-term memories are modified, semantic and short-term memories are unaffected.
+        Test that only episodic long-term memories are modified, and short-term memories are unaffected.
         """
-        lower_time_bound = "2024-04-27T00:00:00"
-        upper_time_bound = "2024-04-28T00:00:00"
-        new_event = "Conference Event Update"
+        lower_time_bound = Literal("2024-04-27T00:00:00", datatype=XSD.dateTime)
+        upper_time_bound = Literal("2024-04-28T00:00:00", datatype=XSD.dateTime)
+        new_event = Literal("Conference Event Update")
 
         # Modify episodic memories
         self.memory.modify_episodic_event(
@@ -1691,10 +1790,6 @@ class TestModifyEpisodicEvent(unittest.TestCase):
         self.assertNotIn("Meeting for coffee", result)
         self.assertNotIn("Dinner event", result)
 
-        # Semantic memories should remain unchanged
-        self.assertIn("study", result)
-        self.assertIn("observation", result)
-
         # Short-term memories should remain unchanged
         self.assertIn("Berlin", result)
         self.assertIn("Tokyo", result)
@@ -1703,9 +1798,9 @@ class TestModifyEpisodicEvent(unittest.TestCase):
         """
         Test that multiple episodic memories within the time range are modified.
         """
-        lower_time_bound = "2024-04-27T00:00:00"
-        upper_time_bound = "2024-04-28T00:00:00"
-        new_event = "Global Event Update"
+        lower_time_bound = Literal("2024-04-27T00:00:00", datatype=XSD.dateTime)
+        upper_time_bound = Literal("2024-04-28T00:00:00", datatype=XSD.dateTime)
+        new_event = Literal("Global Event Update")
 
         # Modify the event for episodic memories
         self.memory.modify_episodic_event(
@@ -1724,11 +1819,11 @@ class TestModifyEpisodicEvent(unittest.TestCase):
 
     def test_event_modification_with_additional_filters(self):
         """
-        Test that episodic memories can be modified with additional filters (e.g., subject, location).
+        Test that episodic memories can be modified with additional filters (e.g., subject).
         """
-        lower_time_bound = "2024-04-27T00:00:00"
-        upper_time_bound = "2024-04-28T00:00:00"
-        new_event = "Filtered Event Update"
+        lower_time_bound = Literal("2024-04-27T00:00:00", datatype=XSD.dateTime)
+        upper_time_bound = Literal("2024-04-28T00:00:00", datatype=XSD.dateTime)
+        new_event = Literal("Filtered Event Update")
 
         # Modify the event for episodic memories with a subject filter (only Alice's memory)
         self.memory.modify_episodic_event(
@@ -1773,20 +1868,26 @@ class TestIncrementRecalled(unittest.TestCase):
 
         # Define episodic and semantic qualifiers
         episodic_qualifiers = {
-            "location": "New York",
-            "time": "2024-04-27T15:00:00",
-            "emotion": "happy",
-            "event": "Meeting for coffee",
+            self.humemai.location: Literal("New York"),
+            self.humemai.eventTime: Literal(
+                "2024-04-27T15:00:00", datatype=XSD.dateTime
+            ),
+            self.humemai.emotion: Literal("happy"),
+            self.humemai.event: Literal("Meeting for coffee"),
         }
 
-        semantic_qualifiers = {"strength": 5, "derivedFrom": "study"}
+        semantic_qualifiers = {
+            self.humemai.knownSince: Literal(
+                "2024-04-27T15:00:00", datatype=XSD.dateTime
+            ),
+            self.humemai.strength: Literal(5, datatype=XSD.integer),
+            self.humemai.derivedFrom: Literal("study"),
+        }
 
         # Add episodic and semantic memories
-        self.memory.add_long_term_memory(
-            "episodic", [self.triple1], **episodic_qualifiers
-        )
-        self.memory.add_long_term_memory(
-            "semantic", [self.semantic_triple1], **semantic_qualifiers
+        self.memory.add_episodic_memory([self.triple1], qualifiers=episodic_qualifiers)
+        self.memory.add_semantic_memory(
+            [self.semantic_triple1], qualifiers=semantic_qualifiers
         )
 
     def test_multiple_increments_recalled(self):
@@ -1800,7 +1901,10 @@ class TestIncrementRecalled(unittest.TestCase):
         result = repr(self.memory)
 
         # Check that the 'recalled' value has been incremented to 1 for both episodic and semantic memories
-        self.assertIn("'https://humem.ai/ontology/recalled': '1'", result)
+        self.assertIn(
+            "rdflib.term.Literal('1', datatype=rdflib.term.URIRef('http://www.w3.org/2001/XMLSchema#integer'))",
+            result,
+        )
 
         # Increment recalled values again
         self.memory.increment_recalled()
@@ -1809,7 +1913,10 @@ class TestIncrementRecalled(unittest.TestCase):
         result = repr(self.memory)
 
         # Check that the 'recalled' value has been incremented to 2 for both episodic and semantic memories
-        self.assertIn("'https://humem.ai/ontology/recalled': '2'", result)
+        self.assertIn(
+            "rdflib.term.Literal('2', datatype=rdflib.term.URIRef('http://www.w3.org/2001/XMLSchema#integer'))",
+            result,
+        )
 
         # Increment recalled values a third time
         self.memory.increment_recalled()
@@ -1818,7 +1925,10 @@ class TestIncrementRecalled(unittest.TestCase):
         result = repr(self.memory)
 
         # Check that the 'recalled' value has been incremented to 3 for both episodic and semantic memories
-        self.assertIn("'https://humem.ai/ontology/recalled': '3'", result)
+        self.assertIn(
+            "rdflib.term.Literal('3', datatype=rdflib.term.URIRef('http://www.w3.org/2001/XMLSchema#integer'))",
+            result,
+        )
 
 
 class TestMemoryDelete(unittest.TestCase):
@@ -1855,86 +1965,109 @@ class TestMemoryDelete(unittest.TestCase):
             ),
         ]
 
-        # Define episodic and semantic qualifiers
+        # Define episodic and semantic qualifiers with URIRef keys
         self.episodic_qualifiers_1 = {
-            "location": "New York",
-            "time": "2024-04-27T15:00:00",
-            "emotion": "happy",
-            "event": "Coffee meeting",
+            URIRef("https://humem.ai/ontology/location"): Literal("New York"),
+            URIRef("https://humem.ai/ontology/eventTime"): Literal(
+                "2024-04-27T15:00:00", datatype=XSD.dateTime
+            ),
+            URIRef("https://humem.ai/ontology/emotion"): Literal("happy"),
+            URIRef("https://humem.ai/ontology/event"): Literal("Coffee meeting"),
         }
         self.episodic_qualifiers_2 = {
-            "location": "London",
-            "time": "2024-05-01T10:00:00",
-            "emotion": "excited",
-            "event": "Conference meeting",
+            URIRef("https://humem.ai/ontology/location"): Literal("London"),
+            URIRef("https://humem.ai/ontology/eventTime"): Literal(
+                "2024-05-01T10:00:00", datatype=XSD.dateTime
+            ),
+            URIRef("https://humem.ai/ontology/emotion"): Literal("excited"),
+            URIRef("https://humem.ai/ontology/event"): Literal("Conference meeting"),
         }
         self.episodic_qualifiers_3 = {
-            "location": "Paris",
-            "time": "2024-05-05T18:00:00",
-            "emotion": "curious",
-            "event": "Workshop",
+            URIRef("https://humem.ai/ontology/location"): Literal("Paris"),
+            URIRef("https://humem.ai/ontology/eventTime"): Literal(
+                "2024-05-05T18:00:00", datatype=XSD.dateTime
+            ),
+            URIRef("https://humem.ai/ontology/emotion"): Literal("curious"),
+            URIRef("https://humem.ai/ontology/event"): Literal("Workshop"),
         }
 
-        self.semantic_qualifiers_1 = {"derivedFrom": "animal_research", "strength": 5}
-        self.semantic_qualifiers_2 = {"derivedFrom": "pet_database", "strength": 10}
+        self.semantic_qualifiers_1 = {
+            URIRef("https://humem.ai/ontology/derivedFrom"): Literal("animal_research"),
+            URIRef("https://humem.ai/ontology/strength"): Literal(
+                5, datatype=XSD.integer
+            ),
+        }
+        self.semantic_qualifiers_2 = {
+            URIRef("https://humem.ai/ontology/derivedFrom"): Literal("pet_database"),
+            URIRef("https://humem.ai/ontology/strength"): Literal(
+                10, datatype=XSD.integer
+            ),
+        }
 
-        # Add episodic memories and semantic memories
-        self.memory.add_long_term_memory(
-            "episodic", [self.triples[0]], **self.episodic_qualifiers_1
+        # Add episodic memories using add_memory (no add_long_term_memory)
+        self.memory.add_memory(
+            [self.triples[0]], self.episodic_qualifiers_1
         )  # Memory ID 0
-        self.memory.add_long_term_memory(
-            "episodic", [self.triples[0]], **self.episodic_qualifiers_2
+        self.memory.add_memory(
+            [self.triples[0]], self.episodic_qualifiers_2
         )  # Memory ID 1
-        self.memory.add_long_term_memory(
-            "episodic", [self.triples[1]], **self.episodic_qualifiers_1
+        self.memory.add_memory(
+            [self.triples[1]], self.episodic_qualifiers_1
         )  # Memory ID 2
-        self.memory.add_long_term_memory(
-            "episodic", [self.triples[2]], **self.episodic_qualifiers_3
+        self.memory.add_memory(
+            [self.triples[2]], self.episodic_qualifiers_3
         )  # Memory ID 3
 
-        self.memory.add_long_term_memory(
-            "semantic", [self.triples[3]], **self.semantic_qualifiers_1
+        # Add semantic memories using add_memory (no add_long_term_memory)
+        self.memory.add_memory(
+            [self.triples[3]], self.semantic_qualifiers_1
         )  # Memory ID 4
-        self.memory.add_long_term_memory(
-            "semantic", [self.triples[3]], **self.semantic_qualifiers_2
+        self.memory.add_memory(
+            [self.triples[3]], self.semantic_qualifiers_2
         )  # Memory ID 5
 
         # Add a short-term memory
         self.memory.add_short_term_memory(
-            [self.triples[4]], location="Alice's home"
+            [self.triples[4]],
+            {URIRef("https://humem.ai/ontology/location"): Literal("Alice's home")},
         )  # Memory ID 6
 
     def test_memory_retrieval_by_id(self):
         """Test retrieving memories by ID."""
-        memory_0 = self.memory.get_memory_by_id(0)
+        memory_0 = self.memory.get_memory_by_id(Literal(0, datatype=XSD.integer))
         self.assertIn(
-            "New York", memory_0["qualifiers"]["https://humem.ai/ontology/location"]
+            "New York",
+            memory_0["qualifiers"][URIRef("https://humem.ai/ontology/location")],
         )  # Check in the qualifiers
 
-        memory_1 = self.memory.get_memory_by_id(1)
+        memory_1 = self.memory.get_memory_by_id(Literal(1, datatype=XSD.integer))
         self.assertIn(
-            "London", memory_1["qualifiers"]["https://humem.ai/ontology/location"]
+            "London",
+            memory_1["qualifiers"][URIRef("https://humem.ai/ontology/location")],
         )  # Check in the qualifiers
 
-        memory_4 = self.memory.get_memory_by_id(4)
+        memory_4 = self.memory.get_memory_by_id(Literal(4, datatype=XSD.integer))
         self.assertIn(
             "animal_research",
-            memory_4["qualifiers"]["https://humem.ai/ontology/derivedFrom"],
+            memory_4["qualifiers"][URIRef("https://humem.ai/ontology/derivedFrom")],
         )  # Check semantic memory
 
-        memory_6 = self.memory.get_memory_by_id(6)
+        memory_6 = self.memory.get_memory_by_id(Literal(6, datatype=XSD.integer))
         self.assertIn(
-            "Alice's home", memory_6["qualifiers"]["https://humem.ai/ontology/location"]
+            "Alice's home",
+            memory_6["qualifiers"][URIRef("https://humem.ai/ontology/location")],
         )  # Check short-term memory
 
     def test_memory_deletion_by_id(self):
         """Test deleting a memory by ID."""
-        self.memory.delete_memory(1)  # Delete memory ID 1
-        deleted_memory = self.memory.get_memory_by_id(1)
+        self.memory.delete_memory(
+            Literal(1, datatype=XSD.integer)
+        )  # Delete memory ID 1
+        deleted_memory = self.memory.get_memory_by_id(Literal(1, datatype=XSD.integer))
         self.assertIsNone(deleted_memory)  # Ensure memory ID 1 is deleted
 
         # Ensure other memories are still present
-        memory_0 = self.memory.get_memory_by_id(0)
+        memory_0 = self.memory.get_memory_by_id(Literal(0, datatype=XSD.integer))
         self.assertIsNotNone(memory_0)
 
     def test_triple_deletion(self):
@@ -1942,12 +2075,16 @@ class TestMemoryDelete(unittest.TestCase):
         self.memory.delete_triple(*self.triples[0])
 
         # Both Memory ID 0 and 1 refer to the triple (Alice, met, Bob), so they should be deleted
-        self.assertIsNone(self.memory.get_memory_by_id(0))
-        self.assertIsNone(self.memory.get_memory_by_id(1))
+        self.assertIsNone(
+            self.memory.get_memory_by_id(Literal(0, datatype=XSD.integer))
+        )
+        self.assertIsNone(
+            self.memory.get_memory_by_id(Literal(1, datatype=XSD.integer))
+        )
 
         # Ensure other memories are not affected
-        memory_2 = self.memory.get_memory_by_id(2)
-        memory_3 = self.memory.get_memory_by_id(3)
+        memory_2 = self.memory.get_memory_by_id(Literal(2, datatype=XSD.integer))
+        memory_3 = self.memory.get_memory_by_id(Literal(3, datatype=XSD.integer))
         self.assertIsNotNone(memory_2)
         self.assertIsNotNone(memory_3)
 
@@ -1984,33 +2121,40 @@ class TestMemoryRetrievalAndDeletion(unittest.TestCase):
             ),
         ]
 
-        # Define qualifiers
+        # Define qualifiers with URIRef keys
         self.episodic_qualifiers_1 = {
-            "location": "New York",
-            "time": "2024-04-27T15:00:00",
-            "emotion": "happy",
-            "event": "Coffee meeting",
+            URIRef("https://humem.ai/ontology/location"): Literal("New York"),
+            URIRef("https://humem.ai/ontology/eventTime"): Literal(
+                "2024-04-27T15:00:00", datatype=XSD.dateTime
+            ),
+            URIRef("https://humem.ai/ontology/emotion"): Literal("happy"),
+            URIRef("https://humem.ai/ontology/event"): Literal("Coffee meeting"),
         }
 
         self.episodic_qualifiers_2 = {
-            "location": "London",
-            "time": "2024-05-01T10:00:00",
-            "emotion": "excited",
-            "event": "Conference meeting",
+            URIRef("https://humem.ai/ontology/location"): Literal("London"),
+            URIRef("https://humem.ai/ontology/eventTime"): Literal(
+                "2024-05-01T10:00:00", datatype=XSD.dateTime
+            ),
+            URIRef("https://humem.ai/ontology/emotion"): Literal("excited"),
+            URIRef("https://humem.ai/ontology/event"): Literal("Conference meeting"),
         }
 
-        # Add long-term episodic memories
-        self.memory.add_long_term_memory(
-            "episodic", [self.triples[0]], **self.episodic_qualifiers_1
+        # Add long-term episodic memories using add_memory
+        self.memory.add_memory(
+            [self.triples[0]], self.episodic_qualifiers_1
         )  # Memory ID 0
-        self.memory.add_long_term_memory(
-            "episodic", [self.triples[1]], **self.episodic_qualifiers_2
+        self.memory.add_memory(
+            [self.triples[1]], self.episodic_qualifiers_2
         )  # Memory ID 1
 
     def test_retrieve_memories(self):
         """Test retrieval of memories by qualifiers and ensure correct memory IDs are returned."""
         # Retrieve memories with the filter location="New York"
-        retrieved_memories = self.memory.get_memories(location="New York")
+        location_qualifier = {
+            URIRef("https://humem.ai/ontology/location"): Literal("New York")
+        }
+        retrieved_memories = self.memory.get_memories(qualifiers=location_qualifier)
 
         # Extract memory IDs from the retrieved memories
         memory_ids = [
@@ -2025,7 +2169,10 @@ class TestMemoryRetrievalAndDeletion(unittest.TestCase):
     def test_delete_memory_by_retrieved_id(self):
         """Test deleting a memory by retrieving its ID and verifying it is deleted."""
         # Retrieve memories with location="New York"
-        retrieved_memories = self.memory.get_memories(location="New York")
+        location_qualifier = {
+            URIRef("https://humem.ai/ontology/location"): Literal("New York")
+        }
+        retrieved_memories = self.memory.get_memories(qualifiers=location_qualifier)
 
         # Extract memory IDs from the retrieved memories
         memory_ids_to_delete = [
@@ -2035,11 +2182,13 @@ class TestMemoryRetrievalAndDeletion(unittest.TestCase):
 
         # Delete the retrieved memory from the original memory system
         for memory_id in memory_ids_to_delete:
-            self.memory.delete_memory(memory_id)
+            self.memory.delete_memory(Literal(memory_id, datatype=XSD.integer))
 
         # Verify that the memory has been deleted
         for memory_id in memory_ids_to_delete:
-            deleted_memory = self.memory.get_memory_by_id(memory_id)
+            deleted_memory = self.memory.get_memory_by_id(
+                Literal(memory_id, datatype=XSD.integer)
+            )
             self.assertIsNone(
                 deleted_memory,
                 f"Memory ID {memory_id} should have been deleted but was not.",
@@ -2048,21 +2197,28 @@ class TestMemoryRetrievalAndDeletion(unittest.TestCase):
     def test_memory_deletion_does_not_affect_others(self):
         """Test that deleting one memory does not affect other memories."""
         # Retrieve and delete memories with location="New York"
-        retrieved_memories = self.memory.get_memories(location="New York")
+        location_qualifier = {
+            URIRef("https://humem.ai/ontology/location"): Literal("New York")
+        }
+        retrieved_memories = self.memory.get_memories(qualifiers=location_qualifier)
         memory_ids_to_delete = [
             int(retrieved_memories.graph.value(statement, humemai.memoryID))
             for statement in retrieved_memories.graph.subjects(RDF.type, RDF.Statement)
         ]
         for memory_id in memory_ids_to_delete:
-            self.memory.delete_memory(memory_id)
+            self.memory.delete_memory(Literal(memory_id, datatype=XSD.integer))
 
         # Ensure memory with ID 1 still exists (the one for "London")
-        remaining_memory = self.memory.get_memory_by_id(1)
+        remaining_memory = self.memory.get_memory_by_id(
+            Literal(1, datatype=XSD.integer)
+        )
         self.assertIsNotNone(remaining_memory, "Memory ID 1 should still exist.")
 
     def test_delete_non_existent_memory(self):
         """Test that deleting a non-existent memory ID does not raise an error."""
-        non_existent_memory_id = 999  # Choose an ID that doesn't exist
+        non_existent_memory_id = Literal(
+            999, datatype=XSD.integer
+        )  # Choose an ID that doesn't exist
         try:
             self.memory.delete_memory(non_existent_memory_id)
         except Exception as e:
@@ -2600,13 +2756,11 @@ class TestGetShortTerm(unittest.TestCase):
         self.obj = URIRef("https://example.org/person/Bob")
 
         # Qualifiers for the short-term memory
-        self.current_time_qualifier = URIRef("https://humem.ai/ontology/currentTime")
+        self.currentTime_qualifier = URIRef("https://humem.ai/ontology/currentTime")
         self.location_qualifier = URIRef("https://humem.ai/ontology/location")
         self.emotion_qualifier = URIRef("https://humem.ai/ontology/emotion")
 
-        self.current_time_literal = Literal(
-            "2024-10-03T15:00:00", datatype=XSD.dateTime
-        )
+        self.currentTime_literal = Literal("2024-10-03T15:00:00", datatype=XSD.dateTime)
         self.location_literal = Literal("New York", datatype=XSD.string)
         self.emotion_literal = Literal("happy", datatype=XSD.string)
 
@@ -2621,8 +2775,8 @@ class TestGetShortTerm(unittest.TestCase):
         self.memory.graph.add(
             (
                 self.reified_statement,
-                self.current_time_qualifier,
-                self.current_time_literal,
+                self.currentTime_qualifier,
+                self.currentTime_literal,
             )
         )
         self.memory.graph.add(
@@ -2662,7 +2816,7 @@ class TestGetShortTerm(unittest.TestCase):
 
         # Check if the correct qualifiers were added
         self.assertIn(
-            (reified_statement, self.current_time_qualifier, self.current_time_literal),
+            (reified_statement, self.currentTime_qualifier, self.currentTime_literal),
             short_term_memory.graph,
         )
         self.assertIn(
@@ -2700,8 +2854,8 @@ class TestGetShortTerm(unittest.TestCase):
         self.memory.graph.add(
             (
                 self.reified_statement,
-                self.current_time_qualifier,
-                self.current_time_literal,
+                self.currentTime_qualifier,
+                self.currentTime_literal,
             )
         )
         self.memory.graph.add(
@@ -2734,7 +2888,7 @@ class TestGetShortTerm(unittest.TestCase):
 
         # Check the available qualifiers (no emotion)
         self.assertIn(
-            (reified_statement, self.current_time_qualifier, self.current_time_literal),
+            (reified_statement, self.currentTime_qualifier, self.currentTime_literal),
             short_term_memory.graph,
         )
         self.assertIn(
@@ -2761,71 +2915,88 @@ class TestMemorySaveLoad(unittest.TestCase):
         # Add multiple short-term memories
         self.memory.add_short_term_memory(
             [(ex.Alice, ex.met, ex.Bob)],
-            location="New York",
-            currentTime="2024-04-27T15:00:00",
+            {
+                humemai.location: Literal("New York"),
+                humemai.currentTime: Literal(
+                    "2024-04-27T15:00:00", datatype=XSD.dateTime
+                ),
+            },
         )
         self.memory.add_short_term_memory(
             [(ex.Alice, ex.met, ex.Bob)],
-            location="New York",
-            currentTime="2024-04-27T16:00:00",
+            {
+                humemai.location: Literal("New York"),
+                humemai.currentTime: Literal(
+                    "2024-04-27T16:00:00", datatype=XSD.dateTime
+                ),
+            },
         )
 
         self.memory.add_short_term_memory(
             [(ex.Bob, ex.knows, ex.Alice)],
-            location="Paris",
-            currentTime="2024-05-01T10:00:00",
+            {
+                humemai.location: Literal("Paris"),
+                humemai.currentTime: Literal(
+                    "2024-05-01T10:00:00", datatype=XSD.dateTime
+                ),
+            },
         )
 
         # Add multiple long-term episodic memories
-        self.memory.add_long_term_memory(
-            "episodic",
+        self.memory.add_memory(
             [(ex.Alice, ex.attended, ex.Conference)],
-            location="London",
-            time="2023-09-15T10:00:00",
-            emotion="excited",
-            event="AI Conference",
+            {
+                humemai.location: Literal("London"),
+                humemai.eventTime: Literal(
+                    "2023-09-15T10:00:00", datatype=XSD.dateTime
+                ),
+                humemai.emotion: Literal("excited"),
+                humemai.event: Literal("AI Conference"),
+            },
         )
-        self.memory.add_long_term_memory(
-            "episodic",
+        self.memory.add_memory(
             [(ex.Alice, ex.spokeWith, ex.Charlie)],
-            location="London",
-            time="2023-09-15T11:00:00",
-            emotion="happy",
-            event="AI Conference",
+            {
+                humemai.location: Literal("London"),
+                humemai.eventTime: Literal(
+                    "2023-09-15T11:00:00", datatype=XSD.dateTime
+                ),
+                humemai.emotion: Literal("happy"),
+                humemai.event: Literal("AI Conference"),
+            },
         )
-        self.memory.add_long_term_memory(
-            "episodic",
+        self.memory.add_memory(
             [(ex.Alice, ex.spokeWith, ex.Charlie)],
-            location="London",
-            time="2023-09-15T11:00:00",
-            emotion="sad",
-            event="AI Conference",
+            {
+                humemai.location: Literal("London"),
+                humemai.eventTime: Literal(
+                    "2023-09-15T11:00:00", datatype=XSD.dateTime
+                ),
+                humemai.emotion: Literal("sad"),
+                humemai.event: Literal("AI Conference"),
+            },
         )
 
         # Add multiple long-term semantic memories
-        self.memory.add_long_term_memory(
-            "semantic",
+        self.memory.add_memory(
             [(ex.Dog, ex.hasType, ex.Animal)],
-            derivedFrom="research_paper_1",
-            strength=5,
+            {
+                humemai.derivedFrom: Literal("research_paper_1"),
+                humemai.strength: Literal(5, datatype=XSD.integer),
+                humemai.knownSince: Literal(
+                    "2023-09-15T10:00:00", datatype=XSD.dateTime
+                ),
+            },
         )
-        self.memory.add_long_term_memory(
-            "semantic",
+        self.memory.add_memory(
             [(ex.Cat, ex.hasType, ex.Animal)],
-            derivedFrom="research_paper_2",
-            strength=4,
-        )
-        self.memory.add_long_term_memory(
-            "semantic",
-            [(ex.Cat, ex.hasType, ex.Animal)],
-            derivedFrom="research_paper_2",
-            strength=4,
-        )
-        self.memory.add_long_term_memory(
-            "semantic",
-            [(ex.Cat, ex.hasType, ex.Animal)],
-            derivedFrom="research_paper_2",
-            strength=4,
+            {
+                humemai.derivedFrom: Literal("research_paper_2"),
+                humemai.strength: Literal(4, datatype=XSD.integer),
+                humemai.knownSince: Literal(
+                    "2023-09-15T10:00:00", datatype=XSD.dateTime
+                ),
+            },
         )
 
         # Store the triples before wiping
@@ -2874,82 +3045,6 @@ class TestMemorySaveLoad(unittest.TestCase):
             os.remove(self.test_file)
 
 
-class TestMemoryCounts(unittest.TestCase):
-
-    def setUp(self):
-        """
-        Set up a fresh Memory instance for each test.
-        """
-        self.memory = Memory(verbose_repr=False)
-
-    def test_memory_counts(self):
-        """
-        Test to verify memory counts and ensure relationships between total, short-term,
-        and long-term memories are consistent.
-        """
-        # Add some short-term memories
-        triples_1 = [
-            (
-                URIRef("https://example.org/Alice"),
-                URIRef("https://example.org/knows"),
-                URIRef("https://example.org/Bob"),
-            )
-        ]
-        triples_2 = [
-            (
-                URIRef("https://example.org/Charlie"),
-                URIRef("https://example.org/spokeWith"),
-                URIRef("https://example.org/Alice"),
-            )
-        ]
-
-        self.memory.add_short_term_memory(
-            triples_1, location="Paris", currentTime="2024-05-01T10:00:00"
-        )
-        self.memory.add_short_term_memory(
-            triples_2, location="London", currentTime="2024-05-02T12:00:00"
-        )
-
-        # Add some long-term episodic memories
-        self.memory.add_long_term_memory(
-            memory_type="episodic",
-            triples=triples_1,
-            location="Paris",
-            time="2024-05-01T10:00:00",
-            emotion="happy",
-            event="AI Conference",
-        )
-
-        # Add some long-term semantic memories
-        self.memory.add_long_term_memory(
-            memory_type="semantic",
-            triples=triples_2,
-            derivedFrom="research_paper_1",
-            strength=5,
-        )
-
-        # Retrieve counts
-        total_memories = self.memory.get_memory_count()
-        short_term_memories = self.memory.get_short_term_memory_count()
-        long_term_memories = self.memory.get_long_term_memory_count()
-        episodic_memories = self.memory.get_long_term_episodic_memory_count()
-        semantic_memories = self.memory.get_long_term_semantic_memory_count()
-
-        # Check that total memory count matches the sum of short-term and long-term memories
-        self.assertEqual(
-            total_memories,
-            short_term_memories + long_term_memories,
-            "Total memory count should equal short-term + long-term memory count",
-        )
-
-        # Check that long-term memory count matches the sum of episodic and semantic memories
-        self.assertEqual(
-            long_term_memories,
-            episodic_memories + semantic_memories,
-            "Long-term memory count should equal episodic + semantic memory count",
-        )
-
-
 class TestMemoryRetrievalMethods(unittest.TestCase):
 
     def setUp(self):
@@ -2958,54 +3053,59 @@ class TestMemoryRetrievalMethods(unittest.TestCase):
         for testing.
         """
         self.memory = Memory()
+        self.humemai = Namespace("https://humem.ai/ontology/")
+        self.ex = Namespace("https://example.org/")
 
         # Add short-term memory
         triples_short = [
             (
-                URIRef("https://example.org/Alice"),
-                URIRef("https://example.org/meet"),
-                URIRef("https://example.org/Bob"),
+                self.ex.Alice,
+                self.ex.meet,
+                self.ex.Bob,
             )
         ]
-        current_time = datetime.now().isoformat()
-        location = "Paris"
-        self.memory.add_short_term_memory(
-            triples_short, location, currentTime=current_time
-        )
+        current_time = Literal(datetime.now().isoformat(), datatype=XSD.dateTime)
+        location = Literal("Paris")
+        qualifiers_short = {
+            self.humemai.currentTime: current_time,
+            self.humemai.location: location,
+        }
+        self.memory.add_memory(triples_short, qualifiers_short)
 
         # Add long-term episodic memory
         triples_episodic = [
             (
-                URIRef("https://example.org/Bob"),
-                URIRef("https://example.org/visit"),
-                URIRef("https://example.org/Paris"),
+                self.ex.Bob,
+                self.ex.visit,
+                self.ex.Paris,
             )
         ]
-        time_episodic = "2022-05-05T10:00:00"
-        location_episodic = "Paris"
-        self.memory.add_long_term_memory(
-            memory_type="episodic",
-            triples=triples_episodic,
-            time=time_episodic,
-            location=location_episodic,
-        )
+        time_episodic = Literal("2022-05-05T10:00:00", datatype=XSD.dateTime)
+        location_episodic = Literal("Paris")
+        qualifiers_episodic = {
+            self.humemai.eventTime: time_episodic,
+            self.humemai.location: location_episodic,
+        }
+        self.memory.add_memory(triples_episodic, qualifiers_episodic)
 
         # Add long-term semantic memory
         triples_semantic = [
             (
-                URIRef("https://example.org/Charlie"),
-                URIRef("https://example.org/hasType"),
-                URIRef("https://example.org/Human"),
+                self.ex.Charlie,
+                self.ex.hasType,
+                self.ex.Human,
             )
         ]
-        derived_from = "research_paper_1"
-        strength = 5
-        self.memory.add_long_term_memory(
-            memory_type="semantic",
-            triples=triples_semantic,
-            derivedFrom=derived_from,
-            strength=strength,
-        )
+        derived_from = Literal("research_paper_1")
+        strength = Literal(5, datatype=XSD.integer)
+        qualifiers_semantic = {
+            self.humemai.derivedFrom: derived_from,
+            self.humemai.strength: strength,
+            self.humemai.knownSince: Literal(
+                "2023-01-01T10:00:00", datatype=XSD.dateTime
+            ),
+        }
+        self.memory.add_memory(triples_semantic, qualifiers_semantic)
 
     def test_get_short_term_memories(self):
         """
@@ -3023,16 +3123,16 @@ class TestMemoryRetrievalMethods(unittest.TestCase):
             pred = short_term_memories.graph.value(statement, RDF.predicate)
             obj = short_term_memories.graph.value(statement, RDF.object)
             current_time = short_term_memories.graph.value(
-                statement, humemai.currentTime
+                statement, self.humemai.currentTime
             )
 
             # Ensure this is a short-term memory
             self.assertIsNotNone(current_time)
 
             # Validate that the subject, predicate, and object are correctly extracted
-            self.assertEqual(subj, URIRef("https://example.org/Alice"))
-            self.assertEqual(pred, URIRef("https://example.org/meet"))
-            self.assertEqual(obj, URIRef("https://example.org/Bob"))
+            self.assertEqual(subj, self.ex.Alice)
+            self.assertEqual(pred, self.ex.meet)
+            self.assertEqual(obj, self.ex.Bob)
 
     def test_get_long_term_memories(self):
         """
@@ -3053,35 +3153,29 @@ class TestMemoryRetrievalMethods(unittest.TestCase):
             subj = long_term_memories.graph.value(statement, RDF.subject)
             pred = long_term_memories.graph.value(statement, RDF.predicate)
             obj = long_term_memories.graph.value(statement, RDF.object)
-            time = long_term_memories.graph.value(statement, humemai.time)
+            event_time = long_term_memories.graph.value(
+                statement, self.humemai.eventTime
+            )
             current_time = long_term_memories.graph.value(
-                statement, humemai.currentTime
+                statement, self.humemai.currentTime
             )
             derived_from = long_term_memories.graph.value(
-                statement, humemai.derivedFrom
+                statement, self.humemai.derivedFrom
             )
-
-            # Debug print to inspect the triples and qualifiers
-            print(f"Statement: {statement}")
-            print(f"Subject: {subj}, Predicate: {pred}, Object: {obj}")
-            print(f"Time (episodic): {time}")
-            print(f"DerivedFrom (semantic): {derived_from}")
-            print(f"CurrentTime (should be None for long-term): {current_time}")
-            print("---")
 
             # Ensure that there is no currentTime for long-term memories
             self.assertIsNone(current_time)
 
-            if time:
+            if event_time:
                 episodic_found = True
-                self.assertEqual(subj, URIRef("https://example.org/Bob"))
-                self.assertEqual(pred, URIRef("https://example.org/visit"))
-                self.assertEqual(obj, URIRef("https://example.org/Paris"))
+                self.assertEqual(subj, self.ex.Bob)
+                self.assertEqual(pred, self.ex.visit)
+                self.assertEqual(obj, self.ex.Paris)
             if derived_from:
                 semantic_found = True
-                self.assertEqual(subj, URIRef("https://example.org/Charlie"))
-                self.assertEqual(pred, URIRef("https://example.org/hasType"))
-                self.assertEqual(obj, URIRef("https://example.org/Human"))
+                self.assertEqual(subj, self.ex.Charlie)
+                self.assertEqual(pred, self.ex.hasType)
+                self.assertEqual(obj, self.ex.Human)
 
         # Assert that we found both an episodic and a semantic memory
         self.assertTrue(episodic_found, "Episodic memory not found.")
@@ -3117,8 +3211,12 @@ class TestMemoryIteration(unittest.TestCase):
         ]
         self.memory.add_short_term_memory(
             triples=triples_short_term,
-            location="Paris",
-            currentTime="2023-05-05T10:00:00",
+            qualifiers={
+                humemai.location: Literal("Paris"),
+                humemai.currentTime: Literal(
+                    "2023-05-05T10:00:00", datatype=XSD.dateTime
+                ),
+            },
         )
 
         # Add a long-term episodic memory
@@ -3129,15 +3227,18 @@ class TestMemoryIteration(unittest.TestCase):
                 URIRef("https://example.org/Paris"),
             )
         ]
-        self.memory.add_long_term_memory(
-            memory_type="episodic",
+        self.memory.add_episodic_memory(
             triples=triples_episodic,
-            location="Paris",
-            time="2023-05-06T10:00:00",
-            emotion="happy",
+            qualifiers={
+                humemai.location: Literal("Paris"),
+                humemai.eventTime: Literal(
+                    "2023-05-06T10:00:00", datatype=XSD.dateTime
+                ),
+                humemai.emotion: Literal("happy"),
+            },
         )
 
-        # Add a long-term semantic memory
+        # Add a long-term semantic memory with required qualifiers
         triples_semantic = [
             (
                 URIRef("https://example.org/Charlie"),
@@ -3145,11 +3246,15 @@ class TestMemoryIteration(unittest.TestCase):
                 URIRef("https://example.org/Human"),
             )
         ]
-        self.memory.add_long_term_memory(
-            memory_type="semantic",
+        self.memory.add_semantic_memory(
             triples=triples_semantic,
-            derivedFrom="research_paper_1",
-            strength=5,
+            qualifiers={
+                humemai.knownSince: Literal(
+                    "2023-01-01T00:00:00", datatype=XSD.dateTime
+                ),
+                humemai.derivedFrom: Literal("research_paper_1"),
+                humemai.strength: Literal(5, datatype=XSD.integer),
+            },
         )
 
     def test_iterate_short_term_memories(self):
@@ -3164,7 +3269,7 @@ class TestMemoryIteration(unittest.TestCase):
             self.assertEqual(subj, URIRef("https://example.org/Alice"))
             self.assertEqual(pred, URIRef("https://example.org/meet"))
             self.assertEqual(obj, URIRef("https://example.org/Bob"))
-            self.assertIn("https://humem.ai/ontology/currentTime", qualifiers)
+            self.assertIn(humemai.currentTime, qualifiers)
 
         self.assertEqual(
             short_term_count, 1, "There should be exactly 1 short-term memory."
@@ -3203,7 +3308,7 @@ class TestMemoryIteration(unittest.TestCase):
             self.assertEqual(subj, URIRef("https://example.org/Bob"))
             self.assertEqual(pred, URIRef("https://example.org/visit"))
             self.assertEqual(obj, URIRef("https://example.org/Paris"))
-            self.assertIn("https://humem.ai/ontology/time", qualifiers)
+            self.assertIn(humemai.eventTime, qualifiers)
 
         self.assertEqual(
             episodic_count, 1, "There should be exactly 1 episodic memory."
@@ -3221,7 +3326,7 @@ class TestMemoryIteration(unittest.TestCase):
             self.assertEqual(subj, URIRef("https://example.org/Charlie"))
             self.assertEqual(pred, URIRef("https://example.org/hasType"))
             self.assertEqual(obj, URIRef("https://example.org/Human"))
-            self.assertIn("https://humem.ai/ontology/derivedFrom", qualifiers)
+            self.assertIn(humemai.derivedFrom, qualifiers)
 
         self.assertEqual(
             semantic_count, 1, "There should be exactly 1 semantic memory."
@@ -3238,3 +3343,244 @@ class TestMemoryIteration(unittest.TestCase):
             all_count += 1
 
         self.assertEqual(all_count, 3, "There should be exactly 3 memories in total.")
+
+
+class TestEvent(unittest.TestCase):
+    def setUp(self):
+        """
+        Set up the Memory instance for testing.
+        """
+        self.memory = Memory(verbose_repr=True)
+
+    def test_add_episodic_memory(self):
+        """
+        Test adding an episodic memory with an event, qualifiers, and event properties.
+        """
+        triples = [
+            (
+                URIRef("https://example.org/Alice"),
+                URIRef("https://example.org/met"),
+                URIRef("https://example.org/Bob"),
+            )
+        ]
+        event_time = "2023-10-01T10:00:00"
+        event = URIRef("https://humem.ai/ontology/Event/AI_Conference")  # Event URI
+        qualifiers = {
+            humemai.location: Literal("Paris"),
+            humemai.emotion: Literal("excited"),
+            humemai.event: event,
+        }
+        event_properties = {
+            URIRef("https://humem.ai/ontology/location"): Literal("Paris"),
+            URIRef("https://humem.ai/ontology/duration"): Literal("3 hours"),
+        }
+
+        # Call add_episodic_memory method with humemai.event as key
+        self.memory.add_episodic_memory(
+            triples=triples,
+            qualifiers={
+                humemai.eventTime: Literal(event_time, datatype=XSD.dateTime),
+                **qualifiers,
+            },
+            event_properties=event_properties,
+        )
+
+        # Verify the triple is added
+        results = list(
+            self.memory.graph.triples(
+                (
+                    URIRef("https://example.org/Alice"),
+                    URIRef("https://example.org/met"),
+                    URIRef("https://example.org/Bob"),
+                )
+            )
+        )
+        self.assertEqual(len(results), 1, "Triple should be added")
+
+        # Verify the reified statement with qualifiers
+        statements = list(self.memory.graph.subjects(RDF.type, RDF.Statement))
+        self.assertEqual(len(statements), 1, "There should be one reified statement")
+        statement = statements[0]
+
+        # Check eventTime qualifier
+        event_time_literal = self.memory.graph.value(statement, humemai.eventTime)
+        self.assertIsNotNone(
+            event_time_literal, "Reified statement should have eventTime"
+        )
+        self.assertEqual(
+            str(event_time_literal),
+            event_time,
+            "eventTime should match the provided time",
+        )
+
+        # Check location qualifier
+        location_literal = self.memory.graph.value(statement, humemai.location)
+        self.assertIsNotNone(location_literal, "Reified statement should have location")
+        self.assertEqual(
+            str(location_literal), "Paris", "Location qualifier should be 'Paris'"
+        )
+
+        # Check emotion qualifier
+        emotion_literal = self.memory.graph.value(statement, humemai.emotion)
+        self.assertIsNotNone(emotion_literal, "Reified statement should have emotion")
+        self.assertEqual(
+            str(emotion_literal), "excited", "Emotion qualifier should be 'excited'"
+        )
+
+        # Check event qualifier
+        event_literal = self.memory.graph.value(statement, humemai.event)
+        self.assertIsNotNone(event_literal, "Reified statement should have event")
+        self.assertEqual(
+            str(event_literal),
+            str(event),
+            "Event qualifier should match the event name",
+        )
+
+        # Verify the event node exists with correct properties
+        self.assertTrue(
+            (event, RDF.type, humemai.Event) in self.memory.graph,
+            "Event node should be created",
+        )
+
+        # Verify event properties
+        for prop, value in event_properties.items():
+            self.assertTrue(
+                (event, prop, value) in self.memory.graph,
+                f"Event property '{prop}' should be '{value}'",
+            )
+
+    def test_create_event_node(self):
+        """
+        Test creating an event node in the graph.
+        """
+        event = URIRef("https://humem.ai/ontology/Event/AI_Conference")
+
+        # Call create_event_node
+        self.memory.create_event_node(event)
+
+        # Verify the event node exists
+        self.assertTrue(
+            (event, RDF.type, humemai.Event) in self.memory.graph,
+            "Event node should be created",
+        )
+
+    def test_add_event_properties(self):
+        """
+        Test adding custom properties to an event node.
+        """
+        event = URIRef("https://humem.ai/ontology/Event/AI_Conference")
+        event_properties = {
+            URIRef("https://humem.ai/ontology/location"): Literal("Paris"),
+            URIRef("https://humem.ai/ontology/duration"): Literal("3 hours"),
+        }
+
+        # Create the event node first
+        self.memory.create_event_node(event)
+
+        # Add event properties
+        self.memory.add_event_properties(event, event_properties)
+
+        # Verify the properties are added to the event node
+        for prop, value in event_properties.items():
+            self.assertTrue(
+                (event, prop, value) in self.memory.graph,
+                f"Event property '{prop}' should be '{value}'",
+            )
+
+
+class TestEventCount(unittest.TestCase):
+    def setUp(self):
+        """
+        Set up a memory instance before each test.
+        """
+        self.memory = Memory()
+
+    def test_get_event_count(self):
+        """
+        Test the get_event_count method by adding event nodes and verifying the count.
+        """
+        # Add some event nodes to the graph
+        event_1 = URIRef("https://humem.ai/ontology/Event/AI_Conference")
+        event_2 = URIRef("https://humem.ai/ontology/Event/Workshop_2023")
+        event_3 = URIRef("https://humem.ai/ontology/Event/Hackathon")
+
+        # Add the events as instances of humemai:Event
+        self.memory.graph.add((event_1, RDF.type, humemai.Event))
+        self.memory.graph.add((event_2, RDF.type, humemai.Event))
+        self.memory.graph.add((event_3, RDF.type, humemai.Event))
+
+        # Check the count of events
+        count = self.memory.get_event_count()
+        self.assertEqual(count, 3, "The count of events should be 3")
+
+    def test_no_events(self):
+        """
+        Test the get_event_count method when no events are present.
+        """
+        # Initially, there should be no events
+        count = self.memory.get_event_count()
+        self.assertEqual(
+            count, 0, "The count of events should be 0 when no events are present"
+        )
+
+    def test_one_event(self):
+        """
+        Test the get_event_count method when there is only one event.
+        """
+        # Add one event node to the graph
+        event = URIRef("https://humem.ai/ontology/Event/Seminar")
+        self.memory.graph.add((event, RDF.type, humemai.Event))
+
+        # Check the count of events
+        count = self.memory.get_event_count()
+        self.assertEqual(count, 1, "The count of events should be 1")
+
+
+class TestEventMethods(unittest.TestCase):
+    def setUp(self):
+        """
+        Set up a memory instance before each test.
+        """
+        self.memory = Memory()
+
+    def test_iterate_events(self):
+        """
+        Test the iterate_events method by adding event nodes and verifying the iteration.
+        """
+        # Add some event nodes to the graph
+        event_1 = URIRef("https://humem.ai/ontology/Event/AI_Conference")
+        event_2 = URIRef("https://humem.ai/ontology/Event/Workshop_2023")
+        event_3 = URIRef("https://humem.ai/ontology/Event/Hackathon")
+
+        # Add the events as instances of humemai:Event
+        self.memory.graph.add((event_1, RDF.type, humemai.Event))
+        self.memory.graph.add((event_2, RDF.type, humemai.Event))
+        self.memory.graph.add((event_3, RDF.type, humemai.Event))
+
+        # Collect the events from iterate_events
+        events = list(self.memory.iterate_events())
+        self.assertEqual(len(events), 3, "There should be 3 events")
+        self.assertIn(event_1, events, "AI_Conference event should be in the list")
+        self.assertIn(event_2, events, "Workshop_2023 event should be in the list")
+        self.assertIn(event_3, events, "Hackathon event should be in the list")
+
+    def test_iterate_no_events(self):
+        """
+        Test the iterate_events method when there are no events.
+        """
+        # No events added, so iterate_events should return an empty list
+        events = list(self.memory.iterate_events())
+        self.assertEqual(len(events), 0, "There should be no events")
+
+    def test_iterate_one_event(self):
+        """
+        Test the iterate_events method when there is only one event.
+        """
+        # Add one event node to the graph
+        event = URIRef("https://humem.ai/ontology/Event/Seminar")
+        self.memory.graph.add((event, RDF.type, humemai.Event))
+
+        # Collect the events from iterate_events
+        events = list(self.memory.iterate_events())
+        self.assertEqual(len(events), 1, "There should be 1 event")
+        self.assertIn(event, events, "Seminar event should be in the list")

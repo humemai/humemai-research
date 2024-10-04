@@ -47,8 +47,8 @@ class MemorySystem:
     ) -> "Memory":
         """
         Retrieve working memory based on a trigger node and a specified number of hops.
-        It fetches all triples within N hops from the trigger node in the long-term memory,
-        including their qualifiers. Also includes all short-term memories.
+        It fetches all triples within N hops from the trigger node in the long-term
+        memory, including their qualifiers. Also includes all short-term memories.
 
         If `include_all_long_term` is True, all long-term memories will be included,
         regardless of the BFS traversal or hops.
@@ -58,10 +58,12 @@ class MemorySystem:
         Args:
             trigger_node (URIRef, optional): The starting node for memory traversal.
             hops (int, optional): The number of hops for BFS traversal (default: 0).
-            include_all_long_term (bool, optional): Include all long-term memories (default: False).
+            include_all_long_term (bool, optional): Include all long-term memories
+            (default: False).
 
         Returns:
-            Memory: A new Memory object containing the working memory (short-term + relevant long-term memories).
+            Memory: A new Memory object containing the working memory (short-term +
+            relevant long-term memories).
         """
         working_memory = Memory(self.verbose_repr)
         processed_statements = set()  # Keep track of processed reified statements
@@ -201,64 +203,65 @@ class MemorySystem:
 
         return working_memory
 
-    def move_short_term_to_long_term(
-        self,
-        memory_id_to_move,
-        memory_type="episodic",
-        emotion=None,
-        strength=None,
-        derivedFrom=None,
-        event=None,
-    ):
+    def move_short_term_to_episodic(self, memory_id_to_move):
         """
-        Move the specified short-term memory to long-term memory (either episodic or semantic).
+        Move the specified short-term memory to long-term episodic memory.
 
         Args:
             memory_id_to_move (int): The memory ID to move from short-term to long-term.
-            memory_type (str): The type of long-term memory to store. Either 'episodic' or 'semantic'.
-            emotion (str, optional): The emotion qualifier for episodic memories.
-            strength (int, optional): The strength qualifier for semantic memories.
-            derivedFrom (str, optional): The source of semantic memory.
-            event (str, optional): The event associated with episodic memory.
         """
         # Iterate through the short-term memories
         for subj, pred, obj, qualifiers in self.memory.iterate_memories("short_term"):
-            memory_id = qualifiers.get(str(humemai.memoryID))
+            memory_id = qualifiers.get(humemai.memoryID)
 
             # Check if the memory ID matches
             if memory_id and int(memory_id) == memory_id_to_move:
-                location = qualifiers.get(str(humemai.location))
-                current_time = qualifiers.get(str(humemai.currentTime))
+                location = qualifiers.get(humemai.location)
+                currentTime = qualifiers.get(humemai.currentTime)
 
-                # Validate the memory type and move it to long-term memory accordingly
-                if memory_type == "episodic":
-                    # Move to long-term episodic memory
-                    self.memory.add_long_term_memory(
-                        memory_type="episodic",
-                        triples=[(subj, pred, obj)],
-                        location=location,
-                        time=current_time,
-                        emotion=emotion,
-                        event=event,
-                    )
-                elif memory_type == "semantic":
+                qualifiers = {humemai.currentTime: currentTime}
 
-                    # Move to long-term semantic memory
-                    self.memory.add_long_term_memory(
-                        memory_type="semantic",
-                        triples=[(subj, pred, obj)],
-                        strength=strength,
-                        derivedFrom=derivedFrom,
-                    )
-                else:
-                    raise ValueError(
-                        "memory_type must be either 'episodic' or 'semantic'"
-                    )
+                if location:
+                    qualifiers[humemai.location] = location
+
+                # Move to long-term episodic memory
+                self.memory.add_episodic_memory(
+                    triples=[(subj, pred, obj)], qualifiers=qualifiers
+                )
 
                 # Remove the short-term memory after moving it to long-term
                 self.memory.delete_memory(int(memory_id))
-                print(
-                    f"Moved short-term memory with ID {memory_id_to_move} to {memory_type} long-term memory."
+
+                logger.debug(
+                    f"Moved short-term memory with ID {memory_id_to_move} to episodic long-term memory."
+                )
+                break
+
+    def move_short_term_to_semantic(self, memory_id_to_move):
+        """
+        Move the specified short-term memory to long-term semantic memory.
+
+        Args:
+            memory_id_to_move (int): The memory ID to move from short-term to long-term.
+        """
+        # Iterate through the short-term memories
+        for subj, pred, obj, qualifiers in self.memory.iterate_memories("short_term"):
+            memory_id = qualifiers.get(humemai.memoryID)
+
+            # Check if the memory ID matches
+            if memory_id and int(memory_id) == memory_id_to_move:
+                currentTime = qualifiers.get(humemai.currentTime)
+                qualifiers = {humemai.knownSince: currentTime}
+
+                # Move to long-term semantic memory
+                self.memory.add_semantic_memory(
+                    triples=[(subj, pred, obj)], qualifiers=qualifiers
+                )
+
+                # Remove the short-term memory after moving it to long-term
+                self.memory.delete_memory(int(memory_id))
+                logger.debug(
+                    f"Moved short-term memory with ID {memory_id_to_move} to semantic long-term memory."
                 )
                 break
 
@@ -267,11 +270,11 @@ class MemorySystem:
         Clear all short-term memories from the memory system.
         """
         for subj, pred, obj, qualifiers in self.memory.iterate_memories("short_term"):
-            memory_id = qualifiers.get(str(humemai.memoryID))
+            memory_id = qualifiers.get(humemai.memoryID)
 
             if memory_id:
-                self.memory.delete_memory(int(memory_id))
-                print(f"Cleared short-term memory with ID {memory_id}.")
+                self.memory.delete_memory(memory_id)
+                logger.debug(f"Cleared short-term memory with ID {memory_id}.")
 
     def __repr__(self) -> str:
         """
