@@ -2,8 +2,8 @@
 
 import random
 from datetime import datetime
-import spacy
 from dateutil import parser
+# import spacy
 from rdflib import Namespace, URIRef, Literal, XSD
 
 from humemai import MemorySystem
