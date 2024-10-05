@@ -3,7 +3,7 @@
 import random
 from datetime import datetime
 from dateutil import parser
-# import spacy
+import spacy
 from rdflib import Namespace, URIRef, Literal, XSD
 
 from humemai import MemorySystem
