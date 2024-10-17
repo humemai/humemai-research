@@ -1,0 +1,52 @@
+<< <http://example.org/David> <http://example.org/worksWith> <http://example.org/Alice> >>
+        <http://example.org/certainty>  "high";
+        <http://example.org/startedAt>  "2018-11-11"^^<http://www.w3.org/2001/XMLSchema#date>;
+        <http://example.org/workScore>  90 .
+
+<< <http://example.org/Charlie> <http://example.org/knows> <http://example.org/David> >>
+        <http://example.org/certainty>  "very high";
+        <http://example.org/friendshipScore>
+                100;
+        <http://example.org/startedAt>  "2019-09-05"^^<http://www.w3.org/2001/XMLSchema#date> .
+
+<http://example.org/David>
+        <http://example.org/age>        40;
+        <http://example.org/occupation>
+                "Manager";
+        <http://example.org/worksWith>  <http://example.org/Alice> .
+
+<< <http://example.org/Bob> <http://example.org/knows> <http://example.org/Charlie> >>
+        <http://example.org/certainty>  "low";
+        <http://example.org/friendshipScore>
+                70;
+        <http://example.org/startedAt>  "2020-06-20"^^<http://www.w3.org/2001/XMLSchema#date> .
+
+<< <http://example.org/Alice> <http://example.org/worksWith> <http://example.org/Charlie> >>
+        <http://example.org/certainty>  "medium";
+        <http://example.org/startedAt>  "2022-03-15"^^<http://www.w3.org/2001/XMLSchema#date>;
+        <http://example.org/workScore>  85 .
+
+<http://example.org/Charlie>
+        <http://example.org/age>    28;
+        <http://example.org/knows>  <http://example.org/David>;
+        <http://example.org/occupation>
+                "Data Scientist" .
+
+<< <http://example.org/Alice> <http://example.org/knows> <http://example.org/Bob> >>
+        <http://example.org/certainty>  "high";
+        <http://example.org/friendshipScore>
+                95;
+        <http://example.org/startedAt>  "2021-01-01"^^<http://www.w3.org/2001/XMLSchema#date> .
+
+<http://example.org/Bob>
+        <http://example.org/age>    35;
+        <http://example.org/knows>  <http://example.org/Charlie>;
+        <http://example.org/occupation>
+                "Artist" .
+
+<http://example.org/Alice>
+        <http://example.org/age>        30;
+        <http://example.org/knows>      <http://example.org/Bob>;
+        <http://example.org/occupation>
+                "Engineer";
+        <http://example.org/worksWith>  <http://example.org/Charlie> .
