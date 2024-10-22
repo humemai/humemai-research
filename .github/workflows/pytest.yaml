@@ -11,6 +11,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
+      # Install Docker
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v2
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Docker setup info
+        run: |
+          docker version
+          docker info
+
+      # Set up Python environment
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -21,9 +33,15 @@ jobs:
       - name: Upgrade pip and build dependencies
         run: |
           python -m pip install --upgrade pip setuptools wheel pytest
+          
+      # Install your package (replace humemai with your package name if necessary)
       - name: Install humemai from current branch
         run: |
           python -m pip install git+https://github.com/humemai/humemai@${{ github.ref_name }}
+          
+      # Run pytest
       - name: Run pytest
+        env:
+          DOCKER_BUILDKIT: 1
         run: |
           python -m pytest .
