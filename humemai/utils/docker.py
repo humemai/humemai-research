@@ -7,6 +7,22 @@ from docker.client import DockerClient
 
 SECONDS_TO_WAIT = 1
 
+
+# Helper function to wait until Fuseki is ready
+def wait_for_fuseki(host: str = "http://localhost:3030", timeout: int = 30) -> None:
+    """Wait until Fuseki server is up and ready."""
+    for _ in range(timeout):
+        try:
+            response = requests.get(host)
+            if response.status_code == 200:
+                print("Fuseki is ready!")
+                return
+        except requests.exceptions.ConnectionError:
+            pass
+        time.sleep(1)
+    raise TimeoutError("Fuseki server did not become ready in time.")
+
+
 # Function to run a new container
 def run_jena_container(client: DockerClient, container_name: str = "jena") -> None:
     """Run a new Jena container.
@@ -25,7 +41,7 @@ def run_jena_container(client: DockerClient, container_name: str = "jena") -> No
         environment={"ADMIN_PASSWORD": "admin"},  # Environment variable
         stdin_open=True,  # Keep STDIN open (for interactive mode)
     )
-    time.sleep(SECONDS_TO_WAIT) # Wait for the container to start
+    time.sleep(SECONDS_TO_WAIT)  # Wait for the container to start
     print(f"Container '{container.name}' started successfully!")
 
 
@@ -42,7 +58,7 @@ def stop_jena_container(client: DockerClient, container_name: str = "jena") -> N
         print(f"Container '{container_name}' stopped successfully!")
     else:
         print(f"Container '{container_name}' is not running.")
-    time.sleep(SECONDS_TO_WAIT) # Wait for the container to stop
+    time.sleep(SECONDS_TO_WAIT)  # Wait for the container to stop
 
 
 def start_jena_container(client: DockerClient, container_name: str = "jena") -> None:
@@ -59,7 +75,7 @@ def start_jena_container(client: DockerClient, container_name: str = "jena") -> 
         print(f"Container '{container_name}' started successfully!")
     else:
         print(f"Container '{container_name}' is already running.")
-    time.sleep(SECONDS_TO_WAIT) # Wait for the container to start
+    time.sleep(SECONDS_TO_WAIT)  # Wait for the container to start
 
 
 def remove_jena_container(
@@ -85,7 +101,7 @@ def remove_jena_container(
     else:
         container.remove()
         print(f"Container '{container_name}' removed successfully!")
-    time.sleep(SECONDS_TO_WAIT) # Wait for the container to be removed
+    time.sleep(SECONDS_TO_WAIT)  # Wait for the container to be removed
 
 
 def create_db_jena(db_name: str = "db") -> None:
@@ -115,7 +131,7 @@ def create_db_jena(db_name: str = "db") -> None:
             f"Failed to create dataset: {response.status_code} - {response.text}"
         )
 
-    time.sleep(SECONDS_TO_WAIT) # Wait for the dataset to be created
+    time.sleep(SECONDS_TO_WAIT)  # Wait for the dataset to be created
 
 
 def remove_db_jena(db_name: str = "db") -> None:
@@ -138,4 +154,4 @@ def remove_db_jena(db_name: str = "db") -> None:
         raise Exception(
             f"Failed to remove dataset: {response.status_code} - {response.text}"
         )
-    time.sleep(SECONDS_TO_WAIT) # Wait for the dataset to be removed
+    time.sleep(SECONDS_TO_WAIT)  # Wait for the dataset to be removed

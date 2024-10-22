@@ -10,6 +10,7 @@ from humemai.utils.docker import (
     create_db_jena,
     remove_db_jena,
     remove_jena_container,
+    wait_for_fuseki,
 )
 
 
@@ -25,6 +26,8 @@ class TestMemory(unittest.TestCase):
             run_jena_container(client, "foo")
         except:
             start_jena_container(client, "foo")
+        
+        wait_for_fuseki()
 
         try:
             create_db_jena("db")
