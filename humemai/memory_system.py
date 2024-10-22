@@ -2,6 +2,7 @@
 
 import collections
 import logging
+from typing import Optional
 
 from rdflib import Namespace, URIRef, Literal
 from rdflib.namespace import RDF, XSD
@@ -25,7 +26,7 @@ class MemorySystem:
     def __init__(self):
         self.memory = Memory()
 
-    def is_reified_statement_short_term(self, statement) -> bool:
+    def is_reified_statement_short_term(self, statement: URIRef | Literal) -> bool:
         """
         Check if a given reified statement is a short-term memory by verifying if it
         has a 'currentTime' qualifier.
@@ -40,10 +41,10 @@ class MemorySystem:
 
     def get_working_memory(
         self,
-        trigger_node: URIRef = None,
+        trigger_node: Optional[URIRef] = None,
         hops: int = 0,
         include_all_long_term: bool = False,
-    ) -> "Memory":
+    ) -> Memory:
         """
         Retrieve working memory based on a trigger node and a specified number of hops.
         It fetches all triples within N hops from the trigger node in the long-term
@@ -65,7 +66,7 @@ class MemorySystem:
             relevant long-term memories).
         """
         working_memory = Memory()
-        processed_statements = set()  # Keep track of processed reified statements
+        processed_statements = set()
 
         logger.info(
             f"Initializing working memory. Trigger node: {trigger_node}, Hops: {hops}, Include all long-term: {include_all_long_term}"
@@ -130,7 +131,6 @@ class MemorySystem:
 
             # Explore outgoing triples
             for p, o in self.memory.graph.predicate_objects(current_node):
-                # Retrieve all reified statements for this triple
                 reified_statements = [
                     stmt
                     for stmt in self.memory.graph.subjects(RDF.type, RDF.Statement)
@@ -143,9 +143,7 @@ class MemorySystem:
                     if self.is_reified_statement_short_term(statement):
                         continue  # Skip short-term memories
 
-                    # Only increment and add the statement if it hasn't been processed yet
                     if statement not in processed_statements:
-                        # Add the triple to the working memory
                         working_memory.graph.add((current_node, p, o))
 
                         # Add the reified statement and increment 'recalled'
@@ -159,14 +157,12 @@ class MemorySystem:
 
                         processed_statements.add(statement)
 
-                    # Enqueue the object node if it's a URIRef and not visited
                     if isinstance(o, URIRef) and o not in visited:
                         queue.append((o, current_hop + 1))
                         visited.add(o)
 
             # Explore incoming triples
             for s, p in self.memory.graph.subject_predicates(current_node):
-                # Retrieve all reified statements for this triple
                 reified_statements = [
                     stmt
                     for stmt in self.memory.graph.subjects(RDF.type, RDF.Statement)
@@ -179,9 +175,7 @@ class MemorySystem:
                     if self.is_reified_statement_short_term(statement):
                         continue  # Skip short-term memories
 
-                    # Only increment and add the statement if it hasn't been processed yet
                     if statement not in processed_statements:
-                        # Add the triple to the working memory
                         working_memory.graph.add((s, p, current_node))
 
                         # Add the reified statement and increment 'recalled'
@@ -195,7 +189,6 @@ class MemorySystem:
 
                         processed_statements.add(statement)
 
-                    # Enqueue the subject node if it's a URIRef and not visited
                     if isinstance(s, URIRef) and s not in visited:
                         queue.append((s, current_hop + 1))
                         visited.add(s)
@@ -203,8 +196,10 @@ class MemorySystem:
         return working_memory
 
     def move_short_term_to_episodic(
-        self, memory_id_to_move: Literal, qualifiers: dict = {}
-    ):
+        self,
+        memory_id_to_move: Literal,
+        qualifiers: dict[URIRef, URIRef | Literal] = {},
+    ) -> None:
         """
         Move the specified short-term memory to long-term episodic memory.
 
@@ -242,8 +237,10 @@ class MemorySystem:
                 break
 
     def move_short_term_to_semantic(
-        self, memory_id_to_move: Literal, qualifiers: dict = {}
-    ):
+        self,
+        memory_id_to_move: Literal,
+        qualifiers: dict[URIRef, URIRef | Literal] = {},
+    ) -> None:
         """
         Move the specified short-term memory to long-term semantic memory.
 
@@ -275,7 +272,7 @@ class MemorySystem:
                 )
                 break
 
-    def clear_short_term_memories(self):
+    def clear_short_term_memories(self) -> None:
         """
         Clear all short-term memories from the memory system.
         """

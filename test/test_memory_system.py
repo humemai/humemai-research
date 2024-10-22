@@ -1,10 +1,12 @@
+"""Test cases for the MemorySystem class and its methods."""
+
 import unittest
 from datetime import datetime
-
 from rdflib import RDF, Literal, Namespace, URIRef
 from rdflib.namespace import XSD
 
-from humemai import MemorySystem
+from humemai import MemorySystem  # Assuming MemorySystem is defined in humemai module
+
 
 # Define the custom namespace for the ontology
 humemai = Namespace("https://humem.ai/ontology#")
@@ -12,12 +14,13 @@ humemai = Namespace("https://humem.ai/ontology#")
 
 class TestMemorySystem(unittest.TestCase):
 
-    def setUp(self):
+    def setUp(self) -> None:
+        """Initialize the MemorySystem and populate it with episodic, semantic, and short-term memories."""
         # Initialize the memory system
-        self.memory = MemorySystem()
+        self.memory: MemorySystem = MemorySystem()
 
         # Define multiple triples
-        self.triples = [
+        self.triples: list[tuple[URIRef, URIRef, URIRef]] = [
             (
                 URIRef("https://example.org/person/Alice"),
                 URIRef("https://example.org/event/met"),
@@ -76,29 +79,29 @@ class TestMemorySystem(unittest.TestCase):
         ]
 
         # Define qualifiers for episodic memories using URIRef and Literal
-        episodic_qualifiers_1 = {
+        episodic_qualifiers_1: dict[URIRef, Literal] = {
             humemai.location: Literal("New York"),
             humemai.eventTime: Literal(
                 "2024-04-27T15:00:00",
-                datatype="http://www.w3.org/2001/XMLSchema#dateTime",
+                datatype=XSD.dateTime,
             ),
             humemai.emotion: Literal("happy"),
             humemai.event: Literal("Coffee meeting"),
         }
-        episodic_qualifiers_2 = {
+        episodic_qualifiers_2: dict[URIRef, Literal] = {
             humemai.location: Literal("London"),
             humemai.eventTime: Literal(
                 "2024-05-01T10:00:00",
-                datatype="http://www.w3.org/2001/XMLSchema#dateTime",
+                datatype=XSD.dateTime,
             ),
             humemai.emotion: Literal("excited"),
             humemai.event: Literal("Conference meeting"),
         }
-        episodic_qualifiers_3 = {
+        episodic_qualifiers_3: dict[URIRef, Literal] = {
             humemai.location: Literal("Paris"),
             humemai.eventTime: Literal(
                 "2024-05-03T14:00:00",
-                datatype="http://www.w3.org/2001/XMLSchema#dateTime",
+                datatype=XSD.dateTime,
             ),
             humemai.emotion: Literal("curious"),
             humemai.event: Literal("Workshop"),
@@ -140,15 +143,13 @@ class TestMemorySystem(unittest.TestCase):
         )
 
         # Add semantic memories
-        semantic_qualifiers = {
+        semantic_qualifiers: dict[URIRef, Literal] = {
             humemai.knownSince: Literal(
                 "2023-01-01T00:00:00",
-                datatype="http://www.w3.org/2001/XMLSchema#dateTime",
+                datatype=XSD.dateTime,
             ),
             humemai.derivedFrom: Literal("animal_research"),
-            humemai.strength: Literal(
-                5, datatype="http://www.w3.org/2001/XMLSchema#integer"
-            ),
+            humemai.strength: Literal(5, datatype=XSD.integer),
         }
         self.memory.memory.add_semantic_memory(
             [self.triples[7]], qualifiers=semantic_qualifiers
@@ -179,9 +180,9 @@ class TestMemorySystem(unittest.TestCase):
             [self.triples[9]], qualifiers={humemai.location: Literal("Paris Cafe")}
         )
 
-    def test_working_memory_hop_0(self):
+    def test_working_memory_hop_0(self) -> None:
         """Test that hop=0 only retrieves short-term memories involving Alice."""
-        trigger_node = URIRef("https://example.org/person/Alice")
+        trigger_node: URIRef = URIRef("https://example.org/person/Alice")
         working_memory = self.memory.get_working_memory(
             trigger_node=trigger_node, hops=0
         )
@@ -189,9 +190,9 @@ class TestMemorySystem(unittest.TestCase):
         self.assertEqual(working_memory.get_main_triple_count_except_event(), 2)
         self.assertEqual(working_memory.get_memory_count(), 4)
 
-    def test_working_memory_hop_1(self):
+    def test_working_memory_hop_1(self) -> None:
         """Test that hop=1 retrieves immediate neighbors' relationships."""
-        trigger_node = URIRef("https://example.org/person/Alice")
+        trigger_node: URIRef = URIRef("https://example.org/person/Alice")
         working_memory = self.memory.get_working_memory(
             trigger_node=trigger_node, hops=1
         )
@@ -199,9 +200,9 @@ class TestMemorySystem(unittest.TestCase):
         self.assertEqual(working_memory.get_main_triple_count_except_event(), 5)
         self.assertEqual(working_memory.get_memory_count(), 9)
 
-    def test_working_memory_hop_2(self):
+    def test_working_memory_hop_2(self) -> None:
         """Test that hop=2 retrieves 2-hop neighbors' relationships."""
-        trigger_node = URIRef("https://example.org/person/Alice")
+        trigger_node: URIRef = URIRef("https://example.org/person/Alice")
         working_memory = self.memory.get_working_memory(
             trigger_node=trigger_node, hops=2
         )
@@ -209,9 +210,9 @@ class TestMemorySystem(unittest.TestCase):
         self.assertEqual(working_memory.get_main_triple_count_except_event(), 10)
         self.assertEqual(working_memory.get_memory_count(), 16)
 
-    def test_working_memory_hop_3(self):
+    def test_working_memory_hop_3(self) -> None:
         """Test that hop=3 retrieves 3-hop neighbors' relationships."""
-        trigger_node = URIRef("https://example.org/person/Alice")
+        trigger_node: URIRef = URIRef("https://example.org/person/Alice")
         working_memory = self.memory.get_working_memory(
             trigger_node=trigger_node, hops=3
         )
@@ -219,16 +220,16 @@ class TestMemorySystem(unittest.TestCase):
         self.assertEqual(working_memory.get_main_triple_count_except_event(), 11)
         self.assertEqual(working_memory.get_memory_count(), 19)
 
-    def test_working_memory_include_all_long_term(self):
+    def test_working_memory_include_all_long_term(self) -> None:
         """Test that all long-term memories are included when include_all_long_term=True."""
         working_memory = self.memory.get_working_memory(include_all_long_term=True)
 
         self.assertEqual(working_memory.get_main_triple_count_except_event(), 11)
         self.assertEqual(working_memory.get_memory_count(), 19)
 
-    def test_recalled_value_increment(self):
+    def test_recalled_value_increment(self) -> None:
         """Test that the recalled value increments correctly."""
-        trigger_node = URIRef("https://example.org/person/Alice")
+        trigger_node: URIRef = URIRef("https://example.org/person/Alice")
 
         # Retrieve working memory at different hops
         self.memory.get_working_memory(trigger_node=trigger_node, hops=1)
@@ -244,14 +245,16 @@ class TestMemorySystem(unittest.TestCase):
         for triple in memory_statements:
             if str(triple[1]) == "met" and str(triple[2]) == "Bob":
                 # Ensure the 'recalled' qualifier has increased properly (should be 3)
-                qualifiers = list(working_memory.graph.predicate_objects(triple[0]))
+                qualifiers: list[tuple[URIRef, Literal]] = list(
+                    working_memory.graph.predicate_objects(triple[0])
+                )
                 for pred, obj in qualifiers:
                     if str(pred) == str(humemai.recalled):
                         self.assertEqual(int(obj), 3)
 
-    def test_empty_memory(self):
+    def test_empty_memory(self) -> None:
         """Test that working memory handles empty memory cases."""
-        empty_memory_system = MemorySystem()
+        empty_memory_system: MemorySystem = MemorySystem()
         working_memory = empty_memory_system.get_working_memory(
             URIRef("https://example.org/person/Alice"), hops=1
         )
@@ -259,26 +262,24 @@ class TestMemorySystem(unittest.TestCase):
         self.assertEqual(working_memory.get_main_triple_count_except_event(), 0)
         self.assertEqual(working_memory.get_memory_count(), 0)
 
-    def test_invalid_trigger_node(self):
+    def test_invalid_trigger_node(self) -> None:
         """Test behavior when an invalid trigger node is provided."""
         with self.assertRaises(ValueError):
             self.memory.get_working_memory(trigger_node=None, hops=1)
 
 
 class TestMemorySystemMethods(unittest.TestCase):
-    def setUp(self):
-        """
-        Set up a new MemorySystem instance before each test.
-        """
-        self.memory_system = MemorySystem()
+    def setUp(self) -> None:
+        """Set up a new MemorySystem instance before each test."""
+        self.memory_system: MemorySystem = MemorySystem()
 
         # Add a short-term memory to the memory system
-        self.short_term_triplet_1 = (
+        self.short_term_triplet_1: tuple[URIRef, URIRef, URIRef] = (
             URIRef("https://example.org/Alice"),
             URIRef("https://example.org/meet"),
             URIRef("https://example.org/Bob"),
         )
-        self.short_term_triplet_2 = (
+        self.short_term_triplet_2: tuple[URIRef, URIRef, URIRef] = (
             URIRef("https://example.org/Bob"),
             URIRef("https://example.org/travel"),
             URIRef("https://example.org/Paris"),
@@ -304,7 +305,7 @@ class TestMemorySystemMethods(unittest.TestCase):
             },
         )
 
-    def test_move_short_term_to_long_term(self):
+    def test_move_short_term_to_long_term(self) -> None:
         """
         Test that a specific short-term memory is moved to long-term memory.
         """
@@ -324,7 +325,7 @@ class TestMemorySystemMethods(unittest.TestCase):
         self.assertEqual(long_term_memories.get_memory_count(), 1)
 
         # Check that the moved long-term memory contains the correct triple
-        found_memory = False
+        found_memory: bool = False
         for subj, pred, obj, qualifiers in long_term_memories.iterate_memories():
             if (subj, pred, obj) == self.short_term_triplet_1:
                 found_memory = True
@@ -332,7 +333,7 @@ class TestMemorySystemMethods(unittest.TestCase):
             found_memory, "Moved short-term memory was not found in long-term memory."
         )
 
-    def test_clear_short_term_memories(self):
+    def test_clear_short_term_memories(self) -> None:
         """
         Test that all short-term memories are cleared after calling clear_short_term_memories.
         """
@@ -354,11 +355,11 @@ class TestMemorySystemMethods(unittest.TestCase):
 
 class TestMemorySystemMoveShortTermToLongTerm(unittest.TestCase):
 
-    def setUp(self):
+    def setUp(self) -> None:
         """
         Set up the MemorySystem for testing with some initial short-term memories.
         """
-        self.memory_system = MemorySystem()
+        self.memory_system: MemorySystem = MemorySystem()
 
         # Add a short-term memory to the memory system
         self.memory_system.memory.add_short_term_memory(
@@ -394,7 +395,7 @@ class TestMemorySystemMoveShortTermToLongTerm(unittest.TestCase):
             },
         )
 
-    def test_move_short_term_to_long_term_episodic(self):
+    def test_move_short_term_to_long_term_episodic(self) -> None:
         """
         Test moving a short-term memory to long-term episodic memory with emotion and event qualifiers.
         """
@@ -409,7 +410,7 @@ class TestMemorySystemMoveShortTermToLongTerm(unittest.TestCase):
 
         # Check that the memory was moved to long-term and has correct qualifiers
         long_term_memories = self.memory_system.memory.get_long_term_memories()
-        episodic_memories = list(
+        episodic_memories: list[tuple[URIRef, URIRef, URIRef, dict]] = list(
             self.memory_system.memory.iterate_memories(memory_type="episodic")
         )
 
@@ -427,7 +428,7 @@ class TestMemorySystemMoveShortTermToLongTerm(unittest.TestCase):
         self.assertEqual(qualifiers.get(humemai.emotion), Literal("excited"))
         self.assertEqual(qualifiers.get(humemai.event), Literal("AI Conference"))
 
-    def test_move_short_term_to_long_term_semantic(self):
+    def test_move_short_term_to_long_term_semantic(self) -> None:
         """
         Test moving a short-term memory to long-term semantic memory with strength and derivedFrom qualifiers.
         """
@@ -441,7 +442,7 @@ class TestMemorySystemMoveShortTermToLongTerm(unittest.TestCase):
         )
 
         # Check that the memory was moved to long-term and has correct qualifiers
-        semantic_memories = list(
+        semantic_memories: list[tuple[URIRef, URIRef, URIRef, dict]] = list(
             self.memory_system.memory.iterate_memories(memory_type="semantic")
         )
 
@@ -453,3 +454,6 @@ class TestMemorySystemMoveShortTermToLongTerm(unittest.TestCase):
         self.assertEqual(obj, URIRef("https://example.org/Alice"))
         self.assertEqual(qualifiers.get(humemai.strength), Literal(5))
         self.assertEqual(qualifiers.get(humemai.derivedFrom), Literal("Observation"))
+
+
+# You can add more test classes below following the same pattern

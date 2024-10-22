@@ -1,12 +1,17 @@
 """Memory Class with RDFLib"""
 
+# Enable postponed evaluation of annotations (optional but recommended in Python 3.10)
+from __future__ import annotations
+
 import collections
 import logging
 import os
 from datetime import datetime
+from typing import Optional, Dict, Union
 
 from rdflib import BNode, Graph, Literal, Namespace, URIRef
 from rdflib.namespace import RDF, XSD
+
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
@@ -23,17 +28,18 @@ class Memory:
     """
 
     def __init__(self):
-        # Initialize RDF graph for memory storage
-        self.graph = Graph()
+        self.graph: Graph = Graph()  # Initialize RDF graph for memory storage
         self.graph.bind("humemai", humemai)
-        self.current_statement_id = 0  # Counter to track the next unique ID
+        self.current_statement_id: int = 0  # Counter to track the next unique ID
 
-    def add_memory(self, triples: list, qualifiers: dict = {}):
+    def add_memory(
+        self,
+        triples: list[tuple[URIRef, URIRef, URIRef]],
+        qualifiers: dict[URIRef, Union[URIRef, Literal]] = {},
+    ) -> None:
         """
-
         Add a reified statement to the RDF graph, with the main triple and optional
-        qualifiers. You have to make sure that everything is in the right
-        URIRef format.
+        qualifiers. Ensure that everything is in the correct URIRef format.
 
         Args:
             triples (list): A list of triples (subject, predicate, object) to be added.
@@ -42,18 +48,16 @@ class Memory:
         for subj, pred, obj in triples:
             logger.debug(f"Adding triple: ({subj}, {pred}, {obj})")
 
-            # Add the main triple [subject, predicate, object] if it doesn't already
-            # exist
             if not (subj, pred, obj) in self.graph:
                 self.graph.add((subj, pred, obj))
                 logger.debug(f"Main triple added: ({subj}, {pred}, {obj})")
             else:
                 logger.debug(f"Main triple already exists: ({subj}, {pred}, {obj})")
 
-            # Create a new reified statement to attach the qualifiers, and assign a
-            # unique ID
-            statement = BNode()  # Blank node to represent the new reified statement
-            unique_id = self.current_statement_id  # Get the current ID
+            statement: BNode = (
+                BNode()
+            )  # Blank node to represent the new reified statement
+            unique_id: int = self.current_statement_id  # Get the current ID
             self.current_statement_id += 1  # Increment for the next memory
 
             # Add the reified statement and unique ID
@@ -67,7 +71,6 @@ class Memory:
 
             logger.debug(f"Reified statement created: {statement} with ID {unique_id}")
 
-            # Add the provided qualifiers with the correct data types
             for key, value in qualifiers.items():
                 if not isinstance(key, URIRef):
                     raise ValueError(f"Qualifier key {key} must be a URIRef.")
@@ -75,11 +78,10 @@ class Memory:
                     raise ValueError(
                         f"Qualifier value {value} must be a URIRef or Literal."
                     )
-                # assumes that both key and value are in URIRef format
                 self.graph.add((statement, key, value))
                 logger.debug(f"Added qualifier: ({statement}, {key}, {value})")
 
-    def delete_memory(self, memory_id: Literal):
+    def delete_memory(self, memory_id: Literal) -> None:
         """
         Delete a memory (reified statement) by its unique ID, including all associated
         qualifiers.
@@ -92,8 +94,7 @@ class Memory:
         if not isinstance(memory_id, Literal) or memory_id.datatype != XSD.integer:
             raise ValueError(f"memory_id must be a Literal with datatype XSD.integer")
 
-        # Find the reified statement with the given ID
-        statement = None
+        statement: Optional[URIRef] = None
         for stmt in self.graph.subjects(humemai.memoryID, memory_id):
             statement = stmt
             break
@@ -102,7 +103,6 @@ class Memory:
             logger.error(f"No memory found with ID {memory_id}")
             return
 
-        # Get the main triple (subject, predicate, object) from the reified statement
         subj = self.graph.value(statement, RDF.subject)
         pred = self.graph.value(statement, RDF.predicate)
         obj = self.graph.value(statement, RDF.object)
@@ -114,16 +114,12 @@ class Memory:
             return
 
         logger.debug(f"Deleting main triple: ({subj}, {pred}, {obj})")
-
-        # Remove the main triple
         self.graph.remove((subj, pred, obj))
 
-        # Remove all qualifiers associated with this reified statement
         for p, o in list(self.graph.predicate_objects(statement)):
             self.graph.remove((statement, p, o))
             logger.debug(f"Removed qualifier triple: ({statement}, {p}, {o})")
 
-        # Remove the reified statement itself
         self.graph.remove((statement, RDF.type, RDF.Statement))
         self.graph.remove((statement, RDF.subject, subj))
         self.graph.remove((statement, RDF.predicate, pred))
@@ -131,7 +127,7 @@ class Memory:
 
         logger.info(f"Memory with ID {memory_id} deleted successfully.")
 
-    def get_memory_by_id(self, memory_id: Literal) -> dict:
+    def get_memory_by_id(self, memory_id: Literal) -> Optional[dict]:
         """
         Retrieve a memory (reified statement) by its unique ID and return its details.
 
@@ -142,16 +138,14 @@ class Memory:
             dict: A dictionary with the memory details (subject, predicate, object,
             qualifiers).
         """
-        # Find the reified statement with the given ID
         for stmt in self.graph.subjects(
             humemai.memoryID, Literal(memory_id, datatype=XSD.integer)
         ):
             subj = self.graph.value(stmt, RDF.subject)
             pred = self.graph.value(stmt, RDF.predicate)
             obj = self.graph.value(stmt, RDF.object)
-            qualifiers = {}
+            qualifiers: dict[URIRef, Union[URIRef, Literal]] = {}
 
-            # Collect all qualifiers for this memory
             for q_pred, q_obj in self.graph.predicate_objects(stmt):
                 if q_pred not in (
                     RDF.type,
@@ -171,7 +165,9 @@ class Memory:
         logger.error(f"No memory found with ID {memory_id}")
         return None
 
-    def delete_triple(self, subject: URIRef, predicate: URIRef, object_: URIRef):
+    def delete_triple(
+        self, subject: URIRef, predicate: URIRef, object_: URIRef
+    ) -> None:
         """
         Delete a triple from the RDF graph, including all of its qualifiers.
 
@@ -192,18 +188,25 @@ class Memory:
             if s == subject and p == predicate and o == object_:
                 logger.debug(f"Removing qualifiers for statement: {statement}")
                 # Remove all triples related to this statement
-                for _, _, obj in list(self.graph.triples((statement, None, None))):
-                    self.graph.remove((statement, _, obj))
-                    logger.debug(f"Removed qualifier triple: ({statement}, _, {obj})")
+                for _, pred_q, obj_q in list(
+                    self.graph.triples((statement, None, None))
+                ):
+                    self.graph.remove((statement, pred_q, obj_q))
+                    logger.debug(
+                        f"Removed qualifier triple: ({statement}, {pred_q}, {obj_q})"
+                    )
 
-    def add_short_term_memory(self, triples: list, qualifiers: dict = {}):
+    def add_short_term_memory(
+        self,
+        triples: list[tuple[URIRef, URIRef, URIRef]],
+        qualifiers: dict[URIRef, Union[URIRef, Literal]] = {},
+    ) -> None:
         """
         Add short-term memories to the RDF graph, enforcing required qualifiers.
 
         Args:
             triples (list): A list of triples to add.
             qualifiers (dict, optional): Additional qualifiers to add.
-
         """
         if humemai.currentTime not in qualifiers:
             currentTime = Literal(datetime.now().isoformat(), datatype=XSD.dateTime)
@@ -218,10 +221,10 @@ class Memory:
 
     def add_episodic_memory(
         self,
-        triples: list,
-        qualifiers: dict = {},
-        event_properties: dict = {},
-    ):
+        triples: list[tuple[URIRef, URIRef, URIRef]],
+        qualifiers: dict[URIRef, Union[URIRef, Literal]] = {},
+        event_properties: dict[URIRef, Union[URIRef, Literal]] = {},
+    ) -> None:
         """
         Add episodic memories to the RDF graph, enforcing required qualifiers.
 
@@ -235,16 +238,17 @@ class Memory:
                 https://humem.ai/ontology#event: str,
             event_properties (dict, optional): Additional properties for the event node.
                 The properties should be URIRef format.
-
         """
-        if humemai.currentTime in qualifiers:
-            raise ValueError("CurrentTime is not allowed for episodic memories")
-        if humemai.knownSince in qualifiers:
-            raise ValueError("KnownSince is not allowed for episodic memories")
-        if humemai.strength in qualifiers:
-            raise ValueError("Strength is not allowed for episodic memories")
-        if humemai.derivedFrom in qualifiers:
-            raise ValueError("DerivedFrom is not allowed for episodic memories")
+        forbidden_keys = [
+            humemai.currentTime,
+            humemai.knownSince,
+            humemai.strength,
+            humemai.derivedFrom,
+        ]
+        for key in forbidden_keys:
+            if key in qualifiers:
+                raise ValueError(f"{key} is not allowed for episodic memories")
+
         if humemai.eventTime not in qualifiers:
             raise ValueError("Missing required qualifier: eventTime")
 
@@ -258,68 +262,63 @@ class Memory:
         self.add_memory(triples, qualifiers)
 
         if humemai.event in qualifiers:
-
             self.add_event(qualifiers[humemai.event])
 
             if event_properties:
                 self.add_event_properties(qualifiers[humemai.event], event_properties)
 
-    def add_event(self, event: URIRef):
+    def add_event(self, event: URIRef) -> None:
         """
         Create an event node in the RDF graph with custom properties.
 
         Args:
-            event (str): The name of the event.
+            event (URIRef): The URIRef of the event.
         """
-        # Create the event node (as a node in the graph)
         if (event, None, None) not in self.graph:
             self.graph.add((event, RDF.type, humemai.Event))
             logger.debug(f"Event node created: {event}")
 
-    def add_event_properties(self, event: URIRef, event_properties: dict):
+    def add_event_properties(
+        self, event: URIRef, event_properties: dict[URIRef, Union[URIRef, Literal]]
+    ) -> None:
         """
         Add properties to an existing event node in the RDF graph.
 
         Args:
-            event (URIRef): The name of the event.
+            event (URIRef): The URIRef of the event.
             event_properties (dict): Additional properties for the event node.
         """
-        # Add custom event properties to the event node
-        if event_properties:
-            for prop, value in event_properties.items():
-                self.graph.add(
-                    (
-                        event,
-                        prop,
-                        value,
-                    )
-                )
-                logger.debug(f"Added event property: [{event}, {prop}, {value}]")
+        for prop, value in event_properties.items():
+            self.graph.add((event, prop, value))
+            logger.debug(f"Added event property: [{event}, {prop}, {value}]")
 
-    def add_semantic_memory(self, triples: list, qualifiers: dict = {}):
+    def add_semantic_memory(
+        self,
+        triples: list[tuple[URIRef, URIRef, URIRef]],
+        qualifiers: dict[URIRef, Union[URIRef, Literal]] = {},
+    ) -> None:
         """
         Add semantic memories to the RDF graph, enforcing required qualifiers.
 
         Args:
             triples (list): A list of triples to add.
             qualifiers (dict, optional): Additional qualifiers to add.
-                The qualifiers can have the following
+                The qualifiers can have the following:
                 https://humem.ai/ontology#knownSince: str,
                 https://humem.ai/ontology#derivedFrom: str,
                 https://humem.ai/ontology#strength: int,
-
-
         """
-        if humemai.emotion in qualifiers:
-            raise ValueError("Emotion is not allowed for semantic memories")
-        if humemai.location in qualifiers:
-            raise ValueError("Location is not allowed for semantic memories")
-        if humemai.event in qualifiers:
-            raise ValueError("Event is not allowed for semantic memories")
-        if humemai.eventTime in qualifiers:
-            raise ValueError("EventTime is not allowed for semantic memories")
-        if humemai.currentTime in qualifiers:
-            raise ValueError("CurrentTime is not allowed for semantic memories")
+        forbidden_keys = [
+            humemai.emotion,
+            humemai.location,
+            humemai.event,
+            humemai.eventTime,
+            humemai.currentTime,
+        ]
+        for key in forbidden_keys:
+            if key in qualifiers:
+                raise ValueError(f"{key} is not allowed for semantic memories")
+
         if humemai.knownSince not in qualifiers:
             raise ValueError("Missing required qualifier: knownSince")
 
@@ -334,13 +333,13 @@ class Memory:
 
     def get_memories(
         self,
-        subject: URIRef = None,
-        predicate: URIRef = None,
-        object_: URIRef = None,
-        qualifiers: dict = {},
-        lower_time_bound: Literal = None,
-        upper_time_bound: Literal = None,
-    ) -> "Memory":
+        subject: Optional[URIRef] = None,
+        predicate: Optional[URIRef] = None,
+        object_: Optional[URIRef] = None,
+        qualifiers: dict[URIRef, Union[URIRef, Literal]] = {},
+        lower_time_bound: Optional[Literal] = None,
+        upper_time_bound: Optional[Literal] = None,
+    ) -> Memory:
         """
         Retrieve memories with optional filtering based on the qualifiers and triple
         values, including time bounds.
@@ -357,14 +356,14 @@ class Memory:
             Memory: A new Memory object containing the filtered memories.
         """
 
-        # SPARQL query to retrieve memories with optional filters
-        query = """
+        # Construct SPARQL query with f-strings for dynamic filters
+        query = f"""
         PREFIX humemai: <https://humem.ai/ontology#>
         PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
         PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
         SELECT ?statement ?subject ?predicate ?object
-        WHERE {
+        WHERE {{
             ?statement rdf:type rdf:Statement ;
                     rdf:subject ?subject ;
                     rdf:predicate ?predicate ;
@@ -406,7 +405,7 @@ class Memory:
         results = self.graph.query(query)
 
         # To store reified statements and their corresponding qualifiers
-        statement_dict = {}
+        statement_dict: dict[URIRef, dict] = {}
 
         # Iterate through the results and organize them
         for row in results:
@@ -484,7 +483,7 @@ class Memory:
         unique_memories = set()
 
         # Iterate over reified statements and extract subject-predicate-object triples
-        for s, p, o in self.graph.triples((None, RDF.type, RDF.Statement)):
+        for s in self.graph.subjects(RDF.type, RDF.Statement):
             subj = self.graph.value(s, RDF.subject)
             pred = self.graph.value(s, RDF.predicate)
             obj = self.graph.value(s, RDF.object)
@@ -497,6 +496,9 @@ class Memory:
         """
         Count the number of reified statements (RDF statements) in the graph.
         This counts the reified statements instead of just the main triples.
+
+        Returns:
+            int: The count of reified statements.
         """
         return sum(1 for _ in self.graph.subjects(RDF.type, RDF.Statement))
 
@@ -509,11 +511,11 @@ class Memory:
         Returns:
             int: The count of short-term memories.
         """
-        short_term_count = 0
-        for statement in self.graph.subjects(RDF.type, RDF.Statement):
-            if self.graph.value(statement, humemai.currentTime):
-                short_term_count += 1
-        return short_term_count
+        return sum(
+            1
+            for statement in self.graph.subjects(RDF.type, RDF.Statement)
+            if self.graph.value(statement, humemai.currentTime) is not None
+        )
 
     def get_long_term_episodic_memory_count(self) -> int:
         """
@@ -524,25 +526,26 @@ class Memory:
         Returns:
             int: The count of long-term episodic memories.
         """
-        episodic_count = 0
-        for statement in self.graph.subjects(RDF.type, RDF.Statement):
-            if self.graph.value(statement, humemai.eventTime):
-                episodic_count += 1
-
-        return episodic_count
+        return sum(
+            1
+            for statement in self.graph.subjects(RDF.type, RDF.Statement)
+            if self.graph.value(statement, humemai.eventTime) is not None
+        )
 
     def get_long_term_semantic_memory_count(self) -> int:
         """
         Count the number of long-term semantic memories in the graph.
         Long-term semantic memories are reified statements that have the 'knownSince'
         qualifier.
-        """
-        semantic_count = 0
-        for statement in self.graph.subjects(RDF.type, RDF.Statement):
-            if self.graph.value(statement, humemai.knownSince):
-                semantic_count += 1
 
-        return semantic_count
+        Returns:
+            int: The count of long-term semantic memories.
+        """
+        return sum(
+            1
+            for statement in self.graph.subjects(RDF.type, RDF.Statement)
+            if self.graph.value(statement, humemai.knownSince) is not None
+        )
 
     def get_long_term_memory_count(self) -> int:
         """
@@ -558,34 +561,32 @@ class Memory:
             + self.get_long_term_semantic_memory_count()
         )
 
-    def get_event_count(self):
+    def get_event_count(self) -> int:
         """
         Count the number of Event instances in the RDF graph.
 
         Returns:
             int: The number of Event instances.
         """
-        event_count = 0
-        # Query all subjects that are of type humemai.Event
-        for event in self.graph.subjects(RDF.type, humemai.Event):
-            event_count += 1
-
-        return event_count
+        return sum(1 for _ in self.graph.subjects(RDF.type, humemai.Event))
 
     def modify_strength(
-        self, filters: dict, increment_by: int = None, multiply_by: float = None
-    ):
+        self,
+        filters: dict[URIRef, Union[URIRef, Literal]],
+        increment_by: Optional[int] = None,
+        multiply_by: Optional[float] = None,
+    ) -> None:
         """
         Modify the strength of long-term memories by incrementing/decrementing or
         multiplying.
 
         Args:
             filters (dict): Filters to identify the memory, including subject,
-            predicate, object, and any qualifiers.
+                predicate, object, and any qualifiers.
             increment_by (int, optional): Increment or decrement the strength value by
-            this amount.
+                this amount.
             multiply_by (float, optional): Multiply the strength value by this factor.
-            Rounded to the nearest integer.
+                Rounded to the nearest integer.
         """
         logger.debug(
             f"Modifying strength with filters: {filters}, increment_by: {increment_by}, multiply_by: {multiply_by}"
@@ -593,8 +594,7 @@ class Memory:
 
         subject_filter = filters.get(RDF.subject)
 
-        # SPARQL query to retrieve all reified statements with the same subject,
-        # predicate, and object, that have a strength qualifier
+        # Construct SPARQL query using f-strings
         query = f"""
         PREFIX humemai: <https://humem.ai/ontology#>
         PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -607,7 +607,7 @@ class Memory:
                     rdf:predicate ?predicate ;
                     rdf:object ?object ;
                     humemai:strength ?strength .
-            FILTER(?subject = <{subject_filter}>)
+            FILTER(?subject = <{subject_filter}>) 
         }}
         """
 
@@ -647,7 +647,7 @@ class Memory:
             self.graph.set(
                 (
                     statement,
-                    URIRef("https://humem.ai/ontology#strength"),
+                    humemai.strength,
                     Literal(new_strength, datatype=XSD.integer),
                 )
             )
@@ -659,12 +659,12 @@ class Memory:
         self,
         upper_time_bound: Literal,
         lower_time_bound: Literal,
-        new_event: str,
-        subject: URIRef = None,
-        predicate: URIRef = None,
-        object_: URIRef = None,
-        qualifiers: dict = {},
-    ):
+        new_event: URIRef,
+        subject: Optional[URIRef] = None,
+        predicate: Optional[URIRef] = None,
+        object_: Optional[URIRef] = None,
+        qualifiers: dict[URIRef, Union[URIRef, Literal]] = {},
+    ) -> None:
         """
         Modify the event value for episodic memories that fall within a specific time
         range and optional filters.
@@ -672,20 +672,20 @@ class Memory:
         Args:
             upper_time_bound (Literal): The upper bound for time filtering (ISO format).
             lower_time_bound (Literal): The lower bound for time filtering (ISO format).
-            new_event (str): The new value for the event qualifier.
+            new_event (URIRef): The new value for the event qualifier.
             subject (URIRef, optional): Filter by subject URI.
             predicate (URIRef, optional): Filter by predicate URI.
             object_ (URIRef, optional): Filter by object URI.
             qualifiers (dict, optional): Additional qualifiers to filter by.
         """
-        # Start building the SPARQL query to find all reified statements with filters and time bounds
-        query = """
+        # Construct SPARQL query
+        query = f"""
         PREFIX humemai: <https://humem.ai/ontology#>
         PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
         PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
         SELECT ?statement ?subject ?predicate ?object
-        WHERE {
+        WHERE {{
             ?statement rdf:type rdf:Statement ;
                     rdf:subject ?subject ;
                     rdf:predicate ?predicate ;
@@ -709,9 +709,8 @@ class Memory:
 
         # Add time range filter
         query += f"""
-        FILTER(?eventTime >= {lower_time_bound.n3()} && ?eventTime <= {upper_time_bound.n3()}) .
+            FILTER(?eventTime >= {lower_time_bound.n3()} && ?eventTime <= {upper_time_bound.n3()}) .
         }}
-
         """
 
         logger.debug(f"Executing SPARQL query to find episodic memories:\n{query}")
@@ -730,8 +729,8 @@ class Memory:
             self.graph.set(
                 (
                     statement,
-                    URIRef("https://humem.ai/ontology#event"),
-                    Literal(new_event),
+                    humemai.event,
+                    new_event,
                 )
             )
             logger.debug(f"Set new event '{new_event}' for statement: {statement}")
@@ -741,13 +740,13 @@ class Memory:
 
     def increment_recalled(
         self,
-        subject: URIRef = None,
-        predicate: URIRef = None,
-        object_: URIRef = None,
-        qualifiers: dict = {},
-        lower_time_bound: Literal = None,
-        upper_time_bound: Literal = None,
-    ):
+        subject: Optional[URIRef] = None,
+        predicate: Optional[URIRef] = None,
+        object_: Optional[URIRef] = None,
+        qualifiers: dict[URIRef, Union[URIRef, Literal]] = {},
+        lower_time_bound: Optional[Literal] = None,
+        upper_time_bound: Optional[Literal] = None,
+    ) -> None:
         """
         Increment the 'recalled' value for memories (episodic or semantic) that match
         the filters.
@@ -761,14 +760,14 @@ class Memory:
             upper_time_bound (Literal, optional): Upper bound for time filtering (ISO format).
         """
 
-        # Start building the SPARQL query to find reified statements with filters
-        query = """
+        # Construct SPARQL query
+        query = f"""
         PREFIX humemai: <https://humem.ai/ontology#>
         PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
         PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
         SELECT ?statement ?subject ?predicate ?object ?recalled
-        WHERE {
+        WHERE {{
             ?statement rdf:type rdf:Statement ;
                     rdf:subject ?subject ;
                     rdf:predicate ?predicate ;
@@ -805,7 +804,7 @@ class Memory:
 
         # Add OPTIONAL to retrieve the recalled value (if it exists)
         query += """
-        OPTIONAL { ?statement humemai:recalled ?recalled }
+            OPTIONAL { ?statement humemai:recalled ?recalled }
         }
         """
 
@@ -830,7 +829,7 @@ class Memory:
             self.graph.set(
                 (
                     statement,
-                    URIRef("https://humem.ai/ontology#recalled"),
+                    humemai.recalled,
                     Literal(new_recalled_value, datatype=XSD.integer),
                 )
             )
@@ -839,7 +838,7 @@ class Memory:
                 f"Updated recalled for statement {statement} to {new_recalled_value}"
             )
 
-    def _strip_namespace(self, uri):
+    def _strip_namespace(self, uri: Union[URIRef, Literal]) -> str:
         """
         Helper function to strip the namespace and return the last part of a URIRef.
 
@@ -853,13 +852,13 @@ class Memory:
             return uri.split("/")[-1].split("#")[-1]
         return str(uri)
 
-    def is_reified_statement_short_term(self, statement) -> bool:
+    def is_reified_statement_short_term(self, statement: URIRef) -> bool:
         """
         Check if a given reified statement is a short-term memory by verifying if it
         has a 'currentTime' qualifier.
 
         Args:
-            statement (BNode or URIRef): The reified statement to check.
+            statement (URIRef): The reified statement to check.
 
         Returns:
             bool: True if it's a short-term memory, False otherwise.
@@ -872,9 +871,9 @@ class Memory:
         subj: URIRef,
         pred: URIRef,
         obj: URIRef,
-        working_memory: "Memory",
-        specific_statement=None,
-    ):
+        working_memory: Memory,
+        specific_statement: Optional[URIRef] = None,
+    ) -> None:
         """
         Helper method to add all reified statements (including qualifiers) of a given triple
         to the working memory and increment the recall count for each reified statement.
@@ -884,9 +883,8 @@ class Memory:
             pred (URIRef): Predicate of the triple.
             obj (URIRef): Object of the triple.
             working_memory (Memory): The working memory to which the statements and qualifiers are added.
-            specific_statement (BNode or URIRef, optional): A specific reified statement to process, if provided.
+            specific_statement (URIRef, optional): A specific reified statement to process, if provided.
         """
-        # Find all reified statements for this triple
         for statement in self.graph.subjects(RDF.type, RDF.Statement):
             s = self.graph.value(statement, RDF.subject)
             p = self.graph.value(statement, RDF.predicate)
@@ -939,7 +937,7 @@ class Memory:
                             f"Added reified statement triple to working memory: ({statement}, {stmt_p}, {stmt_o})"
                         )
 
-    def get_short_term_memories(self) -> "Memory":
+    def get_short_term_memories(self) -> Memory:
         """
         Query the RDF graph to retrieve all short-term memories with a currentTime
         qualifier and include all associated qualifiers (e.g., location, emotion, etc.).
@@ -971,7 +969,7 @@ class Memory:
         results = self.graph.query(query)
 
         # Dictionary to store reified statements and their qualifiers
-        statement_dict = {}
+        statement_dict: dict[URIRef, dict] = {}
 
         # Iterate through the results and organize the qualifiers for each reified statement
         for row in results:
@@ -982,14 +980,12 @@ class Memory:
             qualifier_pred = row.qualifier_pred
             qualifier_obj = row.qualifier_obj
 
-            # Add the main triple to the memory graph if it's not already added
             if statement not in statement_dict:
                 statement_dict[statement] = {
                     "triple": (subj, pred, obj),
                     "qualifiers": {},
                 }
 
-            # Store the qualifiers, excluding standard reification elements
             if qualifier_pred and qualifier_pred not in (
                 RDF.type,
                 RDF.subject,
@@ -1021,7 +1017,7 @@ class Memory:
 
         return short_term_memory
 
-    def get_long_term_memories(self) -> "Memory":
+    def get_long_term_memories(self) -> Memory:
         """
         Retrieve all long-term memories from the RDF graph.
         Long-term memories are identified by the presence of either 'eventTime' or 'knownSince'
@@ -1086,7 +1082,7 @@ class Memory:
 
         return long_term_memory
 
-    def load_from_ttl(self, ttl_file: str):
+    def load_from_ttl(self, ttl_file: str) -> None:
         """
         Load memory data from a Turtle (.ttl) file into the RDF graph.
 
@@ -1100,7 +1096,7 @@ class Memory:
         self.graph.parse(ttl_file, format="ttl")
         logger.info(f"Memory loaded from {ttl_file} successfully.")
 
-    def save_to_ttl(self, ttl_file: str):
+    def save_to_ttl(self, ttl_file: str) -> None:
         """
         Save the current memory graph to a Turtle (.ttl) file.
 
@@ -1112,20 +1108,22 @@ class Memory:
             f.write(self.graph.serialize(format="ttl"))
         logger.info(f"Memory saved to {ttl_file} successfully.")
 
-    def iterate_memories(self, memory_type=None):
+    def iterate_memories(
+        self, memory_type: Optional[str] = None
+    ) -> tuple[URIRef, URIRef, URIRef, Dict[URIRef, Union[URIRef, Literal]]]:
         """
         Iterate over memories in the graph, filtered by memory type (short-term,
         long-term, episodic, semantic, or all).
 
         Args:
             memory_type (str, optional): The type of memory to iterate over.
-            Valid values: "short_term", "long_term", "episodic", "semantic", or "all".
-            - "short_term": Short-term memories (with 'currentTime').
-            - "long_term": Long-term memories (with 'eventTime' or 'knownSince', but without 'currentTime').
-            - "episodic": Long-term episodic memories (with 'eventTime', but without 'knownSince' and 'currentTime').
-            - "semantic": Long-term semantic memories (with 'knownSince', but without 'eventTime' and 'currentTime').
-            - "all": Iterate over all memories (both short-term and long-term).
-            If None, defaults to "all".
+                Valid values: "short_term", "long_term", "episodic", "semantic", or "all".
+                - "short_term": Short-term memories (with 'currentTime').
+                - "long_term": Long-term memories (with 'eventTime' or 'knownSince', but without 'currentTime').
+                - "episodic": Long-term episodic memories (with 'eventTime', but without 'knownSince' and 'currentTime').
+                - "semantic": Long-term semantic memories (with 'knownSince', but without 'eventTime' and 'currentTime').
+                - "all": Iterate over all memories (both short-term and long-term).
+                If None, defaults to "all".
 
         Yields:
             tuple: (subject, predicate, object, qualifiers) for each memory that matches
@@ -1146,7 +1144,7 @@ class Memory:
             obj = self.graph.value(statement, RDF.object)
 
             # Retrieve qualifiers for the statement
-            qualifiers = {}
+            qualifiers: dict[URIRef, Union[URIRef, Literal]] = {}
             for q_pred, q_obj in self.graph.predicate_objects(statement):
                 if q_pred not in (RDF.type, RDF.subject, RDF.predicate, RDF.object):
                     qualifiers[q_pred] = q_obj
@@ -1181,7 +1179,7 @@ class Memory:
                 # All memories, regardless of type
                 yield (subj, pred, obj, qualifiers)
 
-    def iterate_events(self):
+    def iterate_events(self) -> URIRef:
         """
         Iterate over all event nodes in the RDF graph.
 
@@ -1191,10 +1189,13 @@ class Memory:
         for event_node in self.graph.subjects(RDF.type, humemai.Event):
             yield event_node
 
-    def print_events(self, debug=False):
+    def print_events(self, debug: bool = False) -> Optional[str]:
         """
         Retrieve all triples where an Event entity is involved either as the subject or the object
         and format them as a readable string.
+
+        Args:
+            debug (bool): If True, return the string instead of printing.
 
         Returns:
             str: A formatted string containing all event-related triples.
@@ -1232,24 +1233,35 @@ class Memory:
             print("\n".join(event_strings))
             return
 
-    def print_all_raw_triples(self, debug=False):
+    def print_all_raw_triples(self, debug: bool = False) -> Optional[str]:
         """
         Print all triples in the graph in a readable format.
+
+        Args:
+            debug (bool): If True, return the string instead of printing.
+
+        Returns:
+            str: A formatted string of all triples.
         """
         raw_triples_string = []
         for subj, pred, obj in self.graph:
             raw_triples_string.append(f"({subj}, {pred}, {obj})")
-        
+
         if debug:
             return "\n".join(raw_triples_string)
-        
         else:
             print("\n".join(raw_triples_string))
             return
 
-    def print_memories(self, debug=False):
+    def print_memories(self, debug: bool = False) -> Optional[str]:
         """
         Print all memories in the graph in a readable format.
+
+        Args:
+            debug (bool): If True, return the string instead of printing.
+
+        Returns:
+            str: A formatted string of all memories.
         """
 
         memory_strings = []
@@ -1257,7 +1269,7 @@ class Memory:
             subj = self._strip_namespace(self.graph.value(statement, RDF.subject))
             pred = self._strip_namespace(self.graph.value(statement, RDF.predicate))
             obj = self._strip_namespace(self.graph.value(statement, RDF.object))
-            qualifiers = {}
+            qualifiers: Dict[str, str] = {}
 
             for q_pred, q_obj in self.graph.predicate_objects(statement):
                 if q_pred not in (RDF.type, RDF.subject, RDF.predicate, RDF.object):
@@ -1266,7 +1278,7 @@ class Memory:
                     )
 
             memory_strings.append(f"({subj}, {pred}, {obj}, {qualifiers})")
-        
+
         if debug:
             return "\n".join(memory_strings)
         else:

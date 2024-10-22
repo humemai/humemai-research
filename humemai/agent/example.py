@@ -5,8 +5,8 @@ from datetime import datetime
 from dateutil import parser
 import spacy
 from rdflib import Namespace, URIRef, Literal, XSD
-
 from humemai import MemorySystem
+from typing import Optional, List, Tuple, Dict
 
 # Define the custom namespace for the ontology
 humemai = Namespace("https://humem.ai/ontology#")
@@ -20,7 +20,7 @@ class Agent:
         self.memory_system = MemorySystem()
         self.nlp = spacy.load("en_core_web_sm")
 
-    def process_input(self, sentence: str):
+    def process_input(self, sentence: str) -> None:
         """
         Process the input sentence, extract triples, location, and time, and add them to
         short-term memory. Afterward, check the working memory and decide which memories
@@ -35,12 +35,12 @@ class Agent:
         entities = [(ent.text, ent.label_) for ent in doc.ents]
         print("\nEntities found:", entities)
 
-        triples = []
-        location = None
-        time = None
+        triples: List[Tuple[URIRef, URIRef, URIRef]] = []
+        location: Optional[str] = None
+        time: Optional[str] = None
 
         # Function to find the nearest verb to an entity
-        def find_nearest_verb(token):
+        def find_nearest_verb(token) -> Optional[str]:
             for ancestor in token.ancestors:
                 if ancestor.pos_ == "VERB":
                     return ancestor.lemma_  # Use lemma of the verb
@@ -84,20 +84,25 @@ class Agent:
         # After adding to short-term memory, check if we should move any memories to long-term
         self.evaluate_and_move_memories()
 
-    def add_to_short_term_memory(self, triples, location=None, time=None):
+    def add_to_short_term_memory(
+        self,
+        triples: List[Tuple[URIRef, URIRef, URIRef]],
+        location: Optional[str] = None,
+        time: Optional[str] = None,
+    ) -> None:
         """
         Add triples into short-term memory along with location and time qualifiers using
         MemorySystem.
 
         Args:
             triples (list): List of triples (subject, predicate, object).
-            location (str): Location qualifier.
-            time (str): Time qualifier in ISO format.
+            location (str | None): Location qualifier.
+            time (str | None): Time qualifier in ISO format.
         """
         for triple in triples:
             subj, pred, obj = triple
 
-            qualifiers = {}
+            qualifiers: Dict[URIRef, Literal] = {}
 
             # Add location and time if available
             if location:
@@ -109,7 +114,7 @@ class Agent:
                 [(subj, pred, obj)], qualifiers=qualifiers
             )
 
-    def evaluate_and_move_memories(self):
+    def evaluate_and_move_memories(self) -> None:
         """
         Evaluate the current working memory (short-term and relevant long-term memories)
         and randomly decide which short-term memories should be moved to long-term memory.
@@ -186,18 +191,20 @@ class Agent:
 
     def move_memory_to_long_term(
         self,
-        memory_id,
-        memory_type,
-        emotion=None,
-        strength=None,
-        derivedFrom=None,
-        event=None,
-    ):
+        memory_id: int,
+        memory_type: str,
+        emotion: Optional[str] = None,
+        strength: Optional[int] = None,
+        derivedFrom: Optional[str] = None,
+        event: Optional[str] = None,
+    ) -> None:
         """
         Move the specified short-term memory to long-term memory.
         """
         # Retrieve the memory to modify
-        memory = self.memory_system.memory.get_memory_by_id(Literal(memory_id, datatype=XSD.integer))
+        memory = self.memory_system.memory.get_memory_by_id(
+            Literal(memory_id, datatype=XSD.integer)
+        )
 
         # If it's an episodic memory, we need to ensure 'currentTime' is removed and 'eventTime' is added
         if memory_type == "episodic":
@@ -208,7 +215,9 @@ class Agent:
                 del qualifiers[humemai.currentTime]
 
             # Add the required eventTime qualifier
-            qualifiers[humemai.eventTime] = Literal(datetime.now().isoformat(), datatype=XSD.dateTime)
+            qualifiers[humemai.eventTime] = Literal(
+                datetime.now().isoformat(), datatype=XSD.dateTime
+            )
 
             # Optionally add emotion and event if provided
             if emotion:
@@ -225,13 +234,20 @@ class Agent:
             qualifiers = memory["qualifiers"]
 
             # Remove disallowed qualifiers for semantic memories
-            disallowed_qualifiers = [humemai.location, humemai.event, humemai.emotion, humemai.currentTime]
+            disallowed_qualifiers = [
+                humemai.location,
+                humemai.event,
+                humemai.emotion,
+                humemai.currentTime,
+            ]
             for disallowed in disallowed_qualifiers:
                 if disallowed in qualifiers:
                     del qualifiers[disallowed]
 
             # Add knownSince for semantic memories
-            qualifiers[humemai.knownSince] = Literal(datetime.now().isoformat(), datatype=XSD.dateTime)
+            qualifiers[humemai.knownSince] = Literal(
+                datetime.now().isoformat(), datatype=XSD.dateTime
+            )
 
             # Optionally add strength and derivedFrom
             if strength is not None:
@@ -245,16 +261,18 @@ class Agent:
             )
 
         # Remove the original short-term memory
-        self.memory_system.memory.delete_memory(Literal(memory_id, datatype=XSD.integer))
+        self.memory_system.memory.delete_memory(
+            Literal(memory_id, datatype=XSD.integer)
+        )
 
-    def print_memory(self):
+    def print_memory(self) -> None:
         """
         Print the current memory system (short-term and long-term memories).
         """
         print("\nMemory System:")
         self.memory_system.memory.print_memories()
 
-    def clear_short_term_memories(self):
+    def clear_short_term_memories(self) -> None:
         """
         Clear all remaining short-term memories.
         """
