@@ -1,0 +1,112 @@
+z
+2.18.0CP_ontologyFD
+gm6AAYAAAAAAAAAAlocation&
+$g2+AFCgAFE9uIHRvcCBvZiBCcm93biByb2Nr#
+!
+g2+ABygABWxhcmdlsize"
+largeFD
+gm6AAYAAAAAAAAABlocation&
+$g2+AFCgAFE9uIHRvcCBvZiBTbWFsbCByb2Nr#
+!
+g2+ABygABXNtYWxssize"
+smallFD
+gm6AAYAAAAAAAAAClocation&
+$g2+AFCgAE1JpZ2h0IHNpZGUgb2YgZmllbGQ=#
+!
+g2+ADCgABGdyZXk=color"
+greyJH
+gm6AAYAAAAAAAAADlocation*
+(g2+AFCgAFkxlZnQgc2lkZSBvZiByb2NrIHBpbGU=$
+"
+g2+ADCgABWJyb3ducolor"
+brownB@
+gm6AAYAAAAAAAAAElocation"
+ g2+AFCgAD09uIHRvcCBvZiBSb2JvdA==&
+$
+g2+ADygABHJvY2s=obj_type"
+rockB@
+gm6AAYAAAAAAAAAFlocation"
+ g2+AFCgAEFRvcCBvZiByb2NrIHBpbGU=)
+'
+g2+AEigABWh1bWFu
+actor_type"
+humanB@
+gm6AAYAAAAAAAAAGlocation"
+ g2+AFCgAEE9uIHRvcCBvZiBWaWN0aW0=)
+'
+g2+AEigABXJvYm90
+actor_type"
+robotFD
+gm6AAYAAAAAAAAAHlocation&
+$g2+AFCgAEkxlZnQgc2lkZSBvZiBmaWVsZA==.
+,
+g2+AEigABnZpY3RpbQ==
+actor_type"
+victimB@
+gm6AAYAAAAAAAAAIlocation"
+ g2+AFCgAD09uIHRvcCBvZiBIdW1hbg==>
+<
+ g2+AFCgAD0Fib3ZlIHJvY2sgcGlsZQ==range"
+Above rock pileFD
+gm6AAYAAAAAAAAAJlocation&
+$g2+AFCgAE0JvdHRvbSBvZiByb2NrIHBpbGU=>
+<
+ g2+AFCgAD09uIHRvcCBvZiBIdW1hbg==range"
+On top of HumanFD
+gm6AAYAAAAAAAAAKlocation&
+$g2+AFCgAFE9uIHRvcCBvZiBMYXJnZSByb2Nr>
+<
+ g2+AFCgAD09uIHRvcCBvZiBSb2JvdA==range"
+On top of RobotB@
+gm6AAYAAAAAAAAALlocation"
+ g2+AFCgAD0Fib3ZlIHJvY2sgcGlsZQ==?
+=
+ g2+AFCgAEE9uIHRvcCBvZiBWaWN0aW0=range"
+On top of VictimJH
+gm6AAYAAAAAAAAAMlocation*
+(g2+AFCgAF1JpZ2h0IHNpZGUgb2Ygcm9jayBwaWxl?
+=
+ g2+AFCgAEFRvcCBvZiByb2NrIHBpbGU=range"
+Top of rock pileE
+C
+$g2+AFCgAEkxlZnQgc2lkZSBvZiBmaWVsZA==range"
+Left side of field/-
+gm6AAoAAAAAAAAAAactor
+g2+AEigABWh1bWFuF
+D
+$g2+AFCgAE0JvdHRvbSBvZiByb2NrIHBpbGU=range"
+Bottom of rock pile/-
+gm6AAoAAAAAAAAABactor
+g2+AEigABXJvYm90F
+D
+$g2+AFCgAE1JpZ2h0IHNpZGUgb2YgZmllbGQ=range"
+Right side of field31
+gm6AAoAAAAAAAAACactor
+g2+AEigABnZpY3RpbQ==G
+E
+$g2+AFCgAFE9uIHRvcCBvZiBCcm93biByb2Nrrange"
+On top of Brown rockG
+E
+$g2+AFCgAFE9uIHRvcCBvZiBMYXJnZSByb2Nrrange"
+On top of Large rockXV
+gm6ABoAAAAAAAAAAobject
+g2+ABygABWxhcmdl
+g2+ADCgABWJyb3du
+g2+ADygABHJvY2s=G
+E
+$g2+AFCgAFE9uIHRvcCBvZiBTbWFsbCByb2Nrrange"
+On top of Small rockM
+K
+(g2+AFCgAFkxlZnQgc2lkZSBvZiByb2NrIHBpbGU=range"
+Left side of rock pileZX
+gm6ACoAAAAAAAAAAresource
+g2+ABygABWxhcmdl
+g2+ADCgABGdyZXk=
+g2+ADygABHJvY2s=N
+L
+(g2+AFCgAF1JpZ2h0IHNpZGUgb2Ygcm9jayBwaWxlrange"
+Right side of rock pileZX
+gm6ACoAAAAAAAAABresource
+g2+ABygABXNtYWxs
+g2+ADCgABGdyZXk=
+g2+ADygABHJvY2s=	‚(

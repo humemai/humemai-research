@@ -1,0 +1,49 @@
+@prefix co_learning: <https://humem.ai/example/co_learning#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+co_learning:CP164 a co_learning:CollaborationPattern ;
+    co_learning:hasCPLabel "Label"^^xsd:string ;
+    co_learning:hasCPNum 164 ;
+    co_learning:hasHumanAction co_learning:HumanAction164_0 ;
+    co_learning:hasParticipantNumber 4097 ;
+    co_learning:hasRemainingRocks 19 ;
+    co_learning:hasRemainingTime 3000 ;
+    co_learning:hasRobotAction co_learning:RobotAction164_0 ;
+    co_learning:hasRoundNumber 6 ;
+    co_learning:hasSituation co_learning:Situation164_0 ;
+    co_learning:hasTicksLasted 2 ;
+    co_learning:hasTimeStamp "2024-07-22T09:47:40"^^xsd:dateTime ;
+    co_learning:hasUnixTimeStamp 1721634460 ;
+    co_learning:hasVictimHarm 400 .
+
+co_learning:HumanAction164_0 a co_learning:HumanAction ;
+    co_learning:hasNextHumanAction co_learning:HumanAction164_1 .
+
+co_learning:HumanAction164_1 a co_learning:HumanAction ;
+    co_learning:hasAction "Pick up <object> in <location>" ;
+    co_learning:hasLocation "Top of rock pile" ;
+    co_learning:hasNextHumanAction co_learning:HumanAction164_2 ;
+    co_learning:hasObject "Large rock" .
+
+co_learning:HumanAction164_2 a co_learning:HumanAction .
+
+co_learning:RobotAction164_0 a co_learning:RobotAction ;
+    co_learning:hasAction "Move to <Object>" ;
+    co_learning:hasActor "Human" ;
+    co_learning:hasNextRobotAction co_learning:RobotAction164_1 .
+
+co_learning:RobotAction164_1 a co_learning:RobotAction ;
+    co_learning:hasAction "Pick up <object> in <location>" ;
+    co_learning:hasLocation "Top of rock pile" ;
+    co_learning:hasNextRobotAction co_learning:RobotAction164_2 ;
+    co_learning:hasObject "Large rock" .
+
+co_learning:RobotAction164_2 a co_learning:RobotAction .
+
+co_learning:Situation164_0 a co_learning:Situation ;
+    co_learning:hasActor "Robot" ;
+    co_learning:hasLocation "<Left> side of rock pile" ;
+    co_learning:hasNextSituation co_learning:Situation164_1 .
+
+co_learning:Situation164_1 a co_learning:Situation .
+

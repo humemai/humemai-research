@@ -1,0 +1,51 @@
+@prefix co_learning: <https://humem.ai/example/co_learning#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+co_learning:CP7 a co_learning:CollaborationPattern ;
+    co_learning:hasCPLabel "stand still break big rock"^^xsd:string ;
+    co_learning:hasCPNum 7 ;
+    co_learning:hasHumanAction co_learning:HumanAction7_0 ;
+    co_learning:hasParticipantNumber 4071 ;
+    co_learning:hasRemainingRocks 28 ;
+    co_learning:hasRemainingTime 3000 ;
+    co_learning:hasRobotAction co_learning:RobotAction7_0 ;
+    co_learning:hasRoundNumber 4 ;
+    co_learning:hasSituation co_learning:Situation7_0 ;
+    co_learning:hasTicksLasted 596 ;
+    co_learning:hasTimeStamp "2024-08-29T15:44:12"^^xsd:dateTime ;
+    co_learning:hasUnixTimeStamp 1724939052 ;
+    co_learning:hasVictimHarm 0 .
+
+co_learning:HumanAction7_0 a co_learning:HumanAction ;
+    co_learning:hasAction "Stand still in <location>" ;
+    co_learning:hasLocation "<Right> side of field" ;
+    co_learning:hasNextHumanAction co_learning:HumanAction7_1 .
+
+co_learning:HumanAction7_1 a co_learning:HumanAction ;
+    co_learning:hasNextHumanAction co_learning:HumanAction7_2 .
+
+co_learning:HumanAction7_2 a co_learning:HumanAction .
+
+co_learning:RobotAction7_0 a co_learning:RobotAction ;
+    co_learning:hasNextRobotAction co_learning:RobotAction7_1 .
+
+co_learning:RobotAction7_1 a co_learning:RobotAction ;
+    co_learning:hasAction "Break <object> in <location>" ;
+    co_learning:hasLocation "Top of rock pile" ;
+    co_learning:hasNextRobotAction co_learning:RobotAction7_2 ;
+    co_learning:hasObject "Large rock" .
+
+co_learning:RobotAction7_2 a co_learning:RobotAction .
+
+co_learning:Situation7_0 a co_learning:Situation ;
+    co_learning:hasLocation "Top of rock pile" ;
+    co_learning:hasNextSituation co_learning:Situation7_1 ;
+    co_learning:hasObject "Large rock" .
+
+co_learning:Situation7_1 a co_learning:Situation ;
+    co_learning:hasActor "Human" ;
+    co_learning:hasLocation "<Right> side of field" ;
+    co_learning:hasNextSituation co_learning:Situation7_2 .
+
+co_learning:Situation7_2 a co_learning:Situation .
+

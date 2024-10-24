@@ -1,0 +1,413 @@
+z
+2.18.0CP_ontology31
+gm6AA4AAAAAAAAAAactor
+g2+ADSgABnZpY3RpbQ==/-
+gm6AA4AAAAAAAAABactor
+g2+ADSgABXJvYm90/-
+gm6AA4AAAAAAAAACactor
+g2+ADSgABWh1bWFuZX
+gm6AB4AAAAAAAAAAresource
+g2+ABCgABWxhcmdl
+g2+ABSgABHJvY2s=
+g2+ACSgABGdyZXk=ZX
+gm6AB4AAAAAAAAABresource
+g2+ABCgABXNtYWxs
+g2+ABSgABHJvY2s=
+g2+ACSgABGdyZXk=vt
+gm6ACIAAAAAAAAAStask
+g2+ABigABURyb3Ag
+g2+ABygAATI=6
+4g2+ACygAHnRhc2tfcm9ib3RfMl8xNzE0NzM3NTUyLjc5NjA2Ng==zx
+gm6ACIAAAAAAAAATtask
+g2+ABigACFBpY2sgdXAg
+g2+ABygAATE=6
+4g2+ACygAHnRhc2tfaHVtYW5fMV8xNzE0NzM3NTUyLjc5NjAzOA==vt
+gm6ACIAAAAAAAAAUtask
+g2+ABigABURyb3Ag
+g2+ABygAATI=6
+4g2+ACygAHnRhc2tfaHVtYW5fMl8xNzE0NzM3NTUyLjc5NjA0OQ==zx
+gm6ACIAAAAAAAAAVtask
+g2+ABigABkJyZWFrIA==
+g2+ABygAATA=6
+4g2+ACygAHnRhc2tfcm9ib3RfMF8xNzE0NzM3NTUyLjc5NjA1Ng==zx
+gm6ACIAAAAAAAAAWtask
+g2+ABigACFBpY2sgdXAg
+g2+ABygAATE=6
+4g2+ACygAHnRhc2tfcm9ib3RfMV8xNzE0NzM3NTUyLjc5NjA2MQ==7
+5
+g2+AASgACmluZGl2aWR1YWw=action_type"
+
+individualƒ€
+gm6ACIAAAAAAAAAXtask
+g2+ABigADFN0YW5kIHN0aWxsIA==
+g2+ABygAATA=6
+4g2+ACygAHnRhc2tfaHVtYW5fMF8xNzE0NzM3NTUyLjc5NjAyMQ==#
+!
+g2+AAigABUxhYmVsname"
+LabelXV
+gm6ACYAAAAAAAAAAobject
+g2+ABCgABWxhcmdl
+g2+ABSgABHJvY2s=
+g2+ACSgABWJyb3du>
+<
+ g2+AAygAD0Fib3ZlIHJvY2sgcGlsZQ==range"
+Above rock pileFD
+gm6ACoAAAAAAAAAAlocation&
+$g2+AAygAEkxlZnQgc2lkZSBvZiBmaWVsZA==>
+<
+ g2+AAygAD09uIHRvcCBvZiBIdW1hbg==range"
+On top of HumanB@
+gm6ACoAAAAAAAAABlocation"
+ g2+AAygAEE9uIHRvcCBvZiBWaWN0aW0=>
+<
+ g2+AAygAD09uIHRvcCBvZiBSb2JvdA==range"
+On top of RobotB@
+gm6ACoAAAAAAAAAClocation"
+ g2+AAygAD0Fib3ZlIHJvY2sgcGlsZQ==?
+=
+ g2+AAygAEE9uIHRvcCBvZiBWaWN0aW0=range"
+On top of VictimB@
+gm6ACoAAAAAAAAADlocation"
+ g2+AAygAEFRvcCBvZiByb2NrIHBpbGU=?
+=
+ g2+AAygAEFRvcCBvZiByb2NrIHBpbGU=range"
+Top of rock pileJH
+gm6ACoAAAAAAAAAElocation*
+(g2+AAygAF1JpZ2h0IHNpZGUgb2Ygcm9jayBwaWxlE
+C
+$g2+AAygAEkxlZnQgc2lkZSBvZiBmaWVsZA==range"
+Left side of fieldFD
+gm6ACoAAAAAAAAAFlocation&
+$g2+AAygAFE9uIHRvcCBvZiBCcm93biByb2NrF
+D
+$g2+AAygAE0JvdHRvbSBvZiByb2NrIHBpbGU=range"
+Bottom of rock pileB@
+gm6ACoAAAAAAAAAGlocation"
+ g2+AAygAD09uIHRvcCBvZiBSb2JvdA==F
+D
+$g2+AAygAE1JpZ2h0IHNpZGUgb2YgZmllbGQ=range"
+Right side of fieldFD
+gm6ACoAAAAAAAAAHlocation&
+$g2+AAygAE0JvdHRvbSBvZiByb2NrIHBpbGU=G
+E
+$g2+AAygAFE9uIHRvcCBvZiBCcm93biByb2Nrrange"
+On top of Brown rockFD
+gm6ACoAAAAAAAAAIlocation&
+$g2+AAygAE1JpZ2h0IHNpZGUgb2YgZmllbGQ=G
+E
+$g2+AAygAFE9uIHRvcCBvZiBMYXJnZSByb2Nrrange"
+On top of Large rockFD
+gm6ACoAAAAAAAAAJlocation&
+$g2+AAygAFE9uIHRvcCBvZiBMYXJnZSByb2NrG
+E
+$g2+AAygAFE9uIHRvcCBvZiBTbWFsbCByb2Nrrange"
+On top of Small rockB@
+gm6ACoAAAAAAAAAKlocation"
+ g2+AAygAD09uIHRvcCBvZiBIdW1hbg==FD
+gm6ACoAAAAAAAAALlocation&
+$g2+AAygAFE9uIHRvcCBvZiBTbWFsbCByb2NrM
+K
+(g2+AAygAFkxlZnQgc2lkZSBvZiByb2NrIHBpbGU=range"
+Left side of rock pileJH
+gm6ACoAAAAAAAAAMlocation*
+(g2+AAygAFkxlZnQgc2lkZSBvZiByb2NrIHBpbGU=N
+L
+(g2+AAygAF1JpZ2h0IHNpZGUgb2Ygcm9jayBwaWxlrange"
+Right side of rock pile#
+!
+g2+ABCgABWxhcmdlsize"
+large#
+!
+g2+ABCgABXNtYWxssize"
+small&
+$
+g2+ABSgABHJvY2s=obj_type"
+rock¾*»*
+gm6AC4AAAAAAAAAHcollaboration_pattern
+g2+AAigABUxhYmVsû)
+ø)g2+AESgPs3sic2l0dWF0aW9uIjoiXG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImJveF9jcCBib3hfc2l0dVwiIGlkPVwic2l0dWF0aW9uYm94XzFcIj48L2Rpdj5cbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiYm94X2NwIGJveF9zaXR1XCIgaWQ9XCJzaXR1YXRpb25ib3hfMlwiPjwvZGl2PlxuICAgICAgICAgICAgIiwiYWN0aW9uQSI6IlxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiYWdlbnRfbmFtZVwiIGlkPVwiYWdfMVwiPkh1bWFuPC9kaXY+XG4gICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJib3hfY3AgYm94X2FjdGlvblwiIGlkPVwicGF0dGVybmJveF8xXCI+PGRpdiBjbGFzcz1cIml0ZW0gdGFza1wiIGNsb25hYmxlPVwiZmFsc2VcIiBzdHlsZT1cIlwiPlxuICAgICAgICAgICAgICA8cD5TdGFuZCBzdGlsbCBpbiA8L3A+PGRpdiBjbGFzcz1cImludnVsdmFramUgaW52X2xvY1wiPjxpPmxvY2F0aW9uPC9pPjwvZGl2PlxuICAgICAgICAgICAgPC9kaXY+PGRpdiBjbGFzcz1cIml0ZW0gbG9jYXRpb25cIiBjbG9uYWJsZT1cImZhbHNlXCI+XG4gICAgICAgICAgICAgIDxwPlRvcCBvZiByb2NrIHBpbGU8L3A+XG4gICAgICAgICAgICA8L2Rpdj48L2Rpdj5cbiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImJveF9jcCBib3hfYWN0aW9uXCIgaWQ9XCJwYXR0ZXJuYm94XzJcIj48ZGl2IGNsYXNzPVwiaXRlbSB0YXNrXCIgY2xvbmFibGU9XCJmYWxzZVwiIHN0eWxlPVwiXCI+XG4gICAgICAgICAgICAgIDxwPlBpY2sgdXAgPC9wPjxkaXYgY2xhc3M9XCJpbnZ1bHZha2plXCI+PGk+b2JqZWN0PC9pPjwvZGl2PjxwPiBpbiA8L3A+PGRpdiBjbGFzcz1cImludnVsdmFramUgaW52X2xvY1wiPjxpPmxvY2F0aW9uPC9pPjwvZGl2PlxuICAgICAgICAgICAgPC9kaXY+PGRpdiBjbGFzcz1cIml0ZW0gb2JqZWN0X2NwXCIgY2xvbmFibGU9XCJmYWxzZVwiIHN0eWxlPVwiXCI+XG4gICAgICAgICAgICAgIDxwPlNtYWxsIHJvY2s8L3A+XG4gICAgICAgICAgICA8L2Rpdj48ZGl2IGNsYXNzPVwiaXRlbSBsb2NhdGlvblwiIGNsb25hYmxlPVwiZmFsc2VcIj5cbiAgICAgICAgICAgICAgPHA+VG9wIG9mIHJvY2sgcGlsZTwvcD5cbiAgICAgICAgICAgIDwvZGl2PjxkaXYgY2xhc3M9XCJpdGVtIGxvY2F0aW9uXCIgY2xvbmFibGU9XCJmYWxzZVwiPlxuICAgICAgICAgICAgICA8cD5BYm92ZSByb2NrIHBpbGU8L3A+XG4gICAgICAgICAgICA8L2Rpdj48ZGl2IGNsYXNzPVwiaXRlbSBsb2NhdGlvblwiIGNsb25hYmxlPVwiZmFsc2VcIj5cbiAgICAgICAgICAgICAgPHA+Qm90dG9tIG9mIHJvY2sgcGlsZTwvcD5cbiAgICAgICAgICAgIDwvZGl2PjwvZGl2PlxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiYm94X2NwIGJveF9hY3Rpb25cIiBpZD1cInBhdHRlcm5ib3hfM1wiPjxkaXYgY2xhc3M9XCJpdGVtIHRhc2tcIiBjbG9uYWJsZT1cImZhbHNlXCIgc3R5bGU9XCJcIj5cbiAgICAgICAgICAgICAgPHA+RHJvcCA8L3A+PGRpdiBjbGFzcz1cImludnVsdmFramVcIj48aT5vYmplY3Q8L2k+PC9kaXY+PHA+IGluIDwvcD48ZGl2IGNsYXNzPVwiaW52dWx2YWtqZSBpbnZfbG9jXCI+PGk+bG9jYXRpb248L2k+PC9kaXY+XG4gICAgICAgICAgICA8L2Rpdj48ZGl2IGNsYXNzPVwiaXRlbSBvYmplY3RfY3BcIiBjbG9uYWJsZT1cImZhbHNlXCIgc3R5bGU9XCJcIj5cbiAgICAgICAgICAgICAgPHA+U21hbGwgcm9jazwvcD5cbiAgICAgICAgICAgIDwvZGl2PjxkaXYgY2xhc3M9XCJpdGVtIGxvY2F0aW9uXCIgY2xvbmFibGU9XCJmYWxzZVwiPlxuICAgICAgICAgICAgICA8YnV0dG9uIGNsYXNzPVwibGVmdHJpZ2h0YnV0dG9uXCIgaWQ9XCJsZWZ0cmlnaHRidXR0b24yXCI+PGk+TGVmdDwvaT48L2J1dHRvbj48cD4gc2lkZSBvZiBmaWVsZDwvcD5cbiAgICAgICAgICAgIDwvZGl2PjwvZGl2PlxuICAgICAgICAgICAgICAgICIsImFjdGlvbkIiOiJcbiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImFnZW50X25hbWVcIiBpZD1cImFnXzJcIj5Sb2JvdDwvZGl2PlxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiYm94X2NwIGJveF9hY3Rpb25cIiBpZD1cInBhdHRlcm5ib3gyXzFcIj48ZGl2IGNsYXNzPVwiaXRlbSB0YXNrXCIgY2xvbmFibGU9XCJmYWxzZVwiIHN0eWxlPVwiXCI+XG4gICAgICAgICAgICAgIDxwPkJyZWFrIDwvcD48ZGl2IGNsYXNzPVwiaW52dWx2YWtqZVwiPjxpPm9iamVjdDwvaT48L2Rpdj48cD4gaW4gPC9wPjxkaXYgY2xhc3M9XCJpbnZ1bHZha2plIGludl9sb2NcIj48aT5sb2NhdGlvbjwvaT48L2Rpdj5cbiAgICAgICAgICAgIDwvZGl2PjxkaXYgY2xhc3M9XCJpdGVtIG9iamVjdF9jcFwiIGNsb25hYmxlPVwiZmFsc2VcIiBzdHlsZT1cIlwiPlxuICAgICAgICAgICAgICA8cD5Ccm93biByb2NrPC9wPlxuICAgICAgICAgICAgPC9kaXY+PC9kaXY+XG4gICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJib3hfY3AgYm94X2FjdGlvblwiIGlkPVwicGF0dGVybmJveDJfMlwiPjxkaXYgY2xhc3M9XCJpdGVtIHRhc2tcIiBjbG9uYWJsZT1cImZhbHNlXCIgc3R5bGU9XCJcIj5cbiAgICAgICAgICAgICAgPHA+UGljayB1cCA8L3A+PGRpdiBjbGFzcz1cImludnVsdmFramVcIj48aT5vYmplY3Q8L2k+PC9kaXY+PHA+IGluIDwvcD48ZGl2IGNsYXNzPVwiaW52dWx2YWtqZSBpbnZfbG9jXCI+PGk+bG9jYXRpb248L2k+PC9kaXY+XG4gICAgICAgICAgICA8L2Rpdj48ZGl2IGNsYXNzPVwiaXRlbSBvYmplY3RfY3BcIiBjbG9uYWJsZT1cImZhbHNlXCIgc3R5bGU9XCJcIj5cbiAgICAgICAgICAgICAgPHA+TGFyZ2Ugcm9jazwvcD5cbiAgICAgICAgICAgIDwvZGl2PjxkaXYgY2xhc3M9XCJpdGVtIGxvY2F0aW9uXCIgY2xvbmFibGU9XCJmYWxzZVwiIHN0eWxlPVwiXCI+XG4gICAgICAgICAgICAgIDxwPlRvcCBvZiByb2NrIHBpbGU8L3A+XG4gICAgICAgICAgICA8L2Rpdj48ZGl2IGNsYXNzPVwiaXRlbSBsb2NhdGlvblwiIGNsb25hYmxlPVwiZmFsc2VcIiBzdHlsZT1cIlwiPlxuICAgICAgICAgICAgICA8cD5BYm92ZSByb2NrIHBpbGU8L3A+XG4gICAgICAgICAgICA8L2Rpdj48ZGl2IGNsYXNzPVwiaXRlbSBsb2NhdGlvblwiIGNsb25hYmxlPVwiZmFsc2VcIj5cbiAgICAgICAgICAgICAgPHA+Qm90dG9tIG9mIHJvY2sgcGlsZTwvcD5cbiAgICAgICAgICAgIDwvZGl2PjwvZGl2PlxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiYm94X2NwIGJveF9hY3Rpb25cIiBpZD1cInBhdHRlcm5ib3gyXzNcIj48ZGl2IGNsYXNzPVwiaXRlbSB0YXNrXCIgY2xvbmFibGU9XCJmYWxzZVwiIHN0eWxlPVwiXCI+XG4gICAgICAgICAgICAgIDxwPkRyb3AgPC9wPjxkaXYgY2xhc3M9XCJpbnZ1bHZha2plXCI+PGk+b2JqZWN0PC9pPjwvZGl2PjxwPiBpbiA8L3A+PGRpdiBjbGFzcz1cImludnVsdmFramUgaW52X2xvY1wiPjxpPmxvY2F0aW9uPC9pPjwvZGl2PlxuICAgICAgICAgICAgPC9kaXY+PGRpdiBjbGFzcz1cIml0ZW0gb2JqZWN0X2NwXCIgY2xvbmFibGU9XCJmYWxzZVwiIHN0eWxlPVwiXCI+XG4gICAgICAgICAgICAgIDxwPkxhcmdlIHJvY2s8L3A+XG4gICAgICAgICAgICA8L2Rpdj48ZGl2IGNsYXNzPVwiaXRlbSBsb2NhdGlvblwiIGNsb25hYmxlPVwiZmFsc2VcIiBzdHlsZT1cIlwiPlxuICAgICAgICAgICAgICA8YnV0dG9uIGNsYXNzPVwibGVmdHJpZ2h0YnV0dG9uXCIgaWQ9XCJsZWZ0cmlnaHRidXR0b24yXCI+PGk+TGVmdDwvaT48L2J1dHRvbj48cD4gc2lkZSBvZiBmaWVsZDwvcD5cbiAgICAgICAgICAgIDwvZGl2PjwvZGl2PlxuICAgICAgICAgICAgICAgICIsInBvc3RzaXR1IjoiXG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImJveF9jcCBib3hfc2l0dVwiIGlkPVwicG9zdHNpdHVib3hfMVwiPjwvZGl2PlxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJib3hfY3AgYm94X3NpdHVcIiBpZD1cInBvc3RzaXR1Ym94XzJcIj48L2Rpdj5cbiAgICAgICAgICAgICJ9(
+&
+g2+ABigABURyb3Ag	task_name"
+Drop -
++
+g2+ABigABkJyZWFrIA==	task_name"
+Break /
+-
+g2+ABigACE1vdmUgdG8g	task_name"
+
+Move to /
+-
+g2+ABigACFBpY2sgdXAg	task_name"
+
+Pick up ;
+9
+g2+ABigADFN0YW5kIHN0aWxsIA==	task_name"
+Stand still "
+ 
+g2+ABygAATA=order_value"
+0"
+ 
+g2+ABygAATE=order_value"
+1"
+ 
+g2+ABygAATI=order_value"
+2p
+n
+8g2+ACCgAImNvbmRpdGlvbl9zdGFydF8wXzE3MTQ3MzY2NzcuOTg5MzQ=condition_id"$
+"condition_start_0_1714736677.98934#
+!
+g2+ACSgABGdyZXk=color"
+grey$
+"
+g2+ACSgABWJyb3ducolor"
+brown^
+\
+0g2+ACygAHXRhc2tfaHVtYW5fMF8xNzE0NzM3MDc5LjE5MTI3task_id"
+task_human_0_1714737079.19127^
+\
+0g2+ACygAHXRhc2tfcm9ib3RfMV8xNzE0NzM2Njc3Ljk4OTM3task_id"
+task_robot_1_1714736677.98937c
+a
+4g2+ACygAHnRhc2tfaHVtYW5fMF8xNzE0NzM2Njc3Ljk4OTM1NQ==task_id" 
+task_human_0_1714736677.989355c
+a
+4g2+ACygAHnRhc2tfaHVtYW5fMF8xNzE0NzM2Njg5LjQ1OTgxNw==task_id" 
+task_human_0_1714736689.459817c
+a
+4g2+ACygAHnRhc2tfaHVtYW5fMF8xNzE0NzM2OTU4Ljc1NjI4OQ==task_id" 
+task_human_0_1714736958.756289c
+a
+4g2+ACygAHnRhc2tfaHVtYW5fMF8xNzE0NzM3MDA3LjAyNTQwNg==task_id" 
+task_human_0_1714737007.025406c
+a
+4g2+ACygAHnRhc2tfaHVtYW5fMF8xNzE0NzM3MzQxLjI1NjE3OA==task_id" 
+task_human_0_1714737341.256178c
+a
+4g2+ACygAHnRhc2tfaHVtYW5fMF8xNzE0NzM3NTUyLjc5NjAyMQ==task_id" 
+task_human_0_1714737552.796021c
+a
+4g2+ACygAHnRhc2tfaHVtYW5fMV8xNzE0NzM2Njc3Ljk4OTM2Mg==task_id" 
+task_human_1_1714736677.989362c
+a
+4g2+ACygAHnRhc2tfaHVtYW5fMV8xNzE0NzM3MzQxLjI1NjE5Mg==task_id" 
+task_human_1_1714737341.256192c
+a
+4g2+ACygAHnRhc2tfaHVtYW5fMV8xNzE0NzM3NTUyLjc5NjAzOA==task_id" 
+task_human_1_1714737552.796038c
+a
+4g2+ACygAHnRhc2tfaHVtYW5fMl8xNzE0NzM3MzQxLjI1NjIwMg==task_id" 
+task_human_2_1714737341.256202c
+a
+4g2+ACygAHnRhc2tfaHVtYW5fMl8xNzE0NzM3NTUyLjc5NjA0OQ==task_id" 
+task_human_2_1714737552.796049c
+a
+4g2+ACygAHnRhc2tfcm9ib3RfMF8xNzE0NzM2Njc3Ljk4OTM2Ng==task_id" 
+task_robot_0_1714736677.989366c
+a
+4g2+ACygAHnRhc2tfcm9ib3RfMF8xNzE0NzM2Njg5LjQ1OTgzNQ==task_id" 
+task_robot_0_1714736689.459835c
+a
+4g2+ACygAHnRhc2tfcm9ib3RfMF8xNzE0NzM2OTU4Ljc1NjMwMQ==task_id" 
+task_robot_0_1714736958.756301c
+a
+4g2+ACygAHnRhc2tfcm9ib3RfMF8xNzE0NzM3MDA3LjAyNTQyMw==task_id" 
+task_robot_0_1714737007.025423c
+a
+4g2+ACygAHnRhc2tfcm9ib3RfMF8xNzE0NzM3MDc5LjE5MTI4OQ==task_id" 
+task_robot_0_1714737079.191289c
+a
+4g2+ACygAHnRhc2tfcm9ib3RfMF8xNzE0NzM3MzQxLjI1NjIwOA==task_id" 
+task_robot_0_1714737341.256208wu
+hHCAAoAAAAAAAAASperformed_by"(
+performed_by:actor
+gm6AA4AAAAAAAAAC")
+performed_by:action
+gm6ACIAAAAAAAAAXc
+a
+4g2+ACygAHnRhc2tfcm9ib3RfMF8xNzE0NzM3NTUyLjc5NjA1Ng==task_id" 
+task_robot_0_1714737552.796056c
+a
+4g2+ACygAHnRhc2tfcm9ib3RfMV8xNzE0NzM3MzQxLjI1NjIxMw==task_id" 
+task_robot_1_1714737341.256213c
+a
+4g2+ACygAHnRhc2tfcm9ib3RfMV8xNzE0NzM3NTUyLjc5NjA2MQ==task_id" 
+task_robot_1_1714737552.796061c
+a
+4g2+ACygAHnRhc2tfcm9ib3RfMl8xNzE0NzM3MzQxLjI1NjIxOA==task_id" 
+task_robot_2_1714737341.256218c
+a
+4g2+ACygAHnRhc2tfcm9ib3RfMl8xNzE0NzM3NTUyLjc5NjA2Ng==task_id" 
+task_robot_2_1714737552.796066wu
+hHCAAoAAAAAAAAATperformed_by"(
+performed_by:actor
+gm6AA4AAAAAAAAAB")
+performed_by:action
+gm6ACIAAAAAAAAAWh
+f
+4g2+ADCgAIGNvbnRleHRfc3RhcnRfMF8xNzE0NzM2Njc3Ljk4OTM0
+context_id""
+ context_start_0_1714736677.98934)
+'
+g2+ADSgABWh1bWFu
+actor_type"
+human)
+'
+g2+ADSgABXJvYm90
+actor_type"
+robot.
+,
+g2+ADSgABnZpY3RpbQ==
+actor_type"
+victimwu
+hHCAAoAAAAAAAAAUperformed_by"(
+performed_by:actor
+gm6AA4AAAAAAAAAB")
+performed_by:action
+gm6ACIAAAAAAAAAVè
+å
+èg2+AESgC5nsic2l0dWF0aW9uIjoiPGRpdiBjbGFzcz1cImJveF9jcCBib3hfc2l0dVwiIGlkPVwic2l0dWF0aW9uYm94XzFcIj48L2Rpdj48ZGl2IGNsYXNzPVwiYm94X2NwIGJveF9zaXR1XCIgaWQ9XCJzaXR1YXRpb25ib3hfMlwiPjwvZGl2PiIsImFjdGlvbkEiOiI8ZGl2IGNsYXNzPVwiYWdlbnRfbmFtZVwiIGlkPVwiYWdfMVwiPkh1bWFuPC9kaXY+PGRpdiBjbGFzcz1cImJveF9jcCBib3hfYWN0aW9uXCIgaWQ9XCJwYXR0ZXJuYm94XzFcIj48L2Rpdj48ZGl2IGNsYXNzPVwiYm94X2NwIGJveF9hY3Rpb25cIiBpZD1cInBhdHRlcm5ib3hfMlwiPjwvZGl2PjxkaXYgY2xhc3M9XCJib3hfY3AgYm94X2FjdGlvblwiIGlkPVwicGF0dGVybmJveF8zXCI+PC9kaXY+IiwiYWN0aW9uQiI6IjxkaXYgY2xhc3M9XCJhZ2VudF9uYW1lXCIgaWQ9XCJhZ18xXCI+Um9ib3Q8L2Rpdj48ZGl2IGNsYXNzPVwiYm94X2NwIGJveF9hY3Rpb25cIiBpZD1cInBhdHRlcm5ib3hfMVwiPjwvZGl2PjxkaXYgY2xhc3M9XCJib3hfY3AgYm94X2FjdGlvblwiIGlkPVwicGF0dGVybmJveF8yXCI+PC9kaXY+PGRpdiBjbGFzcz1cImJveF9jcCBib3hfYWN0aW9uXCIgaWQ9XCJwYXR0ZXJuYm94XzNcIj48L2Rpdj4iLCJwb3N0c2l0dSI6IjxkaXYgY2xhc3M9XCJib3hfY3AgYm94X3NpdHVcIiBpZD1cInBvc3RzaXR1Ym94XzFcIj48L2Rpdj48ZGl2IGNsYXNzPVwiYm94X2NwIGJveF9zaXR1XCIgaWQ9XCJwb3N0c2l0dWJveF8yXCI+PC9kaXY+In0=html_content"é
+æ{"situation":"<div class=\"box_cp box_situ\" id=\"situationbox_1\"></div><div class=\"box_cp box_situ\" id=\"situationbox_2\"></div>","actionA":"<div class=\"agent_name\" id=\"ag_1\">Human</div><div class=\"box_cp box_action\" id=\"patternbox_1\"></div><div class=\"box_cp box_action\" id=\"patternbox_2\"></div><div class=\"box_cp box_action\" id=\"patternbox_3\"></div>","actionB":"<div class=\"agent_name\" id=\"ag_1\">Robot</div><div class=\"box_cp box_action\" id=\"patternbox_1\"></div><div class=\"box_cp box_action\" id=\"patternbox_2\"></div><div class=\"box_cp box_action\" id=\"patternbox_3\"></div>","postsitu":"<div class=\"box_cp box_situ\" id=\"postsitubox_1\"></div><div class=\"box_cp box_situ\" id=\"postsitubox_2\"></div>"}wu
+hHCAAoAAAAAAAAAVperformed_by"(
+performed_by:actor
+gm6AA4AAAAAAAAAC")
+performed_by:action
+gm6ACIAAAAAAAAAUð
+í
+ìg2+AESgF6nsic2l0dWF0aW9uIjoiPGRpdiBjbGFzcz1cImJveF9jcCBib3hfc2l0dVwiIGlkPVwic2l0dWF0aW9uYm94XzFcIj48L2Rpdj48ZGl2IGNsYXNzPVwiYm94X2NwIGJveF9zaXR1XCIgaWQ9XCJzaXR1YXRpb25ib3hfMlwiPjwvZGl2PiIsImFjdGlvbkEiOiI8ZGl2IGNsYXNzPVwiYWdlbnRfbmFtZVwiIGlkPVwiYWdfMVwiPkh1bWFuPC9kaXY+PGRpdiBjbGFzcz1cImJveF9jcCBib3hfYWN0aW9uXCIgaWQ9XCJwYXR0ZXJuYm94XzFcIj48ZGl2IGNsYXNzPVwiaXRlbSBhY3RvclwiIGNsb25hYmxlPVwiZmFsc2VcIj5cbiAgICAgICAgICAgICAgPHA+SHVtYW48L3A+XG4gICAgICAgICAgICA8L2Rpdj48ZGl2IGNsYXNzPVwiaXRlbSB0YXNrXCIgY2xvbmFibGU9XCJmYWxzZVwiIHN0eWxlPVwiXCI+XG4gICAgICAgICAgICAgIDxwPlN0YW5kIHN0aWxsIGluIDwvcD48ZGl2IGNsYXNzPVwiaW52dWx2YWtqZSBpbnZfbG9jXCI+PGk+bG9jYXRpb248L2k+PC9kaXY+XG4gICAgICAgICAgICA8L2Rpdj48ZGl2IGNsYXNzPVwiaXRlbSBsb2NhdGlvblwiIGNsb25hYmxlPVwiZmFsc2VcIj5cbiAgICAgICAgICAgICAgPGJ1dHRvbiBjbGFzcz1cImxlZnRyaWdodGJ1dHRvblwiIGlkPVwibGVmdHJpZ2h0YnV0dG9uMlwiPjxpPkxlZnQ8L2k+PC9idXR0b24+PHA+IHNpZGUgb2YgZmllbGQ8L3A+XG4gICAgICAgICAgICA8L2Rpdj48L2Rpdj48ZGl2IGNsYXNzPVwiYm94X2NwIGJveF9hY3Rpb25cIiBpZD1cInBhdHRlcm5ib3hfMlwiPjwvZGl2PjxkaXYgY2xhc3M9XCJib3hfY3AgYm94X2FjdGlvblwiIGlkPVwicGF0dGVybmJveF8zXCI+PC9kaXY+IiwiYWN0aW9uQiI6IjxkaXYgY2xhc3M9XCJhZ2VudF9uYW1lXCIgaWQ9XCJhZ18xXCI+Um9ib3Q8L2Rpdj48ZGl2IGNsYXNzPVwiYm94X2NwIGJveF9hY3Rpb25cIiBpZD1cInBhdHRlcm5ib3hfMVwiPjxkaXYgY2xhc3M9XCJpdGVtIHRhc2tcIiBjbG9uYWJsZT1cImZhbHNlXCIgc3R5bGU9XCJcIj5cbiAgICAgICAgICAgICAgPHA+QnJlYWsgPC9wPjxkaXYgY2xhc3M9XCJpbnZ1bHZha2plXCI+PGk+b2JqZWN0PC9pPjwvZGl2PjxwPiBpbiA8L3A+PGRpdiBjbGFzcz1cImludnVsdmFramUgaW52X2xvY1wiPjxpPmxvY2F0aW9uPC9pPjwvZGl2PlxuICAgICAgICAgICAgPC9kaXY+PGRpdiBjbGFzcz1cIml0ZW0gb2JqZWN0X2NwXCIgY2xvbmFibGU9XCJmYWxzZVwiIHN0eWxlPVwiXCI+XG4gICAgICAgICAgICAgIDxwPkJyb3duIHJvY2s8L3A+XG4gICAgICAgICAgICA8L2Rpdj48L2Rpdj48ZGl2IGNsYXNzPVwiYm94X2NwIGJveF9hY3Rpb25cIiBpZD1cInBhdHRlcm5ib3hfMlwiPjwvZGl2PjxkaXYgY2xhc3M9XCJib3hfY3AgYm94X2FjdGlvblwiIGlkPVwicGF0dGVybmJveF8zXCI+PC9kaXY+IiwicG9zdHNpdHUiOiI8ZGl2IGNsYXNzPVwiYm94X2NwIGJveF9zaXR1XCIgaWQ9XCJwb3N0c2l0dWJveF8xXCI+PC9kaXY+PGRpdiBjbGFzcz1cImJveF9jcCBib3hfc2l0dVwiIGlkPVwicG9zdHNpdHVib3hfMlwiPjwvZGl2PiJ9html_content"í
+ê{"situation":"<div class=\"box_cp box_situ\" id=\"situationbox_1\"></div><div class=\"box_cp box_situ\" id=\"situationbox_2\"></div>","actionA":"<div class=\"agent_name\" id=\"ag_1\">Human</div><div class=\"box_cp box_action\" id=\"patternbox_1\"><div class=\"item actor\" clonable=\"false\">\n              <p>Human</p>\n            </div><div class=\"item task\" clonable=\"false\" style=\"\">\n              <p>Stand still in </p><div class=\"invulvakje inv_loc\"><i>location</i></div>\n            </div><div class=\"item location\" clonable=\"false\">\n              <button class=\"leftrightbutton\" id=\"leftrightbutton2\"><i>Left</i></button><p> side of field</p>\n            </div></div><div class=\"box_cp box_action\" id=\"patternbox_2\"></div><div class=\"box_cp box_action\" id=\"patternbox_3\"></div>","actionB":"<div class=\"agent_name\" id=\"ag_1\">Robot</div><div class=\"box_cp box_action\" id=\"patternbox_1\"><div class=\"item task\" clonable=\"false\" style=\"\">\n              <p>Break </p><div class=\"invulvakje\"><i>object</i></div><p> in </p><div class=\"invulvakje inv_loc\"><i>location</i></div>\n            </div><div class=\"item object_cp\" clonable=\"false\" style=\"\">\n              <p>Brown rock</p>\n            </div></div><div class=\"box_cp box_action\" id=\"patternbox_2\"></div><div class=\"box_cp box_action\" id=\"patternbox_3\"></div>","postsitu":"<div class=\"box_cp box_situ\" id=\"postsitubox_1\"></div><div class=\"box_cp box_situ\" id=\"postsitubox_2\"></div>"}wu
+hHCAAoAAAAAAAAAWperformed_by"(
+performed_by:actor
+gm6AA4AAAAAAAAAC")
+performed_by:action
+gm6ACIAAAAAAAAATš
+—
+„g2+AESgF/Hsic2l0dWF0aW9uIjoiPGRpdiBjbGFzcz1cImJveF9jcCBib3hfc2l0dVwiIGlkPVwic2l0dWF0aW9uYm94XzFcIj48L2Rpdj48ZGl2IGNsYXNzPVwiYm94X2NwIGJveF9zaXR1XCIgaWQ9XCJzaXR1YXRpb25ib3hfMlwiPjwvZGl2PiIsImFjdGlvbkEiOiI8ZGl2IGNsYXNzPVwiYWdlbnRfbmFtZVwiIGlkPVwiYWdfMVwiPkh1bWFuPC9kaXY+PGRpdiBjbGFzcz1cImJveF9jcCBib3hfYWN0aW9uXCIgaWQ9XCJwYXR0ZXJuYm94XzFcIj48ZGl2IGNsYXNzPVwiaXRlbSBsb2NhdGlvblwiIGNsb25hYmxlPVwiZmFsc2VcIiBzdHlsZT1cIlwiPlxuICAgICAgICAgICAgICA8YnV0dG9uIGNsYXNzPVwibGVmdHJpZ2h0YnV0dG9uXCIgaWQ9XCJsZWZ0cmlnaHRidXR0b24xXCI+PGk+TGVmdDwvaT48L2J1dHRvbj48cD4gc2lkZSBvZiByb2NrIHBpbGU8L3A+XG4gICAgICAgICAgICA8L2Rpdj48ZGl2IGNsYXNzPVwiaXRlbSB0YXNrXCIgY2xvbmFibGU9XCJmYWxzZVwiPlxuICAgICAgICAgICAgICA8cD5TdGFuZCBzdGlsbCBpbiA8L3A+PGRpdiBjbGFzcz1cImludnVsdmFramUgaW52X2xvY1wiPjxpPmxvY2F0aW9uPC9pPjwvZGl2PlxuICAgICAgICAgICAgPC9kaXY+PC9kaXY+PGRpdiBjbGFzcz1cImJveF9jcCBib3hfYWN0aW9uXCIgaWQ9XCJwYXR0ZXJuYm94XzJcIj48L2Rpdj48ZGl2IGNsYXNzPVwiYm94X2NwIGJveF9hY3Rpb25cIiBpZD1cInBhdHRlcm5ib3hfM1wiPjwvZGl2PiIsImFjdGlvbkIiOiI8ZGl2IGNsYXNzPVwiYWdlbnRfbmFtZVwiIGlkPVwiYWdfMVwiPlJvYm90PC9kaXY+PGRpdiBjbGFzcz1cImJveF9jcCBib3hfYWN0aW9uXCIgaWQ9XCJwYXR0ZXJuYm94XzFcIj48ZGl2IGNsYXNzPVwiaXRlbSB0YXNrXCIgY2xvbmFibGU9XCJmYWxzZVwiIHN0eWxlPVwiXCI+XG4gICAgICAgICAgICAgIDxwPkJyZWFrIDwvcD48ZGl2IGNsYXNzPVwiaW52dWx2YWtqZVwiPjxpPm9iamVjdDwvaT48L2Rpdj48cD4gaW4gPC9wPjxkaXYgY2xhc3M9XCJpbnZ1bHZha2plIGludl9sb2NcIj48aT5sb2NhdGlvbjwvaT48L2Rpdj5cbiAgICAgICAgICAgIDwvZGl2PjxkaXYgY2xhc3M9XCJpdGVtIG9iamVjdF9jcFwiIGNsb25hYmxlPVwiZmFsc2VcIiBzdHlsZT1cIlwiPlxuICAgICAgICAgICAgICA8cD5MYXJnZSByb2NrPC9wPlxuICAgICAgICAgICAgPC9kaXY+PGRpdiBjbGFzcz1cIml0ZW0gbG9jYXRpb25cIiBjbG9uYWJsZT1cImZhbHNlXCI+XG4gICAgICAgICAgICAgIDxwPlRvcCBvZiByb2NrIHBpbGU8L3A+XG4gICAgICAgICAgICA8L2Rpdj48L2Rpdj48ZGl2IGNsYXNzPVwiYm94X2NwIGJveF9hY3Rpb25cIiBpZD1cInBhdHRlcm5ib3hfMlwiPjwvZGl2PjxkaXYgY2xhc3M9XCJib3hfY3AgYm94X2FjdGlvblwiIGlkPVwicGF0dGVybmJveF8zXCI+PC9kaXY+IiwicG9zdHNpdHUiOiI8ZGl2IGNsYXNzPVwiYm94X2NwIGJveF9zaXR1XCIgaWQ9XCJwb3N0c2l0dWJveF8xXCI+PC9kaXY+PGRpdiBjbGFzcz1cImJveF9jcCBib3hfc2l0dVwiIGlkPVwicG9zdHNpdHVib3hfMlwiPjwvZGl2PiJ9html_content"ÿ
+ü{"situation":"<div class=\"box_cp box_situ\" id=\"situationbox_1\"></div><div class=\"box_cp box_situ\" id=\"situationbox_2\"></div>","actionA":"<div class=\"agent_name\" id=\"ag_1\">Human</div><div class=\"box_cp box_action\" id=\"patternbox_1\"><div class=\"item location\" clonable=\"false\" style=\"\">\n              <button class=\"leftrightbutton\" id=\"leftrightbutton1\"><i>Left</i></button><p> side of rock pile</p>\n            </div><div class=\"item task\" clonable=\"false\">\n              <p>Stand still in </p><div class=\"invulvakje inv_loc\"><i>location</i></div>\n            </div></div><div class=\"box_cp box_action\" id=\"patternbox_2\"></div><div class=\"box_cp box_action\" id=\"patternbox_3\"></div>","actionB":"<div class=\"agent_name\" id=\"ag_1\">Robot</div><div class=\"box_cp box_action\" id=\"patternbox_1\"><div class=\"item task\" clonable=\"false\" style=\"\">\n              <p>Break </p><div class=\"invulvakje\"><i>object</i></div><p> in </p><div class=\"invulvakje inv_loc\"><i>location</i></div>\n            </div><div class=\"item object_cp\" clonable=\"false\" style=\"\">\n              <p>Large rock</p>\n            </div><div class=\"item location\" clonable=\"false\">\n              <p>Top of rock pile</p>\n            </div></div><div class=\"box_cp box_action\" id=\"patternbox_2\"></div><div class=\"box_cp box_action\" id=\"patternbox_3\"></div>","postsitu":"<div class=\"box_cp box_situ\" id=\"postsitubox_1\"></div><div class=\"box_cp box_situ\" id=\"postsitubox_2\"></div>"}wu
+hHCAAoAAAAAAAAAXperformed_by"(
+performed_by:actor
+gm6AA4AAAAAAAAAB")
+performed_by:action
+gm6ACIAAAAAAAAAS‡
+„
+Œg2+AESgGYXsic2l0dWF0aW9uIjoiPGRpdiBjbGFzcz1cImJveF9jcCBib3hfc2l0dVwiIGlkPVwic2l0dWF0aW9uYm94XzFcIj48L2Rpdj48ZGl2IGNsYXNzPVwiYm94X2NwIGJveF9zaXR1XCIgaWQ9XCJzaXR1YXRpb25ib3hfMlwiPjwvZGl2PiIsImFjdGlvbkEiOiI8ZGl2IGNsYXNzPVwiYWdlbnRfbmFtZVwiIGlkPVwiYWdfMVwiPkh1bWFuPC9kaXY+PGRpdiBjbGFzcz1cImJveF9jcCBib3hfYWN0aW9uXCIgaWQ9XCJwYXR0ZXJuYm94XzFcIj48ZGl2IGNsYXNzPVwiaXRlbSBsb2NhdGlvblwiIGNsb25hYmxlPVwiZmFsc2VcIiBzdHlsZT1cIlwiPlxuICAgICAgICAgICAgICA8YnV0dG9uIGNsYXNzPVwibGVmdHJpZ2h0YnV0dG9uXCIgaWQ9XCJsZWZ0cmlnaHRidXR0b24xXCI+PGk+TGVmdDwvaT48L2J1dHRvbj48cD4gc2lkZSBvZiByb2NrIHBpbGU8L3A+XG4gICAgICAgICAgICA8L2Rpdj48ZGl2IGNsYXNzPVwiaXRlbSB0YXNrXCIgY2xvbmFibGU9XCJmYWxzZVwiIHN0eWxlPVwiXCI+XG4gICAgICAgICAgICAgIDxwPlN0YW5kIHN0aWxsIGluIDwvcD48ZGl2IGNsYXNzPVwiaW52dWx2YWtqZSBpbnZfbG9jXCI+PGk+bG9jYXRpb248L2k+PC9kaXY+XG4gICAgICAgICAgICA8L2Rpdj48L2Rpdj48ZGl2IGNsYXNzPVwiYm94X2NwIGJveF9hY3Rpb25cIiBpZD1cInBhdHRlcm5ib3hfMlwiPjwvZGl2PjxkaXYgY2xhc3M9XCJib3hfY3AgYm94X2FjdGlvblwiIGlkPVwicGF0dGVybmJveF8zXCI+PC9kaXY+IiwiYWN0aW9uQiI6IjxkaXYgY2xhc3M9XCJhZ2VudF9uYW1lXCIgaWQ9XCJhZ18xXCI+Um9ib3Q8L2Rpdj48ZGl2IGNsYXNzPVwiYm94X2NwIGJveF9hY3Rpb25cIiBpZD1cInBhdHRlcm5ib3hfMVwiPjxkaXYgY2xhc3M9XCJpdGVtIG9iamVjdF9jcFwiIGNsb25hYmxlPVwiZmFsc2VcIiBzdHlsZT1cIlwiPlxuICAgICAgICAgICAgICA8cD5MYXJnZSByb2NrPC9wPlxuICAgICAgICAgICAgPC9kaXY+PGRpdiBjbGFzcz1cIml0ZW0gdGFza1wiIGNsb25hYmxlPVwiZmFsc2VcIiBzdHlsZT1cIlwiPlxuICAgICAgICAgICAgICA8cD5Ecm9wIDwvcD48ZGl2IGNsYXNzPVwiaW52dWx2YWtqZVwiPjxpPm9iamVjdDwvaT48L2Rpdj48cD4gaW4gPC9wPjxkaXYgY2xhc3M9XCJpbnZ1bHZha2plIGludl9sb2NcIj48aT5sb2NhdGlvbjwvaT48L2Rpdj5cbiAgICAgICAgICAgIDwvZGl2PjxkaXYgY2xhc3M9XCJpdGVtIGxvY2F0aW9uXCIgY2xvbmFibGU9XCJmYWxzZVwiIHN0eWxlPVwiXCI+XG4gICAgICAgICAgICAgIDxidXR0b24gY2xhc3M9XCJsZWZ0cmlnaHRidXR0b25cIiBpZD1cImxlZnRyaWdodGJ1dHRvbjFcIj48aT5MZWZ0PC9pPjwvYnV0dG9uPjxwPiBzaWRlIG9mIHJvY2sgcGlsZTwvcD5cbiAgICAgICAgICAgIDwvZGl2PjwvZGl2PjxkaXYgY2xhc3M9XCJib3hfY3AgYm94X2FjdGlvblwiIGlkPVwicGF0dGVybmJveF8yXCI+PC9kaXY+PGRpdiBjbGFzcz1cImJveF9jcCBib3hfYWN0aW9uXCIgaWQ9XCJwYXR0ZXJuYm94XzNcIj48L2Rpdj4iLCJwb3N0c2l0dSI6IjxkaXYgY2xhc3M9XCJib3hfY3AgYm94X3NpdHVcIiBpZD1cInBvc3RzaXR1Ym94XzFcIj48L2Rpdj48ZGl2IGNsYXNzPVwiYm94X2NwIGJveF9zaXR1XCIgaWQ9XCJwb3N0c2l0dWJveF8yXCI+PC9kaXY+In0=html_content"ä
+á{"situation":"<div class=\"box_cp box_situ\" id=\"situationbox_1\"></div><div class=\"box_cp box_situ\" id=\"situationbox_2\"></div>","actionA":"<div class=\"agent_name\" id=\"ag_1\">Human</div><div class=\"box_cp box_action\" id=\"patternbox_1\"><div class=\"item location\" clonable=\"false\" style=\"\">\n              <button class=\"leftrightbutton\" id=\"leftrightbutton1\"><i>Left</i></button><p> side of rock pile</p>\n            </div><div class=\"item task\" clonable=\"false\" style=\"\">\n              <p>Stand still in </p><div class=\"invulvakje inv_loc\"><i>location</i></div>\n            </div></div><div class=\"box_cp box_action\" id=\"patternbox_2\"></div><div class=\"box_cp box_action\" id=\"patternbox_3\"></div>","actionB":"<div class=\"agent_name\" id=\"ag_1\">Robot</div><div class=\"box_cp box_action\" id=\"patternbox_1\"><div class=\"item object_cp\" clonable=\"false\" style=\"\">\n              <p>Large rock</p>\n            </div><div class=\"item task\" clonable=\"false\" style=\"\">\n              <p>Drop </p><div class=\"invulvakje\"><i>object</i></div><p> in </p><div class=\"invulvakje inv_loc\"><i>location</i></div>\n            </div><div class=\"item location\" clonable=\"false\" style=\"\">\n              <button class=\"leftrightbutton\" id=\"leftrightbutton1\"><i>Left</i></button><p> side of rock pile</p>\n            </div></div><div class=\"box_cp box_action\" id=\"patternbox_2\"></div><div class=\"box_cp box_action\" id=\"patternbox_3\"></div>","postsitu":"<div class=\"box_cp box_situ\" id=\"postsitubox_1\"></div><div class=\"box_cp box_situ\" id=\"postsitubox_2\"></div>"}ˆ,
+…,
+Œg2+AESgJYnsic2l0dWF0aW9uIjoiXG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImJveF9jcCBib3hfc2l0dVwiIGlkPVwic2l0dWF0aW9uYm94XzFcIj48ZGl2IGNsYXNzPVwiaXRlbSBhY3RvclwiIGNsb25hYmxlPVwiZmFsc2VcIj5cbiAgICAgICAgICAgICAgPHA+SHVtYW48L3A+XG4gICAgICAgICAgICA8L2Rpdj48L2Rpdj5cbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiYm94X2NwIGJveF9zaXR1XCIgaWQ9XCJzaXR1YXRpb25ib3hfMlwiPjwvZGl2PlxuICAgICAgICAgICAgPGRpdiBjbGFzcz1cImJveF9jcCBib3hfc2l0dVwiIGlkPVwic2l0dWF0aW9uYm94XzNcIj48L2Rpdj4iLCJhY3Rpb25BIjoiXG4gICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJhZ2VudF9uYW1lXCIgaWQ9XCJhZ18xXCI+SHVtYW48L2Rpdj5cbiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImJveF9jcCBib3hfYWN0aW9uXCIgaWQ9XCJwYXR0ZXJuYm94XzFcIj48ZGl2IGNsYXNzPVwiaXRlbSB0YXNrXCIgY2xvbmFibGU9XCJmYWxzZVwiIHN0eWxlPVwiXCI+XG4gICAgICAgICAgICAgIDxwPlN0YW5kIHN0aWxsIGluIDwvcD48ZGl2IGNsYXNzPVwiaW52dWx2YWtqZSBpbnZfbG9jXCI+PGk+bG9jYXRpb248L2k+PC9kaXY+XG4gICAgICAgICAgICA8L2Rpdj48ZGl2IGNsYXNzPVwiaXRlbSBsb2NhdGlvblwiIGNsb25hYmxlPVwiZmFsc2VcIj5cbiAgICAgICAgICAgICAgPGJ1dHRvbiBjbGFzcz1cImxlZnRyaWdodGJ1dHRvblwiIGlkPVwibGVmdHJpZ2h0YnV0dG9uMlwiPjxpPkxlZnQ8L2k+PC9idXR0b24+PHA+IHNpZGUgb2YgZmllbGQ8L3A+XG4gICAgICAgICAgICA8L2Rpdj48L2Rpdj5cbiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImJveF9jcCBib3hfYWN0aW9uXCIgaWQ9XCJwYXR0ZXJuYm94XzJcIj48ZGl2IGNsYXNzPVwiaXRlbSB0YXNrXCIgY2xvbmFibGU9XCJmYWxzZVwiIHN0eWxlPVwiXCI+XG4gICAgICAgICAgICAgIDxwPk1vdmUgdG8gPC9wPjxidXR0b24gY2xhc3M9XCJ2YXJpYWJsZWJ1dHRvblwiIGlkPVwidmFyaWFibGVidXR0b24yXCI+PGk+T2JqZWN0PC9pPjwvYnV0dG9uPlxuICAgICAgICAgICAgPC9kaXY+PGRpdiBjbGFzcz1cIml0ZW0gb2JqZWN0X2NwXCIgY2xvbmFibGU9XCJmYWxzZVwiIHN0eWxlPVwiXCI+XG4gICAgICAgICAgICAgIDxwPlNtYWxsIHJvY2s8L3A+XG4gICAgICAgICAgICA8L2Rpdj48L2Rpdj5cbiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImJveF9jcCBib3hfYWN0aW9uXCIgaWQ9XCJwYXR0ZXJuYm94XzNcIj48L2Rpdj5cbiAgICAgICAgICAgICAgICAiLCJhY3Rpb25CIjoiXG4gICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJhZ2VudF9uYW1lXCIgaWQ9XCJhZ18yXCI+Um9ib3Q8L2Rpdj5cbiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImJveF9jcCBib3hfYWN0aW9uXCIgaWQ9XCJwYXR0ZXJuYm94Ml8xXCI+PGRpdiBjbGFzcz1cIml0ZW0gdGFza1wiIGNsb25hYmxlPVwiZmFsc2VcIiBzdHlsZT1cIlwiPlxuICAgICAgICAgICAgICA8cD5CcmVhayA8L3A+PGRpdiBjbGFzcz1cImludnVsdmFramVcIj48aT5vYmplY3Q8L2k+PC9kaXY+PHA+IGluIDwvcD48ZGl2IGNsYXNzPVwiaW52dWx2YWtqZSBpbnZfbG9jXCI+PGk+bG9jYXRpb248L2k+PC9kaXY+XG4gICAgICAgICAgICA8L2Rpdj48L2Rpdj5cbiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImJveF9jcCBib3hfYWN0aW9uXCIgaWQ9XCJwYXR0ZXJuYm94Ml8yXCI+PGRpdiBjbGFzcz1cIml0ZW0gdGFza1wiIGNsb25hYmxlPVwiZmFsc2VcIiBzdHlsZT1cIlwiPlxuICAgICAgICAgICAgICA8cD5QaWNrIHVwIDwvcD48ZGl2IGNsYXNzPVwiaW52dWx2YWtqZVwiPjxpPm9iamVjdDwvaT48L2Rpdj48cD4gaW4gPC9wPjxkaXYgY2xhc3M9XCJpbnZ1bHZha2plIGludl9sb2NcIj48aT5sb2NhdGlvbjwvaT48L2Rpdj5cbiAgICAgICAgICAgIDwvZGl2PjxkaXYgY2xhc3M9XCJpdGVtIG9iamVjdF9jcFwiIGNsb25hYmxlPVwiZmFsc2VcIiBzdHlsZT1cIlwiPlxuICAgICAgICAgICAgICA8cD5Ccm93biByb2NrPC9wPlxuICAgICAgICAgICAgPC9kaXY+PC9kaXY+XG4gICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJib3hfY3AgYm94X2FjdGlvblwiIGlkPVwicGF0dGVybmJveDJfM1wiPjwvZGl2PlxuICAgICAgICAgICAgICAgICIsInBvc3RzaXR1IjoiXG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImJveF9jcCBib3hfc2l0dVwiIGlkPVwicG9zdHNpdHVib3hfMVwiPjwvZGl2PlxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJib3hfY3AgYm94X3NpdHVcIiBpZD1cInBvc3RzaXR1Ym94XzJcIj48L2Rpdj5cbiAgICAgICAgICAgICJ9html_content"å
+â{"situation":"\n                <div class=\"box_cp box_situ\" id=\"situationbox_1\"><div class=\"item actor\" clonable=\"false\">\n              <p>Human</p>\n            </div></div>\n                <div class=\"box_cp box_situ\" id=\"situationbox_2\"></div>\n            <div class=\"box_cp box_situ\" id=\"situationbox_3\"></div>","actionA":"\n                    <div class=\"agent_name\" id=\"ag_1\">Human</div>\n                    <div class=\"box_cp box_action\" id=\"patternbox_1\"><div class=\"item task\" clonable=\"false\" style=\"\">\n              <p>Stand still in </p><div class=\"invulvakje inv_loc\"><i>location</i></div>\n            </div><div class=\"item location\" clonable=\"false\">\n              <button class=\"leftrightbutton\" id=\"leftrightbutton2\"><i>Left</i></button><p> side of field</p>\n            </div></div>\n                    <div class=\"box_cp box_action\" id=\"patternbox_2\"><div class=\"item task\" clonable=\"false\" style=\"\">\n              <p>Move to </p><button class=\"variablebutton\" id=\"variablebutton2\"><i>Object</i></button>\n            </div><div class=\"item object_cp\" clonable=\"false\" style=\"\">\n              <p>Small rock</p>\n            </div></div>\n                    <div class=\"box_cp box_action\" id=\"patternbox_3\"></div>\n                ","actionB":"\n                    <div class=\"agent_name\" id=\"ag_2\">Robot</div>\n                    <div class=\"box_cp box_action\" id=\"patternbox2_1\"><div class=\"item task\" clonable=\"false\" style=\"\">\n              <p>Break </p><div class=\"invulvakje\"><i>object</i></div><p> in </p><div class=\"invulvakje inv_loc\"><i>location</i></div>\n            </div></div>\n                    <div class=\"box_cp box_action\" id=\"patternbox2_2\"><div class=\"item task\" clonable=\"false\" style=\"\">\n              <p>Pick up </p><div class=\"invulvakje\"><i>object</i></div><p> in </p><div class=\"invulvakje inv_loc\"><i>location</i></div>\n            </div><div class=\"item object_cp\" clonable=\"false\" style=\"\">\n              <p>Brown rock</p>\n            </div></div>\n                    <div class=\"box_cp box_action\" id=\"patternbox2_3\"></div>\n                ","postsitu":"\n                <div class=\"box_cp box_situ\" id=\"postsitubox_1\"></div>\n                <div class=\"box_cp box_situ\" id=\"postsitubox_2\"></div>\n            "}b`
+hHCABIAAAAAAAAAGuses"#
+uses:resource
+gm6AB4AAAAAAAAAB"!
+uses:action
+gm6ACIAAAAAAAAAU¢I
+ŸI
+ä)g2+AESgPpHsic2l0dWF0aW9uIjoiXG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImJveF9jcCBib3hfc2l0dVwiIGlkPVwic2l0dWF0aW9uYm94XzFcIj48L2Rpdj5cbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiYm94X2NwIGJveF9zaXR1XCIgaWQ9XCJzaXR1YXRpb25ib3hfMlwiPjwvZGl2PlxuICAgICAgICAgICAgIiwiYWN0aW9uQSI6IlxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiYWdlbnRfbmFtZVwiIGlkPVwiYWdfMVwiPkh1bWFuPC9kaXY+XG4gICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJib3hfY3AgYm94X2FjdGlvblwiIGlkPVwicGF0dGVybmJveF8xXCI+PGRpdiBjbGFzcz1cIml0ZW0gdGFza1wiIGNsb25hYmxlPVwiZmFsc2VcIiBzdHlsZT1cIlwiPlxuICAgICAgICAgICAgICA8cD5TdGFuZCBzdGlsbCBpbiA8L3A+PGRpdiBjbGFzcz1cImludnVsdmFramUgaW52X2xvY1wiPjxpPmxvY2F0aW9uPC9pPjwvZGl2PlxuICAgICAgICAgICAgPC9kaXY+PGRpdiBjbGFzcz1cIml0ZW0gbG9jYXRpb25cIiBjbG9uYWJsZT1cImZhbHNlXCI+XG4gICAgICAgICAgICAgIDxwPlRvcCBvZiByb2NrIHBpbGU8L3A+XG4gICAgICAgICAgICA8L2Rpdj48L2Rpdj5cbiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImJveF9jcCBib3hfYWN0aW9uXCIgaWQ9XCJwYXR0ZXJuYm94XzJcIj48ZGl2IGNsYXNzPVwiaXRlbSB0YXNrXCIgY2xvbmFibGU9XCJmYWxzZVwiIHN0eWxlPVwiXCI+XG4gICAgICAgICAgICAgIDxwPlBpY2sgdXAgPC9wPjxkaXYgY2xhc3M9XCJpbnZ1bHZha2plXCI+PGk+b2JqZWN0PC9pPjwvZGl2PjxwPiBpbiA8L3A+PGRpdiBjbGFzcz1cImludnVsdmFramUgaW52X2xvY1wiPjxpPmxvY2F0aW9uPC9pPjwvZGl2PlxuICAgICAgICAgICAgPC9kaXY+PGRpdiBjbGFzcz1cIml0ZW0gb2JqZWN0X2NwXCIgY2xvbmFibGU9XCJmYWxzZVwiIHN0eWxlPVwiXCI+XG4gICAgICAgICAgICAgIDxwPlNtYWxsIHJvY2s8L3A+XG4gICAgICAgICAgICA8L2Rpdj48ZGl2IGNsYXNzPVwiaXRlbSBsb2NhdGlvblwiIGNsb25hYmxlPVwiZmFsc2VcIj5cbiAgICAgICAgICAgICAgPHA+VG9wIG9mIHJvY2sgcGlsZTwvcD5cbiAgICAgICAgICAgIDwvZGl2PjxkaXYgY2xhc3M9XCJpdGVtIGxvY2F0aW9uXCIgY2xvbmFibGU9XCJmYWxzZVwiPlxuICAgICAgICAgICAgICA8cD5BYm92ZSByb2NrIHBpbGU8L3A+XG4gICAgICAgICAgICA8L2Rpdj48ZGl2IGNsYXNzPVwiaXRlbSBsb2NhdGlvblwiIGNsb25hYmxlPVwiZmFsc2VcIj5cbiAgICAgICAgICAgICAgPHA+Qm90dG9tIG9mIHJvY2sgcGlsZTwvcD5cbiAgICAgICAgICAgIDwvZGl2PjwvZGl2PlxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiYm94X2NwIGJveF9hY3Rpb25cIiBpZD1cInBhdHRlcm5ib3hfM1wiPjxkaXYgY2xhc3M9XCJpdGVtIHRhc2tcIiBjbG9uYWJsZT1cImZhbHNlXCIgc3R5bGU9XCJcIj5cbiAgICAgICAgICAgICAgPHA+RHJvcCA8L3A+PGRpdiBjbGFzcz1cImludnVsdmFramVcIj48aT5vYmplY3Q8L2k+PC9kaXY+PHA+IGluIDwvcD48ZGl2IGNsYXNzPVwiaW52dWx2YWtqZSBpbnZfbG9jXCI+PGk+bG9jYXRpb248L2k+PC9kaXY+XG4gICAgICAgICAgICA8L2Rpdj48ZGl2IGNsYXNzPVwiaXRlbSBvYmplY3RfY3BcIiBjbG9uYWJsZT1cImZhbHNlXCIgc3R5bGU9XCJcIj5cbiAgICAgICAgICAgICAgPHA+U21hbGwgcm9jazwvcD5cbiAgICAgICAgICAgIDwvZGl2PjxkaXYgY2xhc3M9XCJpdGVtIGxvY2F0aW9uXCIgY2xvbmFibGU9XCJmYWxzZVwiPlxuICAgICAgICAgICAgICA8YnV0dG9uIGNsYXNzPVwibGVmdHJpZ2h0YnV0dG9uXCIgaWQ9XCJsZWZ0cmlnaHRidXR0b24yXCI+PGk+TGVmdDwvaT48L2J1dHRvbj48cD4gc2lkZSBvZiBmaWVsZDwvcD5cbiAgICAgICAgICAgIDwvZGl2PjwvZGl2PlxuICAgICAgICAgICAgICAgICIsImFjdGlvbkIiOiJcbiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImFnZW50X25hbWVcIiBpZD1cImFnXzJcIj5Sb2JvdDwvZGl2PlxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiYm94X2NwIGJveF9hY3Rpb25cIiBpZD1cInBhdHRlcm5ib3gyXzFcIj48ZGl2IGNsYXNzPVwiaXRlbSB0YXNrXCIgY2xvbmFibGU9XCJmYWxzZVwiIHN0eWxlPVwiXCI+XG4gICAgICAgICAgICAgIDxwPkJyZWFrIDwvcD48ZGl2IGNsYXNzPVwiaW52dWx2YWtqZVwiPjxpPm9iamVjdDwvaT48L2Rpdj48cD4gaW4gPC9wPjxkaXYgY2xhc3M9XCJpbnZ1bHZha2plIGludl9sb2NcIj48aT5sb2NhdGlvbjwvaT48L2Rpdj5cbiAgICAgICAgICAgIDwvZGl2PjxkaXYgY2xhc3M9XCJpdGVtIG9iamVjdF9jcFwiIGNsb25hYmxlPVwiZmFsc2VcIiBzdHlsZT1cIlwiPlxuICAgICAgICAgICAgICA8cD5Ccm93biByb2NrPC9wPlxuICAgICAgICAgICAgPC9kaXY+PC9kaXY+XG4gICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJib3hfY3AgYm94X2FjdGlvblwiIGlkPVwicGF0dGVybmJveDJfMlwiPjxkaXYgY2xhc3M9XCJpdGVtIHRhc2tcIiBjbG9uYWJsZT1cImZhbHNlXCIgc3R5bGU9XCJcIj5cbiAgICAgICAgICAgICAgPHA+UGljayB1cCA8L3A+PGRpdiBjbGFzcz1cImludnVsdmFramVcIj48aT5vYmplY3Q8L2k+PC9kaXY+PHA+IGluIDwvcD48ZGl2IGNsYXNzPVwiaW52dWx2YWtqZSBpbnZfbG9jXCI+PGk+bG9jYXRpb248L2k+PC9kaXY+XG4gICAgICAgICAgICA8L2Rpdj48ZGl2IGNsYXNzPVwiaXRlbSBvYmplY3RfY3BcIiBjbG9uYWJsZT1cImZhbHNlXCIgc3R5bGU9XCJcIj5cbiAgICAgICAgICAgICAgPHA+TGFyZ2Ugcm9jazwvcD5cbiAgICAgICAgICAgIDwvZGl2PjxkaXYgY2xhc3M9XCJpdGVtIGxvY2F0aW9uXCIgY2xvbmFibGU9XCJmYWxzZVwiIHN0eWxlPVwiXCI+XG4gICAgICAgICAgICAgIDxwPlRvcCBvZiByb2NrIHBpbGU8L3A+XG4gICAgICAgICAgICA8L2Rpdj48ZGl2IGNsYXNzPVwiaXRlbSBsb2NhdGlvblwiIGNsb25hYmxlPVwiZmFsc2VcIiBzdHlsZT1cIlwiPlxuICAgICAgICAgICAgICA8cD5BYm92ZSByb2NrIHBpbGU8L3A+XG4gICAgICAgICAgICA8L2Rpdj48ZGl2IGNsYXNzPVwiaXRlbSBsb2NhdGlvblwiIGNsb25hYmxlPVwiZmFsc2VcIj5cbiAgICAgICAgICAgICAgPHA+Qm90dG9tIG9mIHJvY2sgcGlsZTwvcD5cbiAgICAgICAgICAgIDwvZGl2PjwvZGl2PlxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiYm94X2NwIGJveF9hY3Rpb25cIiBpZD1cInBhdHRlcm5ib3gyXzNcIj48ZGl2IGNsYXNzPVwiaXRlbSB0YXNrXCIgY2xvbmFibGU9XCJmYWxzZVwiIHN0eWxlPVwiXCI+XG4gICAgICAgICAgICAgIDxwPkRyb3AgPC9wPjxkaXYgY2xhc3M9XCJpbnZ1bHZha2plXCI+PGk+b2JqZWN0PC9pPjwvZGl2PjxwPiBpbiA8L3A+PGRpdiBjbGFzcz1cImludnVsdmFramUgaW52X2xvY1wiPjxpPmxvY2F0aW9uPC9pPjwvZGl2PlxuICAgICAgICAgICAgPC9kaXY+PGRpdiBjbGFzcz1cIml0ZW0gb2JqZWN0X2NwXCIgY2xvbmFibGU9XCJmYWxzZVwiIHN0eWxlPVwiXCI+XG4gICAgICAgICAgICAgIDxwPkxhcmdlIHJvY2s8L3A+XG4gICAgICAgICAgICA8L2Rpdj48ZGl2IGNsYXNzPVwiaXRlbSBsb2NhdGlvblwiIGNsb25hYmxlPVwiZmFsc2VcIj5cbiAgICAgICAgICAgICAgPHA+T24gdG9wIG9mIDwvcD48YnV0dG9uIGNsYXNzPVwidmFyaWFibGVidXR0b25cIiBpZD1cInZhcmlhYmxlYnV0dG9uMVwiPjxpPk9iamVjdDwvaT48L2J1dHRvbj5cbiAgICAgICAgICAgIDwvZGl2PjwvZGl2PlxuICAgICAgICAgICAgICAgICIsInBvc3RzaXR1IjoiXG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImJveF9jcCBib3hfc2l0dVwiIGlkPVwicG9zdHNpdHVib3hfMVwiPjwvZGl2PlxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJib3hfY3AgYm94X3NpdHVcIiBpZD1cInBvc3RzaXR1Ym94XzJcIj48L2Rpdj5cbiAgICAgICAgICAgICJ9html_content"§
+¤{"situation":"\n                <div class=\"box_cp box_situ\" id=\"situationbox_1\"></div>\n                <div class=\"box_cp box_situ\" id=\"situationbox_2\"></div>\n            ","actionA":"\n                    <div class=\"agent_name\" id=\"ag_1\">Human</div>\n                    <div class=\"box_cp box_action\" id=\"patternbox_1\"><div class=\"item task\" clonable=\"false\" style=\"\">\n              <p>Stand still in </p><div class=\"invulvakje inv_loc\"><i>location</i></div>\n            </div><div class=\"item location\" clonable=\"false\">\n              <p>Top of rock pile</p>\n            </div></div>\n                    <div class=\"box_cp box_action\" id=\"patternbox_2\"><div class=\"item task\" clonable=\"false\" style=\"\">\n              <p>Pick up </p><div class=\"invulvakje\"><i>object</i></div><p> in </p><div class=\"invulvakje inv_loc\"><i>location</i></div>\n            </div><div class=\"item object_cp\" clonable=\"false\" style=\"\">\n              <p>Small rock</p>\n            </div><div class=\"item location\" clonable=\"false\">\n              <p>Top of rock pile</p>\n            </div><div class=\"item location\" clonable=\"false\">\n              <p>Above rock pile</p>\n            </div><div class=\"item location\" clonable=\"false\">\n              <p>Bottom of rock pile</p>\n            </div></div>\n                    <div class=\"box_cp box_action\" id=\"patternbox_3\"><div class=\"item task\" clonable=\"false\" style=\"\">\n              <p>Drop </p><div class=\"invulvakje\"><i>object</i></div><p> in </p><div class=\"invulvakje inv_loc\"><i>location</i></div>\n            </div><div class=\"item object_cp\" clonable=\"false\" style=\"\">\n              <p>Small rock</p>\n            </div><div class=\"item location\" clonable=\"false\">\n              <button class=\"leftrightbutton\" id=\"leftrightbutton2\"><i>Left</i></button><p> side of field</p>\n            </div></div>\n                ","actionB":"\n                    <div class=\"agent_name\" id=\"ag_2\">Robot</div>\n                    <div class=\"box_cp box_action\" id=\"patternbox2_1\"><div class=\"item task\" clonable=\"false\" style=\"\">\n              <p>Break </p><div class=\"invulvakje\"><i>object</i></div><p> in </p><div class=\"invulvakje inv_loc\"><i>location</i></div>\n            </div><div class=\"item object_cp\" clonable=\"false\" style=\"\">\n              <p>Brown rock</p>\n            </div></div>\n                    <div class=\"box_cp box_action\" id=\"patternbox2_2\"><div class=\"item task\" clonable=\"false\" style=\"\">\n              <p>Pick up </p><div class=\"invulvakje\"><i>object</i></div><p> in </p><div class=\"invulvakje inv_loc\"><i>location</i></div>\n            </div><div class=\"item object_cp\" clonable=\"false\" style=\"\">\n              <p>Large rock</p>\n            </div><div class=\"item location\" clonable=\"false\" style=\"\">\n              <p>Top of rock pile</p>\n            </div><div class=\"item location\" clonable=\"false\" style=\"\">\n              <p>Above rock pile</p>\n            </div><div class=\"item location\" clonable=\"false\">\n              <p>Bottom of rock pile</p>\n            </div></div>\n                    <div class=\"box_cp box_action\" id=\"patternbox2_3\"><div class=\"item task\" clonable=\"false\" style=\"\">\n              <p>Drop </p><div class=\"invulvakje\"><i>object</i></div><p> in </p><div class=\"invulvakje inv_loc\"><i>location</i></div>\n            </div><div class=\"item object_cp\" clonable=\"false\" style=\"\">\n              <p>Large rock</p>\n            </div><div class=\"item location\" clonable=\"false\">\n              <p>On top of </p><button class=\"variablebutton\" id=\"variablebutton1\"><i>Object</i></button>\n            </div></div>\n                ","postsitu":"\n                <div class=\"box_cp box_situ\" id=\"postsitubox_1\"></div>\n                <div class=\"box_cp box_situ\" id=\"postsitubox_2\"></div>\n            "}b`
+hHCABIAAAAAAAAAHuses"#
+uses:resource
+gm6AB4AAAAAAAAAA"!
+uses:action
+gm6ACIAAAAAAAAAWÅI
+ÂI
+ø)g2+AESgPs3sic2l0dWF0aW9uIjoiXG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImJveF9jcCBib3hfc2l0dVwiIGlkPVwic2l0dWF0aW9uYm94XzFcIj48L2Rpdj5cbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiYm94X2NwIGJveF9zaXR1XCIgaWQ9XCJzaXR1YXRpb25ib3hfMlwiPjwvZGl2PlxuICAgICAgICAgICAgIiwiYWN0aW9uQSI6IlxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiYWdlbnRfbmFtZVwiIGlkPVwiYWdfMVwiPkh1bWFuPC9kaXY+XG4gICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJib3hfY3AgYm94X2FjdGlvblwiIGlkPVwicGF0dGVybmJveF8xXCI+PGRpdiBjbGFzcz1cIml0ZW0gdGFza1wiIGNsb25hYmxlPVwiZmFsc2VcIiBzdHlsZT1cIlwiPlxuICAgICAgICAgICAgICA8cD5TdGFuZCBzdGlsbCBpbiA8L3A+PGRpdiBjbGFzcz1cImludnVsdmFramUgaW52X2xvY1wiPjxpPmxvY2F0aW9uPC9pPjwvZGl2PlxuICAgICAgICAgICAgPC9kaXY+PGRpdiBjbGFzcz1cIml0ZW0gbG9jYXRpb25cIiBjbG9uYWJsZT1cImZhbHNlXCI+XG4gICAgICAgICAgICAgIDxwPlRvcCBvZiByb2NrIHBpbGU8L3A+XG4gICAgICAgICAgICA8L2Rpdj48L2Rpdj5cbiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImJveF9jcCBib3hfYWN0aW9uXCIgaWQ9XCJwYXR0ZXJuYm94XzJcIj48ZGl2IGNsYXNzPVwiaXRlbSB0YXNrXCIgY2xvbmFibGU9XCJmYWxzZVwiIHN0eWxlPVwiXCI+XG4gICAgICAgICAgICAgIDxwPlBpY2sgdXAgPC9wPjxkaXYgY2xhc3M9XCJpbnZ1bHZha2plXCI+PGk+b2JqZWN0PC9pPjwvZGl2PjxwPiBpbiA8L3A+PGRpdiBjbGFzcz1cImludnVsdmFramUgaW52X2xvY1wiPjxpPmxvY2F0aW9uPC9pPjwvZGl2PlxuICAgICAgICAgICAgPC9kaXY+PGRpdiBjbGFzcz1cIml0ZW0gb2JqZWN0X2NwXCIgY2xvbmFibGU9XCJmYWxzZVwiIHN0eWxlPVwiXCI+XG4gICAgICAgICAgICAgIDxwPlNtYWxsIHJvY2s8L3A+XG4gICAgICAgICAgICA8L2Rpdj48ZGl2IGNsYXNzPVwiaXRlbSBsb2NhdGlvblwiIGNsb25hYmxlPVwiZmFsc2VcIj5cbiAgICAgICAgICAgICAgPHA+VG9wIG9mIHJvY2sgcGlsZTwvcD5cbiAgICAgICAgICAgIDwvZGl2PjxkaXYgY2xhc3M9XCJpdGVtIGxvY2F0aW9uXCIgY2xvbmFibGU9XCJmYWxzZVwiPlxuICAgICAgICAgICAgICA8cD5BYm92ZSByb2NrIHBpbGU8L3A+XG4gICAgICAgICAgICA8L2Rpdj48ZGl2IGNsYXNzPVwiaXRlbSBsb2NhdGlvblwiIGNsb25hYmxlPVwiZmFsc2VcIj5cbiAgICAgICAgICAgICAgPHA+Qm90dG9tIG9mIHJvY2sgcGlsZTwvcD5cbiAgICAgICAgICAgIDwvZGl2PjwvZGl2PlxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiYm94X2NwIGJveF9hY3Rpb25cIiBpZD1cInBhdHRlcm5ib3hfM1wiPjxkaXYgY2xhc3M9XCJpdGVtIHRhc2tcIiBjbG9uYWJsZT1cImZhbHNlXCIgc3R5bGU9XCJcIj5cbiAgICAgICAgICAgICAgPHA+RHJvcCA8L3A+PGRpdiBjbGFzcz1cImludnVsdmFramVcIj48aT5vYmplY3Q8L2k+PC9kaXY+PHA+IGluIDwvcD48ZGl2IGNsYXNzPVwiaW52dWx2YWtqZSBpbnZfbG9jXCI+PGk+bG9jYXRpb248L2k+PC9kaXY+XG4gICAgICAgICAgICA8L2Rpdj48ZGl2IGNsYXNzPVwiaXRlbSBvYmplY3RfY3BcIiBjbG9uYWJsZT1cImZhbHNlXCIgc3R5bGU9XCJcIj5cbiAgICAgICAgICAgICAgPHA+U21hbGwgcm9jazwvcD5cbiAgICAgICAgICAgIDwvZGl2PjxkaXYgY2xhc3M9XCJpdGVtIGxvY2F0aW9uXCIgY2xvbmFibGU9XCJmYWxzZVwiPlxuICAgICAgICAgICAgICA8YnV0dG9uIGNsYXNzPVwibGVmdHJpZ2h0YnV0dG9uXCIgaWQ9XCJsZWZ0cmlnaHRidXR0b24yXCI+PGk+TGVmdDwvaT48L2J1dHRvbj48cD4gc2lkZSBvZiBmaWVsZDwvcD5cbiAgICAgICAgICAgIDwvZGl2PjwvZGl2PlxuICAgICAgICAgICAgICAgICIsImFjdGlvbkIiOiJcbiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImFnZW50X25hbWVcIiBpZD1cImFnXzJcIj5Sb2JvdDwvZGl2PlxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiYm94X2NwIGJveF9hY3Rpb25cIiBpZD1cInBhdHRlcm5ib3gyXzFcIj48ZGl2IGNsYXNzPVwiaXRlbSB0YXNrXCIgY2xvbmFibGU9XCJmYWxzZVwiIHN0eWxlPVwiXCI+XG4gICAgICAgICAgICAgIDxwPkJyZWFrIDwvcD48ZGl2IGNsYXNzPVwiaW52dWx2YWtqZVwiPjxpPm9iamVjdDwvaT48L2Rpdj48cD4gaW4gPC9wPjxkaXYgY2xhc3M9XCJpbnZ1bHZha2plIGludl9sb2NcIj48aT5sb2NhdGlvbjwvaT48L2Rpdj5cbiAgICAgICAgICAgIDwvZGl2PjxkaXYgY2xhc3M9XCJpdGVtIG9iamVjdF9jcFwiIGNsb25hYmxlPVwiZmFsc2VcIiBzdHlsZT1cIlwiPlxuICAgICAgICAgICAgICA8cD5Ccm93biByb2NrPC9wPlxuICAgICAgICAgICAgPC9kaXY+PC9kaXY+XG4gICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJib3hfY3AgYm94X2FjdGlvblwiIGlkPVwicGF0dGVybmJveDJfMlwiPjxkaXYgY2xhc3M9XCJpdGVtIHRhc2tcIiBjbG9uYWJsZT1cImZhbHNlXCIgc3R5bGU9XCJcIj5cbiAgICAgICAgICAgICAgPHA+UGljayB1cCA8L3A+PGRpdiBjbGFzcz1cImludnVsdmFramVcIj48aT5vYmplY3Q8L2k+PC9kaXY+PHA+IGluIDwvcD48ZGl2IGNsYXNzPVwiaW52dWx2YWtqZSBpbnZfbG9jXCI+PGk+bG9jYXRpb248L2k+PC9kaXY+XG4gICAgICAgICAgICA8L2Rpdj48ZGl2IGNsYXNzPVwiaXRlbSBvYmplY3RfY3BcIiBjbG9uYWJsZT1cImZhbHNlXCIgc3R5bGU9XCJcIj5cbiAgICAgICAgICAgICAgPHA+TGFyZ2Ugcm9jazwvcD5cbiAgICAgICAgICAgIDwvZGl2PjxkaXYgY2xhc3M9XCJpdGVtIGxvY2F0aW9uXCIgY2xvbmFibGU9XCJmYWxzZVwiIHN0eWxlPVwiXCI+XG4gICAgICAgICAgICAgIDxwPlRvcCBvZiByb2NrIHBpbGU8L3A+XG4gICAgICAgICAgICA8L2Rpdj48ZGl2IGNsYXNzPVwiaXRlbSBsb2NhdGlvblwiIGNsb25hYmxlPVwiZmFsc2VcIiBzdHlsZT1cIlwiPlxuICAgICAgICAgICAgICA8cD5BYm92ZSByb2NrIHBpbGU8L3A+XG4gICAgICAgICAgICA8L2Rpdj48ZGl2IGNsYXNzPVwiaXRlbSBsb2NhdGlvblwiIGNsb25hYmxlPVwiZmFsc2VcIj5cbiAgICAgICAgICAgICAgPHA+Qm90dG9tIG9mIHJvY2sgcGlsZTwvcD5cbiAgICAgICAgICAgIDwvZGl2PjwvZGl2PlxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiYm94X2NwIGJveF9hY3Rpb25cIiBpZD1cInBhdHRlcm5ib3gyXzNcIj48ZGl2IGNsYXNzPVwiaXRlbSB0YXNrXCIgY2xvbmFibGU9XCJmYWxzZVwiIHN0eWxlPVwiXCI+XG4gICAgICAgICAgICAgIDxwPkRyb3AgPC9wPjxkaXYgY2xhc3M9XCJpbnZ1bHZha2plXCI+PGk+b2JqZWN0PC9pPjwvZGl2PjxwPiBpbiA8L3A+PGRpdiBjbGFzcz1cImludnVsdmFramUgaW52X2xvY1wiPjxpPmxvY2F0aW9uPC9pPjwvZGl2PlxuICAgICAgICAgICAgPC9kaXY+PGRpdiBjbGFzcz1cIml0ZW0gb2JqZWN0X2NwXCIgY2xvbmFibGU9XCJmYWxzZVwiIHN0eWxlPVwiXCI+XG4gICAgICAgICAgICAgIDxwPkxhcmdlIHJvY2s8L3A+XG4gICAgICAgICAgICA8L2Rpdj48ZGl2IGNsYXNzPVwiaXRlbSBsb2NhdGlvblwiIGNsb25hYmxlPVwiZmFsc2VcIiBzdHlsZT1cIlwiPlxuICAgICAgICAgICAgICA8YnV0dG9uIGNsYXNzPVwibGVmdHJpZ2h0YnV0dG9uXCIgaWQ9XCJsZWZ0cmlnaHRidXR0b24yXCI+PGk+TGVmdDwvaT48L2J1dHRvbj48cD4gc2lkZSBvZiBmaWVsZDwvcD5cbiAgICAgICAgICAgIDwvZGl2PjwvZGl2PlxuICAgICAgICAgICAgICAgICIsInBvc3RzaXR1IjoiXG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImJveF9jcCBib3hfc2l0dVwiIGlkPVwicG9zdHNpdHVib3hfMVwiPjwvZGl2PlxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJib3hfY3AgYm94X3NpdHVcIiBpZD1cInBvc3RzaXR1Ym94XzJcIj48L2Rpdj5cbiAgICAgICAgICAgICJ9html_content"¶
+³{"situation":"\n                <div class=\"box_cp box_situ\" id=\"situationbox_1\"></div>\n                <div class=\"box_cp box_situ\" id=\"situationbox_2\"></div>\n            ","actionA":"\n                    <div class=\"agent_name\" id=\"ag_1\">Human</div>\n                    <div class=\"box_cp box_action\" id=\"patternbox_1\"><div class=\"item task\" clonable=\"false\" style=\"\">\n              <p>Stand still in </p><div class=\"invulvakje inv_loc\"><i>location</i></div>\n            </div><div class=\"item location\" clonable=\"false\">\n              <p>Top of rock pile</p>\n            </div></div>\n                    <div class=\"box_cp box_action\" id=\"patternbox_2\"><div class=\"item task\" clonable=\"false\" style=\"\">\n              <p>Pick up </p><div class=\"invulvakje\"><i>object</i></div><p> in </p><div class=\"invulvakje inv_loc\"><i>location</i></div>\n            </div><div class=\"item object_cp\" clonable=\"false\" style=\"\">\n              <p>Small rock</p>\n            </div><div class=\"item location\" clonable=\"false\">\n              <p>Top of rock pile</p>\n            </div><div class=\"item location\" clonable=\"false\">\n              <p>Above rock pile</p>\n            </div><div class=\"item location\" clonable=\"false\">\n              <p>Bottom of rock pile</p>\n            </div></div>\n                    <div class=\"box_cp box_action\" id=\"patternbox_3\"><div class=\"item task\" clonable=\"false\" style=\"\">\n              <p>Drop </p><div class=\"invulvakje\"><i>object</i></div><p> in </p><div class=\"invulvakje inv_loc\"><i>location</i></div>\n            </div><div class=\"item object_cp\" clonable=\"false\" style=\"\">\n              <p>Small rock</p>\n            </div><div class=\"item location\" clonable=\"false\">\n              <button class=\"leftrightbutton\" id=\"leftrightbutton2\"><i>Left</i></button><p> side of field</p>\n            </div></div>\n                ","actionB":"\n                    <div class=\"agent_name\" id=\"ag_2\">Robot</div>\n                    <div class=\"box_cp box_action\" id=\"patternbox2_1\"><div class=\"item task\" clonable=\"false\" style=\"\">\n              <p>Break </p><div class=\"invulvakje\"><i>object</i></div><p> in </p><div class=\"invulvakje inv_loc\"><i>location</i></div>\n            </div><div class=\"item object_cp\" clonable=\"false\" style=\"\">\n              <p>Brown rock</p>\n            </div></div>\n                    <div class=\"box_cp box_action\" id=\"patternbox2_2\"><div class=\"item task\" clonable=\"false\" style=\"\">\n              <p>Pick up </p><div class=\"invulvakje\"><i>object</i></div><p> in </p><div class=\"invulvakje inv_loc\"><i>location</i></div>\n            </div><div class=\"item object_cp\" clonable=\"false\" style=\"\">\n              <p>Large rock</p>\n            </div><div class=\"item location\" clonable=\"false\" style=\"\">\n              <p>Top of rock pile</p>\n            </div><div class=\"item location\" clonable=\"false\" style=\"\">\n              <p>Above rock pile</p>\n            </div><div class=\"item location\" clonable=\"false\">\n              <p>Bottom of rock pile</p>\n            </div></div>\n                    <div class=\"box_cp box_action\" id=\"patternbox2_3\"><div class=\"item task\" clonable=\"false\" style=\"\">\n              <p>Drop </p><div class=\"invulvakje\"><i>object</i></div><p> in </p><div class=\"invulvakje inv_loc\"><i>location</i></div>\n            </div><div class=\"item object_cp\" clonable=\"false\" style=\"\">\n              <p>Large rock</p>\n            </div><div class=\"item location\" clonable=\"false\" style=\"\">\n              <button class=\"leftrightbutton\" id=\"leftrightbutton2\"><i>Left</i></button><p> side of field</p>\n            </div></div>\n                ","postsitu":"\n                <div class=\"box_cp box_situ\" id=\"postsitubox_1\"></div>\n                <div class=\"box_cp box_situ\" id=\"postsitubox_2\"></div>\n            "}b`
+hHCABIAAAAAAAAAIuses"#
+uses:resource
+gm6AB4AAAAAAAAAA"!
+uses:action
+gm6ACIAAAAAAAAASB
+@
+g2+AEigADnN0YXJ0Y29uZGl0aW9ucondition_type"
+startconditionb`
+hHCABIAAAAAAAAAJuses"#
+uses:resource
+gm6AB4AAAAAAAAAB"!
+uses:action
+gm6ACIAAAAAAAAATig
+hHCACIAAAAAAAAAGaffords"$
+affords:object
+gm6AB4AAAAAAAAAB"$
+affords:action
+gm6ACIAAAAAAAAATig
+hHCACIAAAAAAAAAHaffords"$
+affords:object
+gm6AB4AAAAAAAAAA"$
+affords:action
+gm6ACIAAAAAAAAASig
+hHCACIAAAAAAAAAIaffords"$
+affords:object
+gm6AB4AAAAAAAAAA"$
+affords:action
+gm6ACIAAAAAAAAAWig
+hHCACIAAAAAAAAAJaffords"$
+affords:object
+gm6AB4AAAAAAAAAB"$
+affords:action
+gm6ACIAAAAAAAAAU‰†
+hHCACoAAAAAAAAAS
+is_part_of
+g2+AASgACmluZGl2aWR1YWw="#
+is_part_of:cp
+gm6AC4AAAAAAAAAH"%
+is_part_of:task
+gm6ACIAAAAAAAAAS‰†
+hHCACoAAAAAAAAAT
+is_part_of
+g2+AASgACmluZGl2aWR1YWw="#
+is_part_of:cp
+gm6AC4AAAAAAAAAH"%
+is_part_of:task
+gm6ACIAAAAAAAAAT‰†
+hHCACoAAAAAAAAAU
+is_part_of
+g2+AASgACmluZGl2aWR1YWw="#
+is_part_of:cp
+gm6AC4AAAAAAAAAH"%
+is_part_of:task
+gm6ACIAAAAAAAAAU‰†
+hHCACoAAAAAAAAAV
+is_part_of
+g2+AASgACmluZGl2aWR1YWw="#
+is_part_of:cp
+gm6AC4AAAAAAAAAH"%
+is_part_of:task
+gm6ACIAAAAAAAAAV‰†
+hHCACoAAAAAAAAAW
+is_part_of
+g2+AASgACmluZGl2aWR1YWw="#
+is_part_of:cp
+gm6AC4AAAAAAAAAH"%
+is_part_of:task
+gm6ACIAAAAAAAAAW‰†
+hHCACoAAAAAAAAAX
+is_part_of
+g2+AASgACmluZGl2aWR1YWw="#
+is_part_of:cp
+gm6AC4AAAAAAAAAH"%
+is_part_of:task
+gm6ACIAAAAAAAAAX€~
+hHCADYAAAAAAAAALtakes_place_at"-
+takes_place_at:location
+gm6ACoAAAAAAAAAD"+
+takes_place_at:action
+gm6ACIAAAAAAAAAT€~
+hHCADYAAAAAAAAAMtakes_place_at"-
+takes_place_at:location
+gm6ACoAAAAAAAAAD"+
+takes_place_at:action
+gm6ACIAAAAAAAAAX€~
+hHCADYAAAAAAAAANtakes_place_at"-
+takes_place_at:location
+gm6ACoAAAAAAAAAA"+
+takes_place_at:action
+gm6ACIAAAAAAAAAS€~
+hHCADYAAAAAAAAAOtakes_place_at"-
+takes_place_at:location
+gm6ACoAAAAAAAAAD"+
+takes_place_at:action
+gm6ACIAAAAAAAAAW€~
+hHCADYAAAAAAAAAPtakes_place_at"-
+takes_place_at:location
+gm6ACoAAAAAAAAAA"+
+takes_place_at:action
+gm6ACIAAAAAAAAAU‚
+A 2(3

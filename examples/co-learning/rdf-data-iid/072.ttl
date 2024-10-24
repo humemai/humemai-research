@@ -1,0 +1,47 @@
+@prefix co_learning: <https://humem.ai/example/co_learning#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+co_learning:CP72 a co_learning:CollaborationPattern ;
+    co_learning:hasCPLabel "large rock robot "^^xsd:string ;
+    co_learning:hasCPNum 72 ;
+    co_learning:hasHumanAction co_learning:HumanAction72_0 ;
+    co_learning:hasParticipantNumber 4085 ;
+    co_learning:hasRemainingRocks 0 ;
+    co_learning:hasRemainingTime 1863 ;
+    co_learning:hasRobotAction co_learning:RobotAction72_0 ;
+    co_learning:hasRoundNumber 7 ;
+    co_learning:hasSituation co_learning:Situation72_0 ;
+    co_learning:hasTicksLasted 25 ;
+    co_learning:hasTimeStamp "2024-05-31T10:54:19"^^xsd:dateTime ;
+    co_learning:hasUnixTimeStamp 1717145659 ;
+    co_learning:hasVictimHarm 0 .
+
+co_learning:HumanAction72_0 a co_learning:HumanAction ;
+    co_learning:hasNextHumanAction co_learning:HumanAction72_1 .
+
+co_learning:HumanAction72_1 a co_learning:HumanAction ;
+    co_learning:hasNextHumanAction co_learning:HumanAction72_2 .
+
+co_learning:HumanAction72_2 a co_learning:HumanAction .
+
+co_learning:RobotAction72_0 a co_learning:RobotAction ;
+    co_learning:hasAction "Pick up <object> in <location>" ;
+    co_learning:hasLocation "Top of rock pile" ;
+    co_learning:hasNextRobotAction co_learning:RobotAction72_1 ;
+    co_learning:hasObject "Large rock" .
+
+co_learning:RobotAction72_1 a co_learning:RobotAction ;
+    co_learning:hasAction "Drop <object> in <location>" ;
+    co_learning:hasLocation "<Left> side of field" ;
+    co_learning:hasNextRobotAction co_learning:RobotAction72_2 ;
+    co_learning:hasObject "Large rock" .
+
+co_learning:RobotAction72_2 a co_learning:RobotAction .
+
+co_learning:Situation72_0 a co_learning:Situation ;
+    co_learning:hasLocation "Top of rock pile" ;
+    co_learning:hasNextSituation co_learning:Situation72_1 ;
+    co_learning:hasObject "Large rock" .
+
+co_learning:Situation72_1 a co_learning:Situation .
+

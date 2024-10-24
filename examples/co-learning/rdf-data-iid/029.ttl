@@ -1,0 +1,46 @@
+@prefix co_learning: <https://humem.ai/example/co_learning#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+co_learning:CP29 a co_learning:CollaborationPattern ;
+    co_learning:hasCPLabel "large rocks on top V4"^^xsd:string ;
+    co_learning:hasCPNum 29 ;
+    co_learning:hasHumanAction co_learning:HumanAction29_0 ;
+    co_learning:hasParticipantNumber 4073 ;
+    co_learning:hasRemainingRocks 21 ;
+    co_learning:hasRemainingTime 2957 ;
+    co_learning:hasRobotAction co_learning:RobotAction29_0 ;
+    co_learning:hasRoundNumber 8 ;
+    co_learning:hasSituation co_learning:Situation29_0 ;
+    co_learning:hasTicksLasted 718 ;
+    co_learning:hasTimeStamp "2024-08-23T11:29:22"^^xsd:dateTime ;
+    co_learning:hasUnixTimeStamp 1724405362 ;
+    co_learning:hasVictimHarm 400 .
+
+co_learning:HumanAction29_0 a co_learning:HumanAction ;
+    co_learning:hasAction "Stand still in <location>" ;
+    co_learning:hasLocation "<Left> side of field" ;
+    co_learning:hasNextHumanAction co_learning:HumanAction29_1 .
+
+co_learning:HumanAction29_1 a co_learning:HumanAction ;
+    co_learning:hasNextHumanAction co_learning:HumanAction29_2 .
+
+co_learning:HumanAction29_2 a co_learning:HumanAction .
+
+co_learning:RobotAction29_0 a co_learning:RobotAction ;
+    co_learning:hasAction "Break <object> in <location>" ;
+    co_learning:hasLocation "Top of rock pile" ;
+    co_learning:hasNextRobotAction co_learning:RobotAction29_1 ;
+    co_learning:hasObject "Large rock" .
+
+co_learning:RobotAction29_1 a co_learning:RobotAction ;
+    co_learning:hasNextRobotAction co_learning:RobotAction29_2 .
+
+co_learning:RobotAction29_2 a co_learning:RobotAction .
+
+co_learning:Situation29_0 a co_learning:Situation ;
+    co_learning:hasLocation "Top of rock pile" ;
+    co_learning:hasNextSituation co_learning:Situation29_1 ;
+    co_learning:hasObject "Large rock" .
+
+co_learning:Situation29_1 a co_learning:Situation .
+
