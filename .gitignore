@@ -147,3 +147,7 @@ DEBUG/
 
 # pdoc
 _docs/
+
+# Cassndra
+
+cassandra_data

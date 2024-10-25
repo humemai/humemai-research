@@ -1,0 +1,20 @@
+host: 0.0.0.0
+port: 8182
+scriptEvaluationTimeout: 30000
+channelizer: org.apache.tinkerpop.gremlin.server.channel.WebSocketChannelizer
+graphs: {
+  graph: conf/janusgraph.properties
+}
+
+serializers:
+  - { className: org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerV3d0,
+      config: { 
+          ioRegistries: [org.janusgraph.graphdb.tinkerpop.JanusGraphIoRegistry] 
+      }
+    }
+  - { className: org.apache.tinkerpop.gremlin.driver.ser.GryoMessageSerializerV3d0 }
+
+# Optional: Enable SSL if required
+# ssl: true
+# keyCertChainFile: conf/server.pem
+# keyFile: conf/server.key

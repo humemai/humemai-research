@@ -1,0 +1,34 @@
+# version: '3.8'
+
+services:
+  cassandra:
+    image: cassandra
+    container_name: cassandra
+    ports:
+      - "9042:9042"
+    # volumes:
+    #   - ./cassandra_data:/var/lib/cassandra/data      
+    networks:
+      - janusgraph-net
+    # Optional: customize cassandra configuration if needed
+
+  janusgraph:
+    image: janusgraph/janusgraph
+    container_name: janusgraph
+    ports:
+      - "8182:8182"
+    networks:
+      - janusgraph-net
+    links:
+      - cassandra
+    depends_on:
+      - cassandra
+    volumes:
+      - ./configs/janusgraph.properties:/opt/janusgraph/conf/janusgraph.properties
+      - ./configs/gremlin-server.yaml:/opt/janusgraph/conf/gremlin-server.yaml
+    # environment:
+    #   - JAVA_OPTIONS=-Xms512m -Xmx1024m # Customize as necessary
+
+networks:
+  janusgraph-net:
+    driver: bridge
