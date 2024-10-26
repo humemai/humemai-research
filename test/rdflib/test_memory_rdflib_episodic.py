@@ -5,7 +5,7 @@ import os
 from datetime import datetime
 from unittest.mock import MagicMock
 from rdflib import RDF, XSD, BNode, Graph, Literal, Namespace, URIRef
-from humemai.rdflib import Memory
+from humemai.rdflib import Humemai
 
 # Define custom namespace for humemai ontology
 humemai = Namespace("https://humem.ai/ontology#")
@@ -16,7 +16,7 @@ class TestAddEpisodic(unittest.TestCase):
     def setUp(self) -> None:
         """Initialize the Memory and populate it with episodic, semantic, and short-term memories."""
         # Initialize the memory system
-        self.memory: Memory = Memory()
+        self.memory: Memory = Humemai()
 
         # Define multiple triples
         self.triples: list[tuple[URIRef, URIRef, URIRef]] = [
@@ -253,7 +253,7 @@ class TestAddEpisodic(unittest.TestCase):
 
     def test_empty_memory(self) -> None:
         """Test that working memory handles empty memory cases."""
-        empty_memory_system: Memory = Memory()
+        empty_memory_system: Memory = Humemai()
         working_memory = empty_memory_system.get_working_memory(
             URIRef("https://example.org/person/Alice"), hops=1
         )
@@ -270,7 +270,7 @@ class TestAddEpisodic(unittest.TestCase):
 class TestMemoryMethods(unittest.TestCase):
     def setUp(self) -> None:
         """Set up a new Memory instance before each test."""
-        self.memory: Memory = Memory()
+        self.memory: Memory = Humemai()
 
         # Add a short-term memory to the memory system
         self.short_term_triplet_1: tuple[URIRef, URIRef, URIRef] = (

@@ -1,4 +1,4 @@
-"""Memory Class with RDFLib"""
+"""Humemai Class with RDFLib"""
 
 # Enable postponed evaluation of annotations (optional but recommended in Python 3.10)
 from __future__ import annotations
@@ -15,13 +15,13 @@ from rdflib.namespace import RDF, XSD
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
-logger = logging.getLogger("humemai.memory")
+logger = logging.getLogger("humemai.rdflib.humemai")
 
 # Define custom namespace for humemai ontology
 humemai = Namespace("https://humem.ai/ontology#")
 
 
-class Memory:
+class Humemai:
     """
     Memory class for managing both short-term and long-term memories.
     Provides methods to add, retrieve, delete, cluster, and manage memories in the RDF graph.
@@ -438,7 +438,7 @@ class Memory:
                     ] = qualifier_obj
 
         # Create a new Memory object to store the filtered results
-        filtered_memory = Memory()
+        filtered_memory = Humemai()
 
         # Populate the Memory object with the main triples and their qualifiers
         for statement, data in statement_dict.items():
@@ -945,7 +945,7 @@ class Memory:
         Returns:
             Memory: A Memory object containing all short-term memories with their qualifiers.
         """
-        short_term_memory = Memory()
+        short_term_memory = Humemai()
 
         # SPARQL query to retrieve all reified statements with a currentTime qualifier, along with other qualifiers
         query = """
@@ -1027,7 +1027,7 @@ class Memory:
             Memory: A new Memory object containing all long-term memories (episodic and
             semantic).
         """
-        long_term_memory = Memory()
+        long_term_memory = Humemai()
 
         # SPARQL query to retrieve all reified statements that have either eventTime or knownSince,
         # and do not have a currentTime qualifier
@@ -1311,7 +1311,7 @@ class Memory:
             Memory: A new Memory object containing the working memory (short-term +
             relevant long-term memories).
         """
-        working_memory = Memory()
+        working_memory = Humemai()
         processed_statements = set()
 
         logger.info(

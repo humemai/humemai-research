@@ -1,1 +1,1 @@
-from .memory import Memory
+from .humemai import Humemai

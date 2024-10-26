@@ -5,7 +5,7 @@ import os
 from datetime import datetime
 from unittest.mock import MagicMock
 from rdflib import RDF, XSD, BNode, Graph, Literal, Namespace, URIRef
-from humemai.rdflib import Memory
+from humemai.rdflib import Humemai
 
 # Define custom namespace for humemai ontology
 humemai = Namespace("https://humem.ai/ontology#")
@@ -20,7 +20,7 @@ class TestMemoryCounts(unittest.TestCase):
         """
         Set up a fresh Memory instance before each test.
         """
-        self.memory = Memory()
+        self.memory = Humemai()
         self.humemai = Namespace("https://humem.ai/ontology#")
 
         # Define sample triples

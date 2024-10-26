@@ -5,7 +5,7 @@ import os
 from datetime import datetime
 from unittest.mock import MagicMock
 from rdflib import RDF, XSD, BNode, Graph, Literal, Namespace, URIRef
-from humemai.rdflib import Memory
+from humemai.rdflib import Humemai
 
 # Define custom namespace for humemai ontology
 humemai = Namespace("https://humem.ai/ontology#")
@@ -17,7 +17,7 @@ class TestIncrementRecalled(unittest.TestCase):
         """
         Set up a fresh Memory instance with episodic and semantic memories.
         """
-        self.memory = Memory()
+        self.memory = Humemai()
         self.humemai = Namespace("https://humem.ai/ontology#")
 
         # Define some triples
@@ -95,7 +95,7 @@ class TestIncrementRecalled(unittest.TestCase):
 class TestRefiedMemory(unittest.TestCase):
     def setUp(self) -> None:
         # Initialize the Memory instance
-        self.memory = Memory()
+        self.memory = Humemai()
 
         # Mock the graph object to simulate RDF triples and statements
         self.memory.graph = MagicMock()
@@ -109,7 +109,7 @@ class TestRefiedMemory(unittest.TestCase):
         self.reified_statement = BNode()
 
         # Working memory instance for adding triples
-        self.working_memory = Memory()
+        self.working_memory = Humemai()
         self.working_memory.graph = MagicMock()
 
     def test_add_reified_statement_and_increment_recall(self) -> None:
@@ -614,7 +614,7 @@ class TestMemorySaveLoad(unittest.TestCase):
     def setUp(self) -> None:
         """Set up a Memory object and add some test data"""
         # Create an instance of the Memory class
-        self.memory = Memory()
+        self.memory = Humemai()
         self.test_file = "test_memory.ttl"
 
         # Define the humemai and example namespaces

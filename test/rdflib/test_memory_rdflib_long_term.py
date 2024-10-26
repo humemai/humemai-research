@@ -5,7 +5,7 @@ import os
 from datetime import datetime
 from unittest.mock import MagicMock
 from rdflib import RDF, XSD, BNode, Graph, Literal, Namespace, URIRef
-from humemai.rdflib import Memory
+from humemai.rdflib import Humemai
 
 # Define custom namespace for humemai ontology
 humemai = Namespace("https://humem.ai/ontology#")
@@ -17,7 +17,7 @@ class TestMemoryLongTerm(unittest.TestCase):
         """
         Set up a fresh Memory instance before each test.
         """
-        self.memory = Memory()
+        self.memory = Humemai()
         self.humemai = Namespace("https://humem.ai/ontology#")
 
     def test_add_single_episodic_memory(self) -> None:
@@ -182,7 +182,7 @@ class TestMemoryMoveShortTermToLongTerm(unittest.TestCase):
         """
         Set up the Memory for testing with some initial short-term memories.
         """
-        self.memory: Memory = Memory()
+        self.memory: Memory = Humemai()
 
         # Add a short-term memory to the memory system
         self.memory.add_short_term_memory(

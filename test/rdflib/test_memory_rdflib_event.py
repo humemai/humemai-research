@@ -5,7 +5,7 @@ import os
 from datetime import datetime
 from unittest.mock import MagicMock
 from rdflib import RDF, XSD, BNode, Graph, Literal, Namespace, URIRef
-from humemai.rdflib import Memory
+from humemai.rdflib import Humemai
 
 # Define custom namespace for humemai ontology
 humemai = Namespace("https://humem.ai/ontology#")
@@ -17,7 +17,7 @@ class TestModifyEpisodicEvent(unittest.TestCase):
         """
         Set up the Memory object with some episodic, semantic, and short-term memories.
         """
-        self.memory = Memory()
+        self.memory = Humemai()
         self.humemai = Namespace("https://humem.ai/ontology#")
 
         # Define some triples
@@ -204,7 +204,7 @@ class TestEvent(unittest.TestCase):
         """
         Set up the Memory instance for testing.
         """
-        self.memory = Memory()
+        self.memory = Humemai()
 
     def test_add_episodic_memory(self) -> None:
         """
@@ -347,7 +347,7 @@ class TestEventCount(unittest.TestCase):
         """
         Set up a memory instance before each test.
         """
-        self.memory = Memory()
+        self.memory = Humemai()
 
     def test_get_event_count(self) -> None:
         """
@@ -395,7 +395,7 @@ class TestEventMethods(unittest.TestCase):
         """
         Set up a memory instance before each test.
         """
-        self.memory = Memory()
+        self.memory = Humemai()
 
     def test_iterate_events(self) -> None:
         """
@@ -444,7 +444,7 @@ class TestMemoryEvents(unittest.TestCase):
 
     def setUp(self) -> None:
         """Set up the memory system before each test."""
-        self.memory = Memory()
+        self.memory = Humemai()
 
         # Example URIs and Literals for subjects, predicates, and objects
         self.alice = URIRef("https://example.org/Alice")

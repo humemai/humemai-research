@@ -5,7 +5,7 @@ import os
 from datetime import datetime
 from unittest.mock import MagicMock
 from rdflib import RDF, XSD, BNode, Graph, Literal, Namespace, URIRef
-from humemai.rdflib import Memory
+from humemai.rdflib import Humemai
 
 # Define custom namespace for humemai ontology
 humemai = Namespace("https://humem.ai/ontology#")
@@ -14,7 +14,7 @@ humemai = Namespace("https://humem.ai/ontology#")
 class TestMemory(unittest.TestCase):
     def setUp(self) -> None:
         """Set up a fresh Memory instance before each test."""
-        self.memory = Memory()
+        self.memory = Humemai()
 
     def test_add_single_memory_with_qualifiers(self) -> None:
         """Test adding a single triple with qualifiers and check if it's correctly stored."""
@@ -107,7 +107,7 @@ class TestMemory(unittest.TestCase):
 class TestMemoryDelete(unittest.TestCase):
     def setUp(self) -> None:
         """Set up a fresh Memory instance before each test."""
-        self.memory = Memory()
+        self.memory = Humemai()
         self.humemai = Namespace("https://humem.ai/ontology#")
 
         # Define sample triples
@@ -222,7 +222,7 @@ class TestMemoryDelete(unittest.TestCase):
 class TestMemoryDelete(unittest.TestCase):
     def setUp(self) -> None:
         """Set up the memory and add test data before each test."""
-        self.memory = Memory()
+        self.memory = Humemai()
 
         # Define multiple triples for episodic and semantic memories
         self.triples = [
@@ -399,7 +399,7 @@ class TestMemoryDeleteWithTime(unittest.TestCase):
         """
         Set up a fresh Memory instance before each test.
         """
-        self.memory = Memory()
+        self.memory = Humemai()
         self.humemai = Namespace("https://humem.ai/ontology#")
 
     def test_delete_triple_with_time_filter(self) -> None:
@@ -441,7 +441,7 @@ class TestInvalidInputHandling(unittest.TestCase):
         """
         Set up a fresh Memory instance before each test.
         """
-        self.memory = Memory()
+        self.memory = Humemai()
         self.humemai = Namespace("https://humem.ai/ontology#")
 
     def test_invalid_time_format(self) -> None:
@@ -468,7 +468,7 @@ class TestMemoryInvalidQualifiers(unittest.TestCase):
         """
         Set up a fresh Memory instance before each test.
         """
-        self.memory = Memory()
+        self.memory = Humemai()
         self.humemai = Namespace("https://humem.ai/ontology#")
 
     def test_missing_qualifiers_in_long_term_memory_episodic(self) -> None:
@@ -503,7 +503,7 @@ class TestMemoryIteration(unittest.TestCase):
         """
         Set up the Memory object and add short-term, episodic, and semantic memories.
         """
-        self.memory = Memory()
+        self.memory = Humemai()
 
         # Add a short-term memory
         triples_short_term = [

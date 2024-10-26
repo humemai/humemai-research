@@ -5,7 +5,7 @@ import os
 from datetime import datetime
 from unittest.mock import MagicMock
 from rdflib import RDF, XSD, BNode, Graph, Literal, Namespace, URIRef
-from humemai.rdflib import Memory
+from humemai.rdflib import Humemai
 
 # Define custom namespace for humemai ontology
 humemai = Namespace("https://humem.ai/ontology#")
@@ -17,7 +17,7 @@ class TestMemoryShortTerm(unittest.TestCase):
         """
         Set up a fresh Memory instance before each test.
         """
-        self.memory = Memory()
+        self.memory = Humemai()
         self.humemai = Namespace("https://humem.ai/ontology#")
 
     def test_add_single_short_term_memory(self) -> None:
@@ -135,7 +135,7 @@ class TestGetShortTerm(unittest.TestCase):
     def setUp(self) -> None:
         """Set up the test case with a Memory instance and populate the RDF graph."""
         # Initialize a Memory instance and use an actual Graph instance
-        self.memory = Memory()
+        self.memory = Humemai()
         self.memory.graph = Graph()
 
         # Short-term triple

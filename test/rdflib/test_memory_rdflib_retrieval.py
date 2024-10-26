@@ -5,7 +5,7 @@ import os
 from datetime import datetime
 from unittest.mock import MagicMock
 from rdflib import RDF, XSD, BNode, Graph, Literal, Namespace, URIRef
-from humemai.rdflib import Memory
+from humemai.rdflib import Humemai
 
 # Define custom namespace for humemai ontology
 humemai = Namespace("https://humem.ai/ontology#")
@@ -15,7 +15,7 @@ class TestMemoryRetrievalAndDeletion(unittest.TestCase):
 
     def setUp(self) -> None:
         """Set up the memory system and add initial long-term memories."""
-        self.memory = Memory()
+        self.memory = Humemai()
 
         # Define multiple triples
         self.triples = [
@@ -144,7 +144,7 @@ class TestMemoryRetrievalMethods(unittest.TestCase):
         Set up a memory object with both short-term and long-term memories
         for testing.
         """
-        self.memory = Memory()
+        self.memory = Humemai()
         self.humemai = Namespace("https://humem.ai/ontology#")
         self.ex = Namespace("https://example.org/")
 
