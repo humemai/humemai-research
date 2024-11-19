@@ -1,30 +1,47 @@
 """Humemai class"""
 
+import json
 import os
+from datetime import datetime
 import logging
 import docker
 import nest_asyncio
 from gremlin_python.process.graph_traversal import __
+from gremlin_python.structure.graph import Graph, Vertex, Edge
 from gremlin_python.driver.driver_remote_connection import DriverRemoteConnection
 from gremlin_python.process.anonymous_traversal import traversal
-from gremlin_python.structure.graph import Graph
 from gremlin_python.process.graph_traversal import GraphTraversalSource
-from gremlin_python.process.traversal import T, Direction
+from gremlin_python.process.traversal import P, T, Direction
 from gremlin_python.driver.serializer import GraphSONSerializersV3d0
+from humemai.janusgraph.utils.gremlin import (
+    remove_all_data,
+    get_all_vertices,
+    get_all_edges,
+    find_vertex_by_label,
+    find_vertices_by_properties,
+    remove_vertex,
+    remove_edge,
+    find_edge_by_vertices_and_label,
+    find_edge_by_label,
+    find_edges_by_properties,
+    create_vertex,
+    create_edge,
+    update_vertex_properties,
+    remove_vertex_properties,
+    update_edge_properties,
+    remove_edge_properties,
+    get_vertices_within_hops,
+    get_edges_between_vertices,
+    get_properties,
+)
 from humemai.janusgraph.utils.docker import (
     start_containers,
     stop_containers,
     remove_containers,
-    remove_all_data as remove_all_data_util,
 )
 
-from humemai.memory import (
-    Memory,
-    ShortMemory,
-    LongMemory,
-    EpisodicMemory,
-    SemanticMemory,
-)
+from humemai.utils import is_iso8601_datetime
+
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
@@ -71,18 +88,13 @@ class Humemai:
         # Initialize Docker client
         self.client = docker.from_env()
 
-        # Set up Gremlin connection and traversal source (to be initialized in connect method)
+        # Set up Gremlin connection and traversal source (to be initialized in connect
+        # method)
         self.connection = None
         self.g = None
 
         # Logging configuration
         self.logger = logger
-
-        self.memory_id = 0
-
-    def reset_memory_id(self) -> None:
-        """Reset the memory ID counter to 0."""
-        self.memory_id = 0
 
     def start_containers(self, warmup_seconds: int = 10) -> None:
         """Start the Cassandra and JanusGraph containers with optional warmup time.
@@ -119,7 +131,8 @@ class Humemai:
         """Establish a connection to the Gremlin server."""
         try:
             if not self.connection:
-                # Apply nest_asyncio to allow nested event loops (useful in Jupyter notebooks)
+                # Apply nest_asyncio to allow nested event loops (useful in Jupyter
+                # notebooks)
                 nest_asyncio.apply()
 
                 # Initialize Gremlin connection using GraphSON 3.0 serializer
@@ -147,719 +160,545 @@ class Humemai:
                 self.connection = None
                 self.g = None
 
-    def remove_all(self) -> None:
+    def remove_all_data(self) -> None:
         """Remove all vertices and edges from the JanusGraph graph."""
         if self.g:
-            remove_all_data_util(self.g)
+            remove_all_data(self.g)
         else:
             self.logger.warning("Graph traversal source (g) is not initialized.")
 
-    def write_memory(self, memory: Memory) -> None:
+    def write_short_term_vertex(self, label: str, properties: dict = {}) -> Vertex:
         """
-        Write a new memory to the graph, consisting of two nodes and an edge connecting them.
+        Write a new short-term vertex to the graph.
+
+        if 'current_time' property does not exist in 'properties', it will be added.
 
         Args:
-            memory (Memory): An instance of Memory or its subclass.
+            label (str): Label of the vertex.
+            properties (dict): Properties of the vertex.
 
+        Returns:
+            Vertex: The newly created vertex.
         """
-        try:
-            # Assign a unique memory_id if not already set in the object
-            if memory.memory_id is None:
-                memory.memory_id = self.memory_id
+        if "current_time" not in properties:
+            properties["current_time"] = datetime.now().isoformat(timespec="seconds")
+        else:
+            assert is_iso8601_datetime(
+                properties["current_time"]
+            ), "current_time must be an ISO8601 datetime (timespec=seconds)."
 
-            # Add the head node with label and properties
-            node1 = self.g.addV(memory.head_label).property(
-                "memory_id", memory.memory_id
+        vertices = find_vertex_by_label(self.g, label)
+
+        if len(vertices) == 0:
+            vertex = create_vertex(self.g, label, properties)
+            self.logger.debug(f"Created vertex with ID: {vertex.id}")
+
+        else:
+            self.logger.warning(
+                f"Vertex with label '{label}' already exists. "
+                f"Disambiguation might be needed."
             )
-            for key, value in memory.head_properties.items():
-                node1 = node1.property(key, value)
-            node1 = node1.next()
+            vertex = vertices[0]
+            existing_properties = get_properties(vertex)
 
-            # Add the tail node with label and properties
-            node2 = self.g.addV(memory.tail_label).property(
-                "memory_id", memory.memory_id
-            )
-            for key, value in memory.tail_properties.items():
-                node2 = node2.property(key, value)
-            node2 = node2.next()
+            # merge properties and existing_properties if there are the same keys,
+            # then `properties` takes over
+            properties = {**existing_properties, **properties}
 
-            # Add the edge between head and tail nodes with label and properties
-            edge = (
-                self.g.V(node1.id)
-                .addE(memory.edge_label)
-                .to(__.V(node2.id))
-                .property("memory_id", memory.memory_id)
-            )
-            for key, value in memory.edge_properties.items():
-                edge = edge.property(key, value)
-            edge = edge.next()
+            vertex = update_vertex_properties(self.g, vertex, properties)
+            self.logger.debug(f"Updated vertex with ID: {vertex.id}")
 
-            # Log and return the edge ID
-            self.logger.debug(
-                f"Created memory with edge ID: {edge.id} and memory_id: {memory.memory_id} between nodes {node1.id} and {node2.id}"
-            )
+        return vertex
 
-            # Increment memory_id for the next memory entry if it was newly assigned
-            if memory.memory_id == self.memory_id:
-                self.memory_id += 1
-
-        except Exception as e:
-            self.logger.error(f"Failed to write memory: {e}")
-            raise
-
-    def read_memory(self, memory_id: int) -> Memory:
-        """
-        Read a memory based on its unique integer memory_id.
-
-        Args:
-            memory_id (int): Unique integer identifier for the memory.
-
-        Returns:
-            Memory: A Memory instance (or subclass, depending on edge properties) representing the memory.
-        """
-        try:
-            # Retrieve the edge with the specified memory_id
-            edge = self.g.E().has("memory_id", memory_id).next()
-
-            # Retrieve edge label and properties
-            edge_label = edge.label
-            edge_properties = {prop.key: prop.value for prop in edge.properties}
-
-            # Determine subclass based on properties
-            memory_class = Memory
-            if "current_time" in edge_properties:
-                memory_class = ShortMemory
-            elif "num_recalled" in edge_properties:
-                if "event_time" in edge_properties:
-                    memory_class = EpisodicMemory
-                elif (
-                    "known_since" in edge_properties
-                    and "derived_from" in edge_properties
-                ):
-                    memory_class = SemanticMemory
-                else:
-                    memory_class = LongMemory
-
-            # Retrieve connected nodes (head and tail) with labels and properties
-            tail_id = edge.inV.id
-            tail_label = edge.inV.label
-            tail_properties = {
-                key: val[0]
-                for key, val in self.g.V(edge.inV.id).valueMap().next().items()
-            }
-
-            head_id = edge.outV.id
-            head_label = edge.outV.label
-            head_properties = {
-                key: val[0]
-                for key, val in self.g.V(edge.outV.id).valueMap().next().items()
-            }
-
-            # Construct and return the appropriate memory object
-            memory = memory_class(
-                head_label=head_label,
-                tail_label=tail_label,
-                edge_label=edge_label,
-                memory_id=memory_id,
-                head_properties=head_properties,
-                tail_properties=tail_properties,
-                edge_properties=edge_properties,
-            )
-
-            self.logger.debug(f"Retrieved memory for memory_id {memory_id}: {memory}")
-            return memory
-
-        except Exception as e:
-            self.logger.error(f"Failed to read memory: {e}")
-            raise
-
-    def delete_memory(self, memory_id: int) -> None:
-        """Delete a memory based on memory ID.
-
-        Args:
-            memory_id (int): Unique integer identifier for the memory.
-        """
-        self.g.E().has("memory_id", memory_id).drop().iterate()
-        self.g.V().has("memory_id", memory_id).drop().iterate()
-
-    def read_all(self) -> dict:
-        """
-        read all nodes (vertices) and edges in the database, including all properties.
-
-        Returns:
-            dict: A dictionary containing lists of all vertices and edges with their properties.
-        """
-        try:
-            # read all vertices and their properties
-            vertices = self.g.V().elementMap().toList()
-
-            # read all edges and their properties
-            edges = self.g.E().elementMap().toList()
-
-            # Log and return the results
-            self.logger.debug(
-                f"readd {len(vertices)} vertices and {len(edges)} edges from the database."
-            )
-            return {"vertices": vertices, "edges": edges}
-
-        except Exception as e:
-            self.logger.error(f"Failed to read all data: {e}")
-            raise
-
-    def get_all_short_term_memories(self) -> list:
-        """
-        Retrieve all short-term memories from the database, identified by the presence
-        of the 'current_time' property in the edge.
-
-        Returns:
-            list: A list of ShortMemory objects.
-        """
-        short_memories = []
-
-        try:
-            # Find all edges that have the 'current_time' property, indicating short-term memories
-            edges = self.g.E().has("current_time").toList()
-
-            for edge in edges:
-                # Retrieve edge details
-                edge_label = edge.label
-                edge_properties = {prop.key: prop.value for prop in edge.properties}
-
-                # Retrieve connected vertices (head and tail) with labels and properties
-                tail_id = edge.inV.id
-                tail_label = edge.inV.label
-                tail_properties = {
-                    key: val[0]
-                    for key, val in self.g.V(edge.inV.id).valueMap().next().items()
-                }
-
-                head_id = edge.outV.id
-                head_label = edge.outV.label
-                head_properties = {
-                    key: val[0]
-                    for key, val in self.g.V(edge.outV.id).valueMap().next().items()
-                }
-
-                # Create a ShortMemory object
-                memory = ShortMemory(
-                    head_label=head_label,
-                    tail_label=tail_label,
-                    edge_label=edge_label,
-                    memory_id=edge_properties.get("memory_id"),
-                    head_properties=head_properties,
-                    tail_properties=tail_properties,
-                    edge_properties=edge_properties,
-                )
-
-                # Add to the list
-                short_memories.append(memory)
-
-            self.logger.debug(f"Retrieved {len(short_memories)} short-term memories.")
-            return short_memories
-
-        except Exception as e:
-            self.logger.error(f"Failed to retrieve short-term memories: {e}")
-            raise
-
-    def count_short_term_memories(self) -> int:
-        """
-        Count the number of short-term memories in the database.
-
-        Returns:
-            int: The number of short-term memories.
-        """
-        try:
-            # Count the number of edges with 'current_time' property
-            count = self.g.E().has("current_time").count().next()
-            self.logger.debug(f"Found {count} short-term memories.")
-            return count
-
-        except Exception as e:
-            self.logger.error(f"Failed to count short-term memories: {e}")
-            raise
-
-    def get_all_episodic_memories(self) -> list:
-        """
-        Retrieve all episodic memories from the database, identified by the presence
-        of the 'event_time' property in the edge.
-
-        Returns:
-            list: A list of EpisodicMemory objects.
-        """
-        episodic_memories = []
-
-        try:
-            # Find all edges that have the 'event_time' property, indicating episodic memories
-            edges = self.g.E().has("event_time").toList()
-
-            for edge in edges:
-                # Retrieve edge details
-                edge_label = edge.label
-                edge_properties = {prop.key: prop.value for prop in edge.properties}
-
-                # Retrieve connected vertices (head and tail) with labels and properties
-                tail_id = edge.inV.id
-                tail_label = edge.inV.label
-                tail_properties = {
-                    key: val[0]
-                    for key, val in self.g.V(edge.inV.id).valueMap().next().items()
-                }
-
-                head_id = edge.outV.id
-                head_label = edge.outV.label
-                head_properties = {
-                    key: val[0]
-                    for key, val in self.g.V(edge.outV.id).valueMap().next().items()
-                }
-
-                # Create an EpisodicMemory object
-                memory = EpisodicMemory(
-                    head_label=head_label,
-                    tail_label=tail_label,
-                    edge_label=edge_label,
-                    memory_id=edge_properties.get("memory_id"),
-                    head_properties=head_properties,
-                    tail_properties=tail_properties,
-                    edge_properties=edge_properties,
-                )
-
-                # Add to the list
-                episodic_memories.append(memory)
-
-            self.logger.debug(f"Retrieved {len(episodic_memories)} episodic memories.")
-            return episodic_memories
-
-        except Exception as e:
-            self.logger.error(f"Failed to retrieve episodic memories: {e}")
-            raise
-
-    def count_episodic_memories(self) -> int:
-        """
-        Count the number of episodic memories in the database.
-
-        Returns:
-            int: The number of episodic memories.
-        """
-        try:
-            # Count the number of edges with 'event_time' property
-            count = self.g.E().has("event_time").count().next()
-            self.logger.debug(f"Found {count} episodic memories.")
-            return count
-
-        except Exception as e:
-            self.logger.error(f"Failed to count episodic memories: {e}")
-            raise
-
-    def get_all_semantic_memories(self) -> list:
-        """
-        Retrieve all semantic memories from the database, identified by the presence
-        of the 'known_since' property in the edge.
-
-        Returns:
-            list: A list of SemanticMemory objects.
-        """
-        semantic_memories = []
-
-        try:
-            # Find all edges that have the 'known_since' property, indicating semantic memories
-            edges = self.g.E().has("known_since").toList()
-
-            for edge in edges:
-                # Retrieve edge details
-                edge_label = edge.label
-                edge_properties = {prop.key: prop.value for prop in edge.properties}
-
-                # Retrieve connected vertices (head and tail) with labels and properties
-                tail_id = edge.inV.id
-                tail_label = edge.inV.label
-                tail_properties = {
-                    key: val[0]
-                    for key, val in self.g.V(edge.inV.id).valueMap().next().items()
-                }
-
-                head_id = edge.outV.id
-                head_label = edge.outV.label
-                head_properties = {
-                    key: val[0]
-                    for key, val in self.g.V(edge.outV.id).valueMap().next().items()
-                }
-
-                # Create a SemanticMemory object
-                memory = SemanticMemory(
-                    head_label=head_label,
-                    tail_label=tail_label,
-                    edge_label=edge_label,
-                    memory_id=edge_properties.get("memory_id"),
-                    head_properties=head_properties,
-                    tail_properties=tail_properties,
-                    edge_properties=edge_properties,
-                )
-
-                # Add to the list
-                semantic_memories.append(memory)
-
-            self.logger.debug(f"Retrieved {len(semantic_memories)} semantic memories.")
-            return semantic_memories
-
-        except Exception as e:
-            self.logger.error(f"Failed to retrieve semantic memories: {e}")
-            raise
-
-    def count_semantic_memories(self) -> int:
-        """
-        Count the number of semantic memories in the database.
-
-        Returns:
-            int: The number of semantic memories.
-        """
-        try:
-            # Count the number of edges with 'known_since' property
-            count = self.g.E().has("known_since").count().next()
-            self.logger.debug(f"Found {count} semantic memories.")
-            return count
-
-        except Exception as e:
-            self.logger.error(f"Failed to count semantic memories: {e}")
-            raise
-
-    def get_all_long_term_memories(self) -> list:
-        """
-        Retrieve all long-term memories from the database, identified by the presence
-        of the 'num_recalled' property in the edge, excluding those with 'current_time'.
-
-        Returns:
-            list: A list of LongMemory objects, which may include EpisodicMemory and
-                SemanticMemory instances.
-        """
-        long_term_memories = []
-
-        try:
-            # Find all edges that have 'num_recalled' property and do not have 'current_time'
-            edges = self.g.E().has("num_recalled").not_(__.has("current_time")).toList()
-
-            for edge in edges:
-                # Retrieve edge details
-                edge_label = edge.label
-                edge_properties = {prop.key: prop.value for prop in edge.properties}
-
-                # Determine the specific subclass
-                if "event_time" in edge_properties:
-                    memory_class = EpisodicMemory
-                elif "known_since" in edge_properties:
-                    memory_class = SemanticMemory
-                else:
-                    memory_class = LongMemory
-
-                # Retrieve connected vertices (head and tail) with labels and properties
-                tail_id = edge.inV.id
-                tail_label = edge.inV.label
-                tail_properties = {
-                    key: val[0]
-                    for key, val in self.g.V(edge.inV.id).valueMap().next().items()
-                }
-
-                head_id = edge.outV.id
-                head_label = edge.outV.label
-                head_properties = {
-                    key: val[0]
-                    for key, val in self.g.V(edge.outV.id).valueMap().next().items()
-                }
-
-                # Create a memory object of the appropriate class
-                memory = memory_class(
-                    head_label=head_label,
-                    tail_label=tail_label,
-                    edge_label=edge_label,
-                    memory_id=edge_properties.get("memory_id"),
-                    head_properties=head_properties,
-                    tail_properties=tail_properties,
-                    edge_properties=edge_properties,
-                )
-
-                # Add to the list
-                long_term_memories.append(memory)
-
-            self.logger.debug(
-                f"Retrieved {len(long_term_memories)} long-term memories."
-            )
-            return long_term_memories
-
-        except Exception as e:
-            self.logger.error(f"Failed to retrieve long-term memories: {e}")
-            raise
-
-    def count_long_term_memories(self) -> int:
-        """
-        Count the number of long-term memories in the database.
-
-        Returns:
-            int: The number of long-term memories.
-        """
-        try:
-            # Count the number of edges with 'num_recalled' property and not 'current_time'
-            count = (
-                self.g.E()
-                .has("num_recalled")
-                .not_(__.has("current_time"))
-                .count()
-                .next()
-            )
-            self.logger.debug(f"Found {count} long-term memories.")
-            return count
-
-        except Exception as e:
-            self.logger.error(f"Failed to count long-term memories: {e}")
-            raise
-
-    def get_all_memories(self) -> list:
-        """
-        Retrieve all memories from the database, identified by the presence of 'memory_id'
-        property on edges. This includes generic Memory objects as well as specific types
-        like ShortMemory, LongMemory, EpisodicMemory, and SemanticMemory.
-
-        Returns:
-            list: A combined list of all Memory objects.
-        """
-        all_memories = []
-
-        try:
-            # Find all edges with a 'memory_id' property
-            edges = self.g.E().has("memory_id").toList()
-
-            for edge in edges:
-                # Convert edge properties to a dictionary
-                edge_properties = {prop.key: prop.value for prop in edge.properties}
-                edge_label = edge.label
-                memory_id = edge_properties.get("memory_id")
-
-                # Determine the specific Memory subclass based on edge properties
-                if "current_time" in edge_properties:
-                    memory_class = ShortMemory
-                elif "num_recalled" in edge_properties:
-                    if "event_time" in edge_properties:
-                        memory_class = EpisodicMemory
-                    elif (
-                        "known_since" in edge_properties
-                        and "derived_from" in edge_properties
-                    ):
-                        memory_class = SemanticMemory
-                    else:
-                        memory_class = LongMemory
-                else:
-                    memory_class = Memory
-
-                # Retrieve connected vertices (head and tail) with labels and properties
-                tail_id = edge.inV.id
-                tail_label = edge.inV.label
-                tail_properties = {
-                    key: val[0]
-                    for key, val in self.g.V(tail_id).valueMap().next().items()
-                }
-
-                head_id = edge.outV.id
-                head_label = edge.outV.label
-                head_properties = {
-                    key: val[0]
-                    for key, val in self.g.V(head_id).valueMap().next().items()
-                }
-
-                # Create a memory object of the appropriate class
-                memory = memory_class(
-                    head_label=head_label,
-                    tail_label=tail_label,
-                    edge_label=edge_label,
-                    memory_id=memory_id,
-                    head_properties=head_properties,
-                    tail_properties=tail_properties,
-                    edge_properties=edge_properties,
-                )
-
-                # Add the memory to the list of all memories
-                all_memories.append(memory)
-
-            self.logger.debug(f"Retrieved {len(all_memories)} total memories.")
-            return all_memories
-
-        except Exception as e:
-            self.logger.error(f"Failed to retrieve all memories: {e}")
-            raise
-
-    def count_all_memories(self) -> int:
-        """
-        Count the total number of memories in the database, identified by the presence of
-        the 'memory_id' property on edges.
-
-        Returns:
-            int: The total count of memories.
-        """
-        try:
-            # Count edges that have the 'memory_id' property
-            total_count = self.g.E().has("memory_id").count().next()
-            self.logger.debug(f"Total memory count: {total_count}")
-            return total_count
-
-        except Exception as e:
-            self.logger.error(f"Failed to count all memories: {e}")
-            raise
-
-    def _increment_num_recalled(self, memory: Memory) -> None:
-        """Helper function to increment num_recalled on vertices and edges of a
-        memory.
-
-        Args:
-            memory (Memory): A Memory object to be updated.
-
-        """
-        # Get the edge with the given memory_id
-        edge = self.g.E().has("memory_id", memory.memory_id).next()
-        # Convert edge properties to a dictionary
-        edge_properties = {prop.key: prop.value for prop in edge.properties}
-        # Get the current 'num_recalled' value
-        current_num_recalled = edge_properties.get("num_recalled", 0)
-        new_num_recalled = current_num_recalled + 1
-
-        edge_id = edge.id["@value"]["relationId"]
-
-        head_id = edge.outV.id
-        head_label = edge.outV.label
-        head_properties = {
-            key: val[0] for key, val in self.g.V(edge.outV.id).valueMap().next().items()
-        }
-
-        tail_id = edge.inV.id
-        tail_label = edge.inV.label
-        tail_properties = {
-            key: val[0] for key, val in self.g.V(edge.inV.id).valueMap().next().items()
-        }
-
-        self.g.V(head_id).property("num_recalled", new_num_recalled).iterate()
-        self.g.V(tail_id).property("num_recalled", new_num_recalled).iterate()
-        self.g.E(edge_id).property("num_recalled", new_num_recalled).iterate()
-
-        memory.head_properties["num_recalled"] = new_num_recalled
-        memory.tail_properties["num_recalled"] = new_num_recalled
-        memory.edge_properties["num_recalled"] = new_num_recalled
-
-    def get_working_memory(
+    def write_short_term_edge(
         self,
-        include_all_long_term: bool = True,
-        trigger_node: str = None,
-        hops: int = 1,
-    ) -> list:
+        head_vertex: Vertex,
+        edge_label: str,
+        tail_vertex: Vertex,
+        properties: dict = {},
+    ) -> Edge:
         """
-        Retrieves the working memory, consisting of all short-term memories and partial long-term memories.
+        Write a new short-term edge to the graph.
+
+        if 'current_time' property does not exist in 'properties', it will be added.
 
         Args:
+            head_vertex (Vertex): Head vertex of the edge.
+            edge_label (str): Label of the edge.
+            tail_vertex (Vertex): Tail vertex of the edge.
+            properties (dict): Properties of the edge.
+
+        Returns:
+            Edge: The newly created edge.
+        """
+        if "current_time" not in properties:
+            properties["current_time"] = datetime.now().isoformat(timespec="seconds")
+        else:
+            assert is_iso8601_datetime(
+                properties["current_time"]
+            ), "current_time must be an ISO8601 datetime (timespec=seconds)."
+
+        edges = find_edge_by_vertices_and_label(
+            self.g, head_vertex, edge_label, tail_vertex
+        )
+
+        if len(edges) == 0:
+            edge = create_edge(self.g, head_vertex, edge_label, tail_vertex, properties)
+            self.logger.debug(f"Created edge with ID: {edge.id}")
+
+        else:
+            self.logger.warning(
+                f"Edge with label '{edge_label}' already exists. "
+                f"Disambiguation might be needed."
+            )
+            edge = edges[0]
+            existing_properties = get_properties(edge)
+
+            # merge properties and existing_properties if there are the same keys,
+            # then `properties` takes over
+            properties = {**existing_properties, **properties}
+
+            edge = update_edge_properties(self.g, edge, properties)
+            self.logger.debug(f"Updated edge with ID: {edge.id}")
+
+        return edge
+
+    def move_short_term_vertex(self, vertex: Vertex, action: str) -> Vertex | None:
+        """Move the short-term vertex to another memory type.
+
+        Args:
+            vertex (Vertex): The vertex to be moved.
+            action (str): The action to be taken. Choose from 'episodic' or 'semantic'
+
+        Returns:
+            Vertex: The updated vertex
+
+        """
+        new_properties = {}
+        assert "current_time" in self.get_vertex_properties(
+            vertex
+        ), "current_time must exist."
+
+        if action == "episodic":
+            if "event_time" in get_properties(vertex):
+                new_properties["event_time"] = (
+                    get_properties(vertex)["event_time"]
+                    + get_properties(vertex)["current_time"]
+                )
+            else:
+                new_properties["event_time"] = [get_properties(vertex)["current_time"]]
+
+            if "num_recalled" not in get_properties(vertex):
+                new_properties["num_recalled"] = 0
+
+            vertex = update_vertex_properties(self.g, vertex, new_properties)
+            self.logger.debug(f"Moved vertex to episodic memory with ID: {vertex.id}")
+
+        elif action == "semantic":
+            # look for the existing known_since
+            if "known_since" in get_properties(vertex):
+                new_properties["known_since"] = get_properties(vertex)["known_since"]
+            else:
+                new_properties["known_since"] = get_properties(vertex)["current_time"]
+
+            if "num_recalled" not in get_properties(vertex):
+                new_properties["num_recalled"] = 0
+
+            vertex = update_vertex_properties(self.g, vertex, new_properties)
+            self.logger.debug(f"Moved vertex to semantic memory with ID: {vertex.id}")
+
+        else:
+            self.logger.error("Invalid action. Choose from 'episodic' or 'semantic'.")
+            raise ValueError("Invalid action. Choose from 'episodic' or 'semantic'.")
+
+        return vertex
+
+    def move_short_term_edge(self, edge: Edge, action: str) -> Edge | None:
+        """Move the short-term edge to another memory type.
+
+        Args:
+            edge (Edge): The edge to be moved.
+            action (str): The action to be taken. Choose from 'episodic' or 'semantic'
+
+        Returns:
+            Edge: The updated edge.
+
+        """
+        assert "current_time" in self.get_edge_properties(
+            edge
+        ), "current_time must exist."
+        new_properties = {}
+
+        if action == "episodic":
+            if "event_time" in get_properties(edge):
+                new_properties["event_time"] = (
+                    get_properties(edge)["event_time"]
+                    + get_properties(edge)["current_time"]
+                )
+            else:
+                new_properties["event_time"] = [get_properties(edge)["current_time"]]
+
+            if "num_recalled" not in get_properties(edge):
+                new_properties["num_recalled"] = 0
+
+            edge = update_edge_properties(self.g, edge, new_properties)
+            self.logger.debug(f"Moved edge to episodic memory with ID: {edge.id}")
+
+        elif action == "semantic":
+            # look for the existing known_since
+            if "known_since" in get_properties(edge):
+                new_properties["known_since"] = get_properties(edge)["known_since"]
+            else:
+                new_properties["known_since"] = get_properties(edge)["current_time"]
+
+            if "num_recalled" not in get_properties(edge):
+                new_properties["num_recalled"] = 0
+
+            edge = update_edge_properties(self.g, edge, new_properties)
+            self.logger.debug(f"Moved edge to semantic memory with ID: {edge.id}")
+
+        else:
+            self.logger.error("Invalid action. Choose from 'episodic' or 'semantic'.")
+            raise ValueError("Invalid action. Choose from 'episodic' or 'semantic'.")
+
+        return edge
+
+    def remove_all_short_term(self) -> None:
+        """Remove all pure short-term vertices and edges.
+
+        This method removes all vertices and edges that have 'current_time' property,
+        but not 'num_recalled', 'event_time', or 'known_since' properties, meaning that
+        they are pure short-term memories. This will also remove the 'current_time'
+        property from all the vertices and edges. Call this after you are done with
+        moving short-term memories to other memory types.
+
+        """
+        # Step 1: Remove all pure short-term vertices and edges
+        short_term_vertices = find_vertices_by_properties(
+            self.g, ["current_time"], ["num_recalled"]
+        )
+        for vertex in short_term_vertices:
+            remove_vertex(self.g, vertex)
+
+        short_term_edges = find_edges_by_properties(
+            self.g, ["current_time"], ["num_recalled"]
+        )
+        for edge in short_term_edges:
+            remove_edge(self.g, edge)
+
+        # Step 2: Remove 'current_time' property from all vertices and edges
+        for vertex in self.get_all_short_term_vertices():
+            remove_vertex_properties(self.g, vertex, ["current_time"])
+        for edge in self.get_all_short_term_edges():
+            remove_edge_properties(self.g, edge, ["current_time"])
+
+    def write_long_term_vertex(self, label: str, properties: dict = {}) -> Vertex:
+        """
+        Write a new long-term vertex to the graph.
+
+        This is directly writing a vertex to the long-term memory, so the vertex must
+        should include the time information (e.g., 'event_time' or 'known_since'). One
+        thing to note is that the Vertex might already exist in the long-term memory.
+        In this case, the properties will be updated. You should add 'num_recalled=0'
+        property!
+
+        Args:
+            label (str): Label of the vertex.
+            properties (dict): Properties of the vertex.
+
+        Returns:
+            Vertex: The updated vertex.
+        """
+        assert "current_time" not in properties, "current_time must not be included."
+        assert (
+            "event_time" in properties or "known_since" in properties
+        ), "event_time or known_since must be included."
+        assert (
+            "num_recalled" in properties and properties["num_recalled"] == 0
+        ), "num_recalled must be included and set to 0."
+
+        vertices = find_vertex_by_label(self.g, label)
+
+        if len(vertices) == 0:
+            vertex = create_vertex(self.g, label, properties)
+            self.logger.debug(f"Created vertex with ID: {vertex.id}")
+
+        else:
+            self.logger.error(
+                f"{len(vertices)} vertices found. Disambiguation might be needed."
+            )
+            raise ValueError(
+                f"{len(vertices)} vertices found. We need to disambiguate."
+            )
+
+        return vertex
+
+    def write_long_term_edge(
+        self,
+        head_vertex: Vertex,
+        edge_label: str,
+        tail_vertex: Vertex,
+        properties: dict = {},
+    ) -> Edge:
+        """
+        Write a new long-term edge to the graph.
+
+        This is directly writing an edge to the long-term memory, so the edge must
+        should include the time information (e.g., 'event_time' or 'known_since'). One
+        thing to note is that the Edge might already exist in the long-term memory.
+        In this case, the properties will be updated. If not, a new edge will be
+        created, with 'num_recalled=0' property added.
+
+        Args:
+            head_vertex (Vertex): Head vertex of the edge.
+            edge_label (str): Label of the edge.
+            tail_vertex (Vertex): Tail vertex of the edge.
+            properties (dict): Properties of the edge.
+
+        Returns:
+            Edge: The updated edge.
+        """
+        assert "current_time" not in properties, "current_time must not be included."
+        assert (
+            "event_time" in properties or "known_since" in properties
+        ), "event_time or known_since must be included."
+
+        edges = find_edge_by_vertices_and_label(
+            self.g, head_vertex, edge_label, tail_vertex
+        )
+
+        if len(edges) == 0:
+            # Add 'num_recalled' property
+            properties["num_recalled"] = 0
+            edge = create_edge(self.g, head_vertex, edge_label, tail_vertex, properties)
+            self.logger.debug(f"Created edge with ID: {edge.id}")
+
+        else:
+            self.logger.error(
+                f"{len(edges)} edges found. Disambiguation might be needed."
+            )
+            raise ValueError(f"{len(edges)} edges found. We need to disambiguate.")
+
+        return edge
+
+    def _increment_num_recalled_vertices_and_edges(
+        self, vertices: list[Vertex], edges: list[Edge]
+    ) -> tuple[list[Vertex], list[Edge]]:
+        """Helper function to increment 'num_recalled' on vertices and edges
+
+        Args:
+            vertices (list of Vertex): List of vertices to be updated.
+            edges (list of Edge): List of edges to be updated.
+
+        Returns:
+            tuple: A tuple of updated vertices and edges.
+
+        """
+        vertices_updated = []
+        for vertex in vertices:
+            num_recalled = get_properties(vertex).get("num_recalled")
+            vertex = update_vertex_properties(
+                self.g, vertex, {"num_recalled": num_recalled + 1}
+            )
+            vertices_updated.append(vertex)
+
+        edges_updated = []
+        for edge in edges:
+            num_recalled = get_properties(edge).get("num_recalled")
+            edge = update_edge_properties(
+                self.g, edge, {"num_recalled": num_recalled + 1}
+            )
+            edges_updated.append(edge)
+
+        return vertices_updated, edges_updated
+
+    def get_working_vertices_and_edges(
+        self,
+        short_term_vertices: list[Vertex],
+        short_term_edges: list[Edge],
+        include_all_long_term: bool = True,
+        hops: int = None,
+    ) -> tuple[list[Vertex], list[Edge]]:
+        """
+        Retrieves the working memory based on the short-term memories.
+
+        The short-term memories are used as a trigger to retrieve the working memory.
+
+        Args:
+            short_term_vertices (list of Vertex): List of short-term vertices.
+            short_term_edges (list of Edge): List of short-term edges.
             include_all_long_term (bool): If True, include all long-term memories.
-            trigger_node (str): The starting node ID for traversing the graph.
             hops (int): Number of hops to traverse from the trigger node.
 
         Returns:
-            list: A list of Memory objects representing the working memory.
+            tuple: A tuple of working vertices and edges.
         """
+        if len(short_term_vertices) == 0 or len(short_term_edges) == 0:
+            self.logger.error("Short-term vertices and edges must not be empty.")
+            raise ValueError("Short-term vertices and edges must not be empty.")
         if include_all_long_term:
-            assert (
-                trigger_node is None
-            ), "trigger_node must be None when include_all_long_term is True"
-        working_memories = []
+            long_term_vertices = self.get_all_long_term_vertices()
+            long_term_edges = self.get_all_long_term_edges()
 
-        # Step 1: Get all short-term memories
-        short_term_memories = self.get_all_short_term_memories()
-        working_memories.extend(short_term_memories)
-
-        # Step 2: Get all long-term memories within the specified hops
-        if include_all_long_term:
-
-            long_term_memories = self.get_all_long_term_memories()
-            for memory in long_term_memories:
-                self._increment_num_recalled(memory)
-                # Add the memory to working_memories
-                working_memories.append(memory)
-
-        # Step 2: Get long-term memories within the specified hops
         else:
-            if trigger_node is None:
-                self.logger.error(
-                    "trigger_node must be provided when include_all_long_term is False"
-                )
-                raise ValueError(
-                    "trigger_node must be provided when include_all_long_term is False"
-                )
+            assert (
+                hops is not None
+            ), "hops must be provided when include_all_long_term is False."
 
-            try:
-                # Perform traversal from the trigger node up to 'hops', including both
-                # incoming and outgoing edges
-                edges_within_hops = (
-                    self.g.V()
-                    .hasLabel(trigger_node)
-                    .repeat(__.bothE().as_("e").bothV().simplePath())
-                    .emit()
-                    .times(hops)
-                    .select("e")
-                    .dedup()
-                    .has("memory_id")  # Filter to include only edges with a memory_id
-                    .not_(__.has("current_time"))  # Exclude short-term memories
-                    .toList()
-                )
+            long_term_vertices = get_vertices_within_hops(
+                self.g, short_term_vertices, hops
+            )
 
-                for edge in edges_within_hops:
-                    # Convert edge properties to a dictionary
-                    edge_properties = {prop.key: prop.value for prop in edge.properties}
-                    edge_label = edge.label
-                    memory_id = edge_properties.get("memory_id")
+            long_term_edges = get_edges_between_vertices(self.g, long_term_vertices)
 
-                    # Retrieve connected vertices (head and tail) with labels and properties
-                    tail_id = edge.inV.id
-                    tail_label = edge.inV.label
-                    tail_properties = {
-                        key: val[0]
-                        for key, val in self.g.V(tail_id).valueMap().next().items()
-                    }
+        long_term_vertices = [
+            vertex for vertex in long_term_vertices if vertex not in short_term_vertices
+        ]
 
-                    head_id = edge.outV.id
-                    head_label = edge.outV.label
-                    head_properties = {
-                        key: val[0]
-                        for key, val in self.g.V(head_id).valueMap().next().items()
-                    }
+        long_term_edges = [
+            edge for edge in long_term_edges if edge not in short_term_edges
+        ]
 
-                    # Determine the specific subclass of Memory
-                    if "event_time" in edge_properties:
-                        memory_class = EpisodicMemory
-                    elif (
-                        "known_since" in edge_properties
-                        and "derived_from" in edge_properties
-                    ):
-                        memory_class = SemanticMemory
-                    else:
-                        memory_class = LongMemory
+        # Increment 'num_recalled' on long-term vertices and edges
+        long_term_vertices, long_term_edges = (
+            self._increment_num_recalled_vertices_and_edges(
+                long_term_vertices, long_term_edges
+            )
+        )
 
-                    # Create a memory object of the appropriate class
-                    memory = memory_class(
-                        head_label=head_label,
-                        tail_label=tail_label,
-                        edge_label=edge_label,
-                        memory_id=memory_id,
-                        head_properties=head_properties,
-                        tail_properties=tail_properties,
-                        edge_properties=edge_properties,
-                    )
+        return (
+            short_term_vertices + long_term_vertices,
+            short_term_edges + long_term_edges,
+        )
 
-                    # Increment the num_recalled property for vertices and edges using
-                    # the helper
-                    self._increment_num_recalled(memory)
+    def get_all_vertices(self) -> list[Vertex]:
+        """
+        Retrieve all vertices from the graph.
 
-                    # Add the memory to working_memories
-                    working_memories.append(memory)
+        Returns:
+            list of Vertex: List of all vertices.
+        """
+        return get_all_vertices(self.g)
 
-                self.logger.debug(
-                    f"Retrieved {len(working_memories) - len(short_term_memories)} long-term memories within {hops} hops from node '{trigger_node}'."
-                )
+    def get_all_edges(self) -> list[Edge]:
+        """
+        Retrieve all edges from the graph.
 
-            except Exception as e:
-                self.logger.error(
-                    f"Failed to retrieve long-term memories within {hops} hops from node '{trigger_node}': {e}"
-                )
-                raise
+        Returns:
+            list of Edge: List of all edges.
+        """
+        return get_all_edges(self.g)
 
-        return working_memories
+    def get_all_short_term_vertices(self) -> list[Vertex]:
+        """
+        Retrieve all short-term vertices from the graph.
+
+        Returns:
+            list of Vertex: List of short-term vertices.
+        """
+        return find_vertices_by_properties(self.g, ["current_time"])
+
+    def get_all_short_term_edges(self) -> list[Edge]:
+        """
+        Retrieve all short-term edges from the graph.
+
+        Returns:
+            list of Edge: List of short-term edges.
+        """
+        return find_edges_by_properties(self.g, ["current_time"])
+
+    def get_all_long_term_vertices(self) -> list[Vertex]:
+        """
+        Retrieve all long-term vertices from the graph.
+
+        Returns:
+            list of Vertex: List of long-term vertices.
+        """
+        return find_vertices_by_properties(self.g, ["num_recalled"])
+
+    def get_all_long_term_edges(self) -> list[Edge]:
+        """
+        Retrieve all long-term edges from the graph.
+
+        Returns:
+            list of Edge: List of long-term edges.
+        """
+        return find_edges_by_properties(self.g, ["num_recalled"])
+
+    def get_all_episodic_vertices(self) -> list[Vertex]:
+        """
+        Retrieve all episodic vertices from the graph.
+
+        Returns:
+            list of Vertex: List of episodic vertices.
+        """
+        return find_vertices_by_properties(self.g, ["event_time"])
+
+    def get_all_episodic_edges(self) -> list[Edge]:
+        """
+        Retrieve all episodic edges from the graph.
+
+        Returns:
+            list of Edge: List of episodic edges.
+        """
+        return find_edges_by_properties(self.g, ["event_time"])
+
+    def get_all_semantic_vertices(self) -> list[Vertex]:
+        """
+        Retrieve all semantic vertices from the graph.
+
+        Returns:
+            list of Vertex: List of semantic vertices.
+        """
+        return find_vertices_by_properties(self.g, ["known_since"])
+
+    def get_all_semantic_edges(self) -> list[Edge]:
+        """
+        Retrieve all semantic edges from the graph.
+
+        Returns:
+            list of Edge: List of semantic edges.
+        """
+        return find_edges_by_properties(self.g, ["known_since"])
+
+    def get_vertex_properties(self, vertex: Vertex) -> dict:
+        """
+        Retrieve the properties of a vertex.
+
+        Args:
+            vertex (Vertex): The vertex to retrieve properties from.
+
+        Returns:
+            dict: The properties of the vertex.
+        """
+        return get_properties(vertex)
+
+    def get_edge_properties(self, edge: Edge) -> dict:
+        """
+        Retrieve the properties of an edge.
+
+        Args:
+            edge (Edge): The edge to retrieve properties from.
+
+        Returns:
+            dict: The properties of the edge.
+        """
+        return get_properties(edge)
+
+    def remove_vertex(self, vertex: Vertex) -> None:
+        """
+        Remove a vertex from the graph.
+
+        Args:
+            vertex (Vertex): The vertex to be removed.
+        """
+        remove_vertex(self.g, vertex)
+
+    def remove_edge(self, edge: Edge) -> None:
+        """
+        Remove an edge from the graph.
+
+        Args:
+            edge (Edge): The edge to be removed.
+        """
+        remove_edge(self.g, edge)

@@ -1,4 +1,8 @@
-"""Memory class for HumemAI"""
+"""Memory class for HumemAI.
+
+This module provides a Memory class that represents a relationship between two nodes
+with an edge connecting them.
+"""
 
 from datetime import datetime
 
@@ -13,7 +17,6 @@ class Memory:
         head_label: str,
         tail_label: str,
         edge_label: str,
-        memory_id: int = None,
         head_properties: dict[str, any] = None,
         tail_properties: dict[str, any] = None,
         edge_properties: dict[str, any] = None,
@@ -25,8 +28,6 @@ class Memory:
             head_label (str): Label for the head node.
             tail_label (str): Label for the tail node.
             edge_label (str): Label for the edge between the head and tail nodes.
-            memory_id (int, optional): Unique identifier for the memory. Defaults to
-                None if not provided.
             head_properties (dict[str, any], optional): Properties for the head node.
                 Defaults to an empty dict if not provided.
             tail_properties (dict[str, any], optional): Properties for the tail node.
@@ -37,7 +38,6 @@ class Memory:
         self.head_label = head_label
         self.tail_label = tail_label
         self.edge_label = edge_label
-        self.memory_id = memory_id
 
         # Default properties to empty dictionaries if not provided
         self.head_properties = head_properties if head_properties is not None else {}
@@ -71,7 +71,6 @@ class Memory:
             "head": {"label": self.head_label, "properties": self.head_properties},
             "tail": {"label": self.tail_label, "properties": self.tail_properties},
             "edge": {"label": self.edge_label, "properties": self.edge_properties},
-            "memory_id": self.memory_id,
         }
 
 
@@ -86,7 +85,6 @@ class ShortMemory(Memory):
         head_label: str,
         tail_label: str,
         edge_label: str,
-        memory_id: int = None,
         head_properties: dict[str, any] = None,
         tail_properties: dict[str, any] = None,
         edge_properties: dict[str, any] = None,
@@ -98,14 +96,12 @@ class ShortMemory(Memory):
             head_label (str): Label for the head node.
             tail_label (str): Label for the tail node.
             edge_label (str): Label for the edge between the head and tail nodes.
-            memory_id (int, optional): Unique identifier for the memory. Defaults to None.
             head_properties (dict[str, any], optional): Properties for the head node.
                 Defaults to an empty dict if not provided.
             tail_properties (dict[str, any], optional): Properties for the tail node.
                 Defaults to an empty dict if not provided.
             edge_properties (dict[str, any]): Properties for the edge, including a required
                 'current_time' field. Defaults to an empty dict if not provided.
-                `location` is an optional field.
         """
         # Ensure edge_properties includes 'current_time'
         if edge_properties is None:
@@ -119,15 +115,11 @@ class ShortMemory(Memory):
                 "The 'current_time' in edge_properties must be an ISO 8601 string."
             )
 
-        if "location" not in edge_properties:
-            edge_properties["location"] = None
-
         # Initialize the parent Memory class with the modified edge_properties
         super().__init__(
             head_label=head_label,
             tail_label=tail_label,
             edge_label=edge_label,
-            memory_id=memory_id,
             head_properties=head_properties,
             tail_properties=tail_properties,
             edge_properties=edge_properties,
@@ -161,7 +153,6 @@ class LongMemory(Memory):
         head_label: str,
         tail_label: str,
         edge_label: str,
-        memory_id: int = None,
         head_properties: dict[str, any] = None,
         tail_properties: dict[str, any] = None,
         edge_properties: dict[str, any] = None,
@@ -173,7 +164,6 @@ class LongMemory(Memory):
             head_label (str): Label for the head node.
             tail_label (str): Label for the tail node.
             edge_label (str): Label for the edge between the head and tail nodes.
-            memory_id (int, optional): Unique identifier for the memory. Defaults to None.
             head_properties (dict[str, any], optional): Properties for the head node.
                 Defaults to an empty dict if not provided.
             tail_properties (dict[str, any], optional): Properties for the tail node.
@@ -199,7 +189,6 @@ class LongMemory(Memory):
             head_label=head_label,
             tail_label=tail_label,
             edge_label=edge_label,
-            memory_id=memory_id,
             head_properties=head_properties,
             tail_properties=tail_properties,
             edge_properties=edge_properties,
@@ -229,7 +218,6 @@ class EpisodicMemory(LongMemory):
         head_label: str,
         tail_label: str,
         edge_label: str,
-        memory_id: int = None,
         head_properties: dict[str, any] = None,
         tail_properties: dict[str, any] = None,
         edge_properties: dict[str, any] = None,
@@ -241,37 +229,25 @@ class EpisodicMemory(LongMemory):
             head_label (str): Label for the head node.
             tail_label (str): Label for the tail node.
             edge_label (str): Label for the edge between the head and tail nodes.
-            memory_id (int, optional): Unique identifier for the memory. Defaults to None.
             head_properties (dict[str, any], optional): Properties for the head node.
                 Defaults to an empty dict if not provided.
             tail_properties (dict[str, any], optional): Properties for the tail node.
                 Defaults to an empty dict if not provided.
             edge_properties (dict[str, any], optional): Properties for the edge.
                 `event_time` is a required field.
-                `location` is an optional field.
-                `emotion` is an optional field.
-                `event` is an optional field.
         """
         assert "event_time" in edge_properties, "Edge property 'event_time' is required"
 
-        if not isinstance(edge_properties["event_time"], str):
+        if not isinstance(edge_properties["event_time"], list):
             raise ValueError(
-                "The 'event_time' in edge_properties must be an ISO 8601 string."
+                "The 'event_time' in edge_properties must be a list of ISO 8601 string."
             )
-
-        if "location" not in edge_properties:
-            edge_properties["location"] = None
-        if "emotion" not in edge_properties:
-            edge_properties["emotion"] = None
-        if "event" not in edge_properties:
-            edge_properties["event"] = None
 
         # Initialize the parent LongMemory class
         super().__init__(
             head_label=head_label,
             tail_label=tail_label,
             edge_label=edge_label,
-            memory_id=memory_id,
             head_properties=head_properties,
             tail_properties=tail_properties,
             edge_properties=edge_properties,
@@ -301,7 +277,6 @@ class SemanticMemory(LongMemory):
         head_label: str,
         tail_label: str,
         edge_label: str,
-        memory_id: int = None,
         head_properties: dict[str, any] = None,
         tail_properties: dict[str, any] = None,
         edge_properties: dict[str, any] = None,
@@ -313,7 +288,6 @@ class SemanticMemory(LongMemory):
             head_label (str): Label for the head node.
             tail_label (str): Label for the tail node.
             edge_label (str): Label for the edge between the head and tail nodes.
-            memory_id (int, optional): Unique identifier for the memory. Defaults to None.
             head_properties (dict[str, any], optional): Properties for the head node.
                 Defaults to an empty dict if not provided.
             tail_properties (dict[str, any], optional): Properties for the tail node.
@@ -334,12 +308,12 @@ class SemanticMemory(LongMemory):
         assert (
             "derived_from" in edge_properties
         ), "Edge property 'derived_from' is required"
+
         # Initialize the parent LongMemory class
         super().__init__(
             head_label=head_label,
             tail_label=tail_label,
             edge_label=edge_label,
-            memory_id=memory_id,
             head_properties=head_properties,
             tail_properties=tail_properties,
             edge_properties=edge_properties,

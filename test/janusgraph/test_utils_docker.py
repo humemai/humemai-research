@@ -3,6 +3,7 @@
 import unittest
 import os
 import docker
+import nest_asyncio
 from gremlin_python.driver.serializer import GraphSONSerializersV3d0
 from gremlin_python.driver.driver_remote_connection import DriverRemoteConnection
 from gremlin_python.process.anonymous_traversal import traversal
@@ -12,15 +13,14 @@ from humemai.janusgraph.utils.docker import (
     start_containers,
     stop_containers,
     remove_containers,
-    remove_all_data,
 )
 
 
 class TestDockerRunning(unittest.TestCase):
     def setUp(self) -> None:
         start_containers(
-            cassandra_container_name="foo",
-            janusgraph_container_name="bar",
+            cassandra_container_name="quux",
+            janusgraph_container_name="quux",
             warmup_seconds=20,
         )
         self.graph = Graph()
@@ -32,7 +32,10 @@ class TestDockerRunning(unittest.TestCase):
         self.g = self.graph.traversal().withRemote(self.connection)
 
     def test_add_dummy_data(self) -> None:
-        remove_all_data(self.g)
+
+        # Apply nest_asyncio to allow nested event loops (useful in Jupyter notebooks)
+        nest_asyncio.apply()
+        self.g.V().drop().iterate()
 
         try:
 
@@ -132,7 +135,7 @@ class TestDockerRunning(unittest.TestCase):
         finally:
             pass
 
-    def read_dummy_data(self) -> None:
+    def get_dummy_data(self) -> None:
 
         try:
             # Query 1: Retrieve all vertices with their properties

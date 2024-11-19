@@ -212,21 +212,3 @@ def remove_containers(
     # Remove Cassandra and JanusGraph containers
     remove_container(cassandra_container_name)
     remove_container(janusgraph_container_name)
-
-
-def remove_all_data(g: GraphTraversalSource):
-    """Remove all vertices and edges from the JanusGraph graph.
-
-    Args:
-        g (GraphTraversalSource): JanusGraph graph traversal source.
-    """
-
-    # Apply nest_asyncio to allow nested event loops (useful in Jupyter notebooks)
-    nest_asyncio.apply()
-
-    try:
-        # Delete all vertices (and their connected edges) in the graph
-        g.V().drop().iterate()
-        logger.debug("All vertices and edges have been deleted.")
-    except Exception as e:
-        logger.error(f"Failed to remove all data: {e}")

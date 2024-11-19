@@ -16,7 +16,6 @@ class TestMemory(unittest.TestCase):
             head_label="Person",
             tail_label="Person",
             edge_label="knows",
-            memory_id=101,
             head_properties={"name": "Alice", "age": 30},
             tail_properties={"name": "Bob", "age": 35},
             edge_properties={"since": 2020},
@@ -25,7 +24,6 @@ class TestMemory(unittest.TestCase):
         self.assertEqual(memory.head_label, "Person")
         self.assertEqual(memory.tail_label, "Person")
         self.assertEqual(memory.edge_label, "knows")
-        self.assertEqual(memory.memory_id, 101)
         self.assertEqual(memory.head_properties, {"name": "Alice", "age": 30})
         self.assertEqual(memory.tail_properties, {"name": "Bob", "age": 35})
         self.assertEqual(memory.edge_properties, {"since": 2020})
@@ -36,7 +34,6 @@ class TestMemory(unittest.TestCase):
             head_label="Person",
             tail_label="Person",
             edge_label="knows",
-            memory_id=101,
             head_properties={"name": "Alice"},
             tail_properties={"name": "Bob"},
             edge_properties={"since": 2020},
@@ -46,7 +43,6 @@ class TestMemory(unittest.TestCase):
             "head": {"label": "Person", "properties": {"name": "Alice"}},
             "tail": {"label": "Person", "properties": {"name": "Bob"}},
             "edge": {"label": "knows", "properties": {"since": 2020}},
-            "memory_id": 101,
         }
 
         self.assertEqual(memory.to_dict(), expected_dict)
@@ -62,7 +58,6 @@ class TestShortMemory(unittest.TestCase):
             head_label="Person",
             tail_label="Person",
             edge_label="knows",
-            memory_id=102,
             head_properties={"name": "Alice"},
             tail_properties={"name": "Bob"},
             edge_properties=edge_properties,
@@ -77,7 +72,6 @@ class TestShortMemory(unittest.TestCase):
             head_label="Person",
             tail_label="Person",
             edge_label="knows",
-            memory_id=103,
             head_properties={"name": "Alice"},
             tail_properties={"name": "Bob"},
         )
@@ -94,7 +88,6 @@ class TestShortMemory(unittest.TestCase):
             head_label="Person",
             tail_label="Person",
             edge_label="knows",
-            memory_id=104,
             head_properties={"name": "Alice"},
             tail_properties={"name": "Bob"},
             edge_properties={"current_time": current_time},
@@ -105,9 +98,8 @@ class TestShortMemory(unittest.TestCase):
             "tail": {"label": "Person", "properties": {"name": "Bob"}},
             "edge": {
                 "label": "knows",
-                "properties": {"current_time": current_time, "location": None},
+                "properties": {"current_time": current_time},
             },
-            "memory_id": 104,
         }
 
         self.assertEqual(short_memory.to_dict(), expected_dict)
@@ -132,7 +124,6 @@ class TestLongMemory(unittest.TestCase):
             head_label="Person",
             tail_label="Event",
             edge_label="remembers",
-            memory_id=201,
             head_properties={"name": "Alice"},
             tail_properties={"event_name": "Conference"},
             edge_properties={"importance": "high"},
@@ -142,7 +133,6 @@ class TestLongMemory(unittest.TestCase):
         self.assertEqual(long_memory.head_label, "Person")
         self.assertEqual(long_memory.tail_label, "Event")
         self.assertEqual(long_memory.edge_label, "remembers")
-        self.assertEqual(long_memory.memory_id, 201)
         self.assertEqual(
             long_memory.head_properties, {"name": "Alice", "num_recalled": 0}
         )
@@ -162,7 +152,6 @@ class TestLongMemory(unittest.TestCase):
             head_label="Person",
             tail_label="Event",
             edge_label="remembers",
-            memory_id=202,
             head_properties={"name": "Alice"},
             tail_properties={"event_name": "Workshop"},
         )
@@ -177,7 +166,6 @@ class TestLongMemory(unittest.TestCase):
                 "properties": {"event_name": "Workshop", "num_recalled": 0},
             },
             "edge": {"label": "remembers", "properties": {"num_recalled": 0}},
-            "memory_id": 202,
         }
 
         self.assertEqual(long_memory.to_dict(), expected_dict)
@@ -191,14 +179,13 @@ class TestEpisodicMemory(unittest.TestCase):
             head_label="Person",
             tail_label="Event",
             edge_label="experienced",
-            memory_id=301,
             head_properties={"name": "Alice"},
             tail_properties={"event_name": "Concert"},
-            edge_properties={"event_time": event_time},
+            edge_properties={"event_time": [event_time]},
         )
 
         # Ensure that `event_time` and `recalled` properties are set correctly
-        self.assertEqual(episodic_memory.edge_properties["event_time"], event_time)
+        self.assertEqual(episodic_memory.edge_properties["event_time"], [event_time])
         self.assertEqual(episodic_memory.edge_properties["num_recalled"], 0)
 
     def test_episodic_memory_missing_event_time(self):
@@ -223,10 +210,6 @@ class TestEpisodicMemory(unittest.TestCase):
                 edge_label="experienced",
                 edge_properties={"event_time": 12345},
             )
-        self.assertEqual(
-            str(context.exception),
-            "The 'event_time' in edge_properties must be an ISO 8601 string.",
-        )
 
 
 class TestSemanticMemory(unittest.TestCase):
@@ -237,7 +220,6 @@ class TestSemanticMemory(unittest.TestCase):
             head_label="Person",
             tail_label="Knowledge",
             edge_label="knows",
-            memory_id=401,
             head_properties={"name": "Alice"},
             tail_properties={"fact": "Python programming"},
             edge_properties={"known_since": known_since, "derived_from": "CS course"},
