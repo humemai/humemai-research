@@ -167,10 +167,10 @@ class TestHumemai(unittest.TestCase):
 
         vertex_a = self.humemai.write_short_term_vertex("Alice")
         vertex_b = self.humemai.write_short_term_vertex("Bob", {})
-        vertex_c = self.humemai.write_short_term_vertex("Charlie", {"foo": "qux"})
+        vertex_c = self.humemai.write_short_term_vertex("Charlie", {"foo": 243})
 
         edge_ab = self.humemai.write_short_term_edge(
-            vertex_a, "knows", vertex_b, {"foo": "bar"}
+            vertex_a, "knows", vertex_b, {"foo": 123}
         )
         edge_bc = self.humemai.write_short_term_edge(vertex_b, "likes", vertex_c)
         edge_cb = self.humemai.write_short_term_edge(
@@ -350,7 +350,7 @@ class TestHumemai(unittest.TestCase):
             {
                 "event_time": ["2021-01-01T00:00:00"],
                 "known_since": "2000-01-01T00:00:00",
-                "foo": "bar",
+                "foo": 123,
                 "num_recalled": 0,
             },
         )
@@ -491,7 +491,7 @@ class TestHumemai(unittest.TestCase):
             "G", {"type": "document", "title": "Document 1"}
         )
         edge_hg = self.humemai.write_short_term_edge(
-            vertex_h, "likes", vertex_g, {"foo": [1, 2, 3]}
+            vertex_h, "likes", vertex_g, {"foo": 111}
         )
 
         vertices, edges = self.humemai.get_working_vertices_and_edges(
