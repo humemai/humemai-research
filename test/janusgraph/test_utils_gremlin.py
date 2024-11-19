@@ -43,9 +43,7 @@ class TestGremlinUtil(unittest.TestCase):
     def setUpClass(cls):
         """Set up resources once for all tests."""
         start_containers(
-            cassandra_container_name="foo",
-            janusgraph_container_name="bar",
-            warmup_seconds=20,
+            warmup_seconds=30,
         )
         cls.graph = Graph()
         cls.connection = DriverRemoteConnection(

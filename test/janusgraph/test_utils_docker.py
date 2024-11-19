@@ -19,9 +19,7 @@ from humemai.janusgraph.utils.docker import (
 class TestDockerRunning(unittest.TestCase):
     def setUp(self) -> None:
         start_containers(
-            cassandra_container_name="quux",
-            janusgraph_container_name="quux",
-            warmup_seconds=20,
+            warmup_seconds=30,
         )
         self.graph = Graph()
         self.connection = DriverRemoteConnection(

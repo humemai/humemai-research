@@ -9,10 +9,8 @@ class TestHumemai(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         """Start containers, connect to Gremlin, and initialize Humemai instance."""
-        cls.humemai = Humemai(
-            cassandra_container_name="baz", janusgraph_container_name="qux"
-        )
-        cls.humemai.start_containers(warmup_seconds=20)
+        cls.humemai = Humemai()
+        cls.humemai.start_containers(warmup_seconds=30)
         cls.humemai.connect()
         cls.humemai.remove_all_data()
 
@@ -542,7 +540,7 @@ class TestHumemai(unittest.TestCase):
                 include_all_long_term=False,
                 hops=2,
             )
-        
+
         self.assertEqual(len(self.humemai.get_all_vertices()), 6)
         self.assertEqual(len(self.humemai.get_all_edges()), 4)
         self.assertEqual(len(self.humemai.get_all_short_term_vertices()), 0)
@@ -551,4 +549,3 @@ class TestHumemai(unittest.TestCase):
         self.assertEqual(len(self.humemai.get_all_episodic_vertices()), 4)
         self.assertEqual(len(self.humemai.get_all_semantic_vertices()), 3)
         self.assertEqual(len(self.humemai.get_all_long_term_edges()), 4)
-        
