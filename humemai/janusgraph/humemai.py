@@ -281,10 +281,9 @@ class Humemai:
 
         if action == "episodic":
             if "event_time" in get_properties(vertex):
-                new_properties["event_time"] = (
-                    get_properties(vertex)["event_time"]
-                    + get_properties(vertex)["current_time"]
-                )
+                new_properties["event_time"] = get_properties(vertex)["event_time"] + [
+                    get_properties(vertex)["current_time"]
+                ]
             else:
                 new_properties["event_time"] = [get_properties(vertex)["current_time"]]
 
@@ -331,10 +330,9 @@ class Humemai:
 
         if action == "episodic":
             if "event_time" in get_properties(edge):
-                new_properties["event_time"] = (
-                    get_properties(edge)["event_time"]
-                    + get_properties(edge)["current_time"]
-                )
+                new_properties["event_time"] = get_properties(edge)["event_time"] + [
+                    get_properties(edge)["current_time"]
+                ]
             else:
                 new_properties["event_time"] = [get_properties(edge)["current_time"]]
 
@@ -518,7 +516,7 @@ class Humemai:
         short_term_edges: list[Edge],
         include_all_long_term: bool = True,
         hops: int = None,
-    ) -> tuple[list[Vertex], list[Edge]]:
+    ) -> tuple[list[Vertex], list[Vertex], list[Edge], list[Edge]]:
         """
         Retrieves the working memory based on the short-term memories.
 
@@ -531,7 +529,8 @@ class Humemai:
             hops (int): Number of hops to traverse from the trigger node.
 
         Returns:
-            tuple: A tuple of working vertices and edges.
+            tuple: A tuple of short-term vertices, long-term vertices, short-term edges,
+                and long-term edges.
         """
         if len(short_term_vertices) == 0 or len(short_term_edges) == 0:
             self.logger.error("Short-term vertices and edges must not be empty.")
@@ -567,8 +566,10 @@ class Humemai:
         )
 
         return (
-            short_term_vertices + long_term_vertices,
-            short_term_edges + long_term_edges,
+            short_term_vertices,
+            long_term_vertices,
+            short_term_edges,
+            long_term_edges,
         )
 
     def get_all_vertices(self) -> list[Vertex]:
@@ -702,3 +703,15 @@ class Humemai:
             edge (Edge): The edge to be removed.
         """
         remove_edge(self.g, edge)
+
+    def find_vertex_by_label(self, label: str) -> list[Vertex]:
+        """
+        Find vertices by label.
+
+        Args:
+            label (str): The label to search for.
+
+        Returns:
+            list of Vertex: List of vertices with the given label.
+        """
+        return find_vertex_by_label(self.g, label)

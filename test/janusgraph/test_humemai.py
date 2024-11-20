@@ -10,7 +10,7 @@ class TestHumemai(unittest.TestCase):
     def setUpClass(cls) -> None:
         """Start containers, connect to Gremlin, and initialize Humemai instance."""
         cls.humemai = Humemai()
-        cls.humemai.start_containers(warmup_seconds=30)
+        cls.humemai.start_containers(warmup_seconds=10)
         cls.humemai.connect()
         cls.humemai.remove_all_data()
 
@@ -426,26 +426,30 @@ class TestHumemai(unittest.TestCase):
         self.assertEqual(len(self.humemai.get_all_short_term_vertices()), 7)
         self.assertEqual(len(self.humemai.get_all_short_term_edges()), 8)
 
-        vertices, edges = self.humemai.get_working_vertices_and_edges(
-            self.humemai.get_all_short_term_vertices(),
-            self.humemai.get_all_short_term_edges(),
-            include_all_long_term=True,
+        short_term_vertices, long_term_vertices, short_term_edges, long_term_edges = (
+            self.humemai.get_working_vertices_and_edges(
+                self.humemai.get_all_short_term_vertices(),
+                self.humemai.get_all_short_term_edges(),
+                include_all_long_term=True,
+            )
         )
-        self.assertEqual(len(vertices), 7)
-        self.assertEqual(len(edges), 8)
+        self.assertEqual(len(short_term_vertices + long_term_vertices), 7)
+        self.assertEqual(len(short_term_edges + long_term_edges), 8)
         self.assertEqual(len(self.humemai.get_all_vertices()), 7)
         self.assertEqual(len(self.humemai.get_all_edges()), 8)
         self.assertEqual(len(self.humemai.get_all_short_term_vertices()), 7)
         self.assertEqual(len(self.humemai.get_all_short_term_edges()), 8)
 
-        vertices, edges = self.humemai.get_working_vertices_and_edges(
-            self.humemai.get_all_short_term_vertices(),
-            self.humemai.get_all_short_term_edges(),
-            include_all_long_term=False,
-            hops=2,
+        short_term_vertices, long_term_vertices, short_term_edges, long_term_edges = (
+            self.humemai.get_working_vertices_and_edges(
+                self.humemai.get_all_short_term_vertices(),
+                self.humemai.get_all_short_term_edges(),
+                include_all_long_term=False,
+                hops=2,
+            )
         )
-        self.assertEqual(len(vertices), 7)
-        self.assertEqual(len(edges), 8)
+        self.assertEqual(len(short_term_vertices + long_term_vertices), 7)
+        self.assertEqual(len(short_term_edges + long_term_edges), 8)
         self.assertEqual(len(self.humemai.get_all_vertices()), 7)
         self.assertEqual(len(self.humemai.get_all_edges()), 8)
         self.assertEqual(len(self.humemai.get_all_short_term_vertices()), 7)
@@ -494,13 +498,15 @@ class TestHumemai(unittest.TestCase):
             vertex_h, "likes", vertex_g, {"foo": 111}
         )
 
-        vertices, edges = self.humemai.get_working_vertices_and_edges(
-            self.humemai.get_all_short_term_vertices(),
-            self.humemai.get_all_short_term_edges(),
-            include_all_long_term=True,
+        short_term_vertices, long_term_vertices, short_term_edges, long_term_edges = (
+            self.humemai.get_working_vertices_and_edges(
+                self.humemai.get_all_short_term_vertices(),
+                self.humemai.get_all_short_term_edges(),
+                include_all_long_term=True,
+            )
         )
-        self.assertEqual(len(vertices), 6)
-        self.assertEqual(len(edges), 4)
+        self.assertEqual(len(short_term_vertices + long_term_vertices), 6)
+        self.assertEqual(len(short_term_edges + long_term_edges), 4)
         self.assertEqual(len(self.humemai.get_all_vertices()), 6)
         self.assertEqual(len(self.humemai.get_all_edges()), 4)
         self.assertEqual(len(self.humemai.get_all_short_term_vertices()), 2)
@@ -510,14 +516,16 @@ class TestHumemai(unittest.TestCase):
         self.assertEqual(len(self.humemai.get_all_semantic_vertices()), 3)
         self.assertEqual(len(self.humemai.get_all_long_term_edges()), 3)
 
-        vertices, edges = self.humemai.get_working_vertices_and_edges(
-            self.humemai.get_all_short_term_vertices(),
-            self.humemai.get_all_short_term_edges(),
-            include_all_long_term=False,
-            hops=2,
+        short_term_vertices, long_term_vertices, short_term_edges, long_term_edges = (
+            self.humemai.get_working_vertices_and_edges(
+                self.humemai.get_all_short_term_vertices(),
+                self.humemai.get_all_short_term_edges(),
+                include_all_long_term=False,
+                hops=2,
+            )
         )
-        self.assertEqual(len(vertices), 4)
-        self.assertEqual(len(edges), 3)
+        self.assertEqual(len(short_term_vertices + long_term_vertices), 4)
+        self.assertEqual(len(short_term_edges + long_term_edges), 3)
         self.assertEqual(len(self.humemai.get_all_vertices()), 6)
         self.assertEqual(len(self.humemai.get_all_edges()), 4)
         self.assertEqual(len(self.humemai.get_all_short_term_vertices()), 2)
@@ -534,7 +542,12 @@ class TestHumemai(unittest.TestCase):
         self.humemai.remove_all_short_term()
 
         with self.assertRaises(ValueError):
-            vertices, edges = self.humemai.get_working_vertices_and_edges(
+            (
+                short_term_vertices,
+                long_term_vertices,
+                short_term_edges,
+                long_term_edges,
+            ) = self.humemai.get_working_vertices_and_edges(
                 self.humemai.get_all_short_term_vertices(),
                 self.humemai.get_all_short_term_edges(),
                 include_all_long_term=False,

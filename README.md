@@ -19,46 +19,22 @@ pip install humemai
 
 Supports python>=3.10
 
-## RDF-based or JanusGraph-Cassandra-based HumemAI
+## How it works
 
-### RDF-based: [`./humemai/rdflib`](./humemai/rdflib)
+The 
 
-I stopped working on this. It's very likely that I'll transition to a property graph
-based method, e.g., JanusGraph-Cassandra
+## Example
 
-### JanusGraph-Cassandra-based: [`./humemai/janusgraph`](./humemai/janusgraph)
+## Work in progress
 
-WIP!!
-
-## Updates
-
-### 24-Oct-2024
-
-- Finished implementing RDFLib-based HumemAI
-  - [`humemai/rdflib/memory.py`](./humemai/rdflib/memory.py)
-- Made a very sipmle example
-  - [`examples/example-rdflib-agent.ipynb`](./examples/example-rdflib-agent.ipynb)
-- Released v2
-
-### 11-Aug-2024
-
-- Used RL to learn policies, e.g., memory management, maze navigation, question answering.
-- The HumemAI memories are nothing but python objects, i.e., list of quadruples
-- Released v1.1.2
-
-## TODOs
-
-- Implement JanusGraph + Cassandra DB
-  - RDF-based graph as pros and cons. Let's try out a property graph.
-- Implement a very simple text2graph and graph2text based on [GraphRAG](https://github.com/microsoft/graphrag)
-- Implement a sipmle image2text2graph, e.g., face recognition.
+Currently this is a one-man job. [Click here to see the current
+progress](https://github.com/orgs/humemai/projects/2/).
 
 ## List of academic papers that use HumemAI
 
 - ["A Machine With Human-Like Memory Systems"](https://arxiv.org/abs/2204.01611)
 - ["A Machine with Short-Term, Episodic, and Semantic Memory
   Systems"](https://arxiv.org/abs/2212.02098)
-- ["Leveraging Knowledge Graph-Based Human-Like Memory Systems to Solve Partially Observable Markov Decision Processes"](https://arxiv.org/abs/2408.05861)
 
 ## List of applications that use HumemAI
 
@@ -79,10 +55,6 @@ inspire, and create. Any contributions you make are **greatly appreciated**.
 1. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 1. Push to the Branch (`git push origin feature/AmazingFeature`)
 1. Open a Pull Request
-
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
 
 ## Authors
 

@@ -43,7 +43,7 @@ class TestGremlinUtil(unittest.TestCase):
     def setUpClass(cls):
         """Set up resources once for all tests."""
         start_containers(
-            warmup_seconds=30,
+            warmup_seconds=10,
         )
         cls.graph = Graph()
         cls.connection = DriverRemoteConnection(

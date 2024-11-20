@@ -19,7 +19,7 @@ from humemai.janusgraph.utils.docker import (
 class TestDockerRunning(unittest.TestCase):
     def setUp(self) -> None:
         start_containers(
-            warmup_seconds=30,
+            warmup_seconds=10,
         )
         self.graph = Graph()
         self.connection = DriverRemoteConnection(
