@@ -4,7 +4,7 @@
 [![PyPI
 version](https://badge.fury.io/py/humemai.svg)](https://badge.fury.io/py/humemai)
 
-<div style="text-align: center;">
+<div align="center">
     <img src="./figures/humemai-with-text-below.png" alt="Image" style="width: 50%; max-width: 600px;">
 </div>
 
@@ -27,6 +27,14 @@ The `humemai` python package can already be found in [the PyPI server](https://p
 ```sh
 pip install humemai
 ```
+
+or
+
+```sh
+pip install 'humemai[dev]'
+```
+
+for the development
 
 Supports python>=3.10
 
