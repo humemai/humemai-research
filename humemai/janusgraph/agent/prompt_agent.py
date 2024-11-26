@@ -2,6 +2,7 @@
 
 import re
 import json
+from datetime import datetime
 from gremlin_python.structure.graph import Vertex, Edge
 from humemai.janusgraph import Humemai
 from humemai.utils import disable_logger
@@ -197,9 +198,12 @@ class PromptAgent:
             relations (dict): The relations to save as short-term memory.
 
         """
+        current_time = datetime.now().isoformat(timespec="seconds")
         for entity in entities:
             label = entity.get("label")
-            self.humemai.write_short_term_vertex(label=label)
+            self.humemai.write_short_term_vertex(
+                label=label, properties={"current_time": current_time}
+            )
 
         for relation in relations:
             head_label = relation.get("source")
@@ -222,6 +226,7 @@ class PromptAgent:
                 head_vertex=head_vertex,
                 edge_label=edge_label,
                 tail_vertex=tail_vertex,
+                properties={"current_time": current_time},
             )
 
     def save_as_long_term_memory(self) -> None:
