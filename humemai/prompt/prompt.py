@@ -59,7 +59,8 @@ def get_hf_pipeline(
 
 def text2graph(memory: dict, next_text: str, template: str) -> list[dict]:
     """
-    Generate the prompt for the AI assistant to convert text to a simplified knowledge graph.
+    Generate the prompt for the AI assistant to convert text to a simplified knowledge
+    graph.
 
     Args:
         memory (dict): The memory of the knowledge graph (history) extracted so far.

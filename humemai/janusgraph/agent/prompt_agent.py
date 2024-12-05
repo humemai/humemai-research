@@ -65,9 +65,7 @@ class PromptAgent:
         self.llm_config = llm_config
         self.text2graph_template = text2graph_template
 
-        self.humemai = Humemai()
-        self.humemai.start_containers(warmup_seconds=self.warmup_seconds)
-        self.humemai.connect()
+        self.start_humemai()
         self.pipeline = get_hf_pipeline(
             model=self.llm_config["model"],
             device=self.llm_config["device"],
@@ -79,48 +77,42 @@ class PromptAgent:
         if not turn_on_logger:
             disable_logger()
 
-        # HumemAI reserved keys
-        self.reserved_keys = [
-            "num_recalled",
-            "current_time",
-            "event_time",
-            "known_since",
-        ]
-
         self.reset_working_memory()
+
+    def start_humemai(self) -> None:
+        """Start the HumemAI instance."""
+        self.humemai = Humemai()
+        self.humemai.start_containers(warmup_seconds=self.warmup_seconds)
+        self.humemai.connect()
 
     def reset_working_memory(self) -> None:
         """Reset the working memory of the agent."""
 
         self.working_memory = {
-            "long_term_entities": [],
-            "long_term_relations": [],
             "short_term_entities": [],
             "short_term_relations": [],
+            "long_term_entities": [],
+            "long_term_relations": [],
         }
 
     def update_working_memory(self) -> None:
         """Update the working memory of the agent."""
+        (
+            short_term_vertices,
+            short_term_edges,
+            long_term_vertices,
+            long_term_edges,
+        ) = self.humemai.get_working(
+            include_all_long_term=False,
+            hops=self.num_hops_for_working_memory,
+        )
 
-        if len(self.humemai.get_all_short_term_vertices()) > 0:
-            (
-                short_term_vertices,
-                long_term_vertices,
-                short_term_edges,
-                long_term_edges,
-            ) = self.humemai.get_working_vertices_and_edges(
-                short_term_vertices=self.humemai.get_all_short_term_vertices(),
-                short_term_edges=self.humemai.get_all_short_term_edges(),
-                include_all_long_term=False,
-                hops=self.num_hops_for_working_memory,
-            )
-
-            self.working_memory = {
-                "long_term_entities": long_term_vertices,
-                "long_term_relations": long_term_edges,
-                "short_term_entities": short_term_vertices,
-                "short_term_relations": short_term_edges,
-            }
+        self.working_memory = {
+            "short_term_entities": short_term_vertices,
+            "short_term_relations": short_term_edges,
+            "long_term_entities": long_term_vertices,
+            "long_term_relations": long_term_edges,
+        }
 
     def return_working_memory_as_dict(self) -> dict:
         """Return the working memory as a dictionary.
@@ -157,11 +149,14 @@ class PromptAgent:
 
         return {"entities": entities, "relations": relations}
 
-    def generate_graph(self, text: str) -> None:
+    def generate_graph(self, text: str) -> tuple[list[dict], list[dict]]:
         """Process the input text and convert it into a knowledge graph.
 
         Args:
             text (str): The input text to process.
+
+        Returns:
+            tuple[list[dict], list[dict]]: The extracted entities and relations.
 
         """
         prompt = text2graph(
@@ -188,7 +183,44 @@ class PromptAgent:
         if "entities" not in extracted_dict or "relations" not in extracted_dict:
             return [], []
 
-        return extracted_dict["entities"], extracted_dict["relations"]
+        # CLEAN UP THE EXTRACTED ENTITIES AND RELATIONS
+
+        # Extract entities and relations
+        entities = extracted_dict["entities"]
+        relations = extracted_dict["relations"]
+
+        # Step 1: Filter out invalid entities
+        entities = [entity for entity in entities if "label" in entity]
+
+        # Step 2: Filter out invalid relations
+        relations = [
+            relation
+            for relation in relations
+            if "source" in relation and "relation" in relation and "target" in relation
+        ]
+
+        # Step 3: Extract all sources and targets from relations
+        sources_all = {relation["source"] for relation in relations}
+        targets_all = {relation["target"] for relation in relations}
+
+        # Step 4: Collect all valid entity labels
+        entities_all = {entity["label"] for entity in entities}
+
+        # Step 5: Filter relations with invalid sources or targets
+        relations = [
+            relation
+            for relation in relations
+            if relation["source"] in entities_all and relation["target"] in entities_all
+        ]
+
+        # Step 6: Filter entities that are not referenced as sources or targets
+        entities = [
+            entity
+            for entity in entities
+            if entity["label"] in sources_all or entity["label"] in targets_all
+        ]
+
+        return entities, relations
 
     def save_as_short_term_memory(self, entities: dict, relations: dict) -> None:
         """Save the entities and relations as short-term memory.
@@ -199,35 +231,26 @@ class PromptAgent:
 
         """
         current_time = datetime.now().isoformat(timespec="seconds")
+        current_time_vertex = self.humemai.write_time_vertex(current_time)
+
+        short_term_vertices = {}
+
         for entity in entities:
             label = entity.get("label")
-            self.humemai.write_short_term_vertex(
-                label=label, properties={"current_time": current_time}
+            short_term_vertex = self.humemai.write_short_term_vertex(
+                label=label, time_vertex=current_time_vertex
             )
+            short_term_vertices[label] = short_term_vertex
 
         for relation in relations:
-            head_label = relation.get("source")
-            # assumes that there is only one head vertex
-            head_vertex = self.humemai.find_vertex_by_label(head_label)
-            if len(head_vertex) == 0:
-                continue
-            head_vertex = head_vertex[0]
+            source_label = relation.get("source")
+            relation_label = relation.get("relation")
+            target_label = relation.get("target")
 
-            edge_label = relation.get("relation")
+            source_vertex = short_term_vertices.get(source_label)
+            target_vertex = short_term_vertices.get(target_label)
 
-            tail_label = relation.get("target")
-            # assumes that there is only one tail vertex
-            tail_vertex = self.humemai.find_vertex_by_label(tail_label)
-            if len(tail_vertex) == 0:
-                continue
-            tail_vertex = tail_vertex[0]
-
-            edge = self.humemai.write_short_term_edge(
-                head_vertex=head_vertex,
-                edge_label=edge_label,
-                tail_vertex=tail_vertex,
-                properties={"current_time": current_time},
-            )
+            self.humemai.write_edge(source_vertex, relation_label, target_vertex)
 
     def save_as_long_term_memory(self) -> None:
         """Move the short-term memories to the long-term memory.
@@ -239,12 +262,9 @@ class PromptAgent:
         for vertex in self.working_memory["short_term_entities"]:
             self.humemai.move_short_term_vertex(vertex, "episodic")
 
-        for edge in self.working_memory["short_term_relations"]:
-            self.humemai.move_short_term_edge(edge, "episodic")
-
         self.humemai.remove_all_short_term()
 
-    def step(self, text: str) -> str:
+    def step(self, text: str) -> None:
         """Process the input (text), convert it into a knowledge graph, and save it as
         short-term memory.
 
@@ -266,3 +286,9 @@ class PromptAgent:
 
         # Step 4: move the short-term memories to the long-term memory.
         self.save_as_long_term_memory()
+
+    def finish_humemai(self) -> None:
+        """Finish the HumemAI instance."""
+        self.humemai.disconnect()
+        self.humemai.stop_containers()
+        self.humemai.remove_containers()
