@@ -2,6 +2,7 @@
 
 import re
 import json
+from collections import Counter
 from datetime import datetime
 from gremlin_python.structure.graph import Vertex, Edge
 from humemai.janusgraph import Humemai
@@ -264,6 +265,27 @@ class PromptAgent:
 
         self.humemai.remove_all_short_term()
 
+    def merge_duplicates(self) -> None:
+        """Merge the duplicated vertices.
+
+        At the moment, we only merge the vertices with the same label. In the
+        future, we may do some fuzzy string matching.
+
+        """
+        # Get all vertex labels
+        labels = self.humemai.g.V().label().toList()
+
+        # Count the occurrences of each label
+        label_counts = Counter(labels)
+
+        # Filter labels that occur more than once
+        labels_more_than_once = {
+            label: count for label, count in label_counts.items() if count > 1
+        }
+
+        for label in labels_more_than_once:
+            self.humemai.merge_by_label()
+
     def step(self, text: str) -> None:
         """Process the input (text), convert it into a knowledge graph, and save it as
         short-term memory.
@@ -286,6 +308,9 @@ class PromptAgent:
 
         # Step 4: move the short-term memories to the long-term memory.
         self.save_as_long_term_memory()
+
+        # Step 5: Merge the duplicated vertices.
+        self.merge_duplicates()
 
     def finish_humemai(self) -> None:
         """Finish the HumemAI instance."""

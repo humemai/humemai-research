@@ -11,7 +11,7 @@ from gremlin_python.structure.graph import Graph, Vertex, Edge
 from gremlin_python.driver.driver_remote_connection import DriverRemoteConnection
 from gremlin_python.process.anonymous_traversal import traversal
 from gremlin_python.process.graph_traversal import GraphTraversalSource
-from gremlin_python.process.traversal import P, T, Direction
+from gremlin_python.process.traversal import P, T, Direction, TextP
 from gremlin_python.driver.serializer import GraphSONSerializersV3d0
 from humemai.janusgraph.utils.docker import (
     start_containers,
@@ -660,7 +660,7 @@ class Humemai:
         Args:
             short_term_vertices (list of Vertex): List of short-term vertices.
             include_all_long_term (bool): If True, include all long-term memories.
-            hops (int): Number of hops to traverse from the trigger node.
+            hops (int): Number of hops to traverse from the trigger vertex.
 
         Returns:
             tuple: short-term vertices, short-term edges, long-term vertices, long-term
@@ -836,3 +836,245 @@ class Humemai:
         edges = self.get_edges_between_vertices(vertices)
 
         return vertices, edges
+
+    def get_all_long_term_in_time_range(
+        self, start_time: str, end_time: str
+    ) -> tuple[list[Vertex], list[Edge]]:
+        """Retrieve long-term vertices and edges within a time range.
+
+        Args:
+            start_time (str): Lower bound of the time range.
+            end_time (str): Upper bound of the time range.
+
+        Returns:
+            list of Vertex: List of long-term vertices within the time range.
+        """
+        assert is_iso8601_datetime(
+            start_time
+        ), "Lower bound must be an ISO 8601 datetime."
+        assert is_iso8601_datetime(
+            end_time
+        ), "Upper bound must be an ISO 8601 datetime."
+
+        vertices = (
+            self.g.V()
+            .has("timestamp", True)
+            .hasLabel(P.gte(start_time).and_(P.lte(end_time)))
+            .out("has_episodic_memory", "has_semantic_memory")
+            .toList()
+        )
+
+        edges = self.get_edges_between_vertices(vertices)
+
+        return vertices, edges
+
+    def get_all_episodic_in_time_range(
+        self, start_time: str, end_time: str
+    ) -> tuple[list[Vertex], list[Edge]]:
+        """Retrieve episodic vertices and edges within a time range.
+
+        Args:
+            start_time (str): Lower bound of the time range.
+            end_time (str): Upper bound of the time range.
+
+        Returns:
+            list of Vertex: List of episodic vertices within the time range.
+        """
+        assert is_iso8601_datetime(
+            start_time
+        ), "Lower bound must be an ISO 8601 datetime."
+        assert is_iso8601_datetime(
+            end_time
+        ), "Upper bound must be an ISO 8601 datetime."
+
+        vertices = (
+            self.g.V()
+            .has("timestamp", True)
+            .hasLabel(P.gte(start_time).and_(P.lte(end_time)))
+            .out("has_episodic_memory")
+            .toList()
+        )
+
+        edges = self.get_edges_between_vertices(vertices)
+
+        return vertices, edges
+
+    def get_all_semantic_in_time_range(
+        self, start_time: str, end_time: str
+    ) -> tuple[list[Vertex], list[Edge]]:
+        """Retrieve semantic vertices and edges within a time range.
+
+        Args:
+            start_time (str): Lower bound of the time range.
+            end_time (str): Upper bound of the time range.
+
+        Returns:
+            list of Vertex: List of semantic vertices within the time range.
+        """
+        assert is_iso8601_datetime(
+            start_time
+        ), "Lower bound must be an ISO 8601 datetime."
+        assert is_iso8601_datetime(
+            end_time
+        ), "Upper bound must be an ISO 8601 datetime."
+
+        vertices = (
+            self.g.V()
+            .has("timestamp", True)
+            .hasLabel(P.gte(start_time).and_(P.lte(end_time)))
+            .out("has_semantic_memory")
+            .toList()
+        )
+
+        edges = self.get_edges_between_vertices(vertices)
+
+        return vertices, edges
+
+    def merge_by_label(self):
+        """
+        Merge all vertices and edges in the graph by their labels, creating a unified,
+        property-rich structure that combines data from multiple disconnected subgraphs.
+
+        This method:
+        - Identifies all vertices that share the same label and merges them into a single
+          vertex. It collects and aggregates their properties, ensuring that if multiple
+          values exist for the same property key across different vertices of the same label,
+          they are combined. By default, multiple property values are joined into a single
+          comma-separated string, but you can modify this merging logic as needed.
+
+        - Identifies all edges that share the same label and connect the same pair of vertex
+          labels, merging these edges into a single representative edge. It collects their
+          properties in a manner similar to vertices. If multiple edges of the same label and
+          endpoints exist, their property values are combined. This ensures that duplicate or
+          near-duplicate edges are not simply carried over; instead, they are consolidated into
+          one edge with aggregated properties.
+
+        - Preserves all other edges and their properties. Edges that are unique in terms of
+          their label or the vertex labels they connect remain unchanged, apart from having
+          their property values normalized and possibly combined with other edges that match
+          their pattern.
+
+        - Reconstructs the entire graph after performing these merges. It first clears the
+          existing graph (dropping all vertices and edges), then reintroduces a single vertex
+          for each vertex label and a single edge for each distinct (out_label, in_label,
+          edge_label) combination, enriched with all collected properties.
+
+        This approach helps when working with multiple disconnected subgraphs or overlapping
+        data sets, ensuring that all vertices and edges that share labels are consolidated
+        into a cleaner, more connected, and more data-rich graph. It’s particularly useful in
+        scenarios where graphs representing similar domain concepts (e.g., entities or
+        relationships) must be merged into a unified structure.
+
+        Note:
+        - Property merging logic (e.g., how to handle multiple values per key) can be tailored.
+          Currently, values are joined into a single string if more than one distinct value is
+          found.
+        - Since the graph is fully reconstructed after merging, references to old vertex or
+          edge IDs are invalid after calling this function. The method produces a fresh set
+          of vertices and edges aligned by label and property aggregation.
+        """
+
+        # Extract vertex data
+        vertices_data = (
+            self.g.V()
+            .project("id", "label", "props")
+            .by(T.id)
+            .by(T.label)
+            .by(__.valueMap())
+            .toList()
+        )
+
+        # Extract edge data
+        edges_data = (
+            self.g.E()
+            .project("id", "label", "out", "in", "props")
+            .by(T.id)
+            .by(T.label)
+            .by(__.outV().label())  # label of out vertex
+            .by(__.inV().label())  # label of in vertex
+            .by(__.valueMap())
+            .toList()
+        )
+
+        # Merge node properties by label
+        node_props_by_label = {}
+        for v in vertices_data:
+            vlabel = v["label"]
+            vprops = v["props"]
+            if vlabel not in node_props_by_label:
+                node_props_by_label[vlabel] = {}
+
+            for pk, pvals in vprops.items():
+                # Normalize pvals to always be a list
+                if not isinstance(pvals, list):
+                    pvals = [pvals]
+
+                if pk not in node_props_by_label[vlabel]:
+                    node_props_by_label[vlabel][pk] = []
+                for pv in pvals:
+                    if pv not in node_props_by_label[vlabel][pk]:
+                        node_props_by_label[vlabel][pk].append(pv)
+
+        # Merge edges by (out_label, in_label, edge_label)
+        edge_map = {}
+        for e in edges_data:
+            out_label = e["out"]
+            in_label = e["in"]
+            elabel = e["label"]
+            eprops = e["props"]
+
+            key = (out_label, in_label, elabel)
+            if key not in edge_map:
+                edge_map[key] = {}
+
+            for pk, pvals in eprops.items():
+                # Normalize pvals to always be a list
+                if not isinstance(pvals, list):
+                    pvals = [pvals]
+
+                if pk not in edge_map[key]:
+                    edge_map[key][pk] = []
+                for pv in pvals:
+                    if pv not in edge_map[key][pk]:
+                        edge_map[key][pk].append(pv)
+
+        # Rebuild the graph
+        self.g.V().drop().iterate()
+
+        # Create one vertex per label
+        label_to_id = {}
+        for vlabel, props in node_props_by_label.items():
+            v_trav = self.g.addV(vlabel)
+            for pk, pvals in props.items():
+                # Merge values into a single string or another format
+                merged_value = (
+                    pvals[0] if len(pvals) == 1 else ",".join(map(str, pvals))
+                )
+                v_trav.property(pk, merged_value)
+            new_v = v_trav.next()
+            label_to_id[vlabel] = new_v.id
+
+        # Create edges
+        for (out_l, in_l, elabel), props in edge_map.items():
+            e_trav = (
+                self.g.V(label_to_id[out_l]).addE(elabel).to(__.V(label_to_id[in_l]))
+            )
+            for pk, pvals in props.items():
+                merged_value = (
+                    pvals[0] if len(pvals) == 1 else ",".join(map(str, pvals))
+                )
+                e_trav.property(pk, merged_value)
+            e_trav.iterate()
+
+    def get_vertices_by_partial_label(self, partial_label: str) -> list[Vertex]:
+        """Retrieve vertices with partial label matching.
+
+        Args:
+            partial_label (str): Partial label to match.
+
+        Returns:
+            list of Vertex: List of vertices with partial label matching.
+        """
+        vertices = self.g.V().hasLabel(TextP.containing(partial_label)).toList()
+
+        return vertices

@@ -116,3 +116,45 @@ def read_json(file_path: str) -> dict:
     except Exception as e:
         logger.debug(f"An error occurred: {e}")
         return {}
+
+
+def chunk_by_tokens(
+    filename: str, num_tokens: int, num_tokens_per_word: int = 2
+) -> list[str]:
+    """
+    Reads a text file and returns a list of string chunks, each about `num_tokens` tokens long.
+    Tokens are approximated as: tokens = words * num_tokens_per_word.
+    
+    Steps:
+    1. Read the entire text file.
+    2. Split the text into words by whitespace.
+    3. Calculate how many words per chunk: words_per_chunk = num_tokens // num_tokens_per_word.
+    4. Divide the list of words into chunks of that many words.
+    5. Join each chunk's words into a single string.
+    6. Return the list of string chunks.
+
+    Args:
+        filename (str): Path to the text file.
+        num_tokens (int): Desired approximate number of tokens per chunk.
+        num_tokens_per_word (int): Average tokens per word. Default is 2.
+
+    Returns:
+        list[str]: A list of chunks, each chunk is a single string containing about `num_tokens` tokens.
+    """
+    # Calculate how many words correspond to the desired number of tokens
+    words_per_chunk = max(num_tokens // num_tokens_per_word, 1)
+
+    with open(filename, "r", encoding="utf-8") as f:
+        text = f.read()
+
+    # Split text into words
+    words = text.split()
+
+    chunks = []
+    for i in range(0, len(words), words_per_chunk):
+        chunk_words = words[i:i+words_per_chunk]
+        # Join words into a single string for the chunk
+        chunk_str = " ".join(chunk_words)
+        chunks.append(chunk_str)
+
+    return chunks
