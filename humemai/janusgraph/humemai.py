@@ -140,7 +140,7 @@ class Humemai:
         else:
             self.logger.warning("Graph traversal source (g) is not initialized.")
 
-    def create_vertex(self, label: str, properties: dict = {}) -> Vertex:
+    def write_vertex(self, label: str, properties: dict = {}) -> Vertex:
         """Create a vertex with the given properties.
 
         Note that this does not check if the vertex already exists.
@@ -259,6 +259,19 @@ class Humemai:
 
         return traversal.toList()
 
+    def get_vertices_by_partial_label(self, partial_label: str) -> list[Vertex]:
+        """Retrieve vertices with partial label matching.
+
+        Args:
+            partial_label (str): Partial label to match.
+
+        Returns:
+            list of Vertex: List of vertices with partial label matching.
+        """
+        vertices = self.g.V().hasLabel(TextP.containing(partial_label)).toList()
+
+        return vertices
+
     def get_all(self) -> tuple[list[Vertex], list[Edge]]:
         """Retrieve all vertices and edges from the graph.
 
@@ -268,7 +281,7 @@ class Humemai:
 
         return self.g.V().toList(), self.g.E().toList()
 
-    def create_edge(
+    def write_edge(
         self, head: Vertex, label: str, tail: Vertex, properties: dict = {}
     ) -> Edge:
         """Create an edge between two vertices.
@@ -417,31 +430,16 @@ class Humemai:
 
         return traversal.toList()
 
-    def get_edges_between_vertices(self, vertices: list[Vertex]) -> list[Edge]:
-        """Retrieve all edges between a list of vertices.
+    def get_label(self, element: Vertex | Edge) -> str:
+        """Retrieve the label of a vertex or edge.
 
         Args:
-            g (Graph): JanusGraph graph instance.
-            vertices (list[Vertex]): List of vertices to find edges between.
+            element (Vertex | Edge): Vertex or edge to retrieve the label for.
 
         Returns:
-            list[Edge]: List of edges between the provided vertices.
+            str: Label of the element.
         """
-        assert isinstance(vertices, list), "Vertices must be provided as a list."
-        # Extract vertex IDs from the provided Vertex objects
-        vertex_ids = [v.id for v in vertices]
-
-        edges_between_vertices = (
-            self.g.V(vertex_ids)  # Start with the given vertex IDs
-            .bothE()  # Traverse all edges connected to these vertices
-            .where(
-                __.otherV().hasId(P.within(vertex_ids))
-            )  # Ensure the other end is in the vertex set
-            .dedup()  # Avoid duplicates
-            .toList()  # Convert traversal result to a list
-        )
-
-        return edges_between_vertices
+        return element.label
 
     def get_properties(self, vertex_or_edge: Vertex | Edge) -> dict:
         """Retrieve all properties of a vertex or edge, decoding JSON-encoded values.
@@ -457,271 +455,14 @@ class Humemai:
 
         return {prop.key: prop.value for prop in vertex_or_edge.properties}
 
-    def write_time_vertex(self, timestamp: str) -> Vertex:
-        """Write a time vertex to the graph.
-
-        Args:
-            timestamp (str): The timestamp (ISO 8601 with seconds) of the vertex.
-        """
-        assert is_iso8601_datetime(timestamp), "Timestamp must be an ISO 8601 datetime."
-
-        vertex = self.create_vertex(timestamp, {"timestamp": True})
-
-        return vertex
-
-    def write_short_term_vertex(
-        self, label: str, time_vertex: Vertex, properties: dict = {}
-    ) -> Vertex:
-        """
-        Write a new short-term vertex to the graph.
-
-        This does not check if a vertex with the same label is in the database or not.
-
-        Args:
-            label (str): Label of the vertex.
-            time_vertex (Vertex): Time vertex of the vertex.
-            properties (dict): Properties of the vertex.
-
-        Returns:
-            Vertex: The newly created short-term memory vertex.
-
-        """
-        # Step 1: Create a vertex with the given label and properties
-        short_term_vertex = self.create_vertex(label, properties)
-        self.logger.debug(f"Created vertex with ID: {short_term_vertex.id}")
-
-        # Step 2: Connect the vertex to the time vertex
-        has_short_term_memory_edge = self.create_edge(
-            time_vertex, "has_short_term_memory", short_term_vertex
-        )
-        self.logger.debug(f"Created edge with ID: {has_short_term_memory_edge.id}")
-
-        return short_term_vertex
-
-    def write_edge(
-        self,
-        head_vertex: Vertex,
-        edge_label: str,
-        tail_vertex: Vertex,
-        properties: dict = {},
-    ) -> Edge:
-        """
-        Write a new short-term edge to the graph.
-
-        This does not check if an edge with the same label is in the database or not.
-
-        Args:
-            head_vertex (Vertex): Head vertex of the edge.
-            edge_label (str): Label of the edge.
-            tail_vertex (Vertex): Tail vertex of the edge.
-            properties (dict): Properties of the edge.
-
-        Returns:
-            Edge: The newly created edge.
-        """
-        edge = self.create_edge(head_vertex, edge_label, tail_vertex, properties)
-        self.logger.debug(f"Created edge with ID: {edge.id}")
-
-        return edge
-
-    def move_short_term_vertex(self, vertex: Vertex, action: str) -> None:
-        """Move the short-term vertex to another memory type.
-
-        Args:
-            vertex (Vertex): The vertex to be moved.
-            action (str): The action to be taken. Choose from 'episodic' or 'semantic'
-
-        """
-        assert (
-            self.g.V(vertex).inE("has_short_term_memory").hasNext()
-        ), "The vertex must have an incoming edge 'has_short_term_memory'."
-
-        short_term_edge = self.g.V(vertex).inE("has_short_term_memory").next()
-
-        assert (
-            self.g.V(vertex).inE("has_short_term_memory").outV().hasNext()
-        ), "The incoming edge 'has_short_term_memory' must have a head vertex."
-
-        time_vertex = self.g.V(vertex).inE("has_short_term_memory").outV().next()
-
-        assert is_iso8601_datetime(time_vertex.label), "The time vertex must be valid."
-
-        if action == "episodic":
-            episodic_edge = self.create_edge(
-                time_vertex, "has_episodic_memory", vertex, {"num_recalled": 0}
-            )
-            self.remove_edge(short_term_edge)
-
-            self.logger.debug(f"Moved vertex to episodic memory with ID: {vertex.id}")
-
-        elif action == "semantic":
-            semantic_edge = self.create_edge(
-                time_vertex, "has_semantic_memory", vertex, {"num_recalled": 0}
-            )
-            self.remove_edge(short_term_edge)
-
-            self.logger.debug(f"Moved vertex to semantic memory with ID: {vertex.id}")
-
-        else:
-            self.logger.error("Invalid action. Choose from 'episodic' or 'semantic'.")
-            raise ValueError("Invalid action. Choose from 'episodic' or 'semantic'.")
-
-    def remove_all_short_term(self) -> None:
-        """Remove all pure short-term vertices and edges.
-
-        This method removes all the short-term edges.
-
-        """
-        short_term_edges = self.get_edges_by_label("has_short_term_memory")
-
-        for edge in short_term_edges:
-            self.remove_edge(edge)
-            self.logger.debug(f"Removed short-term edge with ID: {edge.id}")
-
-        # # Remove the timestamp vertices without edges
-        # for vertex in self.g.V().has("timestamp", True).not_(__.bothE()).toList():
-        #     self.remove_vertex(vertex)
-        #     self.logger.debug(f"Removed timestamp vertex with ID: {vertex.id}")
-
-    def write_long_term_vertex(
-        self,
-        label: str,
-        memory_type: str,
-        time_vertex: Vertex,
-        properties: dict = {},
-    ) -> Vertex:
-        """Write a new long-term vertex to the graph.
-
-        This is directly writing a vertex to the long-term memory.
-
-        Args:
-            label (str): Label of the vertex.
-            memory_type (str): Type of memory to write to. Choose from 'episodic' or
-                'semantic'.
-            time_vertex (Vertex): Time vertex of the vertex.
-            properties (dict): Properties of the vertex.
-
-        Returns:
-            Vertex: The updated vertex.
-        """
-
-        # Step 1: Create a vertex with the given label and properties
-        vertex = self.create_vertex(label, properties)
-        self.logger.debug(f"Created vertex with ID: {vertex.id}")
-
-        # Step 2 (optional): Connect the vertex to the time vertex
-        if memory_type == "episodic":
-            has_episodic_memory_edge = self.create_edge(
-                time_vertex, "has_episodic_memory", vertex, {"num_recalled": 0}
-            )
-            self.logger.debug(f"Created edge with ID: {has_episodic_memory_edge.id}")
-        elif memory_type == "semantic":
-            has_semantic_memory_edge = self.create_edge(
-                time_vertex, "has_semantic_memory", vertex, {"num_recalled": 0}
-            )
-            self.logger.debug(f"Created edge with ID: {has_semantic_memory_edge.id}")
-        else:
-            self.logger.error("No memory type specified. The vertex is not connected.")
-            raise ValueError("No memory type specified. The vertex is not connected.")
-
-        return vertex
-
-    def _increment_num_recalled(self, edges: list[Edge]) -> list[Edge]:
-        """Helper function to increment 'num_recalled' on Edges
-
-        Args:
-            edges (list of Edge): List of edges to be updated.
-
-        Returns:
-            list of Edge: List of updated edges.
-
-        """
-        edges_updated = []
-        for edge in edges:
-            num_recalled = self.get_properties(edge).get("num_recalled")
-            edge = self.update_edge_properties(edge, {"num_recalled": num_recalled + 1})
-            edges_updated.append(edge)
-
-        return edges_updated
-
-    def get_working(
-        self,
-        include_all_long_term: bool = True,
-        hops: int = None,
-    ) -> tuple[list[Vertex], list[Edge], list[Vertex], list[Edge]]:
-        """
-        Retrieves the working memory based on the short-term memories.
-
-        Currently, we first fetch long-term vertices whose "label" values are the same
-        as those of the short-term vertices. These fetched long-term memories are then
-        used as triggers. We then fetch long-term vertices and edges within N hops from
-        the triggers.
-
-        Args:
-            short_term_vertices (list of Vertex): List of short-term vertices.
-            include_all_long_term (bool): If True, include all long-term memories.
-            hops (int): Number of hops to traverse from the trigger vertex.
-
-        Returns:
-            tuple: short-term vertices, short-term edges, long-term vertices, long-term
-                edges.
-        """
-        short_term_vertices, short_term_edges = self.get_all_short_term()
-        long_term_edge_labels = ["has_episodic_memory", "has_semantic_memory"]
-
-        if len(short_term_vertices) == 0:
-            self.logger.debug("Short-term memory is emtpy")
-            return [], [], [], []
-
-        if include_all_long_term:
-            long_term_vertices, _ = self.get_all_long_term()
-
-        else:
-            assert (
-                hops is not None
-            ), "hops must be provided when include_all_long_term is False."
-
-            short_term_vertex_labels = [vertex.label for vertex in short_term_vertices]
-
-            long_term_trigger_vertices = (
-                self.g.V()
-                .hasLabel(*short_term_vertex_labels)
-                .inE(*long_term_edge_labels)
-                .inV()
-                .toList()
-            )
-            if len(long_term_trigger_vertices) == 0:
-                return short_term_vertices, short_term_edges, [], []
-            else:
-                long_term_vertices = self.get_vertices_within_hops(
-                    long_term_trigger_vertices, hops, exclude_keys=["timestamp"]
-                )
-
-        # increment num_recalled for the long-term memories
-        incoming_edges = (
-            self.g.V(long_term_vertices)  # Start from the given vertices
-            .inE(*long_term_edge_labels)
-            .toList()  # Convert to a list of edges
-        )
-        self._increment_num_recalled(incoming_edges)
-
-        long_term_edges = self.get_edges_between_vertices(long_term_vertices)
-
-        return (
-            short_term_vertices,
-            short_term_edges,
-            long_term_vertices,
-            long_term_edges,
-        )
-
-    def get_vertices_within_hops(
+    def get_within_hops(
         self,
         vertices: list[Vertex],
         hops: int,
         include_keys: list[str] = [],
         exclude_keys: list[str] = [],
-    ) -> list[Vertex]:
-        """Retrieve all vertices within N hops from a starting vertex.
+    ) -> tuple[list[Vertex], list[Edge]]:
+        """Retrieve all vertices and edges within N hops from a starting vertex.
 
         Args:
             vertices (list[Vertex]): List of starting vertex IDs for the traversal.
@@ -732,14 +473,10 @@ class Humemai:
                 excluded.
 
         Returns:
-            list[Vertex]: List of vertices within N hops from the starting vertex.
+            tuple: List of vertices and edges within N hops from the starting vertex.
         """
-        assert hops >= 0, "Number of hops must be a non-negative integer."
+        assert hops > 0, "Number of hops must be a non-negative integer."
         assert isinstance(vertices, list), "Vertices must be provided as a list."
-
-        if hops == 0:
-            # Directly return the vertices themselves when hops is 0
-            return self.g.V([v.id for v in vertices]).toList()
 
         # Perform traversal for N hops
         traversal = (
@@ -761,7 +498,402 @@ class Humemai:
                 traversal = traversal.hasNot(key)
 
         # Execute the traversal and return the results
-        return traversal.toList()
+        vertices = traversal.toList()
+        edges = self.get_edges_between_vertices(vertices)
+
+        return vertices, edges
+
+    def get_edges_between_vertices(self, vertices: list[Vertex]) -> list[Edge]:
+        """Retrieve all edges between a list of vertices.
+
+        Args:
+            g (Graph): JanusGraph graph instance.
+            vertices (list[Vertex]): List of vertices to find edges between.
+
+        Returns:
+            list[Edge]: List of edges between the provided vertices.
+        """
+        assert isinstance(vertices, list), "`vertices` must be provided as a list."
+        # Extract vertex IDs from the provided Vertex objects
+        vertex_ids = [v.id for v in vertices]
+
+        edges_between_vertices = (
+            self.g.V(vertex_ids)  # Start with the given vertex IDs
+            .bothE()  # Traverse all edges connected to these vertices
+            .where(
+                __.otherV().hasId(P.within(vertex_ids))
+            )  # Ensure the other end is in the vertex set
+            .dedup()  # Avoid duplicates
+            .toList()  # Convert traversal result to a list
+        )
+
+        return edges_between_vertices
+
+    def write_short_term_vertex(self, label: str, properties: dict) -> Vertex:
+        """
+        Write a new short-term vertex to the graph. This does not check if a vertex with
+        the same label is in the database or not. The current_time should be included
+        in properties.
+
+        Args:
+            label (str): Label of the vertex.
+            current_time (str): Current time in ISO 8601 format.
+            properties (dict): Properties of the vertex.
+
+        Returns:
+            Vertex: The newly created short-term memory vertex.
+
+        """
+        assert (
+            "current_time" in properties
+        ), "Current time must be provided in properties."
+        assert is_iso8601_datetime(
+            properties["current_time"]
+        ), "Current time must be an ISO 8601 datetime."
+
+        short_term_vertex = self.write_vertex(label, properties)
+        self.logger.debug(f"Created vertex with ID: {short_term_vertex.id}")
+
+        return short_term_vertex
+
+    def write_short_term_edge(
+        self,
+        head_vertex: Vertex,
+        label: str,
+        tail_vertex: Vertex,
+        properties: dict,
+    ) -> Edge:
+        """
+        Write a new short-term edge to the graph.
+
+        This does not check if an edge with the same label is in the database or not.
+
+        Args:
+            head_vertex (Vertex): Head vertex of the edge.
+            tail_vertex (Vertex): Tail vertex of the edge.
+            label (str): Label of the edge.
+            properties (dict): Properties of the edge.
+
+        Returns:
+            Edge: The newly created edge.
+        """
+        assert (
+            "current_time" in properties
+        ), "Current time must be provided in properties."
+        assert is_iso8601_datetime(
+            properties["current_time"]
+        ), "Current time must be an ISO 8601 datetime."
+
+        edge = self.write_edge(head_vertex, label, tail_vertex, properties)
+        self.logger.debug(f"Created edge with ID: {edge.id}")
+
+        return edge
+
+    def move_short_term_vertex(self, vertex: Vertex, action: str) -> None:
+        """Move the short-term vertex to another memory type.
+
+        Args:
+            vertex (Vertex): The vertex to be moved.
+            action (str): The action to be taken. Choose from 'episodic' or 'semantic'
+
+        """
+        assert action in [
+            "episodic",
+            "semantic",
+        ], "Invalid action. Choose from 'episodic' or 'semantic'."
+        assert "current_time" in self.get_properties(
+            vertex
+        ), "Current time must be provided in properties."
+
+        properties = self.get_properties(vertex)
+        properties["num_recalled"] = 0
+        current_time = properties.pop("current_time")
+
+        if action == "episodic":
+            updated_vertex = self.remove_vertex_properties(vertex, ["current_time"])
+            properties["event_time"] = current_time
+            updated_vertex = self.update_vertex_properties(vertex, properties)
+            self.logger.debug(
+                f"Moved vertex to episodic memory with ID: {updated_vertex.id}"
+            )
+
+        elif action == "semantic":
+            updated_vertex = self.remove_vertex_properties(vertex, ["current_time"])
+            properties["known_since"] = current_time
+            updated_vertex = self.update_vertex_properties(vertex, properties)
+            self.logger.debug(
+                f"Moved vertex to semantic memory with ID: {updated_vertex.id}"
+            )
+
+        else:
+            self.logger.error("Invalid action. Choose from 'episodic' or 'semantic'.")
+            raise ValueError("Invalid action. Choose from 'episodic' or 'semantic'.")
+
+    def move_short_term_edge(self, edge: Edge, action: str) -> None:
+        """Move the short-term edge to another memory type.
+
+        Args:
+            edge (Edge): The edge to be moved.
+            action (str): The action to be taken. Choose from 'episodic' or 'semantic'
+
+        """
+        assert action in [
+            "episodic",
+            "semantic",
+        ], "Invalid action. Choose from 'episodic' or 'semantic'."
+        assert "current_time" in self.get_properties(
+            edge
+        ), "Current time must be provided in properties."
+
+        properties = self.get_properties(edge)
+        properties["num_recalled"] = 0
+        current_time = properties.pop("current_time")
+
+        if action == "episodic":
+            updated_edge = self.remove_edge_properties(edge, ["current_time"])
+            properties["event_time"] = current_time
+            updated_edge = self.update_edge_properties(edge, properties)
+            self.logger.debug(
+                f"Moved edge to episodic memory with ID: {updated_edge.id}"
+            )
+
+        elif action == "semantic":
+            updated_edge = self.remove_edge_properties(edge, ["current_time"])
+            properties["known_since"] = current_time
+            updated_edge = self.update_edge_properties(edge, properties)
+            self.logger.debug(
+                f"Moved edge to semantic memory with ID: {updated_edge.id}"
+            )
+
+    def remove_all_short_term(self) -> None:
+        """Remove all pure short-term vertices and edges.
+
+        This method removes all the short-term edges.
+
+        """
+        self.g.V().has("current_time").drop().iterate()
+        self.logger.debug("Removed all short-term vertices (and edges).")
+
+    def write_long_term_vertex(
+        self,
+        label: str,
+        properties: dict,
+    ) -> Vertex:
+        """
+        Write a new long-term vertex to the graph. This is directly writing a vertex to
+        the long-term memory. It's encouraged to specify either 'episodic' or 'semantic'
+        in the properties, i.e., "event_time" or "known_since", respectively.
+        `num_recalled=0` is also added to the properties.
+
+        Args:
+            label (str): Label of the vertex.
+            properties (dict): Properties of the vertex.
+
+        Returns:
+            Vertex: The updated vertex.
+        """
+        assert (
+            "event_time" in properties or "known_since" in properties
+        ), "Event time or known since must be provided in properties."
+
+        if "event_time" in properties:
+            assert is_iso8601_datetime(
+                properties["event_time"]
+            ), "Event time must be an ISO 8601 datetime."
+        elif "known_since" in properties:
+            assert is_iso8601_datetime(
+                properties["known_since"]
+            ), "Known since must be an ISO 8601 datetime."
+
+        properties["num_recalled"] = 0
+        # Step 1: Create a vertex with the given label and properties
+        vertex = self.write_vertex(label, properties)
+        self.logger.debug(f"Created a long-term vertex with ID: {vertex.id}")
+
+        return vertex
+
+    def write_long_term_edge(
+        self, head_vertex: Vertex, label: str, tail_vertex: Vertex, properties: dict
+    ) -> Edge:
+        """
+        Write a new long-term edge to the graph.
+
+        Args:
+            head_vertex (Vertex): Head vertex of the edge.
+            label (str): Label of the edge.
+            tail_vertex (Vertex): Tail vertex of the edge.
+            properties (dict): Properties of the edge.
+
+        Returns:
+            Edge: The newly created edge.
+        """
+        assert (
+            "event_time" in properties or "known_since" in properties
+        ), "Event time or known since must be provided in properties."
+
+        if "event_time" in properties:
+            assert is_iso8601_datetime(
+                properties["event_time"]
+            ), "Event time must be an ISO 8601 datetime."
+        elif "known_since" in properties:
+            assert is_iso8601_datetime(
+                properties["known_since"]
+            ), "Known since must be an ISO 8601 datetime."
+
+        properties["num_recalled"] = 0
+        edge = self.write_edge(head_vertex, label, tail_vertex, properties)
+        self.logger.debug(f"Created a long-term edge with ID: {edge.id}")
+
+        return edge
+
+    def connect_duplicate_vertices(self, match_logic: str = "exact_label") -> None:
+        """Connect duplicate vertices based on the match logic. This will create
+        "meta" nodes for each label and connect the duplicate nodes to the meta node
+        with a "has_meta_node" edge.
+
+        Args:
+            match_logic (str): The logic to match vertices. Choose from 'exact_label' or
+                'exact_properties'.
+
+        """
+        if match_logic == "exact_label":
+            repeated_labels = [
+                key
+                for key, val in self.g.V().label().groupCount().toList()[0].items()
+                if val > 1
+            ]
+            self.logger.debug(f"Repeated labels found: {repeated_labels}")
+
+            for label in repeated_labels:
+                # Create a reference node for the label
+                if self.g.V().hasLabel(f"meta_{label}").hasNext():
+                    meta_node = self.g.V().hasLabel(f"meta_{label}").next()
+                else:
+                    meta_node = (
+                        self.g.addV(f"meta_{label}").property("meta_node", True).next()
+                    )
+                unconnected_nodes = (
+                    self.g.V().hasLabel(label).not_(__.outE("has_meta_node")).toList()
+                )
+
+                for node in unconnected_nodes:
+                    self.g.V(node).addE("has_meta_node").to(meta_node).iterate()
+        else:
+            raise NotImplementedError(
+                "Currently, only 'exact_label' match logic is supported."
+            )
+
+    def _increment_num_recalled(
+        self, vertices: list[Vertex], edges: list[Edge]
+    ) -> tuple[list[Vertex], list[Edge]]:
+        """Helper function to increment 'num_recalled' on Edges
+
+        Args:
+            vertices (list of Vertex): List of vertices to be updated.
+            edges (list of Edge): List of edges to be updated.
+
+        Returns:
+            tuple: List of updated vertices and edges.
+
+        """
+        vertices_updated = []
+        for vertex in vertices:
+            num_recalled = self.get_properties(vertex).get("num_recalled")
+            vertex = self.update_vertex_properties(
+                vertex, {"num_recalled": num_recalled + 1}
+            )
+            vertices_updated.append(vertex)
+
+        edges_updated = []
+        for edge in edges:
+            num_recalled = self.get_properties(edge).get("num_recalled")
+            edge = self.update_edge_properties(edge, {"num_recalled": num_recalled + 1})
+            edges_updated.append(edge)
+
+        return vertices_updated, edges_updated
+
+    def get_working(
+        self,
+        hops: int = 1,
+        include_all_long_term: bool = False,
+        match_logic: str = "exact_label",
+    ) -> tuple[list[Vertex], list[Edge], list[Vertex], list[Edge]]:
+        """
+        Retrieves the working memory based on the short-term memories. This considers
+        meta nodes for duplicate vertices. If include_all_long_term is True, all
+        long-term memories are included. Otherwise, the long-term memories are included
+        based on the hops.
+
+        Currently we only use the labels from the short-term memory to retrieve the
+        long-term memory with the exact string matching.
+
+        Args:
+            hops (int): Number of hops to traverse from the trigger vertex.
+            include_all_long_term (bool): If True, include all long-term memories.
+            match_logic (str): The logic to match vertices. Choose from 'exact_label' or
+                'exact_properties'.
+
+        Returns:
+            tuple: short-term vertices, short-term edges, long-term vertices, long-term
+                edges.
+        """
+        assert hops > 0, "Hops must be a positive integer."
+        if match_logic != "exact_label":
+            raise NotImplementedError(
+                "Currently, only 'exact_label' match logic is supported."
+            )
+
+        short_term_vertices, short_term_edges = self.get_all_short_term()
+
+        if len(short_term_vertices) == 0:
+            self.logger.debug("Short-term memory is emtpy")
+            return [], [], [], []
+
+        if include_all_long_term:
+            long_term_vertices, long_term_edges = self.get_all_long_term()
+
+        else:
+            assert (
+                hops is not None
+            ), "hops must be provided when include_all_long_term is False."
+
+            # Exact string matching for labels
+            trigger_labels = [vertex.label for vertex in short_term_vertices]
+            long_term_vertices = (
+                self.g.V()
+                .hasLabel(*trigger_labels)
+                .emit()
+                .repeat(
+                    __.bothE()
+                    .otherV()
+                    .union(
+                        __.out("has_meta_node"),
+                        __.out("has_meta_node").in_("has_meta_node"),
+                        __.in_("has_meta_node"),
+                        __.identity(),  # Also keep the current node
+                    )
+                    .simplePath()  # Avoid revisiting nodes in the same path
+                )
+                .times(hops)
+                .dedup()  # Remove duplicate vertices
+                .hasNot("meta_node")  # Exclude vertices with 'meta_node'
+                .has("num_recalled")  # Only include long-term vertices
+                .hasNot("current_time")  # Exclude short-term vertices
+                .toList()
+            )
+
+            long_term_edges = self.get_edges_between_vertices(long_term_vertices)
+
+        long_term_vertices, long_term_edges = self._increment_num_recalled(
+            long_term_vertices, long_term_edges
+        )
+
+        return (
+            short_term_vertices,
+            short_term_edges,
+            long_term_vertices,
+            long_term_edges,
+        )
 
     def save_db_as_json(self, json_name: str = "db.json") -> None:
         """Read the database as a JSON file.
@@ -794,8 +926,8 @@ class Humemai:
         Returns:
             tuple: List of short-term vertices and edges.
         """
-        vertices = self.g.V().inE("has_short_term_memory").inV().toList()
-        edges = self.get_edges_between_vertices(vertices)
+        vertices = self.g.V().has("current_time").toList()
+        edges = self.g.E().has("current_time").toList()
 
         return vertices, edges
 
@@ -806,10 +938,8 @@ class Humemai:
         Returns:
             tuple: List of long-term vertices and edges.
         """
-        vertices = (
-            self.g.V().inE("has_episodic_memory", "has_semantic_memory").inV().toList()
-        )
-        edges = self.get_edges_between_vertices(vertices)
+        vertices = self.g.V().has("num_recalled").toList()
+        edges = self.g.E().has("num_recalled").toList()
 
         return vertices, edges
 
@@ -820,8 +950,8 @@ class Humemai:
         Returns:
             tuple: List of episodic vertices and edges.
         """
-        vertices = self.g.V().inE("has_episodic_memory").inV().toList()
-        edges = self.get_edges_between_vertices(vertices)
+        vertices = self.g.V().has("event_time").toList()
+        edges = self.g.E().has("event_time").toList()
 
         return vertices, edges
 
@@ -832,39 +962,8 @@ class Humemai:
         Returns:
             tuple: List of semantic vertices and edges.
         """
-        vertices = self.g.V().inE("has_semantic_memory").inV().toList()
-        edges = self.get_edges_between_vertices(vertices)
-
-        return vertices, edges
-
-    def get_all_long_term_in_time_range(
-        self, start_time: str, end_time: str
-    ) -> tuple[list[Vertex], list[Edge]]:
-        """Retrieve long-term vertices and edges within a time range.
-
-        Args:
-            start_time (str): Lower bound of the time range.
-            end_time (str): Upper bound of the time range.
-
-        Returns:
-            list of Vertex: List of long-term vertices within the time range.
-        """
-        assert is_iso8601_datetime(
-            start_time
-        ), "Lower bound must be an ISO 8601 datetime."
-        assert is_iso8601_datetime(
-            end_time
-        ), "Upper bound must be an ISO 8601 datetime."
-
-        vertices = (
-            self.g.V()
-            .has("timestamp", True)
-            .hasLabel(P.gte(start_time).and_(P.lte(end_time)))
-            .out("has_episodic_memory", "has_semantic_memory")
-            .toList()
-        )
-
-        edges = self.get_edges_between_vertices(vertices)
+        vertices = self.g.V().has("known_since").toList()
+        edges = self.g.E().has("known_since").toList()
 
         return vertices, edges
 
@@ -889,12 +988,9 @@ class Humemai:
 
         vertices = (
             self.g.V()
-            .has("timestamp", True)
-            .hasLabel(P.gte(start_time).and_(P.lte(end_time)))
-            .out("has_episodic_memory")
+            .has("event_time", P.gte(start_time).and_(P.lte(end_time)))
             .toList()
         )
-
         edges = self.get_edges_between_vertices(vertices)
 
         return vertices, edges
@@ -920,9 +1016,7 @@ class Humemai:
 
         vertices = (
             self.g.V()
-            .has("timestamp", True)
-            .hasLabel(P.gte(start_time).and_(P.lte(end_time)))
-            .out("has_semantic_memory")
+            .has("known_since", P.gte(start_time).and_(P.lte(end_time)))
             .toList()
         )
 
@@ -930,151 +1024,32 @@ class Humemai:
 
         return vertices, edges
 
-    def merge_by_label(self):
-        """
-        Merge all vertices and edges in the graph by their labels, creating a unified,
-        property-rich structure that combines data from multiple disconnected subgraphs.
-
-        This method:
-        - Identifies all vertices that share the same label and merges them into a single
-          vertex. It collects and aggregates their properties, ensuring that if multiple
-          values exist for the same property key across different vertices of the same label,
-          they are combined. By default, multiple property values are joined into a single
-          comma-separated string, but you can modify this merging logic as needed.
-
-        - Identifies all edges that share the same label and connect the same pair of vertex
-          labels, merging these edges into a single representative edge. It collects their
-          properties in a manner similar to vertices. If multiple edges of the same label and
-          endpoints exist, their property values are combined. This ensures that duplicate or
-          near-duplicate edges are not simply carried over; instead, they are consolidated into
-          one edge with aggregated properties.
-
-        - Preserves all other edges and their properties. Edges that are unique in terms of
-          their label or the vertex labels they connect remain unchanged, apart from having
-          their property values normalized and possibly combined with other edges that match
-          their pattern.
-
-        - Reconstructs the entire graph after performing these merges. It first clears the
-          existing graph (dropping all vertices and edges), then reintroduces a single vertex
-          for each vertex label and a single edge for each distinct (out_label, in_label,
-          edge_label) combination, enriched with all collected properties.
-
-        This approach helps when working with multiple disconnected subgraphs or overlapping
-        data sets, ensuring that all vertices and edges that share labels are consolidated
-        into a cleaner, more connected, and more data-rich graph. It’s particularly useful in
-        scenarios where graphs representing similar domain concepts (e.g., entities or
-        relationships) must be merged into a unified structure.
-
-        Note:
-        - Property merging logic (e.g., how to handle multiple values per key) can be tailored.
-          Currently, values are joined into a single string if more than one distinct value is
-          found.
-        - Since the graph is fully reconstructed after merging, references to old vertex or
-          edge IDs are invalid after calling this function. The method produces a fresh set
-          of vertices and edges aligned by label and property aggregation.
-        """
-
-        # Extract vertex data
-        vertices_data = (
-            self.g.V()
-            .project("id", "label", "props")
-            .by(T.id)
-            .by(T.label)
-            .by(__.valueMap())
-            .toList()
-        )
-
-        # Extract edge data
-        edges_data = (
-            self.g.E()
-            .project("id", "label", "out", "in", "props")
-            .by(T.id)
-            .by(T.label)
-            .by(__.outV().label())  # label of out vertex
-            .by(__.inV().label())  # label of in vertex
-            .by(__.valueMap())
-            .toList()
-        )
-
-        # Merge node properties by label
-        node_props_by_label = {}
-        for v in vertices_data:
-            vlabel = v["label"]
-            vprops = v["props"]
-            if vlabel not in node_props_by_label:
-                node_props_by_label[vlabel] = {}
-
-            for pk, pvals in vprops.items():
-                # Normalize pvals to always be a list
-                if not isinstance(pvals, list):
-                    pvals = [pvals]
-
-                if pk not in node_props_by_label[vlabel]:
-                    node_props_by_label[vlabel][pk] = []
-                for pv in pvals:
-                    if pv not in node_props_by_label[vlabel][pk]:
-                        node_props_by_label[vlabel][pk].append(pv)
-
-        # Merge edges by (out_label, in_label, edge_label)
-        edge_map = {}
-        for e in edges_data:
-            out_label = e["out"]
-            in_label = e["in"]
-            elabel = e["label"]
-            eprops = e["props"]
-
-            key = (out_label, in_label, elabel)
-            if key not in edge_map:
-                edge_map[key] = {}
-
-            for pk, pvals in eprops.items():
-                # Normalize pvals to always be a list
-                if not isinstance(pvals, list):
-                    pvals = [pvals]
-
-                if pk not in edge_map[key]:
-                    edge_map[key][pk] = []
-                for pv in pvals:
-                    if pv not in edge_map[key][pk]:
-                        edge_map[key][pk].append(pv)
-
-        # Rebuild the graph
-        self.g.V().drop().iterate()
-
-        # Create one vertex per label
-        label_to_id = {}
-        for vlabel, props in node_props_by_label.items():
-            v_trav = self.g.addV(vlabel)
-            for pk, pvals in props.items():
-                # Merge values into a single string or another format
-                merged_value = (
-                    pvals[0] if len(pvals) == 1 else ",".join(map(str, pvals))
-                )
-                v_trav.property(pk, merged_value)
-            new_v = v_trav.next()
-            label_to_id[vlabel] = new_v.id
-
-        # Create edges
-        for (out_l, in_l, elabel), props in edge_map.items():
-            e_trav = (
-                self.g.V(label_to_id[out_l]).addE(elabel).to(__.V(label_to_id[in_l]))
-            )
-            for pk, pvals in props.items():
-                merged_value = (
-                    pvals[0] if len(pvals) == 1 else ",".join(map(str, pvals))
-                )
-                e_trav.property(pk, merged_value)
-            e_trav.iterate()
-
-    def get_vertices_by_partial_label(self, partial_label: str) -> list[Vertex]:
-        """Retrieve vertices with partial label matching.
+    def get_all_long_term_in_time_range(
+        self, start_time: str, end_time: str
+    ) -> tuple[list[Vertex], list[Edge]]:
+        """Retrieve long-term vertices and edges within a time range.
 
         Args:
-            partial_label (str): Partial label to match.
+            start_time (str): Lower bound of the time range.
+            end_time (str): Upper bound of the time range.
 
         Returns:
-            list of Vertex: List of vertices with partial label matching.
+            list of Vertex: List of long-term vertices within the time range.
         """
-        vertices = self.g.V().hasLabel(TextP.containing(partial_label)).toList()
+        assert is_iso8601_datetime(
+            start_time
+        ), "Lower bound must be an ISO 8601 datetime."
+        assert is_iso8601_datetime(
+            end_time
+        ), "Upper bound must be an ISO 8601 datetime."
 
-        return vertices
+        episodic_vertices, episodic_edges = self.get_all_episodic_in_time_range(
+            start_time, end_time
+        )
+        semantic_vertices, semantic_edges = self.get_all_semantic_in_time_range(
+            start_time, end_time
+        )
+        long_term_vertices = episodic_vertices + semantic_vertices
+        long_term_edges = episodic_edges + semantic_edges
+
+        return long_term_vertices, long_term_edges

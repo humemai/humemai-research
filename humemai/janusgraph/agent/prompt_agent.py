@@ -114,6 +114,7 @@ class PromptAgent:
             "long_term_entities": long_term_vertices,
             "long_term_relations": long_term_edges,
         }
+        print(self.working_memory)
 
     def return_working_memory_as_dict(self) -> dict:
         """Return the working memory as a dictionary.
@@ -232,14 +233,14 @@ class PromptAgent:
 
         """
         current_time = datetime.now().isoformat(timespec="seconds")
-        current_time_vertex = self.humemai.write_time_vertex(current_time)
+        properties = {"current_time": current_time}
 
         short_term_vertices = {}
 
         for entity in entities:
             label = entity.get("label")
             short_term_vertex = self.humemai.write_short_term_vertex(
-                label=label, time_vertex=current_time_vertex
+                label=label, properties=properties
             )
             short_term_vertices[label] = short_term_vertex
 
@@ -251,7 +252,9 @@ class PromptAgent:
             source_vertex = short_term_vertices.get(source_label)
             target_vertex = short_term_vertices.get(target_label)
 
-            self.humemai.write_edge(source_vertex, relation_label, target_vertex)
+            self.humemai.write_short_term_edge(
+                source_vertex, relation_label, target_vertex, properties=properties
+            )
 
     def save_as_long_term_memory(self) -> None:
         """Move the short-term memories to the long-term memory.
@@ -263,28 +266,10 @@ class PromptAgent:
         for vertex in self.working_memory["short_term_entities"]:
             self.humemai.move_short_term_vertex(vertex, "episodic")
 
+        for edge in self.working_memory["short_term_relations"]:
+            self.humemai.move_short_term_edge(edge, "episodic")
+
         self.humemai.remove_all_short_term()
-
-    def merge_duplicates(self) -> None:
-        """Merge the duplicated vertices.
-
-        At the moment, we only merge the vertices with the same label. In the
-        future, we may do some fuzzy string matching.
-
-        """
-        # Get all vertex labels
-        labels = self.humemai.g.V().label().toList()
-
-        # Count the occurrences of each label
-        label_counts = Counter(labels)
-
-        # Filter labels that occur more than once
-        labels_more_than_once = {
-            label: count for label, count in label_counts.items() if count > 1
-        }
-
-        for label in labels_more_than_once:
-            self.humemai.merge_by_label()
 
     def step(self, text: str) -> None:
         """Process the input (text), convert it into a knowledge graph, and save it as
@@ -310,7 +295,7 @@ class PromptAgent:
         self.save_as_long_term_memory()
 
         # Step 5: Merge the duplicated vertices.
-        self.merge_duplicates()
+        self.humemai.connect_duplicate_vertices()
 
     def finish_humemai(self) -> None:
         """Finish the HumemAI instance."""
