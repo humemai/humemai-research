@@ -12,7 +12,7 @@ class TestHumemai(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         """Start containers, connect to Gremlin, and initialize Humemai instance."""
-        cls.humemai = Humemai()
+        cls.humemai = Humemai(warmup_seconds=120)
         cls.humemai.connect()
         cls.humemai.remove_all_data()
 
