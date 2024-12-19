@@ -1,9 +1,9 @@
-# This workflow will install create documentation for the project and upload it to google pages
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+# This workflow generates documentation for the project and deploys it to GitHub Pages.
+# For more information, see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
 name: Documentation
 
-# security: restrict permissions for CI jobs.
+# Security: restrict permissions for CI jobs.
 permissions:
   contents: read
 
@@ -12,10 +12,10 @@ on:
     branches:
       - "main"
 
-  # Allows you to run this workflow manually from the Actions tab
+  # Allows you to run this workflow manually from the Actions tab.
   workflow_dispatch:
 
-# Allow one concurrent deployment
+# Allow one concurrent deployment.
 concurrency:
   group: "pages"
   cancel-in-progress: true
@@ -25,31 +25,45 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Checkout repository without submodules
+        run: |
+          git clone --depth 1 https://github.com/humemai/humemai.git humemai
+          cd humemai
+          git checkout main
+
       - name: Setup Pages
         uses: actions/configure-pages@v3
-      - uses: actions/setup-python@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
           python-version: "3.10"
-      - name: Upgrade pip and build dependencies
+
+      - name: Upgrade pip and install dependencies
         run: |
           python -m pip install --upgrade pip setuptools wheel pdoc pytest
-      - name: Install humemai
+
+      - name: Install humemai package
         run: |
-          python -m pip install git+https://github.com/humemai/humemai@main
-      - name: Create output dir
+          cd humemai
+          python -m pip install .
+
+      - name: Create output directory
         run: |
           rm -rf _docs 
           mkdir _docs
+
       - name: Build documentation
         run: |
-          python -m pdoc -d google -o _docs/ humemai
-      - uses: actions/upload-pages-artifact@v2
+          cd humemai
+          python -m pdoc -d google -o ../_docs humemai
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v2
         with:
           path: "./_docs/"
 
-  # Deploy the artifact to GitHub pages.
+  # Deploy the artifact to GitHub Pages.
   # This is a separate job so that only actions/deploy-pages has the necessary permissions.
   deploy:
     needs: build
