@@ -22,22 +22,37 @@ version](https://badge.fury.io/py/humemai.svg)](https://badge.fury.io/py/humemai
 
 ## Installation
 
-The `humemai` python package can already be found in [the PyPI
-server](https://pypi.org/project/humemai/)
+### Python Package
 
-```sh
+The `humemai` Python package is available on the [PyPI server](https://pypi.org/project/humemai/). You can install it using `pip`:
+
+```bash
 pip install humemai
 ```
 
-or
+For development purposes, use:
 
-```sh
+```bash
 pip install 'humemai[dev]'
 ```
 
-for the development
+**Supported Python Versions:** Python >= 3.10
 
-Supports python>=3.10
+### Docker Compose
+
+To set up Docker Compose, follow these steps:
+
+#### Update package lists
+
+```bash
+sudo apt-get update
+```
+
+#### Install Docker Compose
+
+```bash
+sudo apt-get install -y docker-compose
+```
 
 ## Text2Graph and Graph2Text
 
@@ -47,10 +62,78 @@ and GNN based neural networks.
 
 ## Example
 
-- [`example-janus-agent.ipynb`](./examples/janus-graph-parse-text/example-janus-agent.ipynb):
+- [`example-janus-agent.ipynb`](./examples/harry-potter/harry-potter-agent.ipynb):
   This Jupyter Notebook reads the Harry Potter book paragraph by paragraph and turns it
   into a knowledge graph. Text2Graph and Graph2Text are achieved with LLM prompting.
 - More to come ...
+
+## Docker Compose for JanusGraph with Cassandra and Elasticsearch
+
+This project uses a `docker-compose-cql-es.yml` file to set up a JanusGraph instance with Cassandra, Elasticsearch, and other supporting services.
+
+### Key Points
+
+1. Unless you instantiate the `Humemai` class with a specified `compose_file_path`, it will always use the default `docker-compose-cql-es.yml` provided in the repository.
+2. Port numbers, container names, and other configurations are currently fixed. Future updates will make these configurable for running multiple instances on the same machine.
+3. The Docker Compose file starts four Docker containers:
+   - `janusgraph`: The main JanusGraph instance.
+   - `cassandra`: The backend storage for JanusGraph.
+   - `elasticsearch`: The index/search backend for JanusGraph.
+   - `janusgraph-visualizer`: A visualization tool for JanusGraph.
+4. Not all Docker images are the latest versions. Future work includes updating to the latest compatible versions.
+
+### Instructions
+
+#### Start the Containers
+
+Run the following command in the same directory as the `docker-compose-cql-es.yml` file:
+
+```bash
+docker-compose -f docker-compose-cql-es.yml up -d
+```
+
+#### Check the Status of Containers
+
+Verify the running containers:
+
+```
+docker ps
+```
+
+You should see containers named:
+
+- `jce-janusgraph`
+- `jce-cassandra`
+- `jce-elastic`
+- `jce-visualizer`
+
+#### Access the Services
+
+- **JanusGraph Gremlin Server:** Accessible at `localhost:8182`.
+- **Elasticsearch:** Accessible at `localhost:9200`.
+- **Visualizer:** Accessible at `http://localhost:3000`.
+
+#### Stop the Containers
+
+To stop the services:
+
+```bash
+docker-compose -f docker-compose-cql-es.yml down
+```
+
+#### Clean Up
+
+If you want to remove the containers and associated volumes:
+
+```bash
+docker-compose -f docker-compose-cql-es.yml down --volumes
+```
+
+### Future Work
+
+- Make port numbers, container names, and other configurations customizable.
+- Update Docker images to the latest compatible versions.
+- Add support for running multiple instances on the same machine.
 
 ## Visualizaing Graph
 
