@@ -17,7 +17,7 @@ logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 
-def start_docker_compose(compose_file_path: str, warmup_seconds: int = 10) -> None:
+def start_docker_compose(compose_file_path: str, warmup_seconds: int = 30) -> None:
     """
     Starts the Docker Compose services specified in the given compose file.
 
@@ -39,17 +39,19 @@ def start_docker_compose(compose_file_path: str, warmup_seconds: int = 10) -> No
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True,
+            check=True,
         )
 
         # Output the results
-        if result.returncode == 0:
-            time.sleep(warmup_seconds)
-            logger.debug("Docker Compose started successfully.")
-            logger.debug(result.stdout)
-        else:
-            logger.error(f"Error running docker-compose: {result.stderr}")
+        # if result.returncode == 0:
+        time.sleep(warmup_seconds)
+        logger.debug("Docker Compose started successfully.")
+        logger.debug(result.stdout)
+        # else:
+        #     logger.error(f"Error running docker-compose: {result.stderr}")
     except Exception as e:
         logger.error(f"An error occurred: {e}")
+        raise e
 
 
 def stop_docker_compose(compose_file_path: str) -> None:

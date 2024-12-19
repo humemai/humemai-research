@@ -83,7 +83,6 @@ class PromptAgent:
     def start_humemai(self) -> None:
         """Start the HumemAI instance."""
         self.humemai = Humemai()
-        self.humemai.start_containers(warmup_seconds=self.warmup_seconds)
         self.humemai.connect()
 
     def reset_working_memory(self) -> None:
@@ -300,5 +299,5 @@ class PromptAgent:
     def finish_humemai(self) -> None:
         """Finish the HumemAI instance."""
         self.humemai.disconnect()
-        self.humemai.stop_containers()
-        self.humemai.remove_containers()
+        self.humemai.stop_docker_compose()
+        self.humemai.remove_docker_compose()

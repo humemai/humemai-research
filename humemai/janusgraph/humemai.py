@@ -2,6 +2,7 @@
 
 import json
 import os
+from pathlib import Path
 from datetime import datetime
 import logging
 import nest_asyncio
@@ -16,6 +17,8 @@ from humemai.janusgraph.utils.docker import (
     start_docker_compose,
     stop_docker_compose,
     remove_docker_compose,
+    copy_file_from_docker,
+    copy_file_to_docker,
 )
 
 from humemai.utils import is_iso8601_datetime, write_json, read_json
@@ -29,7 +32,7 @@ logger = logging.getLogger(__name__)
 class Humemai:
     def __init__(
         self,
-        compose_file_path: str = "./humemai/janusgraph/docker-compose-cql-es.yml",
+        compose_file_path: str = None,
         warmup_seconds: int = 30,
     ) -> None:
         """
@@ -38,24 +41,34 @@ class Humemai:
         Cassandra and ElasticSearch containers will be started if not already running.
 
         Args:
-            compose_file_path (str): Path to the Docker Compose file. Default is
-                "./humemai/janusgraph/docker-compose-cql-es.yml".
+            compose_file_path (str): Path to the Docker Compose file. Default is None,
+                in which case the path is resolved relative to the script's directory.
         """
-        self.compose_file_path = compose_file_path
-        start_docker_compose(self.compose_file_path, warmup_seconds)
+        # Resolve default path relative to the script's directory
+        if compose_file_path is None:
+            current_dir = Path(__file__).parent  # Get directory of this script
+            compose_file_path = current_dir / "docker-compose-cql-es.yml"
 
-        self.connection = None
-        self.g = None
+        # Convert to absolute path to avoid issues in production
+        self.compose_file_path = os.path.abspath(compose_file_path)
 
         # Logging configuration
         self.logger = logger
 
-        # janusgraph_container_name="janusgraph",
-        # gremlin_server_url="ws://localhost:8182/gremlin",
-        # gremlin_traversal_source="g",
-        # configs_dir="./configs",
-        # janusgraph_config="janusgraph.properties",
-        # gremlin_server_config="gremlin-server.yaml",
+        self.start_docker_compose(warmup_seconds)
+
+    def start_docker_compose(self, warmup_seconds: int) -> None:
+        """
+        Start the Docker Compose services specified in the given compose file.
+
+        Args:
+            compose_file_path (str): The path to the docker-compose file.
+            warmup_seconds (int): Number of seconds to wait for the containers to warm up.
+
+        """
+        start_docker_compose(self.compose_file_path, warmup_seconds)
+        self.connection = None
+        self.g = None
 
     def stop_docker_compose(self) -> None:
         """
@@ -873,7 +886,7 @@ class Humemai:
         self.g.io(json_name).write().iterate()
 
         copy_file_from_docker(
-            self.janusgraph_container_name, f"/opt/janusgraph/{json_name}", json_name
+            "jce-janusgraph", f"/opt/janusgraph/{json_name}", json_name
         )
 
     def load_db_from_json(self, json_name: str = "db.json") -> None:
@@ -882,9 +895,7 @@ class Humemai:
         Args:
             json_name (str): The name of the JSON file.
         """
-        copy_file_to_docker(
-            self.janusgraph_container_name, json_name, f"/opt/janusgraph/{json_name}"
-        )
+        copy_file_to_docker("jce-janusgraph", json_name, f"/opt/janusgraph/{json_name}")
 
         self.g.io(json_name).read().iterate()
 
