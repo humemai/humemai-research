@@ -1,3 +1,4 @@
 [submodule "examples/wikidata-as-semantic/wikidata"]
-	path = examples/wikidata-as-semantic/wikidata
-	url = git@github.com:humemai/wikidata.git
+    path = examples/wikidata-as-semantic/wikidata
+    url = git@github.com:humemai/wikidata.git
+    active = false
