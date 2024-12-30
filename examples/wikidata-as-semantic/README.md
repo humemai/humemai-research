@@ -46,4 +46,4 @@ This will ensure that the `wikidata` submodule is ready for use.
 
 ## How to Use the Wikidata Submodule
 
-Read the [README.md](./wikidata/README.md) inside.
+Read the [README.md](./wikidata/README.md) inside the submodule.
