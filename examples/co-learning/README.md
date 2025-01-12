@@ -1,11 +1,5 @@
 # Graph Learning
 
-There are two types of graph learning here.
-
-1. [`graph-learning-iid.ipynb`](./graph-learning-iid.ipynb) treats every graph (CP)
-   coming from an iid.
-2. [`graph-learning-humemai.ipynb`](./graph-learning-humemai.ipynb) treats every graph
-   (CP) to be an episodic memory of the agent. `pip install humemai==2.0.2`
 
 ## [`process-raw-data`](./process-raw-data.ipynb)
 
@@ -97,17 +91,9 @@ There are two types of graph learning here.
   }
   ```
 
-## [`graph-learning-iid.ipynb`](./graph-learning-iid.ipynb)
-
-- The raw data is converted into rdf-data, and is saved at
-  [`./rdf-data-iid`](./rdf-data-iid)
-- I also visualize the graph, which is saved at
-  [`./graphs-visualized-iid`](./graphs-visualized-iid/)
-- This method aims to find the N most general CPs (graphs) among the 211 of them.
-
 ## [`graph-learning-humemai.ipynb`](./graph-learning-humemai.ipynb)
 
-- Every CP is treated as an "event", which is a collection of episode memories in
-  HumemAI
-- Currently saving them as episodic memories is done
-- Now I have to do some kinda semantic memory extraction
+- We use the python humemai package to store data
+  - `pip install humemai==2.4.1`
+- The data is stored in a graph database
+- We try to find the most representative CP with graph learning
