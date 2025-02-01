@@ -65,17 +65,7 @@ jobs:
       id-token: write
     environment:
       name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Download documentation artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: documentation
-          path: "./_docs/"
-          
-      - name: Verify downloaded artifact
-        run: ls -lah _docs  # Debug step: lists contents of _docs
-      
       - id: deployment
         uses: actions/deploy-pages@v2
-        with:
-          artifact-path: "./_docs/"
