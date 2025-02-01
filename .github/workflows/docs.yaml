@@ -49,15 +49,20 @@ jobs:
         run: |
           python -m pdoc -d google -o _docs humemai
 
-      - name: Verify docs directory exists
-        run: ls -lah _docs  # Debugging step
+      - name: List artifacts after upload
+        run: ls -lah _docs  # DEBUGGING
 
       - name: Upload documentation artifact
-        uses: actions/upload-artifact@v4  # UPDATED TO LATEST VERSION
+        uses: actions/upload-artifact@v4
         with:
-          name: documentation  # Ensure this name is used in download step
+          name: documentation
           path: "./_docs/"
-          retention-days: 1  # Optional: keep artifact for only 1 day
+          retention-days: 1
+
+      - name: Debug uploaded artifacts
+        run: |
+          echo "Uploaded artifact details:"
+          ls -lah _docs
 
   deploy:
     needs: build
@@ -70,13 +75,13 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Download documentation artifact
-        uses: actions/download-artifact@v4  # UPDATED TO LATEST VERSION
+        uses: actions/download-artifact@v4
         with:
-          name: documentation  # Make sure this matches the upload step
+          name: documentation
           path: "./_docs/"
 
       - name: Verify downloaded artifact
-        run: ls -lah _docs  # Debugging step
+        run: ls -lah _docs  # DEBUGGING
 
       - id: deployment
         uses: actions/deploy-pages@v2
