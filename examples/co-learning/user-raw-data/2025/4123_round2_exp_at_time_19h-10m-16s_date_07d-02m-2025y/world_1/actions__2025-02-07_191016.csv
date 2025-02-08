@@ -1,0 +1,16 @@
+human_selector_action;human_selector_location;robot_action;robot_location;robot_executing_cp;world_nr;tick_nr
+;(3, 4);;(4, 4);False;1;0
+;(3, 4);;(4, 4);False;1;1
+;(3, 4);MoveEast;(4, 4);False;1;2
+;(3, 4);MoveEast;(4, 4);False;1;3
+;(3, 4);MoveEast;(4, 4);False;1;4
+;(3, 4);MoveEast;(4, 4);False;1;5
+;(3, 4);MoveEast;(4, 4);False;1;6
+;(3, 4);MoveEast;(4, 4);False;1;7
+;(3, 4);MoveEast;(4, 4);False;1;8
+;(3, 4);MoveEast;(4, 4);False;1;9
+;(3, 4);MoveEast;(4, 4);False;1;10
+;(3, 4);MoveEast;(4, 4);False;1;11
+;(3, 4);MoveEast;(5, 4);False;1;12
+;(3, 4);MoveEast;(5, 4);False;1;13
+;(3, 4);MoveEast;(5, 4);False;1;14

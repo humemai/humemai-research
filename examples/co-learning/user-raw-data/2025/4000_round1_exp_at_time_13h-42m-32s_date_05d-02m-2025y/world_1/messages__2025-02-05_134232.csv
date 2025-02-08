@@ -1,0 +1,45 @@
+correct_tick;human_selector_sent;human_selector_received;human_selector_mssg_json;human_sent;human_received;human_mssg_json;machine_sent;machine_received;machine_mssg_json;victim_sent;victim_received;victim_mssg_json;gravitygod_sent;gravitygod_received;gravitygod_mssg_json;rewardgod_sent;rewardgod_received;rewardgod_mssg_json;ontologygod_sent;ontologygod_received;ontologygod_mssg_json;robot_sent;robot_received;robot_mssg_json;world_nr;tick_nr
+-1;;;;;;;;;;;;;;;;;;;;;;;;;1;0
+0;;I will now follow the Collaboration Pattern Breaking.;;;I will now follow the Collaboration Pattern Breaking.;;;I will now follow the Collaboration Pattern Breaking.;;;I will now follow the Collaboration Pattern Breaking.;;;I will now follow the Collaboration Pattern Breaking.;;;I will now follow the Collaboration Pattern Breaking.;;;I will now follow the Collaboration Pattern Breaking.;;I will now follow the Collaboration Pattern Breaking.;;"{""content"": ""I will now follow the Collaboration Pattern Breaking."", ""from_id"": ""robot"", ""to_id"": ""ontologygod"", ""message_id"": ""9411328c1460698a07138b3daf8f02b8""}";1;1
+1;;;;;;;;;;;;;;;;;;;;;;;;;1;2
+2;;;;;;;;;;;;;;;;;;;;;;;;;1;3
+3;;;;;;;;;;;;;;;;;;;;;;;;;1;4
+4;;;;;;;;;;;;;;;;;;;;;;;;;1;5
+5;;;;;;;;;;;;;;;;;;;;;;;;;1;6
+6;{'name': 'Breaking', 'delete': 'True'};;"{""content"": {""name"": ""Breaking"", ""delete"": ""True""}, ""from_id"": ""human_selector"", ""to_id"": ""robot"", ""message_id"": ""64f51c54de4789eed8b474ba7a9655a6""}";;{'name': 'Breaking', 'delete': 'True'};;;{'name': 'Breaking', 'delete': 'True'};;;{'name': 'Breaking', 'delete': 'True'};;;{'name': 'Breaking', 'delete': 'True'};;;{'name': 'Breaking', 'delete': 'True'};;;{'name': 'Breaking', 'delete': 'True'};;;{'name': 'Breaking', 'delete': 'True'};;1;7
+7;;{'cp_delete': 'Breaking', 'html': None};;;{'cp_delete': 'Breaking', 'html': None};;;{'cp_delete': 'Breaking', 'html': None};;;{'cp_delete': 'Breaking', 'html': None};;;{'cp_delete': 'Breaking', 'html': None};;;{'cp_delete': 'Breaking', 'html': None};;{'cp_delete': 'Breaking', 'html': None};;"{""content"": {""cp_delete"": ""Breaking"", ""html"": null}, ""from_id"": ""ontologygod"", ""to_id"": ""robot"", ""message_id"": ""39f5310c984da66a68724b7d48a740c4""}";;{'cp_delete': 'Breaking', 'html': None};;1;8
+8;;;;;;;;;;;;;;;;;;;;;;;;;1;9
+9;;;;;;;;;;;;;;;;;;;;;;;;;1;10
+10;;;;;;;;;;;;;;;;;;;;;;;;;1;11
+11;;;;;;;;;;;;;;;;;;;;;;;;;1;12
+12;;;;;;;;;;;;;;;;;;;;;;;;;1;13
+13;;;;;;;;;;;;;;;;;;;;;;;;;1;14
+14;;;;;;;;;;;;;;;;;;;;;;;;;1;15
+15;;;;;;;;;;;;;;;;;;;;;;;;;1;16
+16;;;;;;;;;;;;;;;;;;;;;;;;;1;17
+17;;;;;;;;;;;;;;;;;;;;;;;;;1;18
+18;;;;;;;;;;;;;;;;;;;;;;;;;1;19
+19;{'past_action': ['Stand still', ['Left side of field']]};;"{""content"": {""past_action"": [""Stand still"", [""Left side of field""]]}, ""from_id"": ""human_selector"", ""to_id"": ""robot"", ""message_id"": ""d91908362ab0e13944e2ac0531da5caf""}";;{'past_action': ['Stand still', ['Left side of field']]};;;{'past_action': ['Stand still', ['Left side of field']]};;;{'past_action': ['Stand still', ['Left side of field']]};;;{'past_action': ['Stand still', ['Left side of field']]};;;{'past_action': ['Stand still', ['Left side of field']]};;;{'past_action': ['Stand still', ['Left side of field']]};;;{'past_action': ['Stand still', ['Left side of field']]};;1;20
+20;;;;;;;;;;;;;;;;;;;;;;;;;1;21
+21;;;;;;;;;;;;;;;;;;;;;;;;;1;22
+22;;;;;;;;;;;;;;;;;;;;;;;;;1;23
+23;;;;;;;;;;;;;;;;;;;;;;;;;1;24
+24;;;;;;;;;;;;;;;;;;;;;;;;;1;25
+25;;I will stop following the Collaboration Pattern Breaking;;;I will stop following the Collaboration Pattern Breaking;;;I will stop following the Collaboration Pattern Breaking;;;I will stop following the Collaboration Pattern Breaking;;;I will stop following the Collaboration Pattern Breaking;;;I will stop following the Collaboration Pattern Breaking;;;I will stop following the Collaboration Pattern Breaking;;I will stop following the Collaboration Pattern Breaking;;"{""content"": ""I will stop following the Collaboration Pattern Breaking"", ""from_id"": ""robot"", ""to_id"": ""ontologygod"", ""message_id"": ""2eeaf614c0a9abc3db6e763fbebce65a""}";1;26
+26;;I will now follow the Collaboration Pattern CP_known.;;;I will now follow the Collaboration Pattern CP_known.;;;I will now follow the Collaboration Pattern CP_known.;;;I will now follow the Collaboration Pattern CP_known.;;;I will now follow the Collaboration Pattern CP_known.;;;I will now follow the Collaboration Pattern CP_known.;;;I will now follow the Collaboration Pattern CP_known.;;I will now follow the Collaboration Pattern CP_known.;;"{""content"": ""I will now follow the Collaboration Pattern CP_known."", ""from_id"": ""robot"", ""to_id"": ""ontologygod"", ""message_id"": ""ebb2ffbdb90a1d489c7d88262f7ca3f5""}";1;27
+27;;;;;;;;;;;;;;;;;;;;;;;;;1;28
+28;;;;;;;;;;;;;;;;;;;;;;;;;1;29
+29;;;;;;;;;;;;;;;;;;;;;;;;;1;30
+30;;;;;;;;;;;;;;;;;;;;;;;;;1;31
+31;;;;;;;;;;;;;;;;;;;;;;;;;1;32
+32;;;;;;;;;;;;;;;;;;;;;;;;;1;33
+33;;;;;;;;;;;;;;;;;;;;;;;;;1;34
+34;;;;;;;;;;;;;;;;;;;;;;;;;1;35
+35;;;;;;;;;;;;;;;;;;;;;;;;;1;36
+36;;;;;;;;;;;;;;;;;;;;;;;;;1;37
+37;;;;;;;;;;;;;;;;;;;;;;;;;1;38
+38;;;;;;;;;;;;;;;;;;;;;;;;;1;39
+39;{'past_action': ['Stand still', ['Left side of field']]};Now executing Break a large rock at Top of rock pile;"{""content"": {""past_action"": [""Stand still"", [""Left side of field""]]}, ""from_id"": ""human_selector"", ""to_id"": ""robot"", ""message_id"": ""64815e05ce45f07a482ff855c06a5d32""}";;Now executing Break a large rock at Top of rock pile;;;Now executing Break a large rock at Top of rock pile;;;Now executing Break a large rock at Top of rock pile;;;Now executing Break a large rock at Top of rock pile;;;Now executing Break a large rock at Top of rock pile;;;Now executing Break a large rock at Top of rock pile;;Now executing Break a large rock at Top of rock pile;{'past_action': ['Stand still', ['Left side of field']]};"{""content"": ""Now executing Break a large rock at Top of rock pile"", ""from_id"": ""robot"", ""to_id"": ""ontologygod"", ""message_id"": ""24f43ab0985633e736130df2fd7ff832""}";1;40
+40;;;;;;;;;;;;;;;;;;;;;;;;;1;41
+41;;;;;;;;;;;;;;;;;;;;;;;;;1;42
+42;;;;;;;;;;;;;;;;;;;;;;;;;1;43

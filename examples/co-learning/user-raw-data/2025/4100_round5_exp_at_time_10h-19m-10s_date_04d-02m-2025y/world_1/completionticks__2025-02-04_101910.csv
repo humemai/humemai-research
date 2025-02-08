@@ -1,0 +1,32 @@
+tick;corrected_tick;remaining_distance;victim_harm;idle_time_robot;q_table_cps;q_table_cps_runs;q_table_basic;world_nr;tick_nr
+3019;3000;30;0;1157;"                     CP_known  pick_small_rocks  brown_rock  break_brown_rock  _brown_rock  ignore_brown_rock  CP_known_ignoring_brown
+[4, 'equal', True]    -2603.0               0.0           0                 0            0                  0                        0
+[4, 'equal', False]   -2360.0           -2862.0           0                 0            0                  0                        0
+[4, 'human', False]   -1201.0               0.0           0                 0            0                  0                        0
+[3, 'human', True]        0.0               0.0           0                 0            0                  0                        0
+[2, 'human', True]        0.0               0.0           0                 0            0                  0                        0
+[4, 'robot', False]      89.0               0.0           0                 0            0                  0                        0
+[3, 'human', False]       0.0               0.0           0                 0            0                  0                        0
+[2, 'human', False]       0.0               0.0           0                 0            0                  0                        0
+[2, 'robot', False]       0.0               0.0           0                 0            0                  0                        0
+[3, 'robot', False]       0.0               0.0           0                 0            0                  0                        0
+[2, 'equal', False]       0.0               0.0           0                 0            0                  0                        0
+[4, 'robot', True]        0.0               0.0           0                 0            0                  0                        0
+[3, 'robot', True]    -1448.0               0.0           0                 0            0                  0                        0
+[1, 'robot', False]       NaN              52.0           0                 0            0                  0                        0
+[4, 'human', True]    -2319.0               NaN           0                 0            0                  0                        0";"                     CP_known  pick_small_rocks  brown_rock  break_brown_rock  _brown_rock  ignore_brown_rock  CP_known_ignoring_brown
+[4, 'equal', True]        9.0               0.0           0                 0            0                  0                        0
+[4, 'equal', False]      16.0              19.0           0                 0            0                  0                        0
+[4, 'human', False]       1.0               0.0           0                 0            0                  0                        0
+[3, 'human', True]        0.0               0.0           0                 0            0                  0                        0
+[2, 'human', True]        0.0               0.0           0                 0            0                  0                        0
+[4, 'robot', False]       3.0               0.0           0                 0            0                  0                        0
+[3, 'human', False]       0.0               0.0           0                 0            0                  0                        0
+[2, 'human', False]       0.0               0.0           0                 0            0                  0                        0
+[2, 'robot', False]       0.0               0.0           0                 0            0                  0                        0
+[3, 'robot', False]       0.0               0.0           0                 0            0                  0                        0
+[2, 'equal', False]       0.0               0.0           0                 0            0                  0                        0
+[4, 'robot', True]        0.0               0.0           0                 0            0                  0                        0
+[3, 'robot', True]        1.0               0.0           0                 0            0                  0                        0
+[1, 'robot', False]       NaN               1.0           0                 0            0                  0                        0
+[4, 'human', True]        6.0               NaN           0                 0            0                  0                        0";;1;3019

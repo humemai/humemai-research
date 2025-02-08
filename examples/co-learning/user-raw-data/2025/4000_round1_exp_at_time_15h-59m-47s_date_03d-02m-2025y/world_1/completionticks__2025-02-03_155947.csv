@@ -1,0 +1,20 @@
+tick;corrected_tick;remaining_distance;victim_harm;idle_time_robot;q_table_cps;q_table_cps_runs;q_table_basic;world_nr;tick_nr
+914;895;;100;28;"                     CP_known
+[4, 'equal', True]       -117
+[4, 'equal', False]      -414
+[4, 'human', False]         0
+[3, 'human', True]          0
+[2, 'human', True]          0
+[4, 'robot', False]         0
+[3, 'human', False]         0
+[2, 'human', False]         0
+[2, 'robot', False]         0";"                     CP_known
+[4, 'equal', True]          7
+[4, 'equal', False]        24
+[4, 'human', False]         0
+[3, 'human', True]          0
+[2, 'human', True]          0
+[4, 'robot', False]         0
+[3, 'human', False]         0
+[2, 'human', False]         0
+[2, 'robot', False]         0";;1;914

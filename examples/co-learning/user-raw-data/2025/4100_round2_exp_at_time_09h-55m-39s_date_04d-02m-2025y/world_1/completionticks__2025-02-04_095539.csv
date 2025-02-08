@@ -1,0 +1,28 @@
+tick;corrected_tick;remaining_distance;victim_harm;idle_time_robot;q_table_cps;q_table_cps_runs;q_table_basic;world_nr;tick_nr
+3019;3000;27;0;1906;"                     CP_known  pick_small_rocks
+[4, 'equal', True]    -1939.0                 0
+[4, 'equal', False]   -2360.0             -1346
+[4, 'human', False]       0.0                 0
+[3, 'human', True]        0.0                 0
+[2, 'human', True]        0.0                 0
+[4, 'robot', False]      89.0                 0
+[3, 'human', False]       0.0                 0
+[2, 'human', False]       0.0                 0
+[2, 'robot', False]       0.0                 0
+[3, 'robot', False]       0.0                 0
+[2, 'equal', False]       0.0                 0
+[4, 'robot', True]        0.0                 0
+[3, 'robot', True]    -1448.0                 0";"                     CP_known  pick_small_rocks
+[4, 'equal', True]        3.0                 0
+[4, 'equal', False]      16.0                14
+[4, 'human', False]       0.0                 0
+[3, 'human', True]        0.0                 0
+[2, 'human', True]        0.0                 0
+[4, 'robot', False]       3.0                 0
+[3, 'human', False]       0.0                 0
+[2, 'human', False]       0.0                 0
+[2, 'robot', False]       0.0                 0
+[3, 'robot', False]       0.0                 0
+[2, 'equal', False]       0.0                 0
+[4, 'robot', True]        0.0                 0
+[3, 'robot', True]        1.0                 0";;1;3019

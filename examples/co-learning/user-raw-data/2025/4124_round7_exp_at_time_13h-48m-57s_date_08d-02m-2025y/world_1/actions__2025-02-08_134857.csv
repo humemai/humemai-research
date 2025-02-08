@@ -1,0 +1,1070 @@
+human_selector_action;human_selector_location;robot_action;robot_location;robot_executing_cp;world_nr;tick_nr
+;(3, 4);;(4, 4);False;1;0
+;(3, 4);;(4, 4);False;1;1
+;(3, 4);;(4, 4);right side;1;2
+;(3, 4);;(4, 4);right side;1;3
+;(3, 4);MoveSouthEast;(4, 4);right side;1;4
+;(3, 4);MoveSouthEast;(4, 4);right side;1;5
+;(3, 4);MoveSouthEast;(4, 4);right side;1;6
+;(3, 4);MoveSouthEast;(4, 4);right side;1;7
+;(3, 4);MoveSouthEast;(4, 4);right side;1;8
+;(3, 4);MoveSouthEast;(4, 4);right side;1;9
+;(3, 4);MoveSouthEast;(4, 4);right side;1;10
+;(3, 4);MoveSouthEast;(4, 4);right side;1;11
+;(3, 4);MoveSouthEast;(4, 4);right side;1;12
+;(3, 4);MoveSouthEast;(4, 4);right side;1;13
+;(3, 4);MoveSouthEast;(5, 5);right side;1;14
+;(3, 4);MoveEast;(5, 5);right side;1;15
+;(3, 4);MoveEast;(5, 5);right side;1;16
+;(3, 4);MoveEast;(5, 5);right side;1;17
+;(3, 4);MoveEast;(5, 5);right side;1;18
+;(3, 4);MoveEast;(5, 5);right side;1;19
+;(3, 4);MoveEast;(5, 5);right side;1;20
+;(3, 4);MoveEast;(5, 5);right side;1;21
+;(3, 4);MoveEast;(5, 5);right side;1;22
+;(3, 4);MoveEast;(5, 5);right side;1;23
+;(3, 4);MoveEast;(5, 5);right side;1;24
+;(3, 4);MoveEast;(6, 5);right side;1;25
+;(3, 4);MoveSouthEast;(6, 5);right side;1;26
+;(3, 4);MoveSouthEast;(6, 5);right side;1;27
+;(3, 4);MoveSouthEast;(6, 5);right side;1;28
+;(3, 4);MoveSouthEast;(6, 5);right side;1;29
+;(3, 4);MoveSouthEast;(6, 5);right side;1;30
+;(3, 4);MoveSouthEast;(6, 5);right side;1;31
+;(3, 4);MoveSouthEast;(6, 5);right side;1;32
+;(3, 4);MoveSouthEast;(6, 5);right side;1;33
+;(3, 4);MoveSouthEast;(6, 5);right side;1;34
+;(3, 4);MoveSouthEast;(6, 5);right side;1;35
+;(3, 4);MoveSouthEast;(7, 6);right side;1;36
+;(3, 4);MoveSouthEast;(7, 6);right side;1;37
+;(3, 4);MoveSouthEast;(7, 6);right side;1;38
+;(3, 4);MoveSouthEast;(7, 6);right side;1;39
+;(3, 4);MoveSouthEast;(7, 6);right side;1;40
+;(3, 4);MoveSouthEast;(7, 6);right side;1;41
+;(3, 4);MoveSouthEast;(7, 6);right side;1;42
+;(3, 4);MoveSouthEast;(7, 6);right side;1;43
+;(3, 4);MoveSouthEast;(7, 6);right side;1;44
+;(3, 4);MoveSouthEast;(7, 6);right side;1;45
+;(3, 4);MoveSouthEast;(7, 6);right side;1;46
+;(3, 4);MoveSouthEast;(8, 7);right side;1;47
+;(3, 4);MoveEast;(8, 7);right side;1;48
+;(3, 4);MoveEast;(8, 7);right side;1;49
+;(3, 4);MoveEast;(8, 7);right side;1;50
+;(3, 4);MoveEast;(8, 7);right side;1;51
+;(3, 4);MoveEast;(8, 7);right side;1;52
+;(3, 4);MoveEast;(8, 7);right side;1;53
+;(3, 4);MoveEast;(8, 7);right side;1;54
+;(3, 4);MoveEast;(8, 7);right side;1;55
+;(3, 4);MoveEast;(8, 7);right side;1;56
+MoveEast;(4, 4);MoveEast;(8, 7);right side;1;57
+;(4, 4);MoveEast;(9, 7);right side;1;58
+;(4, 4);MoveSouthEast;(9, 7);right side;1;59
+;(4, 4);MoveSouthEast;(9, 7);right side;1;60
+;(4, 4);MoveSouthEast;(9, 7);right side;1;61
+MoveEast;(5, 4);MoveSouthEast;(9, 7);right side;1;62
+;(5, 4);MoveSouthEast;(9, 7);right side;1;63
+;(5, 4);MoveSouthEast;(9, 7);right side;1;64
+;(5, 4);MoveSouthEast;(9, 7);right side;1;65
+;(5, 4);MoveSouthEast;(9, 7);right side;1;66
+;(5, 4);MoveSouthEast;(9, 7);right side;1;67
+;(5, 4);MoveSouthEast;(9, 7);right side;1;68
+MoveEast;(6, 4);MoveSouthEast;(10, 8);right side;1;69
+;(6, 4);GrabLargeObject;(10, 8);right side;1;70
+;(6, 4);GrabLargeObject;(10, 8);right side;1;71
+;(6, 4);GrabLargeObject;(10, 8);right side;1;72
+;(6, 4);GrabLargeObject;(10, 8);right side;1;73
+;(6, 4);GrabLargeObject;(10, 8);right side;1;74
+;(6, 4);GrabLargeObject;(10, 8);right side;1;75
+;(6, 4);GrabLargeObject;(10, 8);right side;1;76
+;(6, 4);GrabLargeObject;(10, 8);right side;1;77
+MoveEast;(7, 4);GrabLargeObject;(10, 8);right side;1;78
+;(7, 4);GrabLargeObject;(10, 8);right side;1;79
+;(7, 4);GrabLargeObject;(10, 8);right side;1;80
+;(7, 4);;(10, 8);right side;1;81
+;(7, 4);;(10, 8);right side;1;82
+;(7, 4);;(10, 8);right side;1;83
+;(7, 4);;(10, 8);right side;1;84
+MoveEast;(8, 4);;(10, 8);right side;1;85
+;(8, 4);;(10, 8);right side;1;86
+;(8, 4);;(10, 8);right side;1;87
+;(8, 4);;(10, 8);right side;1;88
+;(8, 4);;(10, 8);right side;1;89
+;(8, 4);;(10, 8);right side;1;90
+;(8, 4);;(10, 8);right side;1;91
+;(8, 4);;(10, 8);right side;1;92
+;(8, 4);;(10, 8);right side;1;93
+;(8, 4);;(10, 8);right side;1;94
+;(8, 4);;(10, 8);right side;1;95
+;(8, 4);;(10, 8);right side;1;96
+;(8, 4);;(10, 8);right side;1;97
+MoveEast;(9, 4);;(10, 8);right side;1;98
+;(9, 4);;(10, 8);right side;1;99
+;(9, 4);;(10, 8);right side;1;100
+;(9, 4);;(10, 8);right side;1;101
+;(9, 4);;(10, 8);right side;1;102
+;(9, 4);;(10, 8);right side;1;103
+;(9, 4);;(10, 8);right side;1;104
+;(9, 4);;(10, 8);right side;1;105
+;(9, 4);;(10, 8);right side;1;106
+;(9, 4);;(10, 8);right side;1;107
+;(9, 4);;(10, 8);right side;1;108
+;(9, 4);;(10, 8);right side;1;109
+;(9, 4);;(10, 8);right side;1;110
+;(9, 4);;(10, 8);right side;1;111
+;(9, 4);;(10, 8);right side;1;112
+;(9, 4);;(10, 8);right side;1;113
+;(9, 4);;(10, 8);right side;1;114
+;(9, 4);;(10, 8);right side;1;115
+;(9, 4);;(10, 8);right side;1;116
+;(9, 4);;(10, 8);right side;1;117
+;(9, 4);;(10, 8);right side;1;118
+MoveSouth;(9, 5);;(10, 8);right side;1;119
+;(9, 5);;(10, 8);right side;1;120
+;(9, 5);;(10, 8);right side;1;121
+;(9, 5);;(10, 8);right side;1;122
+;(9, 5);;(10, 8);right side;1;123
+;(9, 5);;(10, 8);right side;1;124
+;(9, 5);;(10, 8);right side;1;125
+;(9, 5);;(10, 8);right side;1;126
+MoveSouth;(9, 6);;(10, 8);right side;1;127
+;(9, 6);;(10, 8);right side;1;128
+;(9, 6);;(10, 8);right side;1;129
+;(9, 6);;(10, 8);right side;1;130
+;(9, 6);;(10, 8);right side;1;131
+;(9, 6);;(10, 8);right side;1;132
+;(9, 6);;(10, 8);right side;1;133
+MoveSouth;(9, 7);;(10, 8);right side;1;134
+;(9, 7);;(10, 8);right side;1;135
+;(9, 7);;(10, 8);right side;1;136
+;(9, 7);;(10, 8);right side;1;137
+;(9, 7);;(10, 8);right side;1;138
+;(9, 7);;(10, 8);right side;1;139
+;(9, 7);;(10, 8);right side;1;140
+;(9, 7);;(10, 8);right side;1;141
+;(9, 7);;(10, 8);right side;1;142
+;(9, 7);;(10, 8);right side;1;143
+;(9, 7);;(10, 8);right side;1;144
+MoveSouth;(9, 8);;(10, 8);right side;1;145
+;(9, 8);;(10, 8);right side;1;146
+;(9, 8);;(10, 8);right side;1;147
+;(9, 8);;(10, 8);right side;1;148
+;(9, 8);;(10, 8);right side;1;149
+;(9, 8);;(10, 8);right side;1;150
+;(9, 8);;(10, 8);right side;1;151
+;(9, 8);;(10, 8);right side;1;152
+;(9, 8);;(10, 8);right side;1;153
+;(9, 8);;(10, 8);right side;1;154
+;(9, 8);;(10, 8);right side;1;155
+;(9, 8);;(10, 8);right side;1;156
+;(9, 8);;(10, 8);right side;1;157
+;(9, 8);;(10, 8);right side;1;158
+MoveEast;(10, 8);;(10, 8);right side;1;159
+;(10, 8);;(10, 8);right side;1;160
+;(10, 8);;(10, 8);right side;1;161
+;(10, 8);;(10, 8);right side;1;162
+;(10, 8);;(10, 8);right side;1;163
+;(10, 8);;(10, 8);right side;1;164
+;(10, 8);;(10, 8);right side;1;165
+;(10, 8);;(10, 8);right side;1;166
+;(10, 8);;(10, 8);right side;1;167
+;(10, 8);;(10, 8);right side;1;168
+;(10, 8);;(10, 8);right side;1;169
+MoveSouth;(10, 9);;(10, 8);right side;1;170
+;(10, 9);;(10, 8);right side;1;171
+;(10, 9);;(10, 8);right side;1;172
+;(10, 9);;(10, 8);right side;1;173
+;(10, 9);;(10, 8);right side;1;174
+;(10, 9);;(10, 8);right side;1;175
+;(10, 9);;(10, 8);right side;1;176
+MoveSouth;(10, 10);;(10, 8);right side;1;177
+;(10, 10);;(10, 8);right side;1;178
+;(10, 10);;(10, 8);right side;1;179
+;(10, 10);;(10, 8);right side;1;180
+;(10, 10);;(10, 8);right side;1;181
+;(10, 10);;(10, 8);right side;1;182
+;(10, 10);;(10, 8);right side;1;183
+;(10, 10);;(10, 8);right side;1;184
+;(10, 10);;(10, 8);right side;1;185
+;(10, 10);;(10, 8);right side;1;186
+;(10, 10);;(10, 8);right side;1;187
+;(10, 10);;(10, 8);right side;1;188
+;(10, 10);;(10, 8);right side;1;189
+;(10, 10);;(10, 8);right side;1;190
+;(10, 10);;(10, 8);right side;1;191
+;(10, 10);;(10, 8);right side;1;192
+;(10, 10);;(10, 8);right side;1;193
+;(10, 10);;(10, 8);right side;1;194
+;(10, 10);;(10, 8);right side;1;195
+;(10, 10);;(10, 8);right side;1;196
+;(10, 10);;(10, 8);right side;1;197
+;(10, 10);;(10, 8);right side;1;198
+;(10, 10);;(10, 8);right side;1;199
+;(10, 10);;(10, 8);right side;1;200
+;(10, 10);;(10, 8);right side;1;201
+;(10, 10);;(10, 8);right side;1;202
+;(10, 10);;(10, 8);right side;1;203
+;(10, 10);;(10, 8);right side;1;204
+;(10, 10);;(10, 8);right side;1;205
+;(10, 10);;(10, 8);right side;1;206
+;(10, 10);;(10, 8);right side;1;207
+;(10, 10);;(10, 8);right side;1;208
+;(10, 10);;(10, 8);right side;1;209
+;(10, 10);;(10, 8);right side;1;210
+;(10, 10);;(10, 8);right side;1;211
+;(10, 10);;(10, 8);right side;1;212
+;(10, 10);;(10, 8);right side;1;213
+GrabObject;(10, 10);;(10, 8);right side;1;214
+;(10, 10);;(10, 8);right side;1;215
+;(10, 10);;(10, 8);right side;1;216
+;(10, 10);;(10, 8);right side;1;217
+;(10, 10);MoveWest;(10, 8);right side;1;218
+;(10, 10);MoveWest;(10, 8);right side;1;219
+;(10, 10);MoveWest;(10, 8);right side;1;220
+;(10, 10);MoveWest;(10, 8);right side;1;221
+;(10, 10);MoveWest;(10, 8);right side;1;222
+;(10, 10);MoveWest;(10, 8);right side;1;223
+MoveWest;(9, 10);MoveWest;(10, 8);right side;1;224
+;(9, 10);MoveWest;(10, 8);right side;1;225
+;(9, 10);MoveWest;(10, 8);right side;1;226
+;(9, 10);MoveWest;(10, 8);right side;1;227
+;(9, 10);MoveWest;(9, 8);right side;1;228
+;(9, 10);MoveWest;(9, 8);right side;1;229
+;(9, 10);MoveWest;(9, 8);right side;1;230
+;(9, 10);MoveWest;(9, 8);right side;1;231
+;(9, 10);MoveWest;(9, 8);right side;1;232
+;(9, 10);MoveWest;(9, 8);right side;1;233
+MoveWest;(8, 10);MoveWest;(9, 8);right side;1;234
+;(8, 10);MoveWest;(9, 8);right side;1;235
+MoveWest;(7, 10);MoveWest;(9, 8);right side;1;236
+MoveWest;(6, 10);MoveWest;(9, 8);right side;1;237
+;(6, 10);MoveWest;(9, 8);right side;1;238
+MoveWest;(5, 10);MoveWest;(8, 8);right side;1;239
+MoveWest;(4, 10);MoveWest;(8, 8);right side;1;240
+;(4, 10);MoveWest;(8, 8);right side;1;241
+MoveWest;(3, 10);MoveWest;(8, 8);right side;1;242
+MoveWest;(2, 10);MoveWest;(8, 8);right side;1;243
+;(2, 10);MoveWest;(8, 8);right side;1;244
+MoveWest;(1, 10);MoveWest;(8, 8);right side;1;245
+;(1, 10);MoveWest;(8, 8);right side;1;246
+MoveWest;(0, 10);MoveWest;(8, 8);right side;1;247
+;(0, 10);MoveWest;(8, 8);right side;1;248
+MoveWest;(0, 10);MoveWest;(8, 8);right side;1;249
+;(0, 10);MoveWest;(7, 8);right side;1;250
+;(0, 10);MoveWest;(7, 8);right side;1;251
+;(0, 10);MoveWest;(7, 8);right side;1;252
+;(0, 10);MoveWest;(7, 8);right side;1;253
+;(0, 10);MoveWest;(7, 8);right side;1;254
+;(0, 10);MoveWest;(7, 8);right side;1;255
+;(0, 10);MoveWest;(7, 8);right side;1;256
+DropObject;(0, 10);MoveWest;(7, 8);right side;1;257
+;(0, 10);MoveWest;(7, 8);right side;1;258
+;(0, 10);MoveWest;(7, 8);right side;1;259
+;(0, 10);MoveWest;(7, 8);right side;1;260
+;(0, 10);MoveWest;(6, 8);right side;1;261
+;(0, 10);MoveWest;(6, 8);right side;1;262
+;(0, 10);MoveWest;(6, 8);right side;1;263
+;(0, 10);MoveWest;(6, 8);right side;1;264
+;(0, 10);MoveWest;(6, 8);right side;1;265
+;(0, 10);MoveWest;(6, 8);right side;1;266
+;(0, 10);MoveWest;(6, 8);right side;1;267
+MoveEast;(1, 10);MoveWest;(6, 8);right side;1;268
+;(1, 10);MoveWest;(6, 8);right side;1;269
+;(1, 10);MoveWest;(6, 8);right side;1;270
+;(1, 10);MoveWest;(6, 8);right side;1;271
+;(1, 10);MoveWest;(5, 8);right side;1;272
+;(1, 10);MoveWest;(5, 8);right side;1;273
+;(1, 10);MoveWest;(5, 8);right side;1;274
+;(1, 10);MoveWest;(5, 8);right side;1;275
+;(1, 10);MoveWest;(5, 8);right side;1;276
+MoveEast;(2, 10);MoveWest;(5, 8);right side;1;277
+;(2, 10);MoveWest;(5, 8);right side;1;278
+MoveEast;(3, 10);MoveWest;(5, 8);right side;1;279
+;(3, 10);MoveWest;(5, 8);right side;1;280
+MoveEast;(4, 10);MoveWest;(5, 8);right side;1;281
+MoveEast;(5, 10);MoveWest;(5, 8);right side;1;282
+;(5, 10);MoveWest;(4, 8);right side;1;283
+MoveEast;(6, 10);MoveNorthWest;(4, 8);right side;1;284
+MoveEast;(7, 10);MoveNorthWest;(4, 8);right side;1;285
+;(7, 10);MoveNorthWest;(4, 8);right side;1;286
+;(7, 10);MoveNorthWest;(4, 8);right side;1;287
+;(7, 10);MoveNorthWest;(4, 8);right side;1;288
+;(7, 10);MoveNorthWest;(4, 8);right side;1;289
+;(7, 10);MoveNorthWest;(4, 8);right side;1;290
+;(7, 10);MoveNorthWest;(4, 8);right side;1;291
+;(7, 10);MoveNorthWest;(4, 8);right side;1;292
+;(7, 10);MoveNorthWest;(4, 8);right side;1;293
+MoveEast;(8, 10);MoveNorthWest;(3, 7);right side;1;294
+;(8, 10);MoveNorthWest;(3, 7);right side;1;295
+;(8, 10);MoveNorthWest;(3, 7);right side;1;296
+;(8, 10);MoveNorthWest;(3, 7);right side;1;297
+;(8, 10);MoveNorthWest;(3, 7);right side;1;298
+;(8, 10);MoveNorthWest;(3, 7);right side;1;299
+;(8, 10);MoveNorthWest;(3, 7);right side;1;300
+;(8, 10);MoveNorthWest;(3, 7);right side;1;301
+;(8, 10);MoveNorthWest;(3, 7);right side;1;302
+;(8, 10);MoveNorthWest;(3, 7);right side;1;303
+;(8, 10);MoveNorthWest;(3, 7);right side;1;304
+;(8, 10);MoveNorthWest;(2, 6);right side;1;305
+;(8, 10);MoveWest;(2, 6);right side;1;306
+;(8, 10);MoveWest;(2, 6);right side;1;307
+;(8, 10);MoveWest;(2, 6);right side;1;308
+;(8, 10);MoveWest;(2, 6);right side;1;309
+;(8, 10);MoveWest;(2, 6);right side;1;310
+;(8, 10);MoveWest;(2, 6);right side;1;311
+;(8, 10);MoveWest;(2, 6);right side;1;312
+;(8, 10);MoveWest;(2, 6);right side;1;313
+;(8, 10);MoveWest;(2, 6);right side;1;314
+MoveNorth;(8, 9);MoveWest;(2, 6);right side;1;315
+;(8, 9);MoveWest;(1, 6);right side;1;316
+;(8, 9);MoveWest;(1, 6);right side;1;317
+;(8, 9);MoveWest;(1, 6);right side;1;318
+;(8, 9);MoveWest;(1, 6);right side;1;319
+;(8, 9);MoveWest;(1, 6);right side;1;320
+;(8, 9);MoveWest;(1, 6);right side;1;321
+;(8, 9);MoveWest;(1, 6);right side;1;322
+;(8, 9);MoveWest;(1, 6);right side;1;323
+;(8, 9);MoveWest;(1, 6);right side;1;324
+;(8, 9);MoveWest;(1, 6);right side;1;325
+;(8, 9);MoveWest;(1, 6);right side;1;326
+;(8, 9);MoveWest;(0, 6);right side;1;327
+;(8, 9);DropLargeObject;(0, 6);right side;1;328
+;(8, 9);DropLargeObject;(0, 6);right side;1;329
+;(8, 9);DropLargeObject;(0, 6);right side;1;330
+;(8, 9);DropLargeObject;(0, 6);right side;1;331
+;(8, 9);DropLargeObject;(0, 6);right side;1;332
+;(8, 9);DropLargeObject;(0, 6);right side;1;333
+;(8, 9);DropLargeObject;(0, 6);right side;1;334
+;(8, 9);DropLargeObject;(0, 6);right side;1;335
+;(8, 9);DropLargeObject;(0, 6);right side;1;336
+;(8, 9);DropLargeObject;(0, 6);right side;1;337
+;(8, 9);DropLargeObject;(0, 6);right side;1;338
+;(8, 9);;(0, 6);right side;1;339
+;(8, 9);;(0, 6);right side;1;340
+;(8, 9);MoveEast;(0, 6);right side;1;341
+;(8, 9);MoveEast;(0, 6);right side;1;342
+;(8, 9);MoveEast;(0, 6);right side;1;343
+;(8, 9);MoveEast;(0, 6);right side;1;344
+;(8, 9);MoveEast;(0, 6);right side;1;345
+;(8, 9);MoveEast;(0, 6);right side;1;346
+;(8, 9);MoveEast;(0, 6);right side;1;347
+;(8, 9);MoveEast;(0, 6);right side;1;348
+;(8, 9);MoveEast;(0, 6);right side;1;349
+;(8, 9);MoveEast;(0, 6);right side;1;350
+;(8, 9);MoveEast;(1, 6);right side;1;351
+;(8, 9);MoveEast;(1, 6);right side;1;352
+;(8, 9);MoveEast;(1, 6);right side;1;353
+;(8, 9);MoveEast;(1, 6);right side;1;354
+;(8, 9);MoveEast;(1, 6);right side;1;355
+;(8, 9);MoveEast;(1, 6);right side;1;356
+;(8, 9);MoveEast;(1, 6);right side;1;357
+;(8, 9);MoveEast;(1, 6);right side;1;358
+;(8, 9);MoveEast;(1, 6);right side;1;359
+;(8, 9);MoveEast;(1, 6);right side;1;360
+;(8, 9);MoveEast;(1, 6);right side;1;361
+;(8, 9);MoveEast;(2, 6);right side;1;362
+;(8, 9);MoveEast;(2, 6);right side;1;363
+;(8, 9);MoveEast;(2, 6);right side;1;364
+;(8, 9);MoveEast;(2, 6);right side;1;365
+;(8, 9);MoveEast;(2, 6);right side;1;366
+;(8, 9);MoveEast;(2, 6);right side;1;367
+;(8, 9);MoveEast;(2, 6);right side;1;368
+;(8, 9);MoveEast;(2, 6);right side;1;369
+;(8, 9);MoveEast;(2, 6);right side;1;370
+;(8, 9);MoveEast;(2, 6);right side;1;371
+;(8, 9);MoveEast;(2, 6);right side;1;372
+;(8, 9);MoveEast;(3, 6);right side;1;373
+;(8, 9);MoveSouthEast;(3, 6);right side;1;374
+;(8, 9);MoveSouthEast;(3, 6);right side;1;375
+;(8, 9);MoveSouthEast;(3, 6);right side;1;376
+;(8, 9);MoveSouthEast;(3, 6);right side;1;377
+;(8, 9);MoveSouthEast;(3, 6);right side;1;378
+;(8, 9);MoveSouthEast;(3, 6);right side;1;379
+;(8, 9);MoveSouthEast;(3, 6);right side;1;380
+;(8, 9);MoveSouthEast;(3, 6);right side;1;381
+;(8, 9);MoveSouthEast;(3, 6);right side;1;382
+;(8, 9);MoveSouthEast;(3, 6);right side;1;383
+;(8, 9);MoveSouthEast;(4, 7);right side;1;384
+;(8, 9);MoveSouthEast;(4, 7);right side;1;385
+;(8, 9);MoveSouthEast;(4, 7);right side;1;386
+;(8, 9);MoveSouthEast;(4, 7);right side;1;387
+;(8, 9);MoveSouthEast;(4, 7);right side;1;388
+;(8, 9);MoveSouthEast;(4, 7);right side;1;389
+;(8, 9);MoveSouthEast;(4, 7);right side;1;390
+;(8, 9);MoveSouthEast;(4, 7);right side;1;391
+;(8, 9);MoveSouthEast;(4, 7);right side;1;392
+;(8, 9);MoveSouthEast;(4, 7);right side;1;393
+;(8, 9);MoveSouthEast;(4, 7);right side;1;394
+;(8, 9);MoveSouthEast;(5, 8);right side;1;395
+;(8, 9);MoveSouthEast;(5, 8);right side;1;396
+;(8, 9);MoveSouthEast;(5, 8);right side;1;397
+;(8, 9);MoveSouthEast;(5, 8);right side;1;398
+;(8, 9);MoveSouthEast;(5, 8);right side;1;399
+;(8, 9);MoveSouthEast;(5, 8);right side;1;400
+;(8, 9);MoveSouthEast;(5, 8);right side;1;401
+;(8, 9);MoveSouthEast;(5, 8);right side;1;402
+;(8, 9);MoveSouthEast;(5, 8);right side;1;403
+;(8, 9);MoveSouthEast;(5, 8);right side;1;404
+;(8, 9);MoveSouthEast;(5, 8);right side;1;405
+;(8, 9);MoveSouthEast;(6, 9);right side;1;406
+;(8, 9);MoveEast;(6, 9);right side;1;407
+;(8, 9);MoveEast;(6, 9);right side;1;408
+;(8, 9);MoveEast;(6, 9);right side;1;409
+;(8, 9);MoveEast;(6, 9);right side;1;410
+;(8, 9);MoveEast;(6, 9);right side;1;411
+;(8, 9);MoveEast;(6, 9);right side;1;412
+;(8, 9);MoveEast;(6, 9);right side;1;413
+;(8, 9);MoveEast;(6, 9);right side;1;414
+;(8, 9);MoveEast;(6, 9);right side;1;415
+;(8, 9);MoveEast;(6, 9);right side;1;416
+;(8, 9);MoveEast;(7, 9);right side;1;417
+;(8, 9);MoveEast;(7, 9);right side;1;418
+;(8, 9);MoveEast;(7, 9);right side;1;419
+;(8, 9);MoveEast;(7, 9);right side;1;420
+;(8, 9);MoveEast;(7, 9);right side;1;421
+;(8, 9);MoveEast;(7, 9);right side;1;422
+;(8, 9);MoveEast;(7, 9);right side;1;423
+;(8, 9);MoveEast;(7, 9);right side;1;424
+;(8, 9);MoveEast;(7, 9);right side;1;425
+;(8, 9);MoveEast;(7, 9);right side;1;426
+;(8, 9);MoveEast;(7, 9);right side;1;427
+;(8, 9);MoveEast;(8, 9);right side;1;428
+;(8, 9);MoveEast;(8, 9);right side;1;429
+;(8, 9);MoveEast;(8, 9);right side;1;430
+;(8, 9);MoveEast;(8, 9);right side;1;431
+;(8, 9);MoveEast;(8, 9);right side;1;432
+;(8, 9);MoveEast;(8, 9);right side;1;433
+;(8, 9);MoveEast;(8, 9);right side;1;434
+;(8, 9);MoveEast;(8, 9);right side;1;435
+;(8, 9);MoveEast;(8, 9);right side;1;436
+;(8, 9);MoveEast;(8, 9);right side;1;437
+;(8, 9);MoveEast;(8, 9);right side;1;438
+;(8, 9);MoveEast;(9, 9);right side;1;439
+;(8, 9);MoveEast;(9, 9);right side;1;440
+;(8, 9);MoveEast;(9, 9);right side;1;441
+;(8, 9);MoveEast;(9, 9);right side;1;442
+;(8, 9);MoveEast;(9, 9);right side;1;443
+;(8, 9);MoveEast;(9, 9);right side;1;444
+;(8, 9);MoveEast;(9, 9);right side;1;445
+;(8, 9);MoveEast;(9, 9);right side;1;446
+;(8, 9);MoveEast;(9, 9);right side;1;447
+;(8, 9);MoveEast;(9, 9);right side;1;448
+;(8, 9);MoveEast;(9, 9);right side;1;449
+;(8, 9);MoveEast;(10, 9);right side;1;450
+;(8, 9);MoveEast;(10, 9);right side;1;451
+;(8, 9);MoveEast;(10, 9);right side;1;452
+;(8, 9);MoveEast;(10, 9);right side;1;453
+;(8, 9);MoveEast;(10, 9);right side;1;454
+;(8, 9);MoveEast;(10, 9);right side;1;455
+;(8, 9);MoveEast;(10, 9);right side;1;456
+;(8, 9);MoveEast;(10, 9);right side;1;457
+;(8, 9);MoveEast;(10, 9);right side;1;458
+;(8, 9);MoveEast;(10, 9);right side;1;459
+;(8, 9);MoveEast;(10, 9);right side;1;460
+;(8, 9);MoveEast;(11, 9);right side;1;461
+;(8, 9);GrabLargeObject;(11, 9);right side;1;462
+;(8, 9);GrabLargeObject;(11, 9);right side;1;463
+;(8, 9);GrabLargeObject;(11, 9);right side;1;464
+;(8, 9);GrabLargeObject;(11, 9);right side;1;465
+;(8, 9);GrabLargeObject;(11, 9);right side;1;466
+;(8, 9);GrabLargeObject;(11, 9);right side;1;467
+;(8, 9);GrabLargeObject;(11, 9);right side;1;468
+;(8, 9);GrabLargeObject;(11, 9);right side;1;469
+;(8, 9);GrabLargeObject;(11, 9);right side;1;470
+;(8, 9);GrabLargeObject;(11, 9);right side;1;471
+;(8, 9);GrabLargeObject;(11, 9);right side;1;472
+;(8, 9);;(11, 9);right side;1;473
+;(8, 9);;(11, 9);right side;1;474
+;(8, 9);;(11, 9);right side;1;475
+;(8, 9);MoveEast;(11, 9);right side;1;476
+;(8, 9);MoveEast;(11, 9);right side;1;477
+;(8, 9);MoveEast;(11, 9);right side;1;478
+;(8, 9);MoveEast;(11, 9);right side;1;479
+;(8, 9);MoveEast;(11, 9);right side;1;480
+;(8, 9);MoveEast;(11, 9);right side;1;481
+;(8, 9);MoveEast;(11, 9);right side;1;482
+;(8, 9);MoveEast;(11, 9);right side;1;483
+;(8, 9);MoveEast;(11, 9);right side;1;484
+;(8, 9);MoveEast;(11, 9);right side;1;485
+;(8, 9);MoveEast;(12, 9);right side;1;486
+MoveEast;(9, 9);MoveEast;(12, 9);right side;1;487
+;(9, 9);MoveEast;(12, 9);right side;1;488
+;(9, 9);MoveEast;(12, 9);right side;1;489
+;(9, 9);MoveEast;(12, 9);right side;1;490
+MoveEast;(10, 9);MoveEast;(12, 9);right side;1;491
+;(10, 9);MoveEast;(12, 9);right side;1;492
+;(10, 9);MoveEast;(12, 9);right side;1;493
+;(10, 9);MoveEast;(12, 9);right side;1;494
+MoveEast;(11, 9);MoveEast;(12, 9);right side;1;495
+;(11, 9);MoveEast;(12, 9);right side;1;496
+;(11, 9);MoveEast;(13, 9);right side;1;497
+;(11, 9);MoveEast;(13, 9);right side;1;498
+;(11, 9);MoveEast;(13, 9);right side;1;499
+;(11, 9);MoveEast;(13, 9);right side;1;500
+;(11, 9);MoveEast;(13, 9);right side;1;501
+;(11, 9);MoveEast;(13, 9);right side;1;502
+;(11, 9);MoveEast;(13, 9);right side;1;503
+;(11, 9);MoveEast;(13, 9);right side;1;504
+;(11, 9);MoveEast;(13, 9);right side;1;505
+;(11, 9);MoveEast;(13, 9);right side;1;506
+;(11, 9);MoveEast;(13, 9);right side;1;507
+GrabObject;(11, 9);MoveEast;(14, 9);right side;1;508
+;(11, 9);MoveNorthEast;(14, 9);right side;1;509
+;(11, 9);MoveNorthEast;(14, 9);right side;1;510
+;(11, 9);MoveNorthEast;(14, 9);right side;1;511
+;(11, 9);MoveNorthEast;(14, 9);right side;1;512
+;(11, 9);MoveNorthEast;(14, 9);right side;1;513
+;(11, 9);MoveNorthEast;(14, 9);right side;1;514
+;(11, 9);MoveNorthEast;(14, 9);right side;1;515
+MoveWest;(10, 9);MoveNorthEast;(14, 9);right side;1;516
+;(10, 9);MoveNorthEast;(14, 9);right side;1;517
+;(10, 9);MoveNorthEast;(14, 9);right side;1;518
+;(10, 9);MoveNorthEast;(15, 8);right side;1;519
+;(10, 9);MoveEast;(15, 8);right side;1;520
+;(10, 9);MoveEast;(15, 8);right side;1;521
+;(10, 9);MoveEast;(15, 8);right side;1;522
+;(10, 9);MoveEast;(15, 8);right side;1;523
+;(10, 9);MoveEast;(15, 8);right side;1;524
+;(10, 9);MoveEast;(15, 8);right side;1;525
+MoveWest;(9, 9);MoveEast;(15, 8);right side;1;526
+MoveWest;(8, 9);MoveEast;(15, 8);right side;1;527
+;(8, 9);MoveEast;(15, 8);right side;1;528
+MoveWest;(7, 9);MoveEast;(15, 8);right side;1;529
+;(7, 9);MoveEast;(16, 8);right side;1;530
+MoveWest;(6, 9);MoveNorthEast;(16, 8);right side;1;531
+MoveWest;(5, 9);MoveNorthEast;(16, 8);right side;1;532
+;(5, 9);MoveNorthEast;(16, 8);right side;1;533
+MoveWest;(4, 9);MoveNorthEast;(16, 8);right side;1;534
+MoveWest;(3, 9);MoveNorthEast;(16, 8);right side;1;535
+;(3, 9);MoveNorthEast;(16, 8);right side;1;536
+MoveWest;(2, 9);MoveNorthEast;(16, 8);right side;1;537
+;(2, 9);MoveNorthEast;(16, 8);right side;1;538
+MoveWest;(1, 9);MoveNorthEast;(16, 8);right side;1;539
+MoveWest;(0, 9);MoveNorthEast;(16, 8);right side;1;540
+;(0, 9);MoveNorthEast;(17, 7);right side;1;541
+MoveWest;(0, 9);MoveEast;(17, 7);right side;1;542
+;(0, 9);MoveEast;(17, 7);right side;1;543
+;(0, 9);MoveEast;(17, 7);right side;1;544
+;(0, 9);MoveEast;(17, 7);right side;1;545
+;(0, 9);MoveEast;(17, 7);right side;1;546
+DropObject;(0, 9);MoveEast;(17, 7);right side;1;547
+;(0, 9);MoveEast;(17, 7);right side;1;548
+;(0, 9);MoveEast;(17, 7);right side;1;549
+;(0, 9);MoveEast;(17, 7);right side;1;550
+;(0, 9);MoveEast;(17, 7);right side;1;551
+;(0, 9);MoveEast;(18, 7);right side;1;552
+;(0, 9);DropLargeObject;(18, 7);right side;1;553
+;(0, 9);DropLargeObject;(18, 7);right side;1;554
+;(0, 9);DropLargeObject;(18, 7);right side;1;555
+;(0, 9);DropLargeObject;(18, 7);right side;1;556
+;(0, 9);DropLargeObject;(18, 7);right side;1;557
+MoveEast;(1, 9);DropLargeObject;(18, 7);right side;1;558
+;(1, 9);DropLargeObject;(18, 7);right side;1;559
+;(1, 9);DropLargeObject;(18, 7);right side;1;560
+;(1, 9);DropLargeObject;(18, 7);right side;1;561
+;(1, 9);DropLargeObject;(18, 7);right side;1;562
+;(1, 9);DropLargeObject;(18, 7);right side;1;563
+;(1, 9);;(18, 7);right side;1;564
+;(1, 9);;(18, 7);right side;1;565
+;(1, 9);;(18, 7);right side;1;566
+MoveEast;(2, 9);MoveWest;(18, 7);right side;1;567
+;(2, 9);MoveWest;(18, 7);right side;1;568
+MoveEast;(3, 9);MoveWest;(18, 7);right side;1;569
+MoveEast;(4, 9);MoveWest;(18, 7);right side;1;570
+;(4, 9);MoveWest;(18, 7);right side;1;571
+MoveEast;(5, 9);MoveWest;(18, 7);right side;1;572
+MoveEast;(6, 9);MoveWest;(18, 7);right side;1;573
+;(6, 9);MoveWest;(18, 7);right side;1;574
+MoveEast;(7, 9);MoveWest;(18, 7);right side;1;575
+;(7, 9);MoveWest;(18, 7);right side;1;576
+MoveEast;(8, 9);MoveWest;(17, 7);right side;1;577
+MoveEast;(9, 9);MoveWest;(17, 7);right side;1;578
+;(9, 9);MoveWest;(17, 7);right side;1;579
+MoveEast;(10, 9);MoveWest;(17, 7);right side;1;580
+;(10, 9);MoveWest;(17, 7);right side;1;581
+MoveEast;(11, 9);MoveWest;(17, 7);right side;1;582
+;(11, 9);MoveWest;(17, 7);right side;1;583
+;(11, 9);MoveWest;(17, 7);right side;1;584
+;(11, 9);MoveWest;(17, 7);right side;1;585
+;(11, 9);MoveWest;(17, 7);right side;1;586
+;(11, 9);MoveWest;(17, 7);right side;1;587
+;(11, 9);MoveWest;(16, 7);right side;1;588
+;(11, 9);MoveWest;(16, 7);right side;1;589
+;(11, 9);MoveWest;(16, 7);right side;1;590
+MoveSouth;(11, 10);MoveWest;(16, 7);right side;1;591
+;(11, 10);MoveWest;(16, 7);right side;1;592
+;(11, 10);MoveWest;(16, 7);right side;1;593
+;(11, 10);MoveWest;(16, 7);right side;1;594
+;(11, 10);MoveWest;(16, 7);right side;1;595
+;(11, 10);MoveWest;(16, 7);right side;1;596
+;(11, 10);MoveWest;(16, 7);right side;1;597
+;(11, 10);MoveWest;(16, 7);right side;1;598
+;(11, 10);MoveWest;(15, 7);right side;1;599
+;(11, 10);MoveWest;(15, 7);right side;1;600
+GrabObject;(11, 10);MoveWest;(15, 7);right side;1;601
+;(11, 10);MoveWest;(15, 7);right side;1;602
+;(11, 10);MoveWest;(15, 7);right side;1;603
+;(11, 10);MoveWest;(15, 7);right side;1;604
+;(11, 10);MoveWest;(15, 7);right side;1;605
+MoveWest;(10, 10);MoveWest;(15, 7);right side;1;606
+;(10, 10);MoveWest;(15, 7);right side;1;607
+;(10, 10);MoveWest;(15, 7);right side;1;608
+;(10, 10);MoveWest;(15, 7);right side;1;609
+;(10, 10);MoveWest;(14, 7);right side;1;610
+;(10, 10);MoveWest;(14, 7);right side;1;611
+;(10, 10);MoveWest;(14, 7);right side;1;612
+;(10, 10);MoveWest;(14, 7);right side;1;613
+;(10, 10);MoveWest;(14, 7);right side;1;614
+;(10, 10);MoveWest;(14, 7);right side;1;615
+MoveWest;(9, 10);MoveWest;(14, 7);right side;1;616
+MoveWest;(8, 10);MoveWest;(14, 7);right side;1;617
+;(8, 10);MoveWest;(14, 7);right side;1;618
+MoveWest;(7, 10);MoveWest;(14, 7);right side;1;619
+MoveWest;(6, 10);MoveWest;(14, 7);right side;1;620
+;(6, 10);MoveWest;(13, 7);right side;1;621
+MoveWest;(5, 10);MoveWest;(13, 7);right side;1;622
+MoveWest;(4, 10);MoveWest;(13, 7);right side;1;623
+;(4, 10);MoveWest;(13, 7);right side;1;624
+MoveWest;(3, 10);MoveWest;(13, 7);right side;1;625
+;(3, 10);MoveWest;(13, 7);right side;1;626
+MoveWest;(2, 10);MoveWest;(13, 7);right side;1;627
+MoveWest;(1, 10);MoveWest;(13, 7);right side;1;628
+;(1, 10);MoveWest;(13, 7);right side;1;629
+MoveWest;(0, 10);MoveWest;(13, 7);right side;1;630
+MoveWest;(0, 10);MoveWest;(13, 7);right side;1;631
+;(0, 10);MoveWest;(12, 7);right side;1;632
+MoveWest;(0, 10);GrabLargeObject;(12, 7);right side;1;633
+;(0, 10);GrabLargeObject;(12, 7);right side;1;634
+DropObject;(0, 10);GrabLargeObject;(12, 7);right side;1;635
+;(0, 10);GrabLargeObject;(12, 7);right side;1;636
+;(0, 10);GrabLargeObject;(12, 7);right side;1;637
+;(0, 10);GrabLargeObject;(12, 7);right side;1;638
+;(0, 10);GrabLargeObject;(12, 7);right side;1;639
+;(0, 10);GrabLargeObject;(12, 7);right side;1;640
+MoveEast;(1, 10);GrabLargeObject;(12, 7);right side;1;641
+;(1, 10);GrabLargeObject;(12, 7);right side;1;642
+;(1, 10);GrabLargeObject;(12, 7);right side;1;643
+;(1, 10);;(12, 7);right side;1;644
+;(1, 10);;(12, 7);False;1;645
+;(1, 10);;(12, 7);falling ;1;646
+;(1, 10);;(12, 7);falling ;1;647
+MoveEast;(2, 10);;(12, 7);falling ;1;648
+MoveEast;(3, 10);;(12, 7);falling ;1;649
+MoveEast;(4, 10);;(12, 7);False;1;650
+;(4, 10);MoveEast;(12, 7);False;1;651
+MoveEast;(5, 10);MoveEast;(12, 7);False;1;652
+MoveEast;(6, 10);MoveEast;(12, 7);False;1;653
+;(6, 10);MoveEast;(12, 7);False;1;654
+MoveEast;(7, 10);MoveEast;(12, 7);False;1;655
+;(7, 10);MoveEast;(12, 7);False;1;656
+MoveEast;(8, 10);MoveEast;(12, 7);False;1;657
+MoveEast;(9, 10);MoveEast;(12, 7);False;1;658
+;(9, 10);MoveEast;(12, 7);False;1;659
+MoveEast;(10, 10);MoveEast;(12, 7);False;1;660
+MoveEast;(11, 10);MoveEast;(13, 7);False;1;661
+;(11, 10);MoveEast;(13, 7);False;1;662
+MoveEast;(12, 10);MoveEast;(13, 7);False;1;663
+MoveEast;(13, 10);MoveEast;(13, 7);False;1;664
+MoveEast;(14, 10);MoveEast;(13, 7);False;1;665
+;(14, 10);MoveEast;(13, 7);False;1;666
+;(14, 10);MoveEast;(13, 7);False;1;667
+;(14, 10);MoveEast;(13, 7);False;1;668
+;(14, 10);MoveEast;(13, 7);False;1;669
+;(14, 10);MoveEast;(13, 7);False;1;670
+;(14, 10);MoveEast;(13, 7);False;1;671
+;(14, 10);MoveEast;(14, 7);False;1;672
+;(14, 10);;(14, 7);False;1;673
+;(14, 10);;(14, 7);falling ;1;674
+;(14, 10);MoveNorthEast;(14, 7);falling ;1;675
+MoveWest;(13, 10);MoveNorthEast;(14, 7);falling ;1;676
+;(13, 10);MoveNorthEast;(14, 7);falling ;1;677
+;(13, 10);MoveNorthEast;(14, 7);falling ;1;678
+;(13, 10);MoveNorthEast;(14, 7);falling ;1;679
+;(13, 10);MoveNorthEast;(14, 7);falling ;1;680
+;(13, 10);MoveNorthEast;(14, 7);falling ;1;681
+;(13, 10);MoveNorthEast;(14, 7);falling ;1;682
+;(13, 10);MoveNorthEast;(14, 7);falling ;1;683
+;(13, 10);MoveNorthEast;(14, 7);falling ;1;684
+;(13, 10);MoveNorthEast;(15, 6);falling ;1;685
+GrabObject;(13, 10);MoveEast;(15, 6);falling ;1;686
+;(13, 10);MoveEast;(15, 6);falling ;1;687
+;(13, 10);MoveEast;(15, 6);falling ;1;688
+;(13, 10);MoveEast;(15, 6);falling ;1;689
+;(13, 10);MoveEast;(15, 6);falling ;1;690
+;(13, 10);MoveEast;(15, 6);falling ;1;691
+;(13, 10);MoveEast;(15, 6);falling ;1;692
+;(13, 10);MoveEast;(15, 6);falling ;1;693
+MoveEast;(14, 10);MoveEast;(15, 6);falling ;1;694
+;(14, 10);MoveEast;(15, 6);falling ;1;695
+;(14, 10);MoveEast;(16, 6);falling ;1;696
+;(14, 10);;(16, 6);falling ;1;697
+;(14, 10);;(16, 6);False;1;698
+;(14, 10);MoveNorth;(16, 6);False;1;699
+;(14, 10);MoveNorth;(16, 6);False;1;700
+;(14, 10);MoveNorth;(16, 6);False;1;701
+;(14, 10);MoveNorth;(16, 6);False;1;702
+;(14, 10);MoveNorth;(16, 6);False;1;703
+MoveEast;(15, 10);MoveNorth;(16, 6);False;1;704
+MoveEast;(16, 10);MoveNorth;(16, 6);False;1;705
+;(16, 10);MoveNorth;(16, 6);False;1;706
+MoveEast;(17, 10);MoveNorth;(16, 6);False;1;707
+;(17, 10);MoveNorth;(16, 6);False;1;708
+MoveEast;(18, 10);MoveNorth;(16, 5);False;1;709
+;(18, 10);MoveNorth;(16, 5);False;1;710
+;(18, 10);MoveNorth;(16, 5);False;1;711
+;(18, 10);MoveNorth;(16, 5);False;1;712
+;(18, 10);MoveNorth;(16, 5);False;1;713
+;(18, 10);MoveNorth;(16, 5);False;1;714
+;(18, 10);MoveNorth;(16, 5);False;1;715
+;(18, 10);MoveNorth;(16, 5);False;1;716
+GrabObject;(18, 10);MoveNorth;(16, 5);False;1;717
+;(18, 10);MoveNorth;(16, 5);False;1;718
+;(18, 10);MoveNorth;(16, 5);False;1;719
+;(18, 10);MoveNorth;(16, 4);False;1;720
+;(18, 10);DropLargeObject;(16, 4);False;1;721
+;(18, 10);DropLargeObject;(16, 4);False;1;722
+;(18, 10);DropLargeObject;(16, 4);False;1;723
+;(18, 10);DropLargeObject;(16, 4);False;1;724
+MoveWest;(17, 10);DropLargeObject;(16, 4);False;1;725
+;(17, 10);DropLargeObject;(16, 4);False;1;726
+;(17, 10);DropLargeObject;(16, 4);False;1;727
+;(17, 10);DropLargeObject;(16, 4);False;1;728
+;(17, 10);DropLargeObject;(16, 4);False;1;729
+;(17, 10);DropLargeObject;(16, 4);False;1;730
+;(17, 10);DropLargeObject;(16, 4);False;1;731
+;(17, 10);;(16, 4);False;1;732
+MoveWest;(16, 10);MoveWest;(16, 4);False;1;733
+MoveWest;(15, 10);MoveWest;(16, 4);False;1;734
+MoveWest;(14, 10);MoveWest;(16, 4);False;1;735
+;(14, 10);MoveWest;(16, 4);False;1;736
+MoveWest;(13, 10);MoveWest;(16, 4);False;1;737
+MoveWest;(12, 10);MoveWest;(16, 4);False;1;738
+;(12, 10);MoveWest;(16, 4);False;1;739
+MoveWest;(11, 10);MoveWest;(16, 4);False;1;740
+;(11, 10);MoveWest;(16, 4);False;1;741
+;(11, 10);MoveWest;(16, 4);False;1;742
+;(11, 10);MoveWest;(15, 4);False;1;743
+;(11, 10);;(15, 4);False;1;744
+MoveEast;(12, 10);;(15, 4);falling ;1;745
+;(12, 10);MoveWest;(15, 4);falling ;1;746
+;(12, 10);MoveWest;(15, 4);falling ;1;747
+;(12, 10);MoveWest;(15, 4);falling ;1;748
+;(12, 10);MoveWest;(15, 4);falling ;1;749
+;(12, 10);MoveWest;(15, 4);falling ;1;750
+;(12, 10);MoveWest;(15, 4);falling ;1;751
+;(12, 10);MoveWest;(15, 4);falling ;1;752
+MoveEast;(13, 10);MoveWest;(15, 4);falling ;1;753
+;(13, 10);MoveWest;(15, 4);falling ;1;754
+MoveEast;(14, 10);MoveWest;(15, 4);falling ;1;755
+MoveEast;(15, 10);MoveWest;(14, 4);falling ;1;756
+;(15, 10);MoveSouthWest;(14, 4);falling ;1;757
+;(15, 10);MoveSouthWest;(14, 4);falling ;1;758
+MoveEast;(16, 10);MoveSouthWest;(14, 4);falling ;1;759
+;(16, 10);MoveSouthWest;(14, 4);falling ;1;760
+MoveEast;(17, 10);MoveSouthWest;(14, 4);falling ;1;761
+;(17, 10);MoveSouthWest;(14, 4);falling ;1;762
+;(17, 10);MoveSouthWest;(14, 4);falling ;1;763
+;(17, 10);MoveSouthWest;(14, 4);falling ;1;764
+;(17, 10);MoveSouthWest;(14, 4);falling ;1;765
+;(17, 10);MoveSouthWest;(14, 4);falling ;1;766
+DropObject;(17, 10);MoveSouthWest;(13, 5);falling ;1;767
+;(17, 10);;(13, 5);falling ;1;768
+;(17, 10);;(13, 5);False;1;769
+;(17, 10);MoveWest;(13, 5);False;1;770
+MoveWest;(16, 10);MoveWest;(13, 5);False;1;771
+;(16, 10);MoveWest;(13, 5);False;1;772
+;(16, 10);MoveWest;(13, 5);False;1;773
+;(16, 10);MoveWest;(13, 5);False;1;774
+;(16, 10);MoveWest;(13, 5);False;1;775
+;(16, 10);MoveWest;(13, 5);False;1;776
+;(16, 10);MoveWest;(13, 5);False;1;777
+;(16, 10);MoveWest;(13, 5);False;1;778
+;(16, 10);MoveWest;(13, 5);False;1;779
+MoveWest;(15, 10);MoveWest;(12, 5);False;1;780
+;(15, 10);MoveWest;(12, 5);False;1;781
+MoveWest;(14, 10);MoveWest;(12, 5);False;1;782
+MoveWest;(13, 10);MoveWest;(12, 5);False;1;783
+MoveWest;(12, 10);MoveWest;(12, 5);False;1;784
+;(12, 10);MoveWest;(12, 5);False;1;785
+MoveWest;(11, 10);MoveWest;(12, 5);False;1;786
+;(11, 10);MoveWest;(12, 5);False;1;787
+;(11, 10);MoveWest;(12, 5);False;1;788
+;(11, 10);MoveWest;(12, 5);False;1;789
+;(11, 10);MoveWest;(12, 5);False;1;790
+;(11, 10);MoveWest;(11, 5);False;1;791
+;(11, 10);;(11, 5);False;1;792
+;(11, 10);;(11, 5);falling ;1;793
+;(11, 10);MoveSouthWest;(11, 5);falling ;1;794
+MoveEast;(12, 10);MoveSouthWest;(11, 5);falling ;1;795
+;(12, 10);MoveSouthWest;(11, 5);falling ;1;796
+;(12, 10);MoveSouthWest;(11, 5);falling ;1;797
+;(12, 10);MoveSouthWest;(11, 5);falling ;1;798
+;(12, 10);MoveSouthWest;(11, 5);falling ;1;799
+;(12, 10);MoveSouthWest;(11, 5);falling ;1;800
+;(12, 10);MoveSouthWest;(11, 5);falling ;1;801
+;(12, 10);MoveSouthWest;(11, 5);falling ;1;802
+;(12, 10);MoveSouthWest;(11, 5);falling ;1;803
+;(12, 10);MoveSouthWest;(10, 6);falling ;1;804
+;(12, 10);MoveWest;(10, 6);falling ;1;805
+GrabObject;(12, 10);MoveWest;(10, 6);falling ;1;806
+;(12, 10);MoveWest;(10, 6);falling ;1;807
+;(12, 10);MoveWest;(10, 6);falling ;1;808
+;(12, 10);MoveWest;(10, 6);falling ;1;809
+;(12, 10);MoveWest;(10, 6);falling ;1;810
+;(12, 10);MoveWest;(10, 6);falling ;1;811
+;(12, 10);MoveWest;(10, 6);falling ;1;812
+;(12, 10);MoveWest;(10, 6);falling ;1;813
+;(12, 10);MoveWest;(10, 6);falling ;1;814
+;(12, 10);MoveWest;(9, 6);falling ;1;815
+;(12, 10);;(9, 6);falling ;1;816
+;(12, 10);;(9, 6);False;1;817
+MoveEast;(13, 10);MoveSouthWest;(9, 6);False;1;818
+;(13, 10);MoveSouthWest;(9, 6);False;1;819
+;(13, 10);MoveSouthWest;(9, 6);False;1;820
+;(13, 10);MoveSouthWest;(9, 6);False;1;821
+;(13, 10);MoveSouthWest;(9, 6);False;1;822
+;(13, 10);MoveSouthWest;(9, 6);False;1;823
+;(13, 10);MoveSouthWest;(9, 6);False;1;824
+;(13, 10);MoveSouthWest;(9, 6);False;1;825
+;(13, 10);MoveSouthWest;(9, 6);False;1;826
+MoveEast;(14, 10);MoveSouthWest;(9, 6);False;1;827
+;(14, 10);MoveSouthWest;(8, 7);False;1;828
+MoveEast;(15, 10);GrabLargeObject;(8, 7);False;1;829
+MoveEast;(16, 10);GrabLargeObject;(8, 7);False;1;830
+;(16, 10);GrabLargeObject;(8, 7);False;1;831
+MoveEast;(17, 10);GrabLargeObject;(8, 7);False;1;832
+MoveEast;(18, 10);GrabLargeObject;(8, 7);False;1;833
+;(18, 10);GrabLargeObject;(8, 7);False;1;834
+MoveEast;(19, 10);GrabLargeObject;(8, 7);False;1;835
+;(19, 10);GrabLargeObject;(8, 7);False;1;836
+;(19, 10);GrabLargeObject;(8, 7);False;1;837
+;(19, 10);GrabLargeObject;(8, 7);False;1;838
+;(19, 10);GrabLargeObject;(8, 7);False;1;839
+;(19, 10);;(8, 7);False;1;840
+;(19, 10);MoveWest;(8, 7);False;1;841
+;(19, 10);MoveWest;(8, 7);False;1;842
+;(19, 10);MoveWest;(8, 7);False;1;843
+;(19, 10);MoveWest;(8, 7);False;1;844
+;(19, 10);MoveWest;(8, 7);False;1;845
+;(19, 10);MoveWest;(8, 7);False;1;846
+GrabObject;(19, 10);MoveWest;(8, 7);False;1;847
+;(19, 10);MoveWest;(8, 7);False;1;848
+;(19, 10);MoveWest;(8, 7);False;1;849
+;(19, 10);MoveWest;(8, 7);False;1;850
+;(19, 10);MoveWest;(7, 7);False;1;851
+;(19, 10);MoveWest;(7, 7);False;1;852
+;(19, 10);MoveWest;(7, 7);False;1;853
+;(19, 10);MoveWest;(7, 7);False;1;854
+;(19, 10);MoveWest;(7, 7);False;1;855
+;(19, 10);MoveWest;(7, 7);False;1;856
+;(19, 10);MoveWest;(7, 7);False;1;857
+;(19, 10);MoveWest;(7, 7);False;1;858
+;(19, 10);MoveWest;(7, 7);False;1;859
+;(19, 10);MoveWest;(7, 7);False;1;860
+;(19, 10);MoveWest;(7, 7);False;1;861
+;(19, 10);MoveWest;(6, 7);False;1;862
+MoveWest;(18, 10);MoveWest;(6, 7);False;1;863
+;(18, 10);MoveWest;(6, 7);False;1;864
+;(18, 10);MoveWest;(6, 7);False;1;865
+;(18, 10);MoveWest;(6, 7);False;1;866
+;(18, 10);MoveWest;(6, 7);False;1;867
+;(18, 10);MoveWest;(6, 7);False;1;868
+;(18, 10);MoveWest;(6, 7);False;1;869
+;(18, 10);MoveWest;(6, 7);False;1;870
+;(18, 10);MoveWest;(6, 7);False;1;871
+MoveWest;(17, 10);MoveWest;(6, 7);False;1;872
+;(17, 10);MoveWest;(5, 7);False;1;873
+MoveWest;(16, 10);;(5, 7);False;1;874
+MoveWest;(15, 10);;(5, 7);falling ;1;875
+MoveWest;(14, 10);MoveNorthWest;(5, 7);falling ;1;876
+;(14, 10);MoveNorthWest;(5, 7);falling ;1;877
+MoveWest;(13, 10);MoveNorthWest;(5, 7);falling ;1;878
+;(13, 10);MoveNorthWest;(5, 7);falling ;1;879
+MoveWest;(12, 10);MoveNorthWest;(5, 7);falling ;1;880
+MoveWest;(11, 10);MoveNorthWest;(5, 7);falling ;1;881
+;(11, 10);MoveNorthWest;(5, 7);falling ;1;882
+MoveWest;(10, 10);MoveNorthWest;(5, 7);falling ;1;883
+;(10, 10);MoveNorthWest;(5, 7);falling ;1;884
+MoveWest;(9, 10);MoveNorthWest;(5, 7);falling ;1;885
+MoveWest;(8, 10);MoveNorthWest;(4, 6);falling ;1;886
+;(8, 10);;(4, 6);falling ;1;887
+MoveWest;(7, 10);;(4, 6);False;1;888
+MoveWest;(6, 10);MoveNorthWest;(4, 6);False;1;889
+;(6, 10);MoveNorthWest;(4, 6);False;1;890
+;(6, 10);MoveNorthWest;(4, 6);False;1;891
+;(6, 10);MoveNorthWest;(4, 6);False;1;892
+;(6, 10);MoveNorthWest;(4, 6);False;1;893
+;(6, 10);MoveNorthWest;(4, 6);False;1;894
+;(6, 10);MoveNorthWest;(4, 6);False;1;895
+;(6, 10);MoveNorthWest;(4, 6);False;1;896
+;(6, 10);MoveNorthWest;(4, 6);False;1;897
+MoveEast;(7, 10);MoveNorthWest;(4, 6);False;1;898
+;(7, 10);MoveNorthWest;(3, 5);False;1;899
+;(7, 10);MoveWest;(3, 5);False;1;900
+;(7, 10);MoveWest;(3, 5);False;1;901
+;(7, 10);MoveWest;(3, 5);False;1;902
+;(7, 10);MoveWest;(3, 5);False;1;903
+;(7, 10);MoveWest;(3, 5);False;1;904
+;(7, 10);MoveWest;(3, 5);False;1;905
+;(7, 10);MoveWest;(3, 5);False;1;906
+;(7, 10);MoveWest;(3, 5);False;1;907
+MoveEast;(8, 10);MoveWest;(3, 5);False;1;908
+;(8, 10);MoveWest;(3, 5);False;1;909
+MoveEast;(9, 10);MoveWest;(2, 5);False;1;910
+MoveEast;(10, 10);MoveNorthWest;(2, 5);False;1;911
+MoveEast;(11, 10);MoveNorthWest;(2, 5);False;1;912
+;(11, 10);MoveNorthWest;(2, 5);False;1;913
+MoveEast;(12, 10);MoveNorthWest;(2, 5);False;1;914
+MoveEast;(13, 10);MoveNorthWest;(2, 5);False;1;915
+;(13, 10);MoveNorthWest;(2, 5);False;1;916
+MoveEast;(14, 10);MoveNorthWest;(2, 5);False;1;917
+;(14, 10);MoveNorthWest;(2, 5);False;1;918
+MoveEast;(15, 10);MoveNorthWest;(2, 5);False;1;919
+MoveEast;(16, 10);MoveNorthWest;(2, 5);False;1;920
+;(16, 10);MoveNorthWest;(1, 4);False;1;921
+MoveEast;(17, 10);MoveWest;(1, 4);False;1;922
+;(17, 10);MoveWest;(1, 4);False;1;923
+MoveEast;(18, 10);MoveWest;(1, 4);False;1;924
+MoveEast;(19, 10);MoveWest;(1, 4);False;1;925
+;(19, 10);MoveWest;(1, 4);False;1;926
+;(19, 10);MoveWest;(1, 4);False;1;927
+DropObject;(19, 10);MoveWest;(1, 4);False;1;928
+;(19, 10);MoveWest;(1, 4);False;1;929
+;(19, 10);MoveWest;(1, 4);False;1;930
+;(19, 10);MoveWest;(1, 4);False;1;931
+;(19, 10);MoveWest;(0, 4);False;1;932
+;(19, 10);DropLargeObject;(0, 4);False;1;933
+;(19, 10);DropLargeObject;(0, 4);False;1;934
+;(19, 10);DropLargeObject;(0, 4);False;1;935
+MoveWest;(18, 10);DropLargeObject;(0, 4);False;1;936
+;(18, 10);DropLargeObject;(0, 4);False;1;937
+;(18, 10);DropLargeObject;(0, 4);False;1;938
+;(18, 10);DropLargeObject;(0, 4);False;1;939
+;(18, 10);DropLargeObject;(0, 4);False;1;940
+;(18, 10);DropLargeObject;(0, 4);False;1;941
+;(18, 10);DropLargeObject;(0, 4);False;1;942
+;(18, 10);DropLargeObject;(0, 4);False;1;943
+;(18, 10);;(0, 4);False;1;944
+MoveWest;(17, 10);MoveEast;(0, 4);False;1;945
+MoveWest;(16, 10);MoveEast;(0, 4);False;1;946
+;(16, 10);MoveEast;(0, 4);False;1;947
+MoveWest;(15, 10);MoveEast;(0, 4);False;1;948
+MoveWest;(14, 10);MoveEast;(0, 4);False;1;949
+;(14, 10);MoveEast;(0, 4);False;1;950
+MoveWest;(13, 10);MoveEast;(0, 4);False;1;951
+;(13, 10);MoveEast;(0, 4);False;1;952
+MoveWest;(12, 10);MoveEast;(0, 4);False;1;953
+;(12, 10);MoveEast;(0, 4);False;1;954
+MoveWest;(11, 10);MoveEast;(1, 4);False;1;955
+MoveWest;(10, 10);MoveEast;(1, 4);False;1;956
+MoveWest;(9, 10);MoveEast;(1, 4);False;1;957
+;(9, 10);MoveEast;(1, 4);False;1;958
+MoveWest;(8, 10);MoveEast;(1, 4);False;1;959
+;(8, 10);MoveEast;(1, 4);False;1;960
+MoveWest;(7, 10);MoveEast;(1, 4);False;1;961
+;(7, 10);MoveEast;(1, 4);False;1;962
+;(7, 10);MoveEast;(1, 4);False;1;963
+;(7, 10);MoveEast;(1, 4);False;1;964
+;(7, 10);MoveEast;(1, 4);False;1;965
+;(7, 10);MoveEast;(2, 4);False;1;966
+;(7, 10);MoveEast;(2, 4);False;1;967
+;(7, 10);MoveEast;(2, 4);False;1;968
+;(7, 10);MoveEast;(2, 4);False;1;969
+MoveNorth;(7, 9);MoveEast;(2, 4);False;1;970
+;(7, 9);MoveEast;(2, 4);False;1;971
+;(7, 9);MoveEast;(2, 4);False;1;972
+;(7, 9);MoveEast;(2, 4);False;1;973
+;(7, 9);MoveEast;(2, 4);False;1;974
+;(7, 9);MoveEast;(2, 4);False;1;975
+;(7, 9);MoveEast;(2, 4);False;1;976
+;(7, 9);MoveEast;(3, 4);False;1;977
+;(7, 9);MoveEast;(3, 4);False;1;978
+;(7, 9);MoveEast;(3, 4);False;1;979
+MoveEast;(8, 9);MoveEast;(3, 4);False;1;980
+;(8, 9);MoveEast;(3, 4);False;1;981
+;(8, 9);MoveEast;(3, 4);False;1;982
+;(8, 9);MoveEast;(3, 4);False;1;983
+;(8, 9);MoveEast;(3, 4);False;1;984
+;(8, 9);MoveEast;(3, 4);False;1;985
+;(8, 9);MoveEast;(3, 4);False;1;986
+;(8, 9);MoveEast;(3, 4);False;1;987
+;(8, 9);MoveEast;(4, 4);False;1;988
+;(8, 9);MoveEast;(4, 4);False;1;989
+;(8, 9);MoveEast;(4, 4);False;1;990
+;(8, 9);MoveEast;(4, 4);False;1;991
+;(8, 9);MoveEast;(4, 4);False;1;992
+;(8, 9);MoveEast;(4, 4);False;1;993
+;(8, 9);MoveEast;(4, 4);False;1;994
+;(8, 9);MoveEast;(4, 4);False;1;995
+;(8, 9);MoveEast;(4, 4);False;1;996
+;(8, 9);MoveEast;(4, 4);False;1;997
+;(8, 9);MoveEast;(4, 4);False;1;998
+;(8, 9);MoveEast;(5, 4);False;1;999
+;(8, 9);;(5, 4);False;1;1000
+;(8, 9);;(5, 4);falling ;1;1001
+;(8, 9);MoveSouthEast;(5, 4);falling ;1;1002
+;(8, 9);MoveSouthEast;(5, 4);falling ;1;1003
+;(8, 9);MoveSouthEast;(5, 4);falling ;1;1004
+;(8, 9);MoveSouthEast;(5, 4);falling ;1;1005
+;(8, 9);MoveSouthEast;(5, 4);falling ;1;1006
+;(8, 9);MoveSouthEast;(5, 4);falling ;1;1007
+;(8, 9);MoveSouthEast;(5, 4);falling ;1;1008
+;(8, 9);MoveSouthEast;(5, 4);falling ;1;1009
+;(8, 9);MoveSouthEast;(5, 4);falling ;1;1010
+;(8, 9);MoveSouthEast;(5, 4);falling ;1;1011
+;(8, 9);MoveSouthEast;(6, 5);falling ;1;1012
+;(8, 9);;(6, 5);falling ;1;1013
+;(8, 9);;(6, 5);False;1;1014
+GrabObject;(8, 9);MoveSouthEast;(6, 5);False;1;1015
+;(8, 9);MoveSouthEast;(6, 5);False;1;1016
+;(8, 9);MoveSouthEast;(6, 5);False;1;1017
+;(8, 9);MoveSouthEast;(6, 5);False;1;1018
+;(8, 9);MoveSouthEast;(6, 5);False;1;1019
+;(8, 9);MoveSouthEast;(6, 5);False;1;1020
+;(8, 9);MoveSouthEast;(6, 5);False;1;1021
+;(8, 9);MoveSouthEast;(6, 5);False;1;1022
+;(8, 9);MoveSouthEast;(6, 5);False;1;1023
+;(8, 9);MoveSouthEast;(6, 5);False;1;1024
+;(8, 9);MoveSouthEast;(7, 6);False;1;1025
+;(8, 9);;(7, 6);False;1;1026
+;(8, 9);BreakObject;(7, 6);False;1;1027
+;(8, 9);BreakObject;(7, 6);False;1;1028
+GrabObject;(8, 9);BreakObject;(7, 6);False;1;1029
+;(8, 9);BreakObject;(7, 6);False;1;1030
+;(8, 9);BreakObject;(7, 6);False;1;1031
+;(8, 9);BreakObject;(7, 6);False;1;1032
+;(8, 9);BreakObject;(7, 6);False;1;1033
+;(8, 9);BreakObject;(7, 6);False;1;1034
+MoveWest;(7, 9);BreakObject;(7, 6);False;1;1035
+;(7, 9);BreakObject;(7, 6);False;1;1036
+;(7, 9);BreakObject;(7, 6);False;1;1037
+;(7, 9);;(7, 6);False;1;1038
+;(7, 9);MoveNorthEast;(7, 6);False;1;1039
+;(7, 9);MoveNorthEast;(7, 6);False;1;1040
+;(7, 9);MoveNorthEast;(7, 6);False;1;1041
+;(7, 9);MoveNorthEast;(7, 6);False;1;1042
+MoveWest;(6, 9);MoveNorthEast;(7, 6);False;1;1043
+;(6, 9);MoveNorthEast;(7, 6);False;1;1044
+MoveWest;(5, 9);MoveNorthEast;(7, 6);False;1;1045
+;(5, 9);MoveNorthEast;(7, 6);False;1;1046
+MoveWest;(4, 9);MoveNorthEast;(7, 6);False;1;1047
+MoveWest;(3, 9);MoveNorthEast;(7, 6);False;1;1048
+;(3, 9);MoveNorthEast;(8, 5);False;1;1049
+MoveWest;(2, 9);;(8, 5);False;1;1050
+;(2, 9);;(8, 5);False;1;1051
+MoveWest;(1, 9);;(8, 5);False;1;1052
+MoveWest;(0, 9);;(8, 5);False;1;1053
+MoveWest;(0, 9);;(8, 5);False;1;1054
+;(0, 9);;(8, 5);False;1;1055
+;(0, 9);;(8, 5);False;1;1056
+;(0, 9);;(8, 5);False;1;1057
+;(0, 9);;(8, 5);False;1;1058
+;(0, 9);;(8, 5);False;1;1059
+;(0, 9);;(8, 5);False;1;1060
+;(0, 9);;(8, 5);False;1;1061
+;(0, 9);;(8, 5);False;1;1062
+;(0, 9);;(8, 5);False;1;1063
+;(0, 9);;(8, 5);False;1;1064
+;(0, 9);;(8, 5);False;1;1065
+;(0, 9);;(8, 5);False;1;1066
+;(0, 9);;(8, 5);False;1;1067
+;(0, 9);;(8, 5);False;1;1068

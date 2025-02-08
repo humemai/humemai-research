@@ -1,0 +1,2282 @@
+human_selector_action;human_selector_location;robot_action;robot_location;robot_executing_cp;world_nr;tick_nr
+;(3, 4);;(4, 4);False;1;0
+;(3, 4);;(4, 4);False;1;1
+MoveEast;(4, 4);;(4, 4);same side clearing;1;2
+;(4, 4);;(4, 4);same side clearing;1;3
+;(4, 4);MoveSouthEast;(4, 4);same side clearing;1;4
+MoveEast;(5, 4);MoveSouthEast;(4, 4);same side clearing;1;5
+;(5, 4);MoveSouthEast;(4, 4);same side clearing;1;6
+;(5, 4);MoveSouthEast;(4, 4);same side clearing;1;7
+;(5, 4);MoveSouthEast;(4, 4);same side clearing;1;8
+MoveEast;(6, 4);MoveSouthEast;(4, 4);same side clearing;1;9
+;(6, 4);MoveSouthEast;(4, 4);same side clearing;1;10
+;(6, 4);MoveSouthEast;(4, 4);same side clearing;1;11
+;(6, 4);MoveSouthEast;(4, 4);same side clearing;1;12
+;(6, 4);MoveSouthEast;(4, 4);same side clearing;1;13
+;(6, 4);MoveSouthEast;(5, 5);same side clearing;1;14
+MoveEast;(7, 4);MoveEast;(5, 5);same side clearing;1;15
+;(7, 4);MoveEast;(5, 5);same side clearing;1;16
+;(7, 4);MoveEast;(5, 5);same side clearing;1;17
+;(7, 4);MoveEast;(5, 5);same side clearing;1;18
+;(7, 4);MoveEast;(5, 5);same side clearing;1;19
+;(7, 4);MoveEast;(5, 5);same side clearing;1;20
+;(7, 4);MoveEast;(5, 5);same side clearing;1;21
+;(7, 4);MoveEast;(5, 5);same side clearing;1;22
+;(7, 4);MoveEast;(5, 5);same side clearing;1;23
+;(7, 4);MoveEast;(5, 5);same side clearing;1;24
+;(7, 4);MoveEast;(6, 5);same side clearing;1;25
+;(7, 4);MoveSouthEast;(6, 5);same side clearing;1;26
+;(7, 4);MoveSouthEast;(6, 5);same side clearing;1;27
+;(7, 4);MoveSouthEast;(6, 5);same side clearing;1;28
+;(7, 4);MoveSouthEast;(6, 5);same side clearing;1;29
+;(7, 4);MoveSouthEast;(6, 5);same side clearing;1;30
+;(7, 4);MoveSouthEast;(6, 5);same side clearing;1;31
+;(7, 4);MoveSouthEast;(6, 5);same side clearing;1;32
+;(7, 4);MoveSouthEast;(6, 5);same side clearing;1;33
+;(7, 4);MoveSouthEast;(6, 5);same side clearing;1;34
+MoveEast;(8, 4);MoveSouthEast;(6, 5);same side clearing;1;35
+;(8, 4);MoveSouthEast;(7, 6);same side clearing;1;36
+;(8, 4);GrabLargeObject;(7, 6);same side clearing;1;37
+;(8, 4);GrabLargeObject;(7, 6);same side clearing;1;38
+;(8, 4);GrabLargeObject;(7, 6);same side clearing;1;39
+;(8, 4);GrabLargeObject;(7, 6);same side clearing;1;40
+;(8, 4);GrabLargeObject;(7, 6);same side clearing;1;41
+;(8, 4);GrabLargeObject;(7, 6);same side clearing;1;42
+;(8, 4);GrabLargeObject;(7, 6);same side clearing;1;43
+;(8, 4);GrabLargeObject;(7, 6);same side clearing;1;44
+;(8, 4);GrabLargeObject;(7, 6);same side clearing;1;45
+;(8, 4);GrabLargeObject;(7, 6);same side clearing;1;46
+;(8, 4);GrabLargeObject;(7, 6);same side clearing;1;47
+;(8, 4);;(7, 6);same side clearing;1;48
+;(8, 4);;(7, 6);same side clearing;1;49
+GrabObject;(8, 4);;(7, 6);same side clearing;1;50
+;(8, 4);;(7, 6);same side clearing;1;51
+;(8, 4);;(7, 6);same side clearing;1;52
+;(8, 4);;(7, 6);same side clearing;1;53
+;(8, 4);MoveWest;(7, 6);same side clearing;1;54
+;(8, 4);MoveWest;(7, 6);same side clearing;1;55
+;(8, 4);MoveWest;(7, 6);same side clearing;1;56
+;(8, 4);MoveWest;(7, 6);same side clearing;1;57
+;(8, 4);MoveWest;(7, 6);same side clearing;1;58
+MoveWest;(7, 4);MoveWest;(7, 6);same side clearing;1;59
+;(7, 4);MoveWest;(7, 6);same side clearing;1;60
+;(7, 4);MoveWest;(7, 6);same side clearing;1;61
+;(7, 4);MoveWest;(7, 6);same side clearing;1;62
+;(7, 4);MoveWest;(7, 6);same side clearing;1;63
+;(7, 4);MoveWest;(6, 6);same side clearing;1;64
+;(7, 4);MoveWest;(6, 6);same side clearing;1;65
+;(7, 4);MoveWest;(6, 6);same side clearing;1;66
+;(7, 4);MoveWest;(6, 6);same side clearing;1;67
+MoveWest;(6, 4);MoveWest;(6, 6);same side clearing;1;68
+;(6, 4);MoveWest;(6, 6);same side clearing;1;69
+MoveWest;(5, 4);MoveWest;(6, 6);same side clearing;1;70
+MoveWest;(4, 4);MoveWest;(6, 6);same side clearing;1;71
+;(4, 4);MoveWest;(6, 6);same side clearing;1;72
+MoveWest;(3, 4);MoveWest;(6, 6);same side clearing;1;73
+;(3, 4);MoveWest;(6, 6);same side clearing;1;74
+MoveWest;(2, 4);MoveWest;(5, 6);same side clearing;1;75
+MoveWest;(1, 4);MoveNorthWest;(5, 6);same side clearing;1;76
+;(1, 4);MoveNorthWest;(5, 6);same side clearing;1;77
+MoveWest;(0, 4);MoveNorthWest;(5, 6);same side clearing;1;78
+;(0, 4);MoveNorthWest;(5, 6);same side clearing;1;79
+;(0, 4);MoveNorthWest;(5, 6);same side clearing;1;80
+;(0, 4);MoveNorthWest;(5, 6);same side clearing;1;81
+;(0, 4);MoveNorthWest;(5, 6);same side clearing;1;82
+;(0, 4);MoveNorthWest;(5, 6);same side clearing;1;83
+;(0, 4);MoveNorthWest;(5, 6);same side clearing;1;84
+;(0, 4);MoveNorthWest;(5, 6);same side clearing;1;85
+;(0, 4);MoveNorthWest;(4, 5);same side clearing;1;86
+;(0, 4);MoveWest;(4, 5);same side clearing;1;87
+;(0, 4);MoveWest;(4, 5);same side clearing;1;88
+;(0, 4);MoveWest;(4, 5);same side clearing;1;89
+DropObject;(0, 4);MoveWest;(4, 5);same side clearing;1;90
+;(0, 4);MoveWest;(4, 5);same side clearing;1;91
+;(0, 4);MoveWest;(4, 5);same side clearing;1;92
+;(0, 4);MoveWest;(4, 5);same side clearing;1;93
+;(0, 4);MoveWest;(4, 5);same side clearing;1;94
+;(0, 4);MoveWest;(4, 5);same side clearing;1;95
+;(0, 4);MoveWest;(4, 5);same side clearing;1;96
+;(0, 4);MoveWest;(3, 5);same side clearing;1;97
+;(0, 4);MoveNorthWest;(3, 5);same side clearing;1;98
+;(0, 4);MoveNorthWest;(3, 5);same side clearing;1;99
+;(0, 4);MoveNorthWest;(3, 5);same side clearing;1;100
+MoveEast;(1, 4);MoveNorthWest;(3, 5);same side clearing;1;101
+;(1, 4);MoveNorthWest;(3, 5);same side clearing;1;102
+;(1, 4);MoveNorthWest;(3, 5);same side clearing;1;103
+;(1, 4);MoveNorthWest;(3, 5);same side clearing;1;104
+;(1, 4);MoveNorthWest;(3, 5);same side clearing;1;105
+;(1, 4);MoveNorthWest;(3, 5);same side clearing;1;106
+;(1, 4);MoveNorthWest;(3, 5);same side clearing;1;107
+MoveEast;(2, 4);MoveNorthWest;(2, 4);same side clearing;1;108
+;(2, 4);MoveWest;(2, 4);same side clearing;1;109
+MoveEast;(3, 4);MoveWest;(2, 4);same side clearing;1;110
+;(3, 4);MoveWest;(2, 4);same side clearing;1;111
+MoveEast;(4, 4);MoveWest;(2, 4);same side clearing;1;112
+MoveEast;(5, 4);MoveWest;(2, 4);same side clearing;1;113
+;(5, 4);MoveWest;(2, 4);same side clearing;1;114
+MoveEast;(6, 4);MoveWest;(2, 4);same side clearing;1;115
+;(6, 4);MoveWest;(2, 4);same side clearing;1;116
+MoveEast;(7, 4);MoveWest;(2, 4);same side clearing;1;117
+MoveEast;(8, 4);MoveWest;(2, 4);same side clearing;1;118
+;(8, 4);MoveWest;(1, 4);same side clearing;1;119
+;(8, 4);DropLargeObject;(1, 4);same side clearing;1;120
+;(8, 4);DropLargeObject;(1, 4);same side clearing;1;121
+;(8, 4);DropLargeObject;(1, 4);same side clearing;1;122
+;(8, 4);DropLargeObject;(1, 4);same side clearing;1;123
+;(8, 4);DropLargeObject;(1, 4);same side clearing;1;124
+;(8, 4);DropLargeObject;(1, 4);same side clearing;1;125
+;(8, 4);DropLargeObject;(1, 4);same side clearing;1;126
+;(8, 4);DropLargeObject;(1, 4);same side clearing;1;127
+;(8, 4);DropLargeObject;(1, 4);same side clearing;1;128
+;(8, 4);DropLargeObject;(1, 4);same side clearing;1;129
+;(8, 4);DropLargeObject;(1, 4);same side clearing;1;130
+;(8, 4);;(1, 4);same side clearing;1;131
+MoveSouth;(8, 5);;(1, 4);same side clearing;1;132
+;(8, 5);;(1, 4);same side clearing;1;133
+;(8, 5);;(1, 4);same side clearing;1;134
+;(8, 5);;(1, 4);same side clearing;1;135
+;(8, 5);;(1, 4);same side clearing;1;136
+;(8, 5);;(1, 4);same side clearing;1;137
+;(8, 5);;(1, 4);same side clearing;1;138
+;(8, 5);;(1, 4);same side clearing;1;139
+;(8, 5);;(1, 4);same side clearing;1;140
+;(8, 5);;(1, 4);same side clearing;1;141
+;(8, 5);;(1, 4);same side clearing;1;142
+MoveSouth;(8, 6);;(1, 4);same side clearing;1;143
+;(8, 6);;(1, 4);same side clearing;1;144
+;(8, 6);;(1, 4);same side clearing;1;145
+;(8, 6);;(1, 4);same side clearing;1;146
+;(8, 6);;(1, 4);same side clearing;1;147
+;(8, 6);;(1, 4);same side clearing;1;148
+;(8, 6);;(1, 4);same side clearing;1;149
+;(8, 6);;(1, 4);same side clearing;1;150
+;(8, 6);;(1, 4);same side clearing;1;151
+;(8, 6);;(1, 4);same side clearing;1;152
+MoveSouth;(8, 7);;(1, 4);same side clearing;1;153
+;(8, 7);;(1, 4);same side clearing;1;154
+;(8, 7);;(1, 4);same side clearing;1;155
+;(8, 7);;(1, 4);same side clearing;1;156
+;(8, 7);;(1, 4);same side clearing;1;157
+;(8, 7);;(1, 4);same side clearing;1;158
+;(8, 7);;(1, 4);same side clearing;1;159
+;(8, 7);;(1, 4);same side clearing;1;160
+;(8, 7);;(1, 4);same side clearing;1;161
+;(8, 7);;(1, 4);same side clearing;1;162
+;(8, 7);;(1, 4);same side clearing;1;163
+;(8, 7);;(1, 4);same side clearing;1;164
+;(8, 7);;(1, 4);same side clearing;1;165
+;(8, 7);;(1, 4);same side clearing;1;166
+;(8, 7);;(1, 4);same side clearing;1;167
+;(8, 7);;(1, 4);same side clearing;1;168
+MoveWest;(7, 7);;(1, 4);same side clearing;1;169
+;(7, 7);;(1, 4);same side clearing;1;170
+;(7, 7);;(1, 4);same side clearing;1;171
+;(7, 7);;(1, 4);same side clearing;1;172
+;(7, 7);;(1, 4);same side clearing;1;173
+;(7, 7);;(1, 4);same side clearing;1;174
+;(7, 7);;(1, 4);same side clearing;1;175
+;(7, 7);;(1, 4);same side clearing;1;176
+;(7, 7);;(1, 4);same side clearing;1;177
+;(7, 7);;(1, 4);same side clearing;1;178
+;(7, 7);;(1, 4);same side clearing;1;179
+MoveNorth;(7, 6);;(1, 4);same side clearing;1;180
+;(7, 6);;(1, 4);same side clearing;1;181
+;(7, 6);;(1, 4);same side clearing;1;182
+;(7, 6);;(1, 4);same side clearing;1;183
+;(7, 6);;(1, 4);same side clearing;1;184
+;(7, 6);;(1, 4);same side clearing;1;185
+;(7, 6);;(1, 4);same side clearing;1;186
+;(7, 6);;(1, 4);same side clearing;1;187
+;(7, 6);;(1, 4);same side clearing;1;188
+;(7, 6);;(1, 4);same side clearing;1;189
+;(7, 6);;(1, 4);same side clearing;1;190
+;(7, 6);;(1, 4);same side clearing;1;191
+;(7, 6);;(1, 4);same side clearing;1;192
+;(7, 6);;(1, 4);same side clearing;1;193
+;(7, 6);;(1, 4);same side clearing;1;194
+;(7, 6);;(1, 4);same side clearing;1;195
+;(7, 6);;(1, 4);same side clearing;1;196
+;(7, 6);;(1, 4);same side clearing;1;197
+;(7, 6);;(1, 4);same side clearing;1;198
+;(7, 6);;(1, 4);same side clearing;1;199
+;(7, 6);;(1, 4);same side clearing;1;200
+;(7, 6);;(1, 4);same side clearing;1;201
+GrabObject;(7, 6);;(1, 4);same side clearing;1;202
+;(7, 6);;(1, 4);same side clearing;1;203
+;(7, 6);;(1, 4);same side clearing;1;204
+;(7, 6);;(1, 4);same side clearing;1;205
+;(7, 6);;(1, 4);same side clearing;1;206
+;(7, 6);;(1, 4);same side clearing;1;207
+MoveWest;(6, 6);;(1, 4);same side clearing;1;208
+;(6, 6);;(1, 4);same side clearing;1;209
+;(6, 6);;(1, 4);same side clearing;1;210
+;(6, 6);;(1, 4);same side clearing;1;211
+;(6, 6);;(1, 4);same side clearing;1;212
+;(6, 6);;(1, 4);same side clearing;1;213
+;(6, 6);;(1, 4);same side clearing;1;214
+;(6, 6);;(1, 4);same side clearing;1;215
+;(6, 6);;(1, 4);same side clearing;1;216
+MoveWest;(5, 6);;(1, 4);same side clearing;1;217
+;(5, 6);;(1, 4);same side clearing;1;218
+MoveWest;(4, 6);;(1, 4);same side clearing;1;219
+MoveWest;(3, 6);;(1, 4);same side clearing;1;220
+;(3, 6);;(1, 4);same side clearing;1;221
+MoveWest;(2, 6);;(1, 4);same side clearing;1;222
+;(2, 6);;(1, 4);same side clearing;1;223
+MoveWest;(1, 6);;(1, 4);same side clearing;1;224
+MoveWest;(0, 6);;(1, 4);same side clearing;1;225
+;(0, 6);;(1, 4);same side clearing;1;226
+MoveWest;(0, 6);;(1, 4);same side clearing;1;227
+MoveWest;(0, 6);;(1, 4);same side clearing;1;228
+;(0, 6);;(1, 4);same side clearing;1;229
+MoveWest;(0, 6);;(1, 4);same side clearing;1;230
+;(0, 6);;(1, 4);same side clearing;1;231
+;(0, 6);;(1, 4);same side clearing;1;232
+;(0, 6);;(1, 4);same side clearing;1;233
+;(0, 6);;(1, 4);same side clearing;1;234
+DropObject;(0, 6);;(1, 4);same side clearing;1;235
+;(0, 6);;(1, 4);same side clearing;1;236
+;(0, 6);;(1, 4);same side clearing;1;237
+;(0, 6);;(1, 4);same side clearing;1;238
+;(0, 6);;(1, 4);same side clearing;1;239
+MoveEast;(1, 6);;(1, 4);same side clearing;1;240
+;(1, 6);;(1, 4);same side clearing;1;241
+;(1, 6);;(1, 4);same side clearing;1;242
+;(1, 6);;(1, 4);same side clearing;1;243
+;(1, 6);;(1, 4);same side clearing;1;244
+;(1, 6);;(1, 4);same side clearing;1;245
+;(1, 6);;(1, 4);same side clearing;1;246
+;(1, 6);;(1, 4);same side clearing;1;247
+;(1, 6);;(1, 4);same side clearing;1;248
+;(1, 6);;(1, 4);same side clearing;1;249
+MoveEast;(2, 6);;(1, 4);same side clearing;1;250
+MoveEast;(3, 6);;(1, 4);same side clearing;1;251
+;(3, 6);;(1, 4);same side clearing;1;252
+MoveEast;(4, 6);;(1, 4);same side clearing;1;253
+MoveEast;(5, 6);;(1, 4);same side clearing;1;254
+;(5, 6);;(1, 4);same side clearing;1;255
+;(5, 6);;(1, 4);same side clearing;1;256
+;(5, 6);;(1, 4);same side clearing;1;257
+;(5, 6);;(1, 4);same side clearing;1;258
+;(5, 6);;(1, 4);same side clearing;1;259
+;(5, 6);;(1, 4);same side clearing;1;260
+;(5, 6);;(1, 4);same side clearing;1;261
+;(5, 6);;(1, 4);same side clearing;1;262
+MoveEast;(6, 6);;(1, 4);same side clearing;1;263
+;(6, 6);;(1, 4);same side clearing;1;264
+;(6, 6);;(1, 4);same side clearing;1;265
+;(6, 6);;(1, 4);same side clearing;1;266
+;(6, 6);;(1, 4);same side clearing;1;267
+;(6, 6);;(1, 4);same side clearing;1;268
+;(6, 6);;(1, 4);same side clearing;1;269
+;(6, 6);;(1, 4);same side clearing;1;270
+MoveEast;(7, 6);;(1, 4);same side clearing;1;271
+;(7, 6);;(1, 4);same side clearing;1;272
+;(7, 6);;(1, 4);same side clearing;1;273
+;(7, 6);;(1, 4);same side clearing;1;274
+;(7, 6);;(1, 4);same side clearing;1;275
+;(7, 6);;(1, 4);same side clearing;1;276
+;(7, 6);;(1, 4);same side clearing;1;277
+;(7, 6);;(1, 4);same side clearing;1;278
+;(7, 6);;(1, 4);same side clearing;1;279
+;(7, 6);;(1, 4);same side clearing;1;280
+;(7, 6);;(1, 4);same side clearing;1;281
+MoveEast;(8, 6);;(1, 4);same side clearing;1;282
+;(8, 6);;(1, 4);same side clearing;1;283
+;(8, 6);;(1, 4);same side clearing;1;284
+;(8, 6);;(1, 4);same side clearing;1;285
+;(8, 6);;(1, 4);same side clearing;1;286
+;(8, 6);;(1, 4);same side clearing;1;287
+;(8, 6);;(1, 4);same side clearing;1;288
+;(8, 6);;(1, 4);same side clearing;1;289
+;(8, 6);;(1, 4);same side clearing;1;290
+;(8, 6);;(1, 4);same side clearing;1;291
+;(8, 6);;(1, 4);same side clearing;1;292
+;(8, 6);;(1, 4);same side clearing;1;293
+;(8, 6);;(1, 4);same side clearing;1;294
+;(8, 6);;(1, 4);same side clearing;1;295
+;(8, 6);;(1, 4);same side clearing;1;296
+;(8, 6);;(1, 4);same side clearing;1;297
+;(8, 6);;(1, 4);same side clearing;1;298
+;(8, 6);;(1, 4);same side clearing;1;299
+;(8, 6);;(1, 4);same side clearing;1;300
+;(8, 6);;(1, 4);same side clearing;1;301
+;(8, 6);;(1, 4);same side clearing;1;302
+MoveSouth;(8, 7);;(1, 4);same side clearing;1;303
+;(8, 7);;(1, 4);same side clearing;1;304
+;(8, 7);;(1, 4);same side clearing;1;305
+;(8, 7);;(1, 4);same side clearing;1;306
+;(8, 7);;(1, 4);same side clearing;1;307
+;(8, 7);;(1, 4);same side clearing;1;308
+;(8, 7);;(1, 4);same side clearing;1;309
+;(8, 7);;(1, 4);same side clearing;1;310
+;(8, 7);;(1, 4);same side clearing;1;311
+;(8, 7);;(1, 4);same side clearing;1;312
+;(8, 7);;(1, 4);same side clearing;1;313
+;(8, 7);;(1, 4);same side clearing;1;314
+;(8, 7);;(1, 4);same side clearing;1;315
+;(8, 7);;(1, 4);same side clearing;1;316
+;(8, 7);;(1, 4);same side clearing;1;317
+;(8, 7);;(1, 4);same side clearing;1;318
+MoveSouth;(8, 8);;(1, 4);same side clearing;1;319
+;(8, 8);;(1, 4);same side clearing;1;320
+;(8, 8);;(1, 4);same side clearing;1;321
+;(8, 8);;(1, 4);same side clearing;1;322
+;(8, 8);;(1, 4);same side clearing;1;323
+;(8, 8);;(1, 4);same side clearing;1;324
+;(8, 8);;(1, 4);same side clearing;1;325
+;(8, 8);;(1, 4);same side clearing;1;326
+;(8, 8);;(1, 4);same side clearing;1;327
+;(8, 8);;(1, 4);same side clearing;1;328
+;(8, 8);;(1, 4);same side clearing;1;329
+;(8, 8);;(1, 4);same side clearing;1;330
+;(8, 8);;(1, 4);same side clearing;1;331
+;(8, 8);;(1, 4);same side clearing;1;332
+;(8, 8);;(1, 4);same side clearing;1;333
+;(8, 8);;(1, 4);same side clearing;1;334
+;(8, 8);;(1, 4);same side clearing;1;335
+;(8, 8);;(1, 4);same side clearing;1;336
+;(8, 8);;(1, 4);same side clearing;1;337
+;(8, 8);;(1, 4);same side clearing;1;338
+;(8, 8);;(1, 4);same side clearing;1;339
+;(8, 8);;(1, 4);same side clearing;1;340
+GrabObject;(8, 8);;(1, 4);same side clearing;1;341
+;(8, 8);;(1, 4);same side clearing;1;342
+;(8, 8);;(1, 4);same side clearing;1;343
+;(8, 8);;(1, 4);same side clearing;1;344
+;(8, 8);;(1, 4);same side clearing;1;345
+;(8, 8);;(1, 4);same side clearing;1;346
+;(8, 8);;(1, 4);same side clearing;1;347
+;(8, 8);;(1, 4);same side clearing;1;348
+;(8, 8);;(1, 4);same side clearing;1;349
+;(8, 8);;(1, 4);same side clearing;1;350
+;(8, 8);;(1, 4);same side clearing;1;351
+;(8, 8);;(1, 4);same side clearing;1;352
+;(8, 8);;(1, 4);same side clearing;1;353
+;(8, 8);;(1, 4);same side clearing;1;354
+;(8, 8);;(1, 4);same side clearing;1;355
+;(8, 8);;(1, 4);same side clearing;1;356
+;(8, 8);;(1, 4);same side clearing;1;357
+;(8, 8);;(1, 4);same side clearing;1;358
+MoveWest;(7, 8);;(1, 4);same side clearing;1;359
+;(7, 8);;(1, 4);same side clearing;1;360
+;(7, 8);;(1, 4);same side clearing;1;361
+;(7, 8);;(1, 4);same side clearing;1;362
+;(7, 8);;(1, 4);same side clearing;1;363
+;(7, 8);;(1, 4);same side clearing;1;364
+;(7, 8);;(1, 4);same side clearing;1;365
+;(7, 8);;(1, 4);same side clearing;1;366
+;(7, 8);;(1, 4);same side clearing;1;367
+MoveWest;(6, 8);;(1, 4);same side clearing;1;368
+MoveWest;(5, 8);;(1, 4);same side clearing;1;369
+;(5, 8);;(1, 4);same side clearing;1;370
+MoveWest;(4, 8);;(1, 4);same side clearing;1;371
+MoveWest;(3, 8);;(1, 4);same side clearing;1;372
+;(3, 8);;(1, 4);same side clearing;1;373
+MoveWest;(2, 8);;(1, 4);same side clearing;1;374
+MoveWest;(1, 8);;(1, 4);same side clearing;1;375
+;(1, 8);;(1, 4);same side clearing;1;376
+MoveWest;(0, 8);;(1, 4);same side clearing;1;377
+MoveWest;(0, 8);;(1, 4);same side clearing;1;378
+;(0, 8);;(1, 4);same side clearing;1;379
+MoveWest;(0, 8);;(1, 4);same side clearing;1;380
+MoveWest;(0, 8);;(1, 4);same side clearing;1;381
+;(0, 8);;(1, 4);same side clearing;1;382
+;(0, 8);;(1, 4);same side clearing;1;383
+;(0, 8);;(1, 4);same side clearing;1;384
+;(0, 8);;(1, 4);same side clearing;1;385
+DropObject;(0, 8);;(1, 4);same side clearing;1;386
+;(0, 8);;(1, 4);same side clearing;1;387
+;(0, 8);;(1, 4);same side clearing;1;388
+;(0, 8);;(1, 4);same side clearing;1;389
+;(0, 8);;(1, 4);same side clearing;1;390
+;(0, 8);;(1, 4);same side clearing;1;391
+;(0, 8);;(1, 4);same side clearing;1;392
+;(0, 8);;(1, 4);same side clearing;1;393
+;(0, 8);;(1, 4);same side clearing;1;394
+MoveEast;(1, 8);;(1, 4);same side clearing;1;395
+;(1, 8);;(1, 4);same side clearing;1;396
+;(1, 8);;(1, 4);same side clearing;1;397
+;(1, 8);;(1, 4);same side clearing;1;398
+;(1, 8);;(1, 4);same side clearing;1;399
+;(1, 8);;(1, 4);same side clearing;1;400
+;(1, 8);;(1, 4);same side clearing;1;401
+;(1, 8);;(1, 4);same side clearing;1;402
+;(1, 8);;(1, 4);same side clearing;1;403
+;(1, 8);;(1, 4);same side clearing;1;404
+;(1, 8);;(1, 4);same side clearing;1;405
+MoveEast;(2, 8);;(1, 4);same side clearing;1;406
+;(2, 8);;(1, 4);same side clearing;1;407
+MoveEast;(3, 8);;(1, 4);same side clearing;1;408
+;(3, 8);;(1, 4);same side clearing;1;409
+MoveEast;(4, 8);;(1, 4);same side clearing;1;410
+MoveEast;(5, 8);;(1, 4);same side clearing;1;411
+;(5, 8);;(1, 4);same side clearing;1;412
+MoveEast;(6, 8);;(1, 4);same side clearing;1;413
+;(6, 8);;(1, 4);same side clearing;1;414
+MoveEast;(7, 8);;(1, 4);same side clearing;1;415
+MoveEast;(8, 8);;(1, 4);same side clearing;1;416
+;(8, 8);;(1, 4);same side clearing;1;417
+;(8, 8);;(1, 4);same side clearing;1;418
+;(8, 8);;(1, 4);same side clearing;1;419
+;(8, 8);;(1, 4);same side clearing;1;420
+;(8, 8);;(1, 4);same side clearing;1;421
+;(8, 8);;(1, 4);same side clearing;1;422
+;(8, 8);;(1, 4);same side clearing;1;423
+MoveEast;(9, 8);;(1, 4);same side clearing;1;424
+;(9, 8);;(1, 4);same side clearing;1;425
+;(9, 8);;(1, 4);same side clearing;1;426
+;(9, 8);;(1, 4);same side clearing;1;427
+;(9, 8);;(1, 4);same side clearing;1;428
+;(9, 8);;(1, 4);same side clearing;1;429
+;(9, 8);;(1, 4);same side clearing;1;430
+;(9, 8);;(1, 4);same side clearing;1;431
+;(9, 8);;(1, 4);same side clearing;1;432
+;(9, 8);;(1, 4);same side clearing;1;433
+;(9, 8);;(1, 4);same side clearing;1;434
+;(9, 8);;(1, 4);same side clearing;1;435
+;(9, 8);;(1, 4);same side clearing;1;436
+;(9, 8);;(1, 4);same side clearing;1;437
+;(9, 8);;(1, 4);same side clearing;1;438
+;(9, 8);;(1, 4);same side clearing;1;439
+;(9, 8);;(1, 4);same side clearing;1;440
+;(9, 8);;(1, 4);same side clearing;1;441
+;(9, 8);;(1, 4);same side clearing;1;442
+;(9, 8);;(1, 4);same side clearing;1;443
+;(9, 8);;(1, 4);same side clearing;1;444
+;(9, 8);;(1, 4);same side clearing;1;445
+;(9, 8);;(1, 4);same side clearing;1;446
+;(9, 8);;(1, 4);same side clearing;1;447
+;(9, 8);;(1, 4);same side clearing;1;448
+DropObject;(9, 8);;(1, 4);same side clearing;1;449
+;(9, 8);;(1, 4);same side clearing;1;450
+;(9, 8);;(1, 4);same side clearing;1;451
+;(9, 8);;(1, 4);same side clearing;1;452
+;(9, 8);;(1, 4);same side clearing;1;453
+;(9, 8);;(1, 4);same side clearing;1;454
+;(9, 8);;(1, 4);same side clearing;1;455
+;(9, 8);;(1, 4);same side clearing;1;456
+;(9, 8);;(1, 4);same side clearing;1;457
+;(9, 8);;(1, 4);same side clearing;1;458
+;(9, 8);;(1, 4);same side clearing;1;459
+;(9, 8);;(1, 4);same side clearing;1;460
+GrabObject;(9, 8);;(1, 4);same side clearing;1;461
+;(9, 8);;(1, 4);same side clearing;1;462
+;(9, 8);;(1, 4);same side clearing;1;463
+;(9, 8);;(1, 4);same side clearing;1;464
+;(9, 8);;(1, 4);same side clearing;1;465
+;(9, 8);;(1, 4);same side clearing;1;466
+;(9, 8);;(1, 4);same side clearing;1;467
+;(9, 8);;(1, 4);same side clearing;1;468
+;(9, 8);;(1, 4);same side clearing;1;469
+;(9, 8);;(1, 4);same side clearing;1;470
+;(9, 8);;(1, 4);same side clearing;1;471
+;(9, 8);;(1, 4);same side clearing;1;472
+;(9, 8);;(1, 4);same side clearing;1;473
+;(9, 8);;(1, 4);same side clearing;1;474
+;(9, 8);;(1, 4);same side clearing;1;475
+;(9, 8);;(1, 4);same side clearing;1;476
+;(9, 8);;(1, 4);same side clearing;1;477
+;(9, 8);;(1, 4);same side clearing;1;478
+MoveWest;(8, 8);;(1, 4);same side clearing;1;479
+;(8, 8);;(1, 4);same side clearing;1;480
+;(8, 8);;(1, 4);same side clearing;1;481
+;(8, 8);;(1, 4);same side clearing;1;482
+;(8, 8);;(1, 4);same side clearing;1;483
+;(8, 8);;(1, 4);same side clearing;1;484
+;(8, 8);;(1, 4);same side clearing;1;485
+;(8, 8);;(1, 4);same side clearing;1;486
+;(8, 8);;(1, 4);same side clearing;1;487
+MoveWest;(7, 8);;(1, 4);same side clearing;1;488
+;(7, 8);;(1, 4);same side clearing;1;489
+MoveWest;(6, 8);;(1, 4);same side clearing;1;490
+MoveWest;(5, 8);;(1, 4);same side clearing;1;491
+;(5, 8);;(1, 4);same side clearing;1;492
+MoveWest;(4, 8);;(1, 4);same side clearing;1;493
+;(4, 8);;(1, 4);same side clearing;1;494
+;(4, 8);;(1, 4);same side clearing;1;495
+MoveWest;(3, 8);;(1, 4);same side clearing;1;496
+;(3, 8);;(1, 4);same side clearing;1;497
+MoveWest;(2, 8);;(1, 4);same side clearing;1;498
+MoveWest;(1, 8);;(1, 4);same side clearing;1;499
+MoveWest;(0, 8);;(1, 4);same side clearing;1;500
+;(0, 8);;(1, 4);same side clearing;1;501
+;(0, 8);;(1, 4);same side clearing;1;502
+MoveWest;(0, 8);;(1, 4);same side clearing;1;503
+MoveWest;(0, 8);;(1, 4);same side clearing;1;504
+;(0, 8);;(1, 4);same side clearing;1;505
+MoveWest;(0, 8);;(1, 4);same side clearing;1;506
+;(0, 8);;(1, 4);same side clearing;1;507
+;(0, 8);;(1, 4);same side clearing;1;508
+;(0, 8);;(1, 4);same side clearing;1;509
+DropObject;(0, 8);;(1, 4);same side clearing;1;510
+;(0, 8);;(1, 4);same side clearing;1;511
+;(0, 8);;(1, 4);same side clearing;1;512
+;(0, 8);;(1, 4);same side clearing;1;513
+;(0, 8);;(1, 4);same side clearing;1;514
+;(0, 8);;(1, 4);same side clearing;1;515
+MoveEast;(1, 8);;(1, 4);same side clearing;1;516
+;(1, 8);;(1, 4);same side clearing;1;517
+;(1, 8);;(1, 4);same side clearing;1;518
+;(1, 8);;(1, 4);same side clearing;1;519
+;(1, 8);;(1, 4);same side clearing;1;520
+;(1, 8);;(1, 4);same side clearing;1;521
+;(1, 8);;(1, 4);same side clearing;1;522
+;(1, 8);;(1, 4);same side clearing;1;523
+;(1, 8);;(1, 4);same side clearing;1;524
+;(1, 8);;(1, 4);same side clearing;1;525
+MoveEast;(2, 8);;(1, 4);same side clearing;1;526
+MoveEast;(3, 8);;(1, 4);same side clearing;1;527
+;(3, 8);;(1, 4);same side clearing;1;528
+MoveEast;(4, 8);;(1, 4);same side clearing;1;529
+MoveEast;(5, 8);;(1, 4);same side clearing;1;530
+;(5, 8);;(1, 4);same side clearing;1;531
+MoveEast;(6, 8);;(1, 4);same side clearing;1;532
+;(6, 8);;(1, 4);same side clearing;1;533
+MoveEast;(7, 8);;(1, 4);same side clearing;1;534
+;(7, 8);;(1, 4);same side clearing;1;535
+MoveEast;(8, 8);;(1, 4);same side clearing;1;536
+;(8, 8);;(1, 4);same side clearing;1;537
+;(8, 8);;(1, 4);same side clearing;1;538
+;(8, 8);;(1, 4);same side clearing;1;539
+;(8, 8);;(1, 4);same side clearing;1;540
+;(8, 8);;(1, 4);same side clearing;1;541
+;(8, 8);;(1, 4);same side clearing;1;542
+;(8, 8);;(1, 4);same side clearing;1;543
+;(8, 8);;(1, 4);same side clearing;1;544
+;(8, 8);;(1, 4);same side clearing;1;545
+;(8, 8);;(1, 4);same side clearing;1;546
+;(8, 8);;(1, 4);same side clearing;1;547
+;(8, 8);;(1, 4);same side clearing;1;548
+;(8, 8);;(1, 4);same side clearing;1;549
+MoveSouth;(8, 9);;(1, 4);same side clearing;1;550
+;(8, 9);;(1, 4);same side clearing;1;551
+;(8, 9);;(1, 4);same side clearing;1;552
+;(8, 9);;(1, 4);same side clearing;1;553
+;(8, 9);;(1, 4);same side clearing;1;554
+;(8, 9);;(1, 4);same side clearing;1;555
+;(8, 9);;(1, 4);same side clearing;1;556
+;(8, 9);;(1, 4);same side clearing;1;557
+;(8, 9);;(1, 4);same side clearing;1;558
+;(8, 9);;(1, 4);same side clearing;1;559
+;(8, 9);;(1, 4);same side clearing;1;560
+;(8, 9);;(1, 4);same side clearing;1;561
+GrabObject;(8, 9);;(1, 4);same side clearing;1;562
+;(8, 9);;(1, 4);same side clearing;1;563
+;(8, 9);;(1, 4);same side clearing;1;564
+;(8, 9);;(1, 4);same side clearing;1;565
+;(8, 9);;(1, 4);same side clearing;1;566
+;(8, 9);;(1, 4);same side clearing;1;567
+;(8, 9);;(1, 4);same side clearing;1;568
+;(8, 9);;(1, 4);same side clearing;1;569
+;(8, 9);;(1, 4);same side clearing;1;570
+;(8, 9);;(1, 4);same side clearing;1;571
+MoveWest;(7, 9);;(1, 4);same side clearing;1;572
+;(7, 9);;(1, 4);same side clearing;1;573
+;(7, 9);;(1, 4);same side clearing;1;574
+;(7, 9);;(1, 4);same side clearing;1;575
+;(7, 9);;(1, 4);same side clearing;1;576
+;(7, 9);;(1, 4);same side clearing;1;577
+;(7, 9);;(1, 4);same side clearing;1;578
+;(7, 9);;(1, 4);same side clearing;1;579
+;(7, 9);;(1, 4);same side clearing;1;580
+;(7, 9);;(1, 4);same side clearing;1;581
+MoveWest;(6, 9);;(1, 4);same side clearing;1;582
+;(6, 9);;(1, 4);same side clearing;1;583
+MoveWest;(5, 9);;(1, 4);same side clearing;1;584
+MoveWest;(4, 9);;(1, 4);same side clearing;1;585
+;(4, 9);;(1, 4);same side clearing;1;586
+MoveWest;(3, 9);;(1, 4);same side clearing;1;587
+MoveWest;(2, 9);;(1, 4);same side clearing;1;588
+;(2, 9);;(1, 4);same side clearing;1;589
+MoveWest;(1, 9);;(1, 4);same side clearing;1;590
+MoveWest;(0, 9);;(1, 4);same side clearing;1;591
+;(0, 9);;(1, 4);same side clearing;1;592
+MoveWest;(0, 9);;(1, 4);same side clearing;1;593
+MoveWest;(0, 9);;(1, 4);same side clearing;1;594
+;(0, 9);;(1, 4);same side clearing;1;595
+MoveWest;(0, 9);;(1, 4);same side clearing;1;596
+;(0, 9);;(1, 4);same side clearing;1;597
+MoveWest;(0, 9);;(1, 4);same side clearing;1;598
+;(0, 9);;(1, 4);same side clearing;1;599
+DropObject;(0, 9);;(1, 4);same side clearing;1;600
+;(0, 9);;(1, 4);same side clearing;1;601
+;(0, 9);;(1, 4);same side clearing;1;602
+;(0, 9);;(1, 4);same side clearing;1;603
+;(0, 9);;(1, 4);same side clearing;1;604
+;(0, 9);;(1, 4);same side clearing;1;605
+MoveEast;(1, 9);;(1, 4);same side clearing;1;606
+;(1, 9);;(1, 4);same side clearing;1;607
+;(1, 9);;(1, 4);same side clearing;1;608
+;(1, 9);;(1, 4);same side clearing;1;609
+;(1, 9);;(1, 4);same side clearing;1;610
+;(1, 9);;(1, 4);same side clearing;1;611
+;(1, 9);;(1, 4);same side clearing;1;612
+;(1, 9);;(1, 4);same side clearing;1;613
+MoveEast;(2, 9);;(1, 4);same side clearing;1;614
+;(2, 9);;(1, 4);same side clearing;1;615
+MoveEast;(3, 9);;(1, 4);same side clearing;1;616
+;(3, 9);;(1, 4);same side clearing;1;617
+MoveEast;(4, 9);;(1, 4);same side clearing;1;618
+MoveEast;(5, 9);;(1, 4);same side clearing;1;619
+;(5, 9);;(1, 4);same side clearing;1;620
+MoveEast;(6, 9);;(1, 4);same side clearing;1;621
+MoveEast;(7, 9);;(1, 4);same side clearing;1;622
+;(7, 9);;(1, 4);same side clearing;1;623
+MoveEast;(8, 9);;(1, 4);same side clearing;1;624
+;(8, 9);;(1, 4);same side clearing;1;625
+MoveEast;(9, 9);;(1, 4);same side clearing;1;626
+MoveEast;(10, 9);;(1, 4);same side clearing;1;627
+;(10, 9);;(1, 4);same side clearing;1;628
+;(10, 9);;(1, 4);same side clearing;1;629
+;(10, 9);;(1, 4);same side clearing;1;630
+;(10, 9);;(1, 4);same side clearing;1;631
+;(10, 9);;(1, 4);same side clearing;1;632
+;(10, 9);;(1, 4);same side clearing;1;633
+;(10, 9);;(1, 4);same side clearing;1;634
+;(10, 9);;(1, 4);same side clearing;1;635
+;(10, 9);;(1, 4);same side clearing;1;636
+;(10, 9);;(1, 4);same side clearing;1;637
+;(10, 9);;(1, 4);same side clearing;1;638
+;(10, 9);;(1, 4);same side clearing;1;639
+;(10, 9);;(1, 4);same side clearing;1;640
+;(10, 9);;(1, 4);same side clearing;1;641
+MoveWest;(9, 9);;(1, 4);same side clearing;1;642
+;(9, 9);;(1, 4);same side clearing;1;643
+;(9, 9);;(1, 4);same side clearing;1;644
+;(9, 9);;(1, 4);same side clearing;1;645
+;(9, 9);;(1, 4);same side clearing;1;646
+;(9, 9);;(1, 4);same side clearing;1;647
+;(9, 9);;(1, 4);same side clearing;1;648
+;(9, 9);;(1, 4);same side clearing;1;649
+;(9, 9);;(1, 4);same side clearing;1;650
+;(9, 9);;(1, 4);same side clearing;1;651
+;(9, 9);;(1, 4);same side clearing;1;652
+;(9, 9);;(1, 4);same side clearing;1;653
+;(9, 9);;(1, 4);same side clearing;1;654
+;(9, 9);;(1, 4);same side clearing;1;655
+;(9, 9);;(1, 4);same side clearing;1;656
+GrabObject;(9, 9);;(1, 4);same side clearing;1;657
+;(9, 9);;(1, 4);same side clearing;1;658
+;(9, 9);;(1, 4);same side clearing;1;659
+;(9, 9);;(1, 4);same side clearing;1;660
+;(9, 9);;(1, 4);same side clearing;1;661
+MoveWest;(8, 9);;(1, 4);same side clearing;1;662
+;(8, 9);;(1, 4);same side clearing;1;663
+;(8, 9);;(1, 4);same side clearing;1;664
+;(8, 9);;(1, 4);same side clearing;1;665
+;(8, 9);;(1, 4);same side clearing;1;666
+;(8, 9);;(1, 4);same side clearing;1;667
+;(8, 9);;(1, 4);same side clearing;1;668
+;(8, 9);;(1, 4);same side clearing;1;669
+;(8, 9);;(1, 4);same side clearing;1;670
+;(8, 9);;(1, 4);same side clearing;1;671
+MoveWest;(7, 9);;(1, 4);same side clearing;1;672
+;(7, 9);;(1, 4);same side clearing;1;673
+MoveWest;(6, 9);;(1, 4);same side clearing;1;674
+MoveWest;(5, 9);;(1, 4);same side clearing;1;675
+;(5, 9);;(1, 4);same side clearing;1;676
+MoveWest;(4, 9);;(1, 4);same side clearing;1;677
+;(4, 9);;(1, 4);same side clearing;1;678
+MoveWest;(3, 9);;(1, 4);same side clearing;1;679
+MoveWest;(2, 9);;(1, 4);same side clearing;1;680
+MoveWest;(1, 9);;(1, 4);same side clearing;1;681
+;(1, 9);;(1, 4);same side clearing;1;682
+MoveWest;(0, 9);;(1, 4);same side clearing;1;683
+;(0, 9);;(1, 4);same side clearing;1;684
+MoveWest;(0, 9);;(1, 4);same side clearing;1;685
+MoveWest;(0, 9);;(1, 4);same side clearing;1;686
+;(0, 9);;(1, 4);same side clearing;1;687
+MoveWest;(0, 9);;(1, 4);same side clearing;1;688
+;(0, 9);;(1, 4);same side clearing;1;689
+;(0, 9);;(1, 4);same side clearing;1;690
+DropObject;(0, 9);;(1, 4);same side clearing;1;691
+;(0, 9);;(1, 4);same side clearing;1;692
+;(0, 9);;(1, 4);same side clearing;1;693
+;(0, 9);;(1, 4);same side clearing;1;694
+;(0, 9);;(1, 4);same side clearing;1;695
+;(0, 9);;(1, 4);same side clearing;1;696
+;(0, 9);;(1, 4);same side clearing;1;697
+;(0, 9);;(1, 4);same side clearing;1;698
+;(0, 9);;(1, 4);same side clearing;1;699
+;(0, 9);;(1, 4);same side clearing;1;700
+;(0, 9);;(1, 4);same side clearing;1;701
+;(0, 9);;(1, 4);same side clearing;1;702
+;(0, 9);;(1, 4);same side clearing;1;703
+;(0, 9);;(1, 4);same side clearing;1;704
+;(0, 9);;(1, 4);same side clearing;1;705
+;(0, 9);;(1, 4);same side clearing;1;706
+;(0, 9);;(1, 4);same side clearing;1;707
+;(0, 9);;(1, 4);same side clearing;1;708
+;(0, 9);;(1, 4);same side clearing;1;709
+;(0, 9);;(1, 4);same side clearing;1;710
+;(0, 9);;(1, 4);same side clearing;1;711
+;(0, 9);;(1, 4);same side clearing;1;712
+;(0, 9);;(1, 4);same side clearing;1;713
+;(0, 9);;(1, 4);same side clearing;1;714
+;(0, 9);;(1, 4);same side clearing;1;715
+;(0, 9);;(1, 4);same side clearing;1;716
+MoveEast;(1, 9);;(1, 4);same side clearing;1;717
+;(1, 9);;(1, 4);same side clearing;1;718
+;(1, 9);;(1, 4);same side clearing;1;719
+;(1, 9);;(1, 4);same side clearing;1;720
+;(1, 9);;(1, 4);same side clearing;1;721
+;(1, 9);;(1, 4);same side clearing;1;722
+;(1, 9);;(1, 4);same side clearing;1;723
+;(1, 9);;(1, 4);same side clearing;1;724
+MoveEast;(2, 9);;(1, 4);same side clearing;1;725
+MoveEast;(3, 9);;(1, 4);same side clearing;1;726
+;(3, 9);;(1, 4);same side clearing;1;727
+MoveEast;(4, 9);;(1, 4);same side clearing;1;728
+;(4, 9);;(1, 4);same side clearing;1;729
+;(4, 9);;(1, 4);same side clearing;1;730
+;(4, 9);;(1, 4);same side clearing;1;731
+;(4, 9);;(1, 4);same side clearing;1;732
+;(4, 9);;(1, 4);same side clearing;1;733
+;(4, 9);;(1, 4);same side clearing;1;734
+;(4, 9);;(1, 4);same side clearing;1;735
+;(4, 9);;(1, 4);same side clearing;1;736
+MoveEast;(5, 9);;(1, 4);same side clearing;1;737
+;(5, 9);;(1, 4);same side clearing;1;738
+;(5, 9);;(1, 4);same side clearing;1;739
+;(5, 9);;(1, 4);same side clearing;1;740
+;(5, 9);;(1, 4);same side clearing;1;741
+;(5, 9);;(1, 4);same side clearing;1;742
+;(5, 9);;(1, 4);same side clearing;1;743
+;(5, 9);;(1, 4);same side clearing;1;744
+;(5, 9);;(1, 4);same side clearing;1;745
+;(5, 9);;(1, 4);same side clearing;1;746
+;(5, 9);;(1, 4);same side clearing;1;747
+;(5, 9);;(1, 4);same side clearing;1;748
+MoveEast;(6, 9);;(1, 4);same side clearing;1;749
+;(6, 9);;(1, 4);same side clearing;1;750
+;(6, 9);;(1, 4);same side clearing;1;751
+;(6, 9);;(1, 4);same side clearing;1;752
+;(6, 9);;(1, 4);same side clearing;1;753
+;(6, 9);;(1, 4);same side clearing;1;754
+;(6, 9);;(1, 4);same side clearing;1;755
+;(6, 9);;(1, 4);same side clearing;1;756
+;(6, 9);;(1, 4);same side clearing;1;757
+;(6, 9);;(1, 4);same side clearing;1;758
+MoveEast;(7, 9);;(1, 4);same side clearing;1;759
+;(7, 9);;(1, 4);same side clearing;1;760
+;(7, 9);;(1, 4);same side clearing;1;761
+;(7, 9);;(1, 4);same side clearing;1;762
+;(7, 9);;(1, 4);same side clearing;1;763
+;(7, 9);;(1, 4);same side clearing;1;764
+MoveEast;(8, 9);;(1, 4);same side clearing;1;765
+;(8, 9);;(1, 4);same side clearing;1;766
+;(8, 9);;(1, 4);same side clearing;1;767
+;(8, 9);;(1, 4);same side clearing;1;768
+;(8, 9);;(1, 4);same side clearing;1;769
+;(8, 9);;(1, 4);same side clearing;1;770
+;(8, 9);;(1, 4);same side clearing;1;771
+;(8, 9);;(1, 4);same side clearing;1;772
+;(8, 9);;(1, 4);same side clearing;1;773
+;(8, 9);;(1, 4);same side clearing;1;774
+;(8, 9);;(1, 4);same side clearing;1;775
+;(8, 9);;(1, 4);same side clearing;1;776
+;(8, 9);;(1, 4);same side clearing;1;777
+;(8, 9);;(1, 4);same side clearing;1;778
+;(8, 9);;(1, 4);same side clearing;1;779
+MoveSouth;(8, 10);;(1, 4);same side clearing;1;780
+;(8, 10);;(1, 4);same side clearing;1;781
+;(8, 10);;(1, 4);same side clearing;1;782
+;(8, 10);;(1, 4);same side clearing;1;783
+;(8, 10);;(1, 4);same side clearing;1;784
+;(8, 10);;(1, 4);same side clearing;1;785
+;(8, 10);;(1, 4);same side clearing;1;786
+;(8, 10);;(1, 4);same side clearing;1;787
+;(8, 10);;(1, 4);same side clearing;1;788
+;(8, 10);;(1, 4);same side clearing;1;789
+;(8, 10);;(1, 4);same side clearing;1;790
+;(8, 10);;(1, 4);same side clearing;1;791
+GrabObject;(8, 10);;(1, 4);same side clearing;1;792
+;(8, 10);;(1, 4);same side clearing;1;793
+;(8, 10);;(1, 4);same side clearing;1;794
+;(8, 10);;(1, 4);same side clearing;1;795
+;(8, 10);;(1, 4);same side clearing;1;796
+;(8, 10);;(1, 4);same side clearing;1;797
+;(8, 10);;(1, 4);same side clearing;1;798
+MoveWest;(7, 10);;(1, 4);same side clearing;1;799
+;(7, 10);;(1, 4);same side clearing;1;800
+;(7, 10);;(1, 4);same side clearing;1;801
+;(7, 10);;(1, 4);same side clearing;1;802
+;(7, 10);;(1, 4);same side clearing;1;803
+;(7, 10);;(1, 4);same side clearing;1;804
+;(7, 10);;(1, 4);same side clearing;1;805
+;(7, 10);;(1, 4);same side clearing;1;806
+;(7, 10);;(1, 4);same side clearing;1;807
+MoveWest;(6, 10);;(1, 4);same side clearing;1;808
+;(6, 10);;(1, 4);same side clearing;1;809
+MoveWest;(5, 10);;(1, 4);same side clearing;1;810
+;(5, 10);;(1, 4);same side clearing;1;811
+;(5, 10);;(1, 4);same side clearing;1;812
+MoveWest;(4, 10);;(1, 4);same side clearing;1;813
+;(4, 10);;(1, 4);same side clearing;1;814
+MoveWest;(3, 10);;(1, 4);same side clearing;1;815
+MoveWest;(2, 10);;(1, 4);same side clearing;1;816
+;(2, 10);;(1, 4);same side clearing;1;817
+MoveWest;(1, 10);;(1, 4);same side clearing;1;818
+MoveWest;(0, 10);;(1, 4);same side clearing;1;819
+;(0, 10);;(1, 4);same side clearing;1;820
+MoveWest;(0, 10);;(1, 4);same side clearing;1;821
+;(0, 10);;(1, 4);same side clearing;1;822
+MoveWest;(0, 10);;(1, 4);same side clearing;1;823
+MoveWest;(0, 10);;(1, 4);same side clearing;1;824
+;(0, 10);;(1, 4);same side clearing;1;825
+;(0, 10);;(1, 4);same side clearing;1;826
+DropObject;(0, 10);;(1, 4);same side clearing;1;827
+;(0, 10);;(1, 4);same side clearing;1;828
+;(0, 10);;(1, 4);same side clearing;1;829
+;(0, 10);;(1, 4);same side clearing;1;830
+;(0, 10);;(1, 4);same side clearing;1;831
+MoveEast;(1, 10);;(1, 4);same side clearing;1;832
+;(1, 10);;(1, 4);same side clearing;1;833
+;(1, 10);;(1, 4);same side clearing;1;834
+;(1, 10);;(1, 4);same side clearing;1;835
+;(1, 10);;(1, 4);same side clearing;1;836
+;(1, 10);;(1, 4);same side clearing;1;837
+;(1, 10);;(1, 4);same side clearing;1;838
+;(1, 10);;(1, 4);same side clearing;1;839
+;(1, 10);;(1, 4);same side clearing;1;840
+;(1, 10);;(1, 4);same side clearing;1;841
+;(1, 10);;(1, 4);same side clearing;1;842
+MoveEast;(2, 10);;(1, 4);same side clearing;1;843
+MoveEast;(3, 10);;(1, 4);same side clearing;1;844
+MoveEast;(4, 10);;(1, 4);same side clearing;1;845
+;(4, 10);;(1, 4);same side clearing;1;846
+MoveEast;(5, 10);;(1, 4);same side clearing;1;847
+;(5, 10);;(1, 4);same side clearing;1;848
+MoveEast;(6, 10);;(1, 4);same side clearing;1;849
+MoveEast;(7, 10);;(1, 4);same side clearing;1;850
+;(7, 10);;(1, 4);same side clearing;1;851
+MoveEast;(8, 10);;(1, 4);same side clearing;1;852
+;(8, 10);;(1, 4);same side clearing;1;853
+MoveEast;(9, 10);;(1, 4);same side clearing;1;854
+;(9, 10);;(1, 4);same side clearing;1;855
+;(9, 10);;(1, 4);same side clearing;1;856
+;(9, 10);;(1, 4);same side clearing;1;857
+;(9, 10);;(1, 4);same side clearing;1;858
+;(9, 10);;(1, 4);same side clearing;1;859
+;(9, 10);;(1, 4);same side clearing;1;860
+;(9, 10);;(1, 4);same side clearing;1;861
+;(9, 10);;(1, 4);same side clearing;1;862
+;(9, 10);;(1, 4);same side clearing;1;863
+;(9, 10);;(1, 4);same side clearing;1;864
+;(9, 10);;(1, 4);same side clearing;1;865
+;(9, 10);;(1, 4);same side clearing;1;866
+;(9, 10);;(1, 4);same side clearing;1;867
+;(9, 10);;(1, 4);same side clearing;1;868
+;(9, 10);;(1, 4);same side clearing;1;869
+;(9, 10);;(1, 4);same side clearing;1;870
+GrabObject;(9, 10);;(1, 4);same side clearing;1;871
+;(9, 10);;(1, 4);same side clearing;1;872
+;(9, 10);;(1, 4);same side clearing;1;873
+;(9, 10);;(1, 4);same side clearing;1;874
+;(9, 10);;(1, 4);same side clearing;1;875
+;(9, 10);;(1, 4);same side clearing;1;876
+;(9, 10);;(1, 4);same side clearing;1;877
+;(9, 10);;(1, 4);same side clearing;1;878
+;(9, 10);;(1, 4);same side clearing;1;879
+;(9, 10);;(1, 4);same side clearing;1;880
+;(9, 10);;(1, 4);same side clearing;1;881
+;(9, 10);;(1, 4);same side clearing;1;882
+;(9, 10);;(1, 4);same side clearing;1;883
+;(9, 10);;(1, 4);same side clearing;1;884
+MoveWest;(8, 10);;(1, 4);same side clearing;1;885
+;(8, 10);;(1, 4);same side clearing;1;886
+;(8, 10);;(1, 4);same side clearing;1;887
+;(8, 10);;(1, 4);same side clearing;1;888
+;(8, 10);;(1, 4);same side clearing;1;889
+;(8, 10);;(1, 4);same side clearing;1;890
+;(8, 10);;(1, 4);same side clearing;1;891
+;(8, 10);;(1, 4);same side clearing;1;892
+;(8, 10);;(1, 4);same side clearing;1;893
+;(8, 10);;(1, 4);same side clearing;1;894
+MoveWest;(7, 10);;(1, 4);same side clearing;1;895
+MoveWest;(6, 10);;(1, 4);same side clearing;1;896
+;(6, 10);;(1, 4);same side clearing;1;897
+MoveWest;(5, 10);;(1, 4);same side clearing;1;898
+;(5, 10);;(1, 4);same side clearing;1;899
+MoveWest;(4, 10);;(1, 4);same side clearing;1;900
+MoveWest;(3, 10);;(1, 4);same side clearing;1;901
+;(3, 10);;(1, 4);same side clearing;1;902
+MoveWest;(2, 10);;(1, 4);same side clearing;1;903
+MoveWest;(1, 10);;(1, 4);same side clearing;1;904
+;(1, 10);;(1, 4);same side clearing;1;905
+MoveWest;(0, 10);;(1, 4);same side clearing;1;906
+;(0, 10);;(1, 4);same side clearing;1;907
+;(0, 10);;(1, 4);same side clearing;1;908
+MoveWest;(0, 10);;(1, 4);same side clearing;1;909
+;(0, 10);;(1, 4);same side clearing;1;910
+MoveWest;(0, 10);;(1, 4);same side clearing;1;911
+;(0, 10);;(1, 4);same side clearing;1;912
+;(0, 10);;(1, 4);same side clearing;1;913
+;(0, 10);;(1, 4);same side clearing;1;914
+;(0, 10);;(1, 4);same side clearing;1;915
+;(0, 10);;(1, 4);same side clearing;1;916
+DropObject;(0, 10);;(1, 4);same side clearing;1;917
+;(0, 10);;(1, 4);same side clearing;1;918
+;(0, 10);;(1, 4);same side clearing;1;919
+;(0, 10);;(1, 4);same side clearing;1;920
+;(0, 10);;(1, 4);same side clearing;1;921
+;(0, 10);;(1, 4);same side clearing;1;922
+;(0, 10);;(1, 4);same side clearing;1;923
+;(0, 10);;(1, 4);same side clearing;1;924
+;(0, 10);;(1, 4);same side clearing;1;925
+;(0, 10);;(1, 4);same side clearing;1;926
+;(0, 10);;(1, 4);same side clearing;1;927
+;(0, 10);;(1, 4);same side clearing;1;928
+;(0, 10);;(1, 4);same side clearing;1;929
+;(0, 10);;(1, 4);same side clearing;1;930
+;(0, 10);;(1, 4);same side clearing;1;931
+;(0, 10);;(1, 4);same side clearing;1;932
+;(0, 10);;(1, 4);same side clearing;1;933
+;(0, 10);;(1, 4);same side clearing;1;934
+MoveEast;(1, 10);;(1, 4);same side clearing;1;935
+;(1, 10);;(1, 4);same side clearing;1;936
+;(1, 10);;(1, 4);same side clearing;1;937
+;(1, 10);;(1, 4);same side clearing;1;938
+;(1, 10);;(1, 4);same side clearing;1;939
+;(1, 10);;(1, 4);same side clearing;1;940
+;(1, 10);;(1, 4);same side clearing;1;941
+;(1, 10);;(1, 4);same side clearing;1;942
+;(1, 10);;(1, 4);same side clearing;1;943
+;(1, 10);;(1, 4);same side clearing;1;944
+MoveEast;(2, 10);;(1, 4);same side clearing;1;945
+;(2, 10);;(1, 4);same side clearing;1;946
+MoveEast;(3, 10);;(1, 4);same side clearing;1;947
+MoveEast;(4, 10);;(1, 4);same side clearing;1;948
+;(4, 10);;(1, 4);same side clearing;1;949
+MoveEast;(5, 10);;(1, 4);same side clearing;1;950
+;(5, 10);;(1, 4);same side clearing;1;951
+MoveEast;(6, 10);;(1, 4);same side clearing;1;952
+;(6, 10);;(1, 4);same side clearing;1;953
+;(6, 10);;(1, 4);same side clearing;1;954
+;(6, 10);;(1, 4);same side clearing;1;955
+;(6, 10);;(1, 4);same side clearing;1;956
+;(6, 10);;(1, 4);same side clearing;1;957
+;(6, 10);;(1, 4);same side clearing;1;958
+;(6, 10);;(1, 4);same side clearing;1;959
+;(6, 10);;(1, 4);same side clearing;1;960
+;(6, 10);;(1, 4);same side clearing;1;961
+;(6, 10);;(1, 4);same side clearing;1;962
+;(6, 10);;(1, 4);same side clearing;1;963
+;(6, 10);;(1, 4);same side clearing;1;964
+;(6, 10);;(1, 4);same side clearing;1;965
+;(6, 10);;(1, 4);same side clearing;1;966
+;(6, 10);;(1, 4);same side clearing;1;967
+;(6, 10);;(1, 4);same side clearing;1;968
+;(6, 10);;(1, 4);same side clearing;1;969
+;(6, 10);;(1, 4);same side clearing;1;970
+;(6, 10);;(1, 4);same side clearing;1;971
+;(6, 10);;(1, 4);same side clearing;1;972
+GrabObject;(6, 10);;(1, 4);same side clearing;1;973
+;(6, 10);;(1, 4);same side clearing;1;974
+;(6, 10);;(1, 4);same side clearing;1;975
+;(6, 10);;(1, 4);same side clearing;1;976
+;(6, 10);;(1, 4);same side clearing;1;977
+;(6, 10);;(1, 4);same side clearing;1;978
+;(6, 10);;(1, 4);same side clearing;1;979
+;(6, 10);;(1, 4);same side clearing;1;980
+;(6, 10);;(1, 4);same side clearing;1;981
+;(6, 10);;(1, 4);same side clearing;1;982
+;(6, 10);;(1, 4);same side clearing;1;983
+;(6, 10);;(1, 4);same side clearing;1;984
+MoveWest;(5, 10);;(1, 4);same side clearing;1;985
+;(5, 10);;(1, 4);same side clearing;1;986
+;(5, 10);;(1, 4);same side clearing;1;987
+;(5, 10);;(1, 4);same side clearing;1;988
+;(5, 10);;(1, 4);same side clearing;1;989
+;(5, 10);;(1, 4);same side clearing;1;990
+;(5, 10);;(1, 4);same side clearing;1;991
+;(5, 10);;(1, 4);same side clearing;1;992
+;(5, 10);;(1, 4);same side clearing;1;993
+;(5, 10);;(1, 4);same side clearing;1;994
+MoveWest;(4, 10);;(1, 4);same side clearing;1;995
+;(4, 10);;(1, 4);same side clearing;1;996
+MoveWest;(3, 10);;(1, 4);same side clearing;1;997
+MoveWest;(2, 10);;(1, 4);same side clearing;1;998
+;(2, 10);;(1, 4);same side clearing;1;999
+MoveWest;(1, 10);;(1, 4);same side clearing;1;1000
+;(1, 10);;(1, 4);same side clearing;1;1001
+MoveWest;(0, 10);;(1, 4);same side clearing;1;1002
+;(0, 10);;(1, 4);same side clearing;1;1003
+MoveWest;(0, 10);;(1, 4);same side clearing;1;1004
+;(0, 10);;(1, 4);same side clearing;1;1005
+MoveWest;(0, 10);;(1, 4);same side clearing;1;1006
+MoveWest;(0, 10);;(1, 4);same side clearing;1;1007
+;(0, 10);;(1, 4);same side clearing;1;1008
+DropObject;(0, 10);;(1, 4);same side clearing;1;1009
+;(0, 10);;(1, 4);same side clearing;1;1010
+;(0, 10);;(1, 4);same side clearing;1;1011
+;(0, 10);;(1, 4);same side clearing;1;1012
+MoveEast;(1, 10);;(1, 4);same side clearing;1;1013
+;(1, 10);;(1, 4);same side clearing;1;1014
+;(1, 10);;(1, 4);same side clearing;1;1015
+;(1, 10);;(1, 4);same side clearing;1;1016
+;(1, 10);;(1, 4);same side clearing;1;1017
+;(1, 10);;(1, 4);same side clearing;1;1018
+;(1, 10);;(1, 4);same side clearing;1;1019
+;(1, 10);;(1, 4);same side clearing;1;1020
+;(1, 10);;(1, 4);same side clearing;1;1021
+MoveEast;(2, 10);;(1, 4);same side clearing;1;1022
+;(2, 10);;(1, 4);same side clearing;1;1023
+MoveEast;(3, 10);;(1, 4);same side clearing;1;1024
+MoveEast;(4, 10);;(1, 4);same side clearing;1;1025
+;(4, 10);;(1, 4);same side clearing;1;1026
+MoveEast;(5, 10);;(1, 4);same side clearing;1;1027
+;(5, 10);;(1, 4);same side clearing;1;1028
+MoveEast;(6, 10);;(1, 4);same side clearing;1;1029
+MoveEast;(7, 10);;(1, 4);same side clearing;1;1030
+;(7, 10);;(1, 4);same side clearing;1;1031
+;(7, 10);;(1, 4);same side clearing;1;1032
+;(7, 10);;(1, 4);same side clearing;1;1033
+;(7, 10);;(1, 4);same side clearing;1;1034
+;(7, 10);;(1, 4);same side clearing;1;1035
+;(7, 10);;(1, 4);same side clearing;1;1036
+;(7, 10);;(1, 4);same side clearing;1;1037
+;(7, 10);;(1, 4);same side clearing;1;1038
+;(7, 10);;(1, 4);same side clearing;1;1039
+;(7, 10);;(1, 4);same side clearing;1;1040
+;(7, 10);;(1, 4);same side clearing;1;1041
+;(7, 10);;(1, 4);same side clearing;1;1042
+;(7, 10);;(1, 4);same side clearing;1;1043
+;(7, 10);;(1, 4);same side clearing;1;1044
+;(7, 10);;(1, 4);same side clearing;1;1045
+MoveWest;(6, 10);;(1, 4);same side clearing;1;1046
+;(6, 10);;(1, 4);same side clearing;1;1047
+;(6, 10);;(1, 4);same side clearing;1;1048
+;(6, 10);;(1, 4);same side clearing;1;1049
+;(6, 10);;(1, 4);same side clearing;1;1050
+;(6, 10);;(1, 4);same side clearing;1;1051
+;(6, 10);;(1, 4);same side clearing;1;1052
+;(6, 10);;(1, 4);same side clearing;1;1053
+;(6, 10);;(1, 4);same side clearing;1;1054
+;(6, 10);;(1, 4);same side clearing;1;1055
+;(6, 10);;(1, 4);same side clearing;1;1056
+;(6, 10);;(1, 4);same side clearing;1;1057
+GrabObject;(6, 10);;(1, 4);same side clearing;1;1058
+;(6, 10);;(1, 4);same side clearing;1;1059
+;(6, 10);;(1, 4);same side clearing;1;1060
+;(6, 10);;(1, 4);same side clearing;1;1061
+;(6, 10);;(1, 4);same side clearing;1;1062
+;(6, 10);;(1, 4);same side clearing;1;1063
+;(6, 10);;(1, 4);same side clearing;1;1064
+;(6, 10);;(1, 4);same side clearing;1;1065
+;(6, 10);;(1, 4);same side clearing;1;1066
+MoveWest;(5, 10);;(1, 4);same side clearing;1;1067
+;(5, 10);;(1, 4);same side clearing;1;1068
+;(5, 10);;(1, 4);same side clearing;1;1069
+;(5, 10);;(1, 4);same side clearing;1;1070
+;(5, 10);;(1, 4);same side clearing;1;1071
+;(5, 10);;(1, 4);same side clearing;1;1072
+;(5, 10);;(1, 4);same side clearing;1;1073
+;(5, 10);;(1, 4);same side clearing;1;1074
+;(5, 10);;(1, 4);same side clearing;1;1075
+MoveWest;(4, 10);;(1, 4);same side clearing;1;1076
+;(4, 10);;(1, 4);same side clearing;1;1077
+MoveWest;(3, 10);;(1, 4);same side clearing;1;1078
+;(3, 10);;(1, 4);same side clearing;1;1079
+MoveWest;(2, 10);;(1, 4);same side clearing;1;1080
+MoveWest;(1, 10);;(1, 4);same side clearing;1;1081
+;(1, 10);;(1, 4);same side clearing;1;1082
+MoveWest;(0, 10);;(1, 4);same side clearing;1;1083
+;(0, 10);;(1, 4);same side clearing;1;1084
+MoveWest;(0, 10);;(1, 4);same side clearing;1;1085
+MoveWest;(0, 10);;(1, 4);same side clearing;1;1086
+;(0, 10);;(1, 4);same side clearing;1;1087
+MoveWest;(0, 10);;(1, 4);same side clearing;1;1088
+;(0, 10);;(1, 4);same side clearing;1;1089
+;(0, 10);;(1, 4);same side clearing;1;1090
+DropObject;(0, 10);;(1, 4);same side clearing;1;1091
+;(0, 10);;(1, 4);same side clearing;1;1092
+;(0, 10);;(1, 4);same side clearing;1;1093
+;(0, 10);;(1, 4);same side clearing;1;1094
+;(0, 10);;(1, 4);same side clearing;1;1095
+;(0, 10);;(1, 4);same side clearing;1;1096
+;(0, 10);;(1, 4);same side clearing;1;1097
+;(0, 10);;(1, 4);same side clearing;1;1098
+;(0, 10);;(1, 4);same side clearing;1;1099
+;(0, 10);;(1, 4);same side clearing;1;1100
+;(0, 10);;(1, 4);same side clearing;1;1101
+;(0, 10);;(1, 4);same side clearing;1;1102
+;(0, 10);;(1, 4);same side clearing;1;1103
+;(0, 10);;(1, 4);same side clearing;1;1104
+;(0, 10);;(1, 4);same side clearing;1;1105
+;(0, 10);;(1, 4);same side clearing;1;1106
+;(0, 10);;(1, 4);same side clearing;1;1107
+;(0, 10);;(1, 4);same side clearing;1;1108
+;(0, 10);;(1, 4);same side clearing;1;1109
+;(0, 10);;(1, 4);same side clearing;1;1110
+;(0, 10);;(1, 4);same side clearing;1;1111
+;(0, 10);;(1, 4);same side clearing;1;1112
+;(0, 10);;(1, 4);same side clearing;1;1113
+;(0, 10);;(1, 4);same side clearing;1;1114
+;(0, 10);;(1, 4);same side clearing;1;1115
+;(0, 10);;(1, 4);same side clearing;1;1116
+;(0, 10);;(1, 4);same side clearing;1;1117
+MoveNorth;(0, 9);;(1, 4);same side clearing;1;1118
+;(0, 9);;(1, 4);same side clearing;1;1119
+;(0, 9);;(1, 4);same side clearing;1;1120
+;(0, 9);;(1, 4);same side clearing;1;1121
+;(0, 9);;(1, 4);same side clearing;1;1122
+;(0, 9);;(1, 4);same side clearing;1;1123
+;(0, 9);;(1, 4);same side clearing;1;1124
+;(0, 9);;(1, 4);same side clearing;1;1125
+;(0, 9);;(1, 4);same side clearing;1;1126
+;(0, 9);;(1, 4);same side clearing;1;1127
+;(0, 9);;(1, 4);same side clearing;1;1128
+;(0, 9);;(1, 4);same side clearing;1;1129
+;(0, 9);;(1, 4);same side clearing;1;1130
+;(0, 9);;(1, 4);same side clearing;1;1131
+;(0, 9);;(1, 4);same side clearing;1;1132
+MoveNorth;(0, 8);;(1, 4);same side clearing;1;1133
+;(0, 8);;(1, 4);same side clearing;1;1134
+;(0, 8);;(1, 4);same side clearing;1;1135
+;(0, 8);;(1, 4);same side clearing;1;1136
+;(0, 8);;(1, 4);same side clearing;1;1137
+;(0, 8);;(1, 4);same side clearing;1;1138
+;(0, 8);;(1, 4);same side clearing;1;1139
+;(0, 8);;(1, 4);same side clearing;1;1140
+;(0, 8);;(1, 4);same side clearing;1;1141
+;(0, 8);;(1, 4);same side clearing;1;1142
+;(0, 8);;(1, 4);same side clearing;1;1143
+;(0, 8);;(1, 4);same side clearing;1;1144
+;(0, 8);;(1, 4);same side clearing;1;1145
+;(0, 8);;(1, 4);same side clearing;1;1146
+;(0, 8);;(1, 4);same side clearing;1;1147
+;(0, 8);;(1, 4);same side clearing;1;1148
+;(0, 8);;(1, 4);same side clearing;1;1149
+;(0, 8);;(1, 4);same side clearing;1;1150
+;(0, 8);;(1, 4);same side clearing;1;1151
+;(0, 8);;(1, 4);same side clearing;1;1152
+;(0, 8);;(1, 4);same side clearing;1;1153
+;(0, 8);;(1, 4);same side clearing;1;1154
+;(0, 8);;(1, 4);same side clearing;1;1155
+;(0, 8);;(1, 4);same side clearing;1;1156
+;(0, 8);;(1, 4);same side clearing;1;1157
+;(0, 8);;(1, 4);same side clearing;1;1158
+;(0, 8);;(1, 4);same side clearing;1;1159
+;(0, 8);;(1, 4);same side clearing;1;1160
+;(0, 8);;(1, 4);same side clearing;1;1161
+;(0, 8);;(1, 4);same side clearing;1;1162
+;(0, 8);;(1, 4);same side clearing;1;1163
+;(0, 8);;(1, 4);same side clearing;1;1164
+;(0, 8);;(1, 4);same side clearing;1;1165
+;(0, 8);;(1, 4);same side clearing;1;1166
+;(0, 8);;(1, 4);same side clearing;1;1167
+;(0, 8);;(1, 4);same side clearing;1;1168
+;(0, 8);;(1, 4);same side clearing;1;1169
+;(0, 8);;(1, 4);same side clearing;1;1170
+;(0, 8);;(1, 4);same side clearing;1;1171
+;(0, 8);;(1, 4);same side clearing;1;1172
+;(0, 8);;(1, 4);same side clearing;1;1173
+;(0, 8);;(1, 4);same side clearing;1;1174
+;(0, 8);;(1, 4);same side clearing;1;1175
+;(0, 8);;(1, 4);same side clearing;1;1176
+;(0, 8);;(1, 4);same side clearing;1;1177
+;(0, 8);;(1, 4);same side clearing;1;1178
+;(0, 8);;(1, 4);same side clearing;1;1179
+;(0, 8);;(1, 4);same side clearing;1;1180
+;(0, 8);;(1, 4);same side clearing;1;1181
+;(0, 8);;(1, 4);same side clearing;1;1182
+;(0, 8);;(1, 4);same side clearing;1;1183
+;(0, 8);;(1, 4);same side clearing;1;1184
+;(0, 8);;(1, 4);same side clearing;1;1185
+;(0, 8);;(1, 4);same side clearing;1;1186
+;(0, 8);;(1, 4);same side clearing;1;1187
+;(0, 8);;(1, 4);same side clearing;1;1188
+;(0, 8);;(1, 4);same side clearing;1;1189
+;(0, 8);;(1, 4);same side clearing;1;1190
+;(0, 8);;(1, 4);same side clearing;1;1191
+;(0, 8);;(1, 4);same side clearing;1;1192
+;(0, 8);;(1, 4);same side clearing;1;1193
+;(0, 8);;(1, 4);same side clearing;1;1194
+;(0, 8);;(1, 4);same side clearing;1;1195
+;(0, 8);;(1, 4);same side clearing;1;1196
+;(0, 8);;(1, 4);same side clearing;1;1197
+;(0, 8);;(1, 4);same side clearing;1;1198
+;(0, 8);;(1, 4);same side clearing;1;1199
+;(0, 8);;(1, 4);same side clearing;1;1200
+;(0, 8);;(1, 4);same side clearing;1;1201
+;(0, 8);;(1, 4);same side clearing;1;1202
+;(0, 8);;(1, 4);same side clearing;1;1203
+;(0, 8);;(1, 4);same side clearing;1;1204
+;(0, 8);;(1, 4);same side clearing;1;1205
+;(0, 8);;(1, 4);same side clearing;1;1206
+;(0, 8);;(1, 4);same side clearing;1;1207
+;(0, 8);;(1, 4);same side clearing;1;1208
+;(0, 8);;(1, 4);same side clearing;1;1209
+;(0, 8);;(1, 4);same side clearing;1;1210
+;(0, 8);;(1, 4);same side clearing;1;1211
+;(0, 8);;(1, 4);same side clearing;1;1212
+;(0, 8);;(1, 4);same side clearing;1;1213
+;(0, 8);;(1, 4);same side clearing;1;1214
+;(0, 8);;(1, 4);same side clearing;1;1215
+;(0, 8);;(1, 4);same side clearing;1;1216
+;(0, 8);;(1, 4);same side clearing;1;1217
+;(0, 8);;(1, 4);same side clearing;1;1218
+;(0, 8);;(1, 4);same side clearing;1;1219
+;(0, 8);;(1, 4);same side clearing;1;1220
+;(0, 8);;(1, 4);same side clearing;1;1221
+;(0, 8);;(1, 4);same side clearing;1;1222
+;(0, 8);;(1, 4);same side clearing;1;1223
+;(0, 8);;(1, 4);same side clearing;1;1224
+;(0, 8);;(1, 4);same side clearing;1;1225
+;(0, 8);;(1, 4);same side clearing;1;1226
+;(0, 8);;(1, 4);same side clearing;1;1227
+;(0, 8);;(1, 4);same side clearing;1;1228
+;(0, 8);;(1, 4);same side clearing;1;1229
+;(0, 8);;(1, 4);same side clearing;1;1230
+;(0, 8);;(1, 4);same side clearing;1;1231
+;(0, 8);;(1, 4);same side clearing;1;1232
+;(0, 8);;(1, 4);same side clearing;1;1233
+;(0, 8);;(1, 4);same side clearing;1;1234
+;(0, 8);;(1, 4);same side clearing;1;1235
+;(0, 8);;(1, 4);same side clearing;1;1236
+;(0, 8);;(1, 4);same side clearing;1;1237
+;(0, 8);;(1, 4);same side clearing;1;1238
+;(0, 8);;(1, 4);same side clearing;1;1239
+;(0, 8);;(1, 4);same side clearing;1;1240
+;(0, 8);;(1, 4);same side clearing;1;1241
+;(0, 8);;(1, 4);same side clearing;1;1242
+;(0, 8);;(1, 4);same side clearing;1;1243
+;(0, 8);;(1, 4);same side clearing;1;1244
+;(0, 8);;(1, 4);same side clearing;1;1245
+;(0, 8);;(1, 4);same side clearing;1;1246
+;(0, 8);;(1, 4);same side clearing;1;1247
+;(0, 8);;(1, 4);same side clearing;1;1248
+;(0, 8);;(1, 4);same side clearing;1;1249
+;(0, 8);;(1, 4);same side clearing;1;1250
+;(0, 8);;(1, 4);same side clearing;1;1251
+;(0, 8);;(1, 4);same side clearing;1;1252
+;(0, 8);;(1, 4);same side clearing;1;1253
+;(0, 8);;(1, 4);same side clearing;1;1254
+;(0, 8);;(1, 4);same side clearing;1;1255
+;(0, 8);;(1, 4);same side clearing;1;1256
+;(0, 8);;(1, 4);same side clearing;1;1257
+;(0, 8);;(1, 4);same side clearing;1;1258
+;(0, 8);;(1, 4);same side clearing;1;1259
+;(0, 8);;(1, 4);same side clearing;1;1260
+;(0, 8);;(1, 4);same side clearing;1;1261
+;(0, 8);;(1, 4);same side clearing;1;1262
+;(0, 8);;(1, 4);same side clearing;1;1263
+;(0, 8);;(1, 4);same side clearing;1;1264
+;(0, 8);;(1, 4);same side clearing;1;1265
+;(0, 8);;(1, 4);same side clearing;1;1266
+;(0, 8);;(1, 4);same side clearing;1;1267
+;(0, 8);;(1, 4);same side clearing;1;1268
+;(0, 8);;(1, 4);same side clearing;1;1269
+;(0, 8);;(1, 4);same side clearing;1;1270
+;(0, 8);;(1, 4);same side clearing;1;1271
+;(0, 8);;(1, 4);same side clearing;1;1272
+;(0, 8);;(1, 4);same side clearing;1;1273
+;(0, 8);;(1, 4);same side clearing;1;1274
+;(0, 8);;(1, 4);same side clearing;1;1275
+;(0, 8);;(1, 4);same side clearing;1;1276
+;(0, 8);;(1, 4);same side clearing;1;1277
+;(0, 8);;(1, 4);same side clearing;1;1278
+;(0, 8);;(1, 4);same side clearing;1;1279
+;(0, 8);;(1, 4);same side clearing;1;1280
+;(0, 8);;(1, 4);same side clearing;1;1281
+;(0, 8);;(1, 4);same side clearing;1;1282
+;(0, 8);;(1, 4);same side clearing;1;1283
+;(0, 8);;(1, 4);same side clearing;1;1284
+;(0, 8);;(1, 4);same side clearing;1;1285
+;(0, 8);;(1, 4);same side clearing;1;1286
+;(0, 8);;(1, 4);same side clearing;1;1287
+;(0, 8);;(1, 4);same side clearing;1;1288
+;(0, 8);;(1, 4);same side clearing;1;1289
+;(0, 8);;(1, 4);same side clearing;1;1290
+;(0, 8);;(1, 4);same side clearing;1;1291
+;(0, 8);;(1, 4);same side clearing;1;1292
+;(0, 8);;(1, 4);same side clearing;1;1293
+;(0, 8);;(1, 4);same side clearing;1;1294
+;(0, 8);;(1, 4);same side clearing;1;1295
+;(0, 8);;(1, 4);same side clearing;1;1296
+;(0, 8);;(1, 4);same side clearing;1;1297
+;(0, 8);;(1, 4);same side clearing;1;1298
+;(0, 8);;(1, 4);same side clearing;1;1299
+;(0, 8);;(1, 4);same side clearing;1;1300
+;(0, 8);;(1, 4);same side clearing;1;1301
+;(0, 8);;(1, 4);same side clearing;1;1302
+;(0, 8);;(1, 4);same side clearing;1;1303
+;(0, 8);;(1, 4);same side clearing;1;1304
+;(0, 8);;(1, 4);same side clearing;1;1305
+;(0, 8);;(1, 4);same side clearing;1;1306
+;(0, 8);;(1, 4);same side clearing;1;1307
+;(0, 8);;(1, 4);same side clearing;1;1308
+;(0, 8);;(1, 4);same side clearing;1;1309
+;(0, 8);;(1, 4);same side clearing;1;1310
+;(0, 8);;(1, 4);same side clearing;1;1311
+;(0, 8);;(1, 4);same side clearing;1;1312
+;(0, 8);;(1, 4);same side clearing;1;1313
+;(0, 8);;(1, 4);same side clearing;1;1314
+;(0, 8);;(1, 4);same side clearing;1;1315
+;(0, 8);;(1, 4);same side clearing;1;1316
+;(0, 8);;(1, 4);same side clearing;1;1317
+;(0, 8);;(1, 4);same side clearing;1;1318
+;(0, 8);;(1, 4);same side clearing;1;1319
+;(0, 8);;(1, 4);same side clearing;1;1320
+;(0, 8);;(1, 4);same side clearing;1;1321
+;(0, 8);;(1, 4);same side clearing;1;1322
+;(0, 8);;(1, 4);same side clearing;1;1323
+;(0, 8);;(1, 4);same side clearing;1;1324
+;(0, 8);;(1, 4);same side clearing;1;1325
+;(0, 8);;(1, 4);same side clearing;1;1326
+;(0, 8);;(1, 4);same side clearing;1;1327
+;(0, 8);;(1, 4);same side clearing;1;1328
+;(0, 8);;(1, 4);same side clearing;1;1329
+;(0, 8);;(1, 4);same side clearing;1;1330
+;(0, 8);;(1, 4);same side clearing;1;1331
+;(0, 8);;(1, 4);same side clearing;1;1332
+;(0, 8);;(1, 4);same side clearing;1;1333
+;(0, 8);;(1, 4);same side clearing;1;1334
+;(0, 8);;(1, 4);same side clearing;1;1335
+;(0, 8);;(1, 4);same side clearing;1;1336
+;(0, 8);;(1, 4);same side clearing;1;1337
+;(0, 8);;(1, 4);same side clearing;1;1338
+;(0, 8);;(1, 4);same side clearing;1;1339
+;(0, 8);;(1, 4);same side clearing;1;1340
+;(0, 8);;(1, 4);same side clearing;1;1341
+;(0, 8);;(1, 4);same side clearing;1;1342
+;(0, 8);;(1, 4);same side clearing;1;1343
+;(0, 8);;(1, 4);same side clearing;1;1344
+;(0, 8);;(1, 4);same side clearing;1;1345
+;(0, 8);;(1, 4);same side clearing;1;1346
+;(0, 8);;(1, 4);same side clearing;1;1347
+;(0, 8);;(1, 4);same side clearing;1;1348
+;(0, 8);;(1, 4);same side clearing;1;1349
+;(0, 8);;(1, 4);same side clearing;1;1350
+;(0, 8);;(1, 4);same side clearing;1;1351
+;(0, 8);;(1, 4);same side clearing;1;1352
+;(0, 8);;(1, 4);same side clearing;1;1353
+;(0, 8);;(1, 4);same side clearing;1;1354
+;(0, 8);;(1, 4);same side clearing;1;1355
+;(0, 8);;(1, 4);same side clearing;1;1356
+;(0, 8);;(1, 4);same side clearing;1;1357
+;(0, 8);;(1, 4);same side clearing;1;1358
+;(0, 8);;(1, 4);same side clearing;1;1359
+;(0, 8);;(1, 4);same side clearing;1;1360
+;(0, 8);;(1, 4);same side clearing;1;1361
+;(0, 8);;(1, 4);same side clearing;1;1362
+;(0, 8);;(1, 4);same side clearing;1;1363
+;(0, 8);;(1, 4);same side clearing;1;1364
+;(0, 8);;(1, 4);same side clearing;1;1365
+;(0, 8);;(1, 4);same side clearing;1;1366
+;(0, 8);;(1, 4);same side clearing;1;1367
+;(0, 8);;(1, 4);same side clearing;1;1368
+;(0, 8);;(1, 4);same side clearing;1;1369
+;(0, 8);;(1, 4);same side clearing;1;1370
+;(0, 8);;(1, 4);same side clearing;1;1371
+;(0, 8);;(1, 4);same side clearing;1;1372
+;(0, 8);;(1, 4);same side clearing;1;1373
+;(0, 8);;(1, 4);same side clearing;1;1374
+;(0, 8);;(1, 4);same side clearing;1;1375
+;(0, 8);;(1, 4);same side clearing;1;1376
+;(0, 8);;(1, 4);same side clearing;1;1377
+;(0, 8);;(1, 4);same side clearing;1;1378
+;(0, 8);;(1, 4);same side clearing;1;1379
+;(0, 8);;(1, 4);same side clearing;1;1380
+;(0, 8);;(1, 4);same side clearing;1;1381
+;(0, 8);;(1, 4);same side clearing;1;1382
+;(0, 8);;(1, 4);same side clearing;1;1383
+;(0, 8);;(1, 4);same side clearing;1;1384
+;(0, 8);;(1, 4);same side clearing;1;1385
+;(0, 8);;(1, 4);same side clearing;1;1386
+;(0, 8);;(1, 4);same side clearing;1;1387
+;(0, 8);;(1, 4);same side clearing;1;1388
+;(0, 8);;(1, 4);same side clearing;1;1389
+;(0, 8);;(1, 4);same side clearing;1;1390
+;(0, 8);;(1, 4);same side clearing;1;1391
+;(0, 8);;(1, 4);same side clearing;1;1392
+;(0, 8);;(1, 4);same side clearing;1;1393
+;(0, 8);;(1, 4);same side clearing;1;1394
+;(0, 8);;(1, 4);same side clearing;1;1395
+;(0, 8);;(1, 4);same side clearing;1;1396
+;(0, 8);;(1, 4);same side clearing;1;1397
+;(0, 8);;(1, 4);False;1;1398
+;(0, 8);;(1, 4);CP_known;1;1399
+;(0, 8);;(1, 4);CP_known;1;1400
+;(0, 8);;(1, 4);CP_known;1;1401
+;(0, 8);;(1, 4);CP_known;1;1402
+;(0, 8);;(1, 4);CP_known;1;1403
+;(0, 8);;(1, 4);CP_known;1;1404
+;(0, 8);;(1, 4);CP_known;1;1405
+;(0, 8);;(1, 4);CP_known;1;1406
+;(0, 8);;(1, 4);CP_known;1;1407
+;(0, 8);;(1, 4);CP_known;1;1408
+;(0, 8);;(1, 4);CP_known;1;1409
+;(0, 8);;(1, 4);CP_known;1;1410
+;(0, 8);;(1, 4);CP_known;1;1411
+;(0, 8);;(1, 4);CP_known;1;1412
+;(0, 8);;(1, 4);CP_known;1;1413
+;(0, 8);;(1, 4);CP_known;1;1414
+;(0, 8);;(1, 4);CP_known;1;1415
+;(0, 8);;(1, 4);CP_known;1;1416
+;(0, 8);;(1, 4);CP_known;1;1417
+;(0, 8);;(1, 4);CP_known;1;1418
+;(0, 8);;(1, 4);CP_known;1;1419
+;(0, 8);;(1, 4);CP_known;1;1420
+;(0, 8);;(1, 4);CP_known;1;1421
+;(0, 8);;(1, 4);CP_known;1;1422
+;(0, 8);;(1, 4);CP_known;1;1423
+;(0, 8);;(1, 4);CP_known;1;1424
+;(0, 8);;(1, 4);CP_known;1;1425
+;(0, 8);;(1, 4);CP_known;1;1426
+;(0, 8);;(1, 4);CP_known;1;1427
+;(0, 8);;(1, 4);CP_known;1;1428
+;(0, 8);;(1, 4);CP_known;1;1429
+;(0, 8);;(1, 4);CP_known;1;1430
+;(0, 8);;(1, 4);CP_known;1;1431
+;(0, 8);;(1, 4);CP_known;1;1432
+;(0, 8);;(1, 4);CP_known;1;1433
+;(0, 8);;(1, 4);CP_known;1;1434
+;(0, 8);;(1, 4);CP_known;1;1435
+;(0, 8);;(1, 4);CP_known;1;1436
+;(0, 8);;(1, 4);CP_known;1;1437
+;(0, 8);;(1, 4);CP_known;1;1438
+;(0, 8);;(1, 4);CP_known;1;1439
+;(0, 8);;(1, 4);CP_known;1;1440
+;(0, 8);;(1, 4);CP_known;1;1441
+;(0, 8);;(1, 4);CP_known;1;1442
+;(0, 8);;(1, 4);CP_known;1;1443
+;(0, 8);;(1, 4);CP_known;1;1444
+;(0, 8);;(1, 4);CP_known;1;1445
+;(0, 8);;(1, 4);CP_known;1;1446
+;(0, 8);;(1, 4);CP_known;1;1447
+;(0, 8);;(1, 4);CP_known;1;1448
+;(0, 8);;(1, 4);CP_known;1;1449
+;(0, 8);;(1, 4);CP_known;1;1450
+;(0, 8);;(1, 4);CP_known;1;1451
+;(0, 8);;(1, 4);CP_known;1;1452
+;(0, 8);;(1, 4);CP_known;1;1453
+;(0, 8);;(1, 4);CP_known;1;1454
+;(0, 8);;(1, 4);CP_known;1;1455
+;(0, 8);;(1, 4);CP_known;1;1456
+;(0, 8);;(1, 4);CP_known;1;1457
+;(0, 8);;(1, 4);CP_known;1;1458
+MoveEast;(1, 8);;(1, 4);CP_known;1;1459
+;(1, 8);;(1, 4);CP_known;1;1460
+;(1, 8);;(1, 4);CP_known;1;1461
+;(1, 8);;(1, 4);CP_known;1;1462
+;(1, 8);;(1, 4);CP_known;1;1463
+;(1, 8);;(1, 4);CP_known;1;1464
+;(1, 8);;(1, 4);CP_known;1;1465
+MoveEast;(2, 8);;(1, 4);CP_known;1;1466
+;(2, 8);;(1, 4);CP_known;1;1467
+;(2, 8);;(1, 4);CP_known;1;1468
+;(2, 8);;(1, 4);CP_known;1;1469
+;(2, 8);;(1, 4);CP_known;1;1470
+;(2, 8);;(1, 4);CP_known;1;1471
+;(2, 8);;(1, 4);CP_known;1;1472
+;(2, 8);;(1, 4);CP_known;1;1473
+;(2, 8);;(1, 4);CP_known;1;1474
+;(2, 8);;(1, 4);CP_known;1;1475
+;(2, 8);;(1, 4);CP_known;1;1476
+;(2, 8);;(1, 4);CP_known;1;1477
+;(2, 8);;(1, 4);CP_known;1;1478
+;(2, 8);;(1, 4);CP_known;1;1479
+;(2, 8);;(1, 4);CP_known;1;1480
+;(2, 8);;(1, 4);CP_known;1;1481
+;(2, 8);;(1, 4);CP_known;1;1482
+;(2, 8);;(1, 4);CP_known;1;1483
+;(2, 8);;(1, 4);CP_known;1;1484
+;(2, 8);;(1, 4);CP_known;1;1485
+;(2, 8);;(1, 4);CP_known;1;1486
+;(2, 8);;(1, 4);CP_known;1;1487
+;(2, 8);;(1, 4);CP_known;1;1488
+;(2, 8);;(1, 4);CP_known;1;1489
+;(2, 8);;(1, 4);CP_known;1;1490
+;(2, 8);;(1, 4);CP_known;1;1491
+;(2, 8);;(1, 4);CP_known;1;1492
+;(2, 8);;(1, 4);CP_known;1;1493
+;(2, 8);;(1, 4);CP_known;1;1494
+;(2, 8);;(1, 4);CP_known;1;1495
+;(2, 8);;(1, 4);CP_known;1;1496
+;(2, 8);;(1, 4);CP_known;1;1497
+;(2, 8);;(1, 4);CP_known;1;1498
+;(2, 8);;(1, 4);CP_known;1;1499
+MoveEast;(3, 8);;(1, 4);CP_known;1;1500
+;(3, 8);;(1, 4);CP_known;1;1501
+;(3, 8);;(1, 4);CP_known;1;1502
+;(3, 8);;(1, 4);CP_known;1;1503
+;(3, 8);;(1, 4);CP_known;1;1504
+;(3, 8);;(1, 4);CP_known;1;1505
+;(3, 8);;(1, 4);CP_known;1;1506
+;(3, 8);;(1, 4);CP_known;1;1507
+;(3, 8);;(1, 4);CP_known;1;1508
+;(3, 8);;(1, 4);CP_known;1;1509
+;(3, 8);;(1, 4);CP_known;1;1510
+;(3, 8);;(1, 4);CP_known;1;1511
+;(3, 8);;(1, 4);CP_known;1;1512
+;(3, 8);;(1, 4);CP_known;1;1513
+;(3, 8);;(1, 4);CP_known;1;1514
+;(3, 8);;(1, 4);CP_known;1;1515
+;(3, 8);;(1, 4);CP_known;1;1516
+;(3, 8);;(1, 4);CP_known;1;1517
+;(3, 8);;(1, 4);CP_known;1;1518
+;(3, 8);;(1, 4);CP_known;1;1519
+MoveEast;(4, 8);;(1, 4);CP_known;1;1520
+;(4, 8);;(1, 4);CP_known;1;1521
+;(4, 8);;(1, 4);CP_known;1;1522
+;(4, 8);;(1, 4);CP_known;1;1523
+;(4, 8);;(1, 4);CP_known;1;1524
+;(4, 8);;(1, 4);CP_known;1;1525
+;(4, 8);;(1, 4);CP_known;1;1526
+;(4, 8);;(1, 4);CP_known;1;1527
+MoveEast;(5, 8);;(1, 4);CP_known;1;1528
+;(5, 8);;(1, 4);CP_known;1;1529
+;(5, 8);;(1, 4);CP_known;1;1530
+;(5, 8);;(1, 4);CP_known;1;1531
+;(5, 8);;(1, 4);CP_known;1;1532
+;(5, 8);;(1, 4);CP_known;1;1533
+MoveEast;(6, 8);;(1, 4);CP_known;1;1534
+;(6, 8);;(1, 4);CP_known;1;1535
+;(6, 8);;(1, 4);CP_known;1;1536
+;(6, 8);;(1, 4);CP_known;1;1537
+;(6, 8);;(1, 4);CP_known;1;1538
+;(6, 8);;(1, 4);CP_known;1;1539
+;(6, 8);;(1, 4);CP_known;1;1540
+MoveEast;(7, 8);;(1, 4);CP_known;1;1541
+;(7, 8);;(1, 4);CP_known;1;1542
+;(7, 8);;(1, 4);CP_known;1;1543
+;(7, 8);;(1, 4);CP_known;1;1544
+;(7, 8);;(1, 4);CP_known;1;1545
+;(7, 8);;(1, 4);CP_known;1;1546
+;(7, 8);;(1, 4);CP_known;1;1547
+;(7, 8);;(1, 4);CP_known;1;1548
+;(7, 8);;(1, 4);CP_known;1;1549
+;(7, 8);;(1, 4);CP_known;1;1550
+;(7, 8);;(1, 4);CP_known;1;1551
+;(7, 8);;(1, 4);CP_known;1;1552
+;(7, 8);;(1, 4);CP_known;1;1553
+;(7, 8);;(1, 4);CP_known;1;1554
+;(7, 8);;(1, 4);CP_known;1;1555
+;(7, 8);;(1, 4);CP_known;1;1556
+;(7, 8);;(1, 4);CP_known;1;1557
+;(7, 8);;(1, 4);CP_known;1;1558
+;(7, 8);;(1, 4);CP_known;1;1559
+;(7, 8);;(1, 4);CP_known;1;1560
+;(7, 8);;(1, 4);CP_known;1;1561
+;(7, 8);;(1, 4);CP_known;1;1562
+;(7, 8);;(1, 4);CP_known;1;1563
+;(7, 8);;(1, 4);CP_known;1;1564
+;(7, 8);;(1, 4);CP_known;1;1565
+;(7, 8);;(1, 4);CP_known;1;1566
+;(7, 8);;(1, 4);CP_known;1;1567
+;(7, 8);;(1, 4);CP_known;1;1568
+;(7, 8);;(1, 4);CP_known;1;1569
+;(7, 8);;(1, 4);CP_known;1;1570
+;(7, 8);;(1, 4);CP_known;1;1571
+;(7, 8);;(1, 4);CP_known;1;1572
+;(7, 8);;(1, 4);CP_known;1;1573
+;(7, 8);;(1, 4);CP_known;1;1574
+;(7, 8);;(1, 4);CP_known;1;1575
+;(7, 8);;(1, 4);CP_known;1;1576
+;(7, 8);;(1, 4);CP_known;1;1577
+;(7, 8);;(1, 4);CP_known;1;1578
+;(7, 8);;(1, 4);CP_known;1;1579
+;(7, 8);;(1, 4);CP_known;1;1580
+;(7, 8);;(1, 4);CP_known;1;1581
+;(7, 8);;(1, 4);CP_known;1;1582
+;(7, 8);;(1, 4);CP_known;1;1583
+;(7, 8);;(1, 4);CP_known;1;1584
+;(7, 8);;(1, 4);CP_known;1;1585
+;(7, 8);;(1, 4);CP_known;1;1586
+;(7, 8);;(1, 4);CP_known;1;1587
+;(7, 8);;(1, 4);CP_known;1;1588
+;(7, 8);;(1, 4);CP_known;1;1589
+;(7, 8);;(1, 4);CP_known;1;1590
+;(7, 8);;(1, 4);CP_known;1;1591
+;(7, 8);;(1, 4);CP_known;1;1592
+;(7, 8);;(1, 4);CP_known;1;1593
+;(7, 8);;(1, 4);CP_known;1;1594
+;(7, 8);;(1, 4);CP_known;1;1595
+;(7, 8);;(1, 4);CP_known;1;1596
+;(7, 8);;(1, 4);CP_known;1;1597
+;(7, 8);;(1, 4);CP_known;1;1598
+;(7, 8);;(1, 4);CP_known;1;1599
+;(7, 8);;(1, 4);CP_known;1;1600
+;(7, 8);;(1, 4);CP_known;1;1601
+;(7, 8);;(1, 4);CP_known;1;1602
+;(7, 8);;(1, 4);CP_known;1;1603
+;(7, 8);;(1, 4);CP_known;1;1604
+;(7, 8);;(1, 4);CP_known;1;1605
+;(7, 8);;(1, 4);CP_known;1;1606
+;(7, 8);;(1, 4);CP_known;1;1607
+;(7, 8);;(1, 4);CP_known;1;1608
+;(7, 8);;(1, 4);CP_known;1;1609
+;(7, 8);;(1, 4);CP_known;1;1610
+DropObject;(7, 8);;(1, 4);CP_known;1;1611
+;(7, 8);;(1, 4);CP_known;1;1612
+;(7, 8);;(1, 4);CP_known;1;1613
+;(7, 8);;(1, 4);CP_known;1;1614
+;(7, 8);;(1, 4);CP_known;1;1615
+;(7, 8);;(1, 4);CP_known;1;1616
+;(7, 8);;(1, 4);CP_known;1;1617
+;(7, 8);;(1, 4);CP_known;1;1618
+;(7, 8);;(1, 4);CP_known;1;1619
+;(7, 8);;(1, 4);CP_known;1;1620
+;(7, 8);;(1, 4);CP_known;1;1621
+;(7, 8);;(1, 4);CP_known;1;1622
+;(7, 8);;(1, 4);CP_known;1;1623
+;(7, 8);;(1, 4);CP_known;1;1624
+;(7, 8);;(1, 4);CP_known;1;1625
+;(7, 8);;(1, 4);CP_known;1;1626
+;(7, 8);;(1, 4);CP_known;1;1627
+;(7, 8);;(1, 4);CP_known;1;1628
+;(7, 8);;(1, 4);CP_known;1;1629
+;(7, 8);;(1, 4);CP_known;1;1630
+;(7, 8);;(1, 4);CP_known;1;1631
+;(7, 8);;(1, 4);CP_known;1;1632
+;(7, 8);;(1, 4);CP_known;1;1633
+;(7, 8);;(1, 4);CP_known;1;1634
+;(7, 8);;(1, 4);CP_known;1;1635
+;(7, 8);;(1, 4);CP_known;1;1636
+MoveEast;(8, 8);;(1, 4);CP_known;1;1637
+;(8, 8);;(1, 4);CP_known;1;1638
+;(8, 8);;(1, 4);CP_known;1;1639
+;(8, 8);;(1, 4);CP_known;1;1640
+MoveEast;(9, 8);;(1, 4);CP_known;1;1641
+;(9, 8);;(1, 4);CP_known;1;1642
+;(9, 8);;(1, 4);CP_known;1;1643
+;(9, 8);;(1, 4);CP_known;1;1644
+;(9, 8);;(1, 4);CP_known;1;1645
+;(9, 8);;(1, 4);CP_known;1;1646
+;(9, 8);;(1, 4);CP_known;1;1647
+;(9, 8);;(1, 4);CP_known;1;1648
+;(9, 8);;(1, 4);CP_known;1;1649
+;(9, 8);;(1, 4);CP_known;1;1650
+;(9, 8);;(1, 4);CP_known;1;1651
+;(9, 8);;(1, 4);CP_known;1;1652
+;(9, 8);;(1, 4);CP_known;1;1653
+;(9, 8);;(1, 4);CP_known;1;1654
+;(9, 8);;(1, 4);CP_known;1;1655
+MoveWest;(8, 8);;(1, 4);CP_known;1;1656
+;(8, 8);;(1, 4);CP_known;1;1657
+;(8, 8);;(1, 4);CP_known;1;1658
+;(8, 8);;(1, 4);CP_known;1;1659
+;(8, 8);;(1, 4);CP_known;1;1660
+;(8, 8);;(1, 4);CP_known;1;1661
+;(8, 8);;(1, 4);CP_known;1;1662
+;(8, 8);;(1, 4);CP_known;1;1663
+;(8, 8);;(1, 4);CP_known;1;1664
+;(8, 8);;(1, 4);CP_known;1;1665
+;(8, 8);;(1, 4);CP_known;1;1666
+;(8, 8);;(1, 4);CP_known;1;1667
+;(8, 8);;(1, 4);CP_known;1;1668
+;(8, 8);;(1, 4);CP_known;1;1669
+;(8, 8);;(1, 4);CP_known;1;1670
+;(8, 8);;(1, 4);CP_known;1;1671
+;(8, 8);;(1, 4);CP_known;1;1672
+;(8, 8);;(1, 4);CP_known;1;1673
+;(8, 8);;(1, 4);CP_known;1;1674
+;(8, 8);;(1, 4);CP_known;1;1675
+;(8, 8);;(1, 4);CP_known;1;1676
+;(8, 8);;(1, 4);CP_known;1;1677
+;(8, 8);;(1, 4);CP_known;1;1678
+;(8, 8);;(1, 4);CP_known;1;1679
+;(8, 8);;(1, 4);CP_known;1;1680
+;(8, 8);;(1, 4);CP_known;1;1681
+;(8, 8);;(1, 4);CP_known;1;1682
+;(8, 8);;(1, 4);CP_known;1;1683
+;(8, 8);;(1, 4);CP_known;1;1684
+;(8, 8);;(1, 4);CP_known;1;1685
+;(8, 8);;(1, 4);CP_known;1;1686
+;(8, 8);;(1, 4);CP_known;1;1687
+;(8, 8);;(1, 4);CP_known;1;1688
+;(8, 8);;(1, 4);CP_known;1;1689
+;(8, 8);;(1, 4);CP_known;1;1690
+;(8, 8);;(1, 4);CP_known;1;1691
+;(8, 8);;(1, 4);CP_known;1;1692
+;(8, 8);;(1, 4);CP_known;1;1693
+MoveNorth;(8, 7);;(1, 4);CP_known;1;1694
+;(8, 7);;(1, 4);CP_known;1;1695
+;(8, 7);;(1, 4);CP_known;1;1696
+;(8, 7);;(1, 4);CP_known;1;1697
+;(8, 7);;(1, 4);CP_known;1;1698
+;(8, 7);;(1, 4);CP_known;1;1699
+;(8, 7);;(1, 4);CP_known;1;1700
+;(8, 7);;(1, 4);CP_known;1;1701
+;(8, 7);;(1, 4);CP_known;1;1702
+;(8, 7);;(1, 4);CP_known;1;1703
+;(8, 7);;(1, 4);CP_known;1;1704
+;(8, 7);;(1, 4);CP_known;1;1705
+;(8, 7);;(1, 4);CP_known;1;1706
+;(8, 7);;(1, 4);CP_known;1;1707
+;(8, 7);;(1, 4);CP_known;1;1708
+;(8, 7);;(1, 4);CP_known;1;1709
+;(8, 7);;(1, 4);CP_known;1;1710
+;(8, 7);;(1, 4);CP_known;1;1711
+;(8, 7);;(1, 4);CP_known;1;1712
+;(8, 7);;(1, 4);CP_known;1;1713
+;(8, 7);;(1, 4);CP_known;1;1714
+MoveEast;(9, 7);;(1, 4);CP_known;1;1715
+;(9, 7);;(1, 4);CP_known;1;1716
+;(9, 7);;(1, 4);CP_known;1;1717
+;(9, 7);;(1, 4);CP_known;1;1718
+;(9, 7);;(1, 4);CP_known;1;1719
+;(9, 7);;(1, 4);CP_known;1;1720
+;(9, 7);;(1, 4);CP_known;1;1721
+;(9, 7);;(1, 4);CP_known;1;1722
+;(9, 7);;(1, 4);CP_known;1;1723
+;(9, 7);;(1, 4);CP_known;1;1724
+;(9, 7);;(1, 4);CP_known;1;1725
+;(9, 7);;(1, 4);CP_known;1;1726
+;(9, 7);;(1, 4);CP_known;1;1727
+;(9, 7);;(1, 4);CP_known;1;1728
+;(9, 7);;(1, 4);CP_known;1;1729
+;(9, 7);;(1, 4);CP_known;1;1730
+;(9, 7);;(1, 4);CP_known;1;1731
+;(9, 7);;(1, 4);CP_known;1;1732
+;(9, 7);;(1, 4);CP_known;1;1733
+;(9, 7);;(1, 4);CP_known;1;1734
+;(9, 7);;(1, 4);CP_known;1;1735
+;(9, 7);;(1, 4);CP_known;1;1736
+;(9, 7);;(1, 4);CP_known;1;1737
+;(9, 7);;(1, 4);CP_known;1;1738
+;(9, 7);;(1, 4);CP_known;1;1739
+;(9, 7);;(1, 4);CP_known;1;1740
+;(9, 7);;(1, 4);CP_known;1;1741
+;(9, 7);;(1, 4);CP_known;1;1742
+;(9, 7);;(1, 4);CP_known;1;1743
+;(9, 7);;(1, 4);CP_known;1;1744
+;(9, 7);;(1, 4);CP_known;1;1745
+;(9, 7);;(1, 4);CP_known;1;1746
+;(9, 7);;(1, 4);CP_known;1;1747
+;(9, 7);;(1, 4);CP_known;1;1748
+;(9, 7);;(1, 4);CP_known;1;1749
+;(9, 7);;(1, 4);CP_known;1;1750
+;(9, 7);;(1, 4);CP_known;1;1751
+;(9, 7);;(1, 4);CP_known;1;1752
+;(9, 7);;(1, 4);CP_known;1;1753
+;(9, 7);;(1, 4);CP_known;1;1754
+;(9, 7);;(1, 4);CP_known;1;1755
+;(9, 7);;(1, 4);CP_known;1;1756
+;(9, 7);;(1, 4);CP_known;1;1757
+;(9, 7);;(1, 4);CP_known;1;1758
+;(9, 7);;(1, 4);CP_known;1;1759
+;(9, 7);;(1, 4);CP_known;1;1760
+;(9, 7);;(1, 4);CP_known;1;1761
+;(9, 7);;(1, 4);CP_known;1;1762
+;(9, 7);;(1, 4);CP_known;1;1763
+;(9, 7);;(1, 4);CP_known;1;1764
+;(9, 7);;(1, 4);CP_known;1;1765
+;(9, 7);;(1, 4);CP_known;1;1766
+;(9, 7);;(1, 4);CP_known;1;1767
+;(9, 7);;(1, 4);CP_known;1;1768
+;(9, 7);;(1, 4);CP_known;1;1769
+;(9, 7);;(1, 4);CP_known;1;1770
+;(9, 7);;(1, 4);CP_known;1;1771
+;(9, 7);;(1, 4);CP_known;1;1772
+;(9, 7);;(1, 4);CP_known;1;1773
+;(9, 7);;(1, 4);CP_known;1;1774
+;(9, 7);;(1, 4);CP_known;1;1775
+;(9, 7);;(1, 4);CP_known;1;1776
+;(9, 7);;(1, 4);CP_known;1;1777
+;(9, 7);;(1, 4);CP_known;1;1778
+;(9, 7);;(1, 4);CP_known;1;1779
+;(9, 7);;(1, 4);CP_known;1;1780
+;(9, 7);;(1, 4);CP_known;1;1781
+;(9, 7);;(1, 4);CP_known;1;1782
+;(9, 7);;(1, 4);CP_known;1;1783
+;(9, 7);;(1, 4);CP_known;1;1784
+;(9, 7);;(1, 4);CP_known;1;1785
+;(9, 7);;(1, 4);CP_known;1;1786
+;(9, 7);;(1, 4);CP_known;1;1787
+;(9, 7);;(1, 4);CP_known;1;1788
+;(9, 7);;(1, 4);CP_known;1;1789
+;(9, 7);;(1, 4);CP_known;1;1790
+;(9, 7);;(1, 4);CP_known;1;1791
+;(9, 7);;(1, 4);CP_known;1;1792
+;(9, 7);;(1, 4);CP_known;1;1793
+;(9, 7);;(1, 4);CP_known;1;1794
+;(9, 7);;(1, 4);CP_known;1;1795
+;(9, 7);;(1, 4);CP_known;1;1796
+;(9, 7);;(1, 4);CP_known;1;1797
+;(9, 7);;(1, 4);CP_known;1;1798
+;(9, 7);;(1, 4);CP_known;1;1799
+;(9, 7);;(1, 4);CP_known;1;1800
+;(9, 7);;(1, 4);CP_known;1;1801
+;(9, 7);;(1, 4);CP_known;1;1802
+;(9, 7);;(1, 4);CP_known;1;1803
+;(9, 7);;(1, 4);CP_known;1;1804
+;(9, 7);;(1, 4);CP_known;1;1805
+;(9, 7);;(1, 4);CP_known;1;1806
+;(9, 7);;(1, 4);CP_known;1;1807
+;(9, 7);;(1, 4);CP_known;1;1808
+;(9, 7);;(1, 4);CP_known;1;1809
+;(9, 7);;(1, 4);CP_known;1;1810
+;(9, 7);;(1, 4);CP_known;1;1811
+;(9, 7);;(1, 4);CP_known;1;1812
+;(9, 7);;(1, 4);CP_known;1;1813
+;(9, 7);;(1, 4);CP_known;1;1814
+;(9, 7);;(1, 4);CP_known;1;1815
+;(9, 7);;(1, 4);CP_known;1;1816
+;(9, 7);;(1, 4);CP_known;1;1817
+;(9, 7);;(1, 4);CP_known;1;1818
+;(9, 7);;(1, 4);CP_known;1;1819
+;(9, 7);;(1, 4);CP_known;1;1820
+;(9, 7);;(1, 4);CP_known;1;1821
+;(9, 7);;(1, 4);CP_known;1;1822
+;(9, 7);;(1, 4);CP_known;1;1823
+;(9, 7);;(1, 4);CP_known;1;1824
+;(9, 7);;(1, 4);CP_known;1;1825
+;(9, 7);;(1, 4);CP_known;1;1826
+;(9, 7);;(1, 4);CP_known;1;1827
+;(9, 7);;(1, 4);CP_known;1;1828
+;(9, 7);;(1, 4);CP_known;1;1829
+;(9, 7);;(1, 4);CP_known;1;1830
+;(9, 7);;(1, 4);CP_known;1;1831
+;(9, 7);;(1, 4);CP_known;1;1832
+;(9, 7);;(1, 4);CP_known;1;1833
+MoveEast;(10, 7);;(1, 4);CP_known;1;1834
+;(10, 7);;(1, 4);CP_known;1;1835
+;(10, 7);;(1, 4);CP_known;1;1836
+;(10, 7);;(1, 4);CP_known;1;1837
+;(10, 7);;(1, 4);CP_known;1;1838
+;(10, 7);;(1, 4);CP_known;1;1839
+;(10, 7);;(1, 4);CP_known;1;1840
+;(10, 7);;(1, 4);CP_known;1;1841
+;(10, 7);;(1, 4);CP_known;1;1842
+;(10, 7);;(1, 4);CP_known;1;1843
+;(10, 7);;(1, 4);CP_known;1;1844
+;(10, 7);;(1, 4);CP_known;1;1845
+;(10, 7);;(1, 4);CP_known;1;1846
+;(10, 7);;(1, 4);CP_known;1;1847
+;(10, 7);;(1, 4);CP_known;1;1848
+;(10, 7);;(1, 4);CP_known;1;1849
+;(10, 7);;(1, 4);CP_known;1;1850
+MoveEast;(11, 7);;(1, 4);CP_known;1;1851
+;(11, 7);;(1, 4);CP_known;1;1852
+;(11, 7);;(1, 4);CP_known;1;1853
+;(11, 7);;(1, 4);CP_known;1;1854
+;(11, 7);;(1, 4);CP_known;1;1855
+;(11, 7);;(1, 4);CP_known;1;1856
+;(11, 7);;(1, 4);CP_known;1;1857
+;(11, 7);;(1, 4);CP_known;1;1858
+;(11, 7);;(1, 4);CP_known;1;1859
+;(11, 7);;(1, 4);CP_known;1;1860
+;(11, 7);;(1, 4);CP_known;1;1861
+;(11, 7);;(1, 4);CP_known;1;1862
+;(11, 7);;(1, 4);CP_known;1;1863
+;(11, 7);;(1, 4);CP_known;1;1864
+;(11, 7);;(1, 4);CP_known;1;1865
+;(11, 7);;(1, 4);CP_known;1;1866
+;(11, 7);;(1, 4);CP_known;1;1867
+;(11, 7);;(1, 4);CP_known;1;1868
+;(11, 7);;(1, 4);CP_known;1;1869
+;(11, 7);;(1, 4);CP_known;1;1870
+;(11, 7);;(1, 4);CP_known;1;1871
+MoveNorth;(11, 6);;(1, 4);CP_known;1;1872
+;(11, 6);;(1, 4);CP_known;1;1873
+;(11, 6);;(1, 4);CP_known;1;1874
+;(11, 6);;(1, 4);CP_known;1;1875
+MoveNorth;(11, 5);;(1, 4);CP_known;1;1876
+;(11, 5);;(1, 4);CP_known;1;1877
+;(11, 5);;(1, 4);CP_known;1;1878
+;(11, 5);;(1, 4);CP_known;1;1879
+;(11, 5);;(1, 4);CP_known;1;1880
+MoveNorth;(11, 4);;(1, 4);CP_known;1;1881
+;(11, 4);;(1, 4);CP_known;1;1882
+;(11, 4);;(1, 4);CP_known;1;1883
+;(11, 4);;(1, 4);CP_known;1;1884
+MoveNorth;(11, 3);;(1, 4);CP_known;1;1885
+;(11, 3);;(1, 4);CP_known;1;1886
+;(11, 3);;(1, 4);CP_known;1;1887
+;(11, 3);;(1, 4);CP_known;1;1888
+;(11, 3);;(1, 4);CP_known;1;1889
+;(11, 3);;(1, 4);CP_known;1;1890
+;(11, 3);;(1, 4);CP_known;1;1891
+;(11, 3);;(1, 4);CP_known;1;1892
+MoveNorth;(11, 2);;(1, 4);CP_known;1;1893
+;(11, 2);;(1, 4);CP_known;1;1894
+;(11, 2);;(1, 4);CP_known;1;1895
+;(11, 2);;(1, 4);CP_known;1;1896
+;(11, 2);;(1, 4);CP_known;1;1897
+;(11, 2);;(1, 4);CP_known;1;1898
+;(11, 2);;(1, 4);CP_known;1;1899
+;(11, 2);;(1, 4);CP_known;1;1900
+;(11, 2);;(1, 4);CP_known;1;1901
+;(11, 2);;(1, 4);CP_known;1;1902
+;(11, 2);;(1, 4);CP_known;1;1903
+;(11, 2);;(1, 4);CP_known;1;1904
+;(11, 2);;(1, 4);CP_known;1;1905
+;(11, 2);;(1, 4);CP_known;1;1906
+;(11, 2);;(1, 4);CP_known;1;1907
+;(11, 2);;(1, 4);CP_known;1;1908
+;(11, 2);;(1, 4);CP_known;1;1909
+;(11, 2);;(1, 4);CP_known;1;1910
+;(11, 2);;(1, 4);CP_known;1;1911
+;(11, 2);;(1, 4);CP_known;1;1912
+;(11, 2);;(1, 4);CP_known;1;1913
+;(11, 2);;(1, 4);CP_known;1;1914
+;(11, 2);;(1, 4);CP_known;1;1915
+;(11, 2);;(1, 4);CP_known;1;1916
+MoveWest;(10, 2);;(1, 4);CP_known;1;1917
+;(10, 2);;(1, 4);CP_known;1;1918
+;(10, 2);;(1, 4);CP_known;1;1919
+;(10, 2);;(1, 4);CP_known;1;1920
+;(10, 2);;(1, 4);CP_known;1;1921
+;(10, 2);;(1, 4);CP_known;1;1922
+;(10, 2);;(1, 4);CP_known;1;1923
+;(10, 2);;(1, 4);CP_known;1;1924
+;(10, 2);;(1, 4);CP_known;1;1925
+;(10, 2);;(1, 4);CP_known;1;1926
+;(10, 2);;(1, 4);CP_known;1;1927
+;(10, 2);;(1, 4);CP_known;1;1928
+;(10, 2);;(1, 4);CP_known;1;1929
+;(10, 2);;(1, 4);CP_known;1;1930
+;(10, 2);;(1, 4);CP_known;1;1931
+;(10, 2);;(1, 4);CP_known;1;1932
+;(10, 2);;(1, 4);CP_known;1;1933
+;(10, 2);;(1, 4);CP_known;1;1934
+;(10, 2);;(1, 4);CP_known;1;1935
+;(10, 2);;(1, 4);CP_known;1;1936
+;(10, 2);;(1, 4);CP_known;1;1937
+;(10, 2);;(1, 4);CP_known;1;1938
+;(10, 2);;(1, 4);CP_known;1;1939
+;(10, 2);;(1, 4);CP_known;1;1940
+;(10, 2);;(1, 4);CP_known;1;1941
+;(10, 2);;(1, 4);CP_known;1;1942
+;(10, 2);;(1, 4);CP_known;1;1943
+;(10, 2);;(1, 4);CP_known;1;1944
+GrabObject;(10, 2);;(1, 4);CP_known;1;1945
+;(10, 2);;(1, 4);CP_known;1;1946
+;(10, 2);;(1, 4);CP_known;1;1947
+;(10, 2);;(1, 4);CP_known;1;1948
+;(10, 2);MoveSouthEast;(1, 4);CP_known;1;1949
+;(10, 2);MoveSouthEast;(1, 4);CP_known;1;1950
+MoveWest;(9, 2);MoveSouthEast;(1, 4);CP_known;1;1951
+;(9, 2);MoveSouthEast;(1, 4);CP_known;1;1952
+;(9, 2);MoveSouthEast;(1, 4);CP_known;1;1953
+;(9, 2);MoveSouthEast;(1, 4);CP_known;1;1954
+;(9, 2);MoveSouthEast;(1, 4);CP_known;1;1955
+;(9, 2);MoveSouthEast;(1, 4);CP_known;1;1956
+;(9, 2);MoveSouthEast;(1, 4);CP_known;1;1957
+;(9, 2);MoveSouthEast;(1, 4);CP_known;1;1958
+;(9, 2);MoveSouthEast;(2, 5);CP_known;1;1959
+;(9, 2);MoveEast;(2, 5);CP_known;1;1960
+MoveWest;(8, 2);MoveEast;(2, 5);CP_known;1;1961
+;(8, 2);MoveEast;(2, 5);CP_known;1;1962
+MoveWest;(7, 2);MoveEast;(2, 5);CP_known;1;1963
+MoveWest;(6, 2);MoveEast;(2, 5);CP_known;1;1964
+;(6, 2);MoveEast;(2, 5);CP_known;1;1965
+MoveWest;(5, 2);MoveEast;(2, 5);CP_known;1;1966
+;(5, 2);MoveEast;(2, 5);CP_known;1;1967
+MoveWest;(4, 2);MoveEast;(2, 5);CP_known;1;1968
+MoveWest;(3, 2);MoveEast;(2, 5);CP_known;1;1969
+;(3, 2);MoveEast;(3, 5);CP_known;1;1970
+;(3, 2);MoveSouthEast;(3, 5);CP_known;1;1971
+MoveWest;(2, 2);MoveSouthEast;(3, 5);CP_known;1;1972
+MoveWest;(1, 2);MoveSouthEast;(3, 5);CP_known;1;1973
+MoveWest;(0, 2);MoveSouthEast;(3, 5);CP_known;1;1974
+;(0, 2);MoveSouthEast;(3, 5);CP_known;1;1975
+MoveWest;(0, 2);MoveSouthEast;(3, 5);CP_known;1;1976
+MoveWest;(0, 2);MoveSouthEast;(3, 5);CP_known;1;1977
+;(0, 2);MoveSouthEast;(3, 5);CP_known;1;1978
+MoveWest;(0, 2);MoveSouthEast;(3, 5);CP_known;1;1979
+MoveWest;(0, 2);MoveSouthEast;(3, 5);CP_known;1;1980
+;(0, 2);MoveSouthEast;(4, 6);CP_known;1;1981
+;(0, 2);MoveEast;(4, 6);CP_known;1;1982
+;(0, 2);MoveEast;(4, 6);CP_known;1;1983
+;(0, 2);MoveEast;(4, 6);CP_known;1;1984
+DropObject;(0, 2);MoveEast;(4, 6);CP_known;1;1985
+;(0, 2);MoveEast;(4, 6);CP_known;1;1986
+;(0, 2);MoveEast;(4, 6);CP_known;1;1987
+;(0, 2);MoveEast;(4, 6);CP_known;1;1988
+;(0, 2);MoveEast;(4, 6);CP_known;1;1989
+;(0, 2);MoveEast;(4, 6);CP_known;1;1990
+;(0, 2);MoveEast;(4, 6);CP_known;1;1991
+;(0, 2);MoveEast;(5, 6);CP_known;1;1992
+;(0, 2);MoveEast;(5, 6);CP_known;1;1993
+;(0, 2);MoveEast;(5, 6);CP_known;1;1994
+;(0, 2);MoveEast;(5, 6);CP_known;1;1995
+;(0, 2);MoveEast;(5, 6);CP_known;1;1996
+;(0, 2);MoveEast;(5, 6);CP_known;1;1997
+;(0, 2);MoveEast;(5, 6);CP_known;1;1998
+MoveEast;(1, 2);MoveEast;(5, 6);CP_known;1;1999
+;(1, 2);MoveEast;(5, 6);CP_known;1;2000
+;(1, 2);MoveEast;(5, 6);CP_known;1;2001
+;(1, 2);MoveEast;(5, 6);CP_known;1;2002
+;(1, 2);MoveEast;(6, 6);CP_known;1;2003
+;(1, 2);MoveSouthEast;(6, 6);CP_known;1;2004
+;(1, 2);MoveSouthEast;(6, 6);CP_known;1;2005
+;(1, 2);MoveSouthEast;(6, 6);CP_known;1;2006
+;(1, 2);MoveSouthEast;(6, 6);CP_known;1;2007
+;(1, 2);MoveSouthEast;(6, 6);CP_known;1;2008
+MoveEast;(2, 2);MoveSouthEast;(6, 6);CP_known;1;2009
+MoveEast;(3, 2);MoveSouthEast;(6, 6);CP_known;1;2010
+;(3, 2);MoveSouthEast;(6, 6);CP_known;1;2011
+MoveEast;(4, 2);MoveSouthEast;(6, 6);CP_known;1;2012
+;(4, 2);MoveSouthEast;(6, 6);CP_known;1;2013
+MoveEast;(5, 2);MoveSouthEast;(7, 7);CP_known;1;2014
+MoveEast;(6, 2);GrabLargeObject;(7, 7);CP_known;1;2015
+;(6, 2);GrabLargeObject;(7, 7);CP_known;1;2016
+MoveEast;(7, 2);GrabLargeObject;(7, 7);CP_known;1;2017
+MoveEast;(8, 2);GrabLargeObject;(7, 7);CP_known;1;2018
+;(8, 2);GrabLargeObject;(7, 7);CP_known;1;2019
+MoveEast;(9, 2);GrabLargeObject;(7, 7);CP_known;1;2020
+MoveEast;(10, 2);GrabLargeObject;(7, 7);CP_known;1;2021
+;(10, 2);GrabLargeObject;(7, 7);CP_known;1;2022
+MoveEast;(11, 2);GrabLargeObject;(7, 7);CP_known;1;2023
+;(11, 2);GrabLargeObject;(7, 7);CP_known;1;2024
+MoveEast;(12, 2);GrabLargeObject;(7, 7);CP_known;1;2025
+MoveEast;(13, 2);;(7, 7);CP_known;1;2026
+;(13, 2);;(7, 7);CP_known;1;2027
+MoveEast;(14, 2);MoveNorthEast;(7, 7);CP_known;1;2028
+;(14, 2);MoveNorthEast;(7, 7);CP_known;1;2029
+;(14, 2);MoveNorthEast;(7, 7);CP_known;1;2030
+;(14, 2);MoveNorthEast;(7, 7);CP_known;1;2031
+;(14, 2);MoveNorthEast;(7, 7);CP_known;1;2032
+;(14, 2);MoveNorthEast;(7, 7);CP_known;1;2033
+;(14, 2);MoveNorthEast;(7, 7);CP_known;1;2034
+;(14, 2);MoveNorthEast;(7, 7);CP_known;1;2035
+;(14, 2);MoveNorthEast;(7, 7);CP_known;1;2036
+;(14, 2);MoveNorthEast;(7, 7);CP_known;1;2037
+;(14, 2);MoveNorthEast;(8, 6);CP_known;1;2038
+;(14, 2);MoveEast;(8, 6);CP_known;1;2039
+;(14, 2);MoveEast;(8, 6);CP_known;1;2040
+;(14, 2);MoveEast;(8, 6);CP_known;1;2041
+;(14, 2);MoveEast;(8, 6);CP_known;1;2042
+;(14, 2);MoveEast;(8, 6);CP_known;1;2043
+;(14, 2);MoveEast;(8, 6);CP_known;1;2044
+MoveSouth;(14, 3);MoveEast;(8, 6);CP_known;1;2045
+;(14, 3);MoveEast;(8, 6);CP_known;1;2046
+;(14, 3);MoveEast;(8, 6);CP_known;1;2047
+;(14, 3);MoveEast;(8, 6);CP_known;1;2048
+;(14, 3);MoveEast;(9, 6);CP_known;1;2049
+;(14, 3);MoveNorthEast;(9, 6);CP_known;1;2050
+;(14, 3);MoveNorthEast;(9, 6);CP_known;1;2051
+;(14, 3);MoveNorthEast;(9, 6);CP_known;1;2052
+;(14, 3);MoveNorthEast;(9, 6);CP_known;1;2053
+;(14, 3);MoveNorthEast;(9, 6);CP_known;1;2054
+;(14, 3);MoveNorthEast;(9, 6);CP_known;1;2055
+;(14, 3);MoveNorthEast;(9, 6);CP_known;1;2056
+;(14, 3);MoveNorthEast;(9, 6);CP_known;1;2057
+;(14, 3);MoveNorthEast;(9, 6);CP_known;1;2058
+;(14, 3);MoveNorthEast;(9, 6);CP_known;1;2059
+MoveSouth;(14, 4);MoveNorthEast;(10, 5);CP_known;1;2060
+;(14, 4);MoveNorthEast;(10, 5);CP_known;1;2061
+;(14, 4);MoveNorthEast;(10, 5);CP_known;1;2062
+;(14, 4);MoveNorthEast;(10, 5);CP_known;1;2063
+;(14, 4);MoveNorthEast;(10, 5);CP_known;1;2064
+;(14, 4);MoveNorthEast;(10, 5);CP_known;1;2065
+;(14, 4);MoveNorthEast;(10, 5);CP_known;1;2066
+;(14, 4);MoveNorthEast;(10, 5);CP_known;1;2067
+;(14, 4);MoveNorthEast;(10, 5);CP_known;1;2068
+MoveWest;(13, 4);MoveNorthEast;(10, 5);CP_known;1;2069
+;(13, 4);MoveNorthEast;(10, 5);CP_known;1;2070
+;(13, 4);MoveNorthEast;(11, 4);CP_known;1;2071
+;(13, 4);MoveNorthEast;(11, 4);CP_known;1;2072
+;(13, 4);MoveNorthEast;(11, 4);CP_known;1;2073
+;(13, 4);MoveNorthEast;(11, 4);CP_known;1;2074
+;(13, 4);MoveNorthEast;(11, 4);CP_known;1;2075
+;(13, 4);MoveNorthEast;(11, 4);CP_known;1;2076
+;(13, 4);MoveNorthEast;(11, 4);CP_known;1;2077
+;(13, 4);MoveNorthEast;(11, 4);CP_known;1;2078
+;(13, 4);MoveNorthEast;(11, 4);CP_known;1;2079
+;(13, 4);MoveNorthEast;(11, 4);CP_known;1;2080
+MoveWest;(12, 4);MoveNorthEast;(11, 4);CP_known;1;2081
+;(12, 4);MoveNorthEast;(12, 3);CP_known;1;2082
+;(12, 4);MoveEast;(12, 3);CP_known;1;2083
+;(12, 4);MoveEast;(12, 3);CP_known;1;2084
+;(12, 4);MoveEast;(12, 3);CP_known;1;2085
+;(12, 4);MoveEast;(12, 3);CP_known;1;2086
+;(12, 4);MoveEast;(12, 3);CP_known;1;2087
+GrabObject;(12, 4);MoveEast;(12, 3);CP_known;1;2088
+;(12, 4);MoveEast;(12, 3);CP_known;1;2089
+;(12, 4);MoveEast;(12, 3);CP_known;1;2090
+;(12, 4);MoveEast;(12, 3);CP_known;1;2091
+;(12, 4);MoveEast;(12, 3);CP_known;1;2092
+;(12, 4);MoveEast;(13, 3);CP_known;1;2093
+;(12, 4);MoveNorthEast;(13, 3);CP_known;1;2094
+;(12, 4);MoveNorthEast;(13, 3);CP_known;1;2095
+;(12, 4);MoveNorthEast;(13, 3);CP_known;1;2096
+;(12, 4);MoveNorthEast;(13, 3);CP_known;1;2097
+;(12, 4);MoveNorthEast;(13, 3);CP_known;1;2098
+MoveWest;(11, 4);MoveNorthEast;(13, 3);CP_known;1;2099
+;(11, 4);MoveNorthEast;(13, 3);CP_known;1;2100
+;(11, 4);MoveNorthEast;(13, 3);CP_known;1;2101
+;(11, 4);MoveNorthEast;(13, 3);CP_known;1;2102
+;(11, 4);MoveNorthEast;(13, 3);CP_known;1;2103
+;(11, 4);MoveNorthEast;(14, 2);CP_known;1;2104
+;(11, 4);MoveEast;(14, 2);CP_known;1;2105
+;(11, 4);MoveEast;(14, 2);CP_known;1;2106
+;(11, 4);MoveEast;(14, 2);CP_known;1;2107
+MoveWest;(10, 4);MoveEast;(14, 2);CP_known;1;2108
+;(10, 4);MoveEast;(14, 2);CP_known;1;2109
+MoveWest;(9, 4);MoveEast;(14, 2);CP_known;1;2110
+;(9, 4);MoveEast;(14, 2);CP_known;1;2111
+MoveWest;(8, 4);MoveEast;(14, 2);CP_known;1;2112
+MoveWest;(7, 4);MoveEast;(14, 2);CP_known;1;2113
+;(7, 4);MoveEast;(14, 2);CP_known;1;2114
+MoveWest;(6, 4);MoveEast;(15, 2);CP_known;1;2115
+MoveWest;(5, 4);DropLargeObject;(15, 2);CP_known;1;2116
+;(5, 4);DropLargeObject;(15, 2);CP_known;1;2117
+MoveWest;(4, 4);DropLargeObject;(15, 2);CP_known;1;2118
+MoveWest;(3, 4);DropLargeObject;(15, 2);CP_known;1;2119
+;(3, 4);DropLargeObject;(15, 2);CP_known;1;2120
+MoveWest;(2, 4);DropLargeObject;(15, 2);CP_known;1;2121
+MoveWest;(1, 4);DropLargeObject;(15, 2);CP_known;1;2122
+;(1, 4);DropLargeObject;(15, 2);CP_known;1;2123
+MoveWest;(0, 4);DropLargeObject;(15, 2);CP_known;1;2124
+;(0, 4);DropLargeObject;(15, 2);CP_known;1;2125
+MoveWest;(0, 4);DropLargeObject;(15, 2);CP_known;1;2126
+MoveWest;(0, 4);;(15, 2);CP_known;1;2127
+MoveWest;(0, 4);;(15, 2);CP_known;1;2128
+;(0, 4);;(15, 2);CP_known;1;2129
+DropObject;(0, 4);MoveWest;(15, 2);CP_known;1;2130
+;(0, 4);MoveWest;(15, 2);CP_known;1;2131
+;(0, 4);MoveWest;(15, 2);CP_known;1;2132
+;(0, 4);MoveWest;(15, 2);CP_known;1;2133
+;(0, 4);MoveWest;(15, 2);CP_known;1;2134
+;(0, 4);MoveWest;(15, 2);CP_known;1;2135
+;(0, 4);MoveWest;(15, 2);CP_known;1;2136
+;(0, 4);MoveWest;(15, 2);CP_known;1;2137
+;(0, 4);MoveWest;(15, 2);CP_known;1;2138
+;(0, 4);MoveWest;(15, 2);CP_known;1;2139
+;(0, 4);MoveWest;(14, 2);CP_known;1;2140
+;(0, 4);MoveWest;(14, 2);CP_known;1;2141
+;(0, 4);MoveWest;(14, 2);CP_known;1;2142
+;(0, 4);MoveWest;(14, 2);CP_known;1;2143
+;(0, 4);MoveWest;(14, 2);CP_known;1;2144
+;(0, 4);MoveWest;(14, 2);CP_known;1;2145
+;(0, 4);MoveWest;(14, 2);CP_known;1;2146
+;(0, 4);MoveWest;(14, 2);CP_known;1;2147
+;(0, 4);MoveWest;(14, 2);CP_known;1;2148
+;(0, 4);MoveWest;(14, 2);CP_known;1;2149
+;(0, 4);MoveWest;(14, 2);CP_known;1;2150
+;(0, 4);MoveWest;(13, 2);CP_known;1;2151
+;(0, 4);MoveWest;(13, 2);CP_known;1;2152
+;(0, 4);MoveWest;(13, 2);CP_known;1;2153
+;(0, 4);MoveWest;(13, 2);CP_known;1;2154
+MoveEast;(1, 4);MoveWest;(13, 2);CP_known;1;2155
+;(1, 4);MoveWest;(13, 2);CP_known;1;2156
+;(1, 4);MoveWest;(13, 2);CP_known;1;2157
+;(1, 4);MoveWest;(13, 2);CP_known;1;2158
+;(1, 4);MoveWest;(13, 2);CP_known;1;2159
+;(1, 4);MoveWest;(13, 2);CP_known;1;2160
+;(1, 4);MoveWest;(13, 2);CP_known;1;2161
+;(1, 4);MoveWest;(12, 2);CP_known;1;2162
+MoveEast;(2, 4);MoveWest;(12, 2);CP_known;1;2163
+;(2, 4);MoveWest;(12, 2);CP_known;1;2164
+MoveEast;(3, 4);MoveWest;(12, 2);CP_known;1;2165
+;(3, 4);MoveWest;(12, 2);CP_known;1;2166
+MoveEast;(4, 4);MoveWest;(12, 2);CP_known;1;2167
+MoveEast;(5, 4);MoveWest;(12, 2);CP_known;1;2168
+;(5, 4);MoveWest;(12, 2);CP_known;1;2169
+MoveEast;(6, 4);MoveWest;(12, 2);CP_known;1;2170
+;(6, 4);MoveWest;(12, 2);CP_known;1;2171
+MoveEast;(7, 4);MoveWest;(12, 2);CP_known;1;2172
+MoveEast;(8, 4);MoveWest;(11, 2);CP_known;1;2173
+;(8, 4);MoveWest;(11, 2);CP_known;1;2174
+MoveEast;(9, 4);MoveWest;(11, 2);CP_known;1;2175
+MoveEast;(10, 4);MoveWest;(11, 2);CP_known;1;2176
+;(10, 4);MoveWest;(11, 2);CP_known;1;2177
+MoveEast;(11, 4);MoveWest;(11, 2);CP_known;1;2178
+;(11, 4);MoveWest;(11, 2);CP_known;1;2179
+MoveEast;(12, 4);MoveWest;(11, 2);CP_known;1;2180
+MoveEast;(13, 4);MoveWest;(11, 2);CP_known;1;2181
+;(13, 4);MoveWest;(11, 2);CP_known;1;2182
+;(13, 4);MoveWest;(11, 2);CP_known;1;2183
+;(13, 4);MoveWest;(10, 2);CP_known;1;2184
+;(13, 4);MoveSouthWest;(10, 2);CP_known;1;2185
+;(13, 4);MoveSouthWest;(10, 2);CP_known;1;2186
+MoveSouth;(13, 5);MoveSouthWest;(10, 2);CP_known;1;2187
+;(13, 5);MoveSouthWest;(10, 2);CP_known;1;2188
+;(13, 5);MoveSouthWest;(10, 2);CP_known;1;2189
+;(13, 5);MoveSouthWest;(10, 2);CP_known;1;2190
+;(13, 5);MoveSouthWest;(10, 2);CP_known;1;2191
+;(13, 5);MoveSouthWest;(10, 2);CP_known;1;2192
+;(13, 5);MoveSouthWest;(10, 2);CP_known;1;2193
+;(13, 5);MoveSouthWest;(10, 2);CP_known;1;2194
+;(13, 5);MoveSouthWest;(9, 3);CP_known;1;2195
+MoveSouth;(13, 6);GrabLargeObject;(9, 3);CP_known;1;2196
+;(13, 6);GrabLargeObject;(9, 3);CP_known;1;2197
+MoveSouth;(13, 7);GrabLargeObject;(9, 3);CP_known;1;2198
+MoveSouth;(13, 8);GrabLargeObject;(9, 3);CP_known;1;2199
+;(13, 8);GrabLargeObject;(9, 3);CP_known;1;2200
+MoveSouth;(13, 9);GrabLargeObject;(9, 3);CP_known;1;2201
+MoveSouth;(13, 10);GrabLargeObject;(9, 3);CP_known;1;2202
+;(13, 10);GrabLargeObject;(9, 3);CP_known;1;2203
+MoveSouth;(13, 11);GrabLargeObject;(9, 3);CP_known;1;2204
+;(13, 11);GrabLargeObject;(9, 3);CP_known;1;2205
+;(13, 11);GrabLargeObject;(9, 3);CP_known;1;2206
+;(13, 11);;(9, 3);CP_known;1;2207
+;(13, 11);;(9, 3);CP_known;1;2208
+;(13, 11);MoveEast;(9, 3);CP_known;1;2209
+;(13, 11);MoveEast;(9, 3);CP_known;1;2210
+;(13, 11);MoveEast;(9, 3);CP_known;1;2211
+MoveWest;(12, 11);MoveEast;(9, 3);CP_known;1;2212
+;(12, 11);MoveEast;(9, 3);CP_known;1;2213
+;(12, 11);MoveEast;(9, 3);CP_known;1;2214
+;(12, 11);MoveEast;(9, 3);CP_known;1;2215
+;(12, 11);MoveEast;(9, 3);CP_known;1;2216
+;(12, 11);MoveEast;(9, 3);CP_known;1;2217
+;(12, 11);MoveEast;(9, 3);CP_known;1;2218
+;(12, 11);MoveEast;(10, 3);CP_known;1;2219
+;(12, 11);MoveEast;(10, 3);CP_known;1;2220
+;(12, 11);MoveEast;(10, 3);CP_known;1;2221
+;(12, 11);MoveEast;(10, 3);CP_known;1;2222
+;(12, 11);MoveEast;(10, 3);CP_known;1;2223
+;(12, 11);MoveEast;(10, 3);CP_known;1;2224
+;(12, 11);MoveEast;(10, 3);CP_known;1;2225
+MoveWest;(11, 11);MoveEast;(10, 3);CP_known;1;2226
+;(11, 11);MoveEast;(10, 3);CP_known;1;2227
+;(11, 11);MoveEast;(10, 3);CP_known;1;2228
+;(11, 11);MoveEast;(10, 3);CP_known;1;2229
+;(11, 11);MoveEast;(11, 3);CP_known;1;2230
+;(11, 11);MoveEast;(11, 3);CP_known;1;2231
+;(11, 11);MoveEast;(11, 3);CP_known;1;2232
+;(11, 11);MoveEast;(11, 3);CP_known;1;2233
+MoveNorth;(11, 10);MoveEast;(11, 3);CP_known;1;2234
+;(11, 10);MoveEast;(11, 3);CP_known;1;2235
+;(11, 10);MoveEast;(11, 3);CP_known;1;2236
+;(11, 10);MoveEast;(11, 3);CP_known;1;2237
+;(11, 10);MoveEast;(11, 3);CP_known;1;2238
+;(11, 10);MoveEast;(11, 3);CP_known;1;2239
+;(11, 10);MoveEast;(11, 3);CP_known;1;2240
+;(11, 10);MoveEast;(12, 3);CP_known;1;2241
+;(11, 10);MoveEast;(12, 3);CP_known;1;2242
+;(11, 10);MoveEast;(12, 3);CP_known;1;2243
+;(11, 10);MoveEast;(12, 3);CP_known;1;2244
+DropObject;(11, 10);MoveEast;(12, 3);CP_known;1;2245
+;(11, 10);MoveEast;(12, 3);CP_known;1;2246
+;(11, 10);MoveEast;(12, 3);CP_known;1;2247
+;(11, 10);MoveEast;(12, 3);CP_known;1;2248
+;(11, 10);MoveEast;(12, 3);CP_known;1;2249
+;(11, 10);MoveEast;(12, 3);CP_known;1;2250
+;(11, 10);MoveEast;(12, 3);CP_known;1;2251
+;(11, 10);MoveEast;(13, 3);CP_known;1;2252
+;(11, 10);MoveEast;(13, 3);CP_known;1;2253
+;(11, 10);MoveEast;(13, 3);CP_known;1;2254
+;(11, 10);MoveEast;(13, 3);CP_known;1;2255
+;(11, 10);MoveEast;(13, 3);CP_known;1;2256
+;(11, 10);MoveEast;(13, 3);CP_known;1;2257
+;(11, 10);MoveEast;(13, 3);CP_known;1;2258
+;(11, 10);MoveEast;(13, 3);CP_known;1;2259
+GrabObject;(11, 10);MoveEast;(13, 3);CP_known;1;2260
+;(11, 10);MoveEast;(13, 3);CP_known;1;2261
+;(11, 10);MoveEast;(13, 3);CP_known;1;2262
+;(11, 10);MoveEast;(14, 3);CP_known;1;2263
+;(11, 10);;(14, 3);CP_known;1;2264
+DropObject;(11, 10);;(14, 3);CP_known;1;2265
+;(11, 10);;(14, 3);CP_known;1;2266
+;(11, 10);;(14, 3);CP_known;1;2267
+;(11, 10);;(14, 3);CP_known;1;2268
+;(11, 10);;(14, 3);CP_known;1;2269
+;(11, 10);;(14, 3);CP_known;1;2270
+;(11, 10);;(14, 3);CP_known;1;2271
+;(11, 10);;(14, 3);CP_known;1;2272
+;(11, 10);;(14, 3);CP_known;1;2273
+;(11, 10);;(14, 3);CP_known;1;2274
+;(11, 10);;(14, 3);CP_known;1;2275
+;(11, 10);;(14, 3);CP_known;1;2276
+;(11, 10);;(14, 3);CP_known;1;2277
+;(11, 10);;(14, 3);CP_known;1;2278
+;(11, 10);;(14, 3);CP_known;1;2279
+;(11, 10);;(14, 3);CP_known;1;2280

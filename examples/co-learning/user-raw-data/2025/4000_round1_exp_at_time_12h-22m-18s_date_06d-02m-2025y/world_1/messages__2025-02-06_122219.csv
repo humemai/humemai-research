@@ -1,0 +1,130 @@
+correct_tick;human_selector_sent;human_selector_received;human_selector_mssg_json;human_sent;human_received;human_mssg_json;machine_sent;machine_received;machine_mssg_json;victim_sent;victim_received;victim_mssg_json;gravitygod_sent;gravitygod_received;gravitygod_mssg_json;rewardgod_sent;rewardgod_received;rewardgod_mssg_json;ontologygod_sent;ontologygod_received;ontologygod_mssg_json;robot_sent;robot_received;robot_mssg_json;world_nr;tick_nr
+-1;;;;;;;;;;;;;;;;;;;;;;;;;1;0
+0;{'name': 'Round 7', 'delete': 'True'};I will now follow the Collaboration Pattern Round 2.;"{""content"": {""name"": ""Round 7"", ""delete"": ""True""}, ""from_id"": ""human_selector"", ""to_id"": ""robot"", ""message_id"": ""5df7d615761c3d9ce185975a398b5417""}";;I will now follow the Collaboration Pattern Round 2.;;;I will now follow the Collaboration Pattern Round 2.;;;I will now follow the Collaboration Pattern Round 2.;;;I will now follow the Collaboration Pattern Round 2.;;;I will now follow the Collaboration Pattern Round 2.;;;I will now follow the Collaboration Pattern Round 2.;;I will now follow the Collaboration Pattern Round 2.;{'name': 'Round 7', 'delete': 'True'};"{""content"": ""I will now follow the Collaboration Pattern Round 2."", ""from_id"": ""robot"", ""to_id"": ""ontologygod"", ""message_id"": ""195a1f8e694868a61afeedf3d57a5e38""}";1;1
+1;;{'cp_delete': 'Round 6', 'html': None};;;{'cp_delete': 'Round 6', 'html': None};;;{'cp_delete': 'Round 6', 'html': None};;;{'cp_delete': 'Round 6', 'html': None};;;{'cp_delete': 'Round 6', 'html': None};;;{'cp_delete': 'Round 6', 'html': None};;{'cp_delete': 'Round 6', 'html': None};;"{""content"": {""cp_delete"": ""Round 6"", ""html"": null}, ""from_id"": ""ontologygod"", ""to_id"": ""robot"", ""message_id"": ""f8170754e977a8ecaefb148fbf0b37c9""}";;{'cp_delete': 'Round 6', 'html': None};;1;2
+2;;{'cp_delete': 'Round 7', 'html': None};;;{'cp_delete': 'Round 7', 'html': None};;;{'cp_delete': 'Round 7', 'html': None};;;{'cp_delete': 'Round 7', 'html': None};;;{'cp_delete': 'Round 7', 'html': None};;;{'cp_delete': 'Round 7', 'html': None};;{'cp_delete': 'Round 7', 'html': None};;"{""content"": {""cp_delete"": ""Round 7"", ""html"": null}, ""from_id"": ""ontologygod"", ""to_id"": ""robot"", ""message_id"": ""880f3bff8a1322758f90abb506a4c531""}";;{'cp_delete': 'Round 7', 'html': None};;1;3
+3;;{'cp_delete': 'Round 5', 'html': None};;;{'cp_delete': 'Round 5', 'html': None};;;{'cp_delete': 'Round 5', 'html': None};;;{'cp_delete': 'Round 5', 'html': None};;;{'cp_delete': 'Round 5', 'html': None};;;{'cp_delete': 'Round 5', 'html': None};;{'cp_delete': 'Round 5', 'html': None};;"{""content"": {""cp_delete"": ""Round 5"", ""html"": null}, ""from_id"": ""ontologygod"", ""to_id"": ""robot"", ""message_id"": ""1e90c5bbd83b04ad25dff75b26dee7d3""}";;{'cp_delete': 'Round 5', 'html': None};;1;4
+4;;;;;;;;;;;;;;;;;;;;;;;;;1;5
+5;;;;;;;;;;;;;;;;;;;;;;;;;1;6
+6;;;;;;;;;;;;;;;;;;;;;;;;;1;7
+7;;;;;;;;;;;;;;;;;;;;;;;;;1;8
+8;;;;;;;;;;;;;;;;;;;;;;;;;1;9
+9;;;;;;;;;;;;;;;;;;;;;;;;;1;10
+10;;;;;;;;;;;;;;;;;;;;;;;;;1;11
+11;;;;;;;;;;;;;;;;;;;;;;;;;1;12
+12;;;;;;;;;;;;;;;;;;;;;;;;;1;13
+13;;;;;;;;;;;;;;;;;;;;;;;;;1;14
+14;;;;;;;;;;;;;;;;;;;;;;;;;1;15
+15;;;;;;;;;;;;;;;;;;;;;;;;;1;16
+16;;;;;;;;;;;;;;;;;;;;;;;;;1;17
+17;;;;;;;;;;;;;;;;;;;;;;;;;1;18
+18;;;;;;;;;;;;;;;;;;;;;;;;;1;19
+19;{'past_action': ['Stand still', ['Left side of field']]};;"{""content"": {""past_action"": [""Stand still"", [""Left side of field""]]}, ""from_id"": ""human_selector"", ""to_id"": ""robot"", ""message_id"": ""4ba696edcb3ebf91433b0a6c45ba30d0""}";;{'past_action': ['Stand still', ['Left side of field']]};;;{'past_action': ['Stand still', ['Left side of field']]};;;{'past_action': ['Stand still', ['Left side of field']]};;;{'past_action': ['Stand still', ['Left side of field']]};;;{'past_action': ['Stand still', ['Left side of field']]};;;{'past_action': ['Stand still', ['Left side of field']]};;;{'past_action': ['Stand still', ['Left side of field']]};;1;20
+20;;;;;;;;;;;;;;;;;;;;;;;;;1;21
+21;;;;;;;;;;;;;;;;;;;;;;;;;1;22
+22;;;;;;;;;;;;;;;;;;;;;;;;;1;23
+23;;;;;;;;;;;;;;;;;;;;;;;;;1;24
+24;;;;;;;;;;;;;;;;;;;;;;;;;1;25
+25;;;;;;;;;;;;;;;;;;;;;;;;;1;26
+26;{'name': 'Round 3', 'delete': 'True'};;"{""content"": {""name"": ""Round 3"", ""delete"": ""True""}, ""from_id"": ""human_selector"", ""to_id"": ""robot"", ""message_id"": ""fb43f9bdf0fc1321b889aced467542bc""}";;{'name': 'Round 3', 'delete': 'True'};;;{'name': 'Round 3', 'delete': 'True'};;;{'name': 'Round 3', 'delete': 'True'};;;{'name': 'Round 3', 'delete': 'True'};;;{'name': 'Round 3', 'delete': 'True'};;;{'name': 'Round 3', 'delete': 'True'};;;{'name': 'Round 3', 'delete': 'True'};;1;27
+27;;{'cp_delete': 'Round 3', 'html': None};;;{'cp_delete': 'Round 3', 'html': None};;;{'cp_delete': 'Round 3', 'html': None};;;{'cp_delete': 'Round 3', 'html': None};;;{'cp_delete': 'Round 3', 'html': None};;;{'cp_delete': 'Round 3', 'html': None};;{'cp_delete': 'Round 3', 'html': None};;"{""content"": {""cp_delete"": ""Round 3"", ""html"": null}, ""from_id"": ""ontologygod"", ""to_id"": ""robot"", ""message_id"": ""567560b0c9b314e2075092e66b3938df""}";;{'cp_delete': 'Round 3', 'html': None};;1;28
+28;;{'cp_delete': 'Round 2', 'html': None};;;{'cp_delete': 'Round 2', 'html': None};;;{'cp_delete': 'Round 2', 'html': None};;;{'cp_delete': 'Round 2', 'html': None};;;{'cp_delete': 'Round 2', 'html': None};;;{'cp_delete': 'Round 2', 'html': None};;{'cp_delete': 'Round 2', 'html': None};;"{""content"": {""cp_delete"": ""Round 2"", ""html"": null}, ""from_id"": ""ontologygod"", ""to_id"": ""robot"", ""message_id"": ""2400f78efce6b287d2b4f6ee50ce63a3""}";;{'cp_delete': 'Round 2', 'html': None};;1;29
+29;;;;;;;;;;;;;;;;;;;;;;;;;1;30
+30;;;;;;;;;;;;;;;;;;;;;;;;;1;31
+31;;;;;;;;;;;;;;;;;;;;;;;;;1;32
+32;;;;;;;;;;;;;;;;;;;;;;;;;1;33
+33;;;;;;;;;;;;;;;;;;;;;;;;;1;34
+34;;;;;;;;;;;;;;;;;;;;;;;;;1;35
+35;;;;;;;;;;;;;;;;;;;;;;;;;1;36
+36;;I will stop following the Collaboration Pattern Round 2;;;I will stop following the Collaboration Pattern Round 2;;;I will stop following the Collaboration Pattern Round 2;;;I will stop following the Collaboration Pattern Round 2;;;I will stop following the Collaboration Pattern Round 2;;;I will stop following the Collaboration Pattern Round 2;;;I will stop following the Collaboration Pattern Round 2;;I will stop following the Collaboration Pattern Round 2;;"{""content"": ""I will stop following the Collaboration Pattern Round 2"", ""from_id"": ""robot"", ""to_id"": ""ontologygod"", ""message_id"": ""72756a6841dc62e5b22075e19782ae7d""}";1;37
+37;;I will now follow the Collaboration Pattern Round 4.;;;I will now follow the Collaboration Pattern Round 4.;;;I will now follow the Collaboration Pattern Round 4.;;;I will now follow the Collaboration Pattern Round 4.;;;I will now follow the Collaboration Pattern Round 4.;;;I will now follow the Collaboration Pattern Round 4.;;;I will now follow the Collaboration Pattern Round 4.;;I will now follow the Collaboration Pattern Round 4.;;"{""content"": ""I will now follow the Collaboration Pattern Round 4."", ""from_id"": ""robot"", ""to_id"": ""ontologygod"", ""message_id"": ""75195100224167027ca73523e41983d1""}";1;38
+38;{'name': 'Round 4', 'delete': 'True'};;"{""content"": {""name"": ""Round 4"", ""delete"": ""True""}, ""from_id"": ""human_selector"", ""to_id"": ""robot"", ""message_id"": ""9b83fae17c519d95d6e1e6c4a36c21f5""}";;{'name': 'Round 4', 'delete': 'True'};;;{'name': 'Round 4', 'delete': 'True'};;;{'name': 'Round 4', 'delete': 'True'};;;{'name': 'Round 4', 'delete': 'True'};;;{'name': 'Round 4', 'delete': 'True'};;;{'name': 'Round 4', 'delete': 'True'};;;{'name': 'Round 4', 'delete': 'True'};;1;39
+39;{'past_action': ['Stand still', ['Left side of field']]};Now executing Pick up a large rock at Top of rock pile;"{""content"": {""past_action"": [""Stand still"", [""Left side of field""]]}, ""from_id"": ""human_selector"", ""to_id"": ""robot"", ""message_id"": ""b216f3e854858fb34a490214ebce6cda""}";;Now executing Pick up a large rock at Top of rock pile;;;Now executing Pick up a large rock at Top of rock pile;;;Now executing Pick up a large rock at Top of rock pile;;;Now executing Pick up a large rock at Top of rock pile;;;Now executing Pick up a large rock at Top of rock pile;;;Now executing Pick up a large rock at Top of rock pile;;Now executing Pick up a large rock at Top of rock pile;{'past_action': ['Stand still', ['Left side of field']]};"{""content"": ""Now executing Pick up a large rock at Top of rock pile"", ""from_id"": ""robot"", ""to_id"": ""ontologygod"", ""message_id"": ""bda1ebc66686e7d92cc96e7e9da0a9fd""}";1;40
+40;;{'cp_delete': 'Round 4', 'html': None};;;{'cp_delete': 'Round 4', 'html': None};;;{'cp_delete': 'Round 4', 'html': None};;;{'cp_delete': 'Round 4', 'html': None};;;{'cp_delete': 'Round 4', 'html': None};;;{'cp_delete': 'Round 4', 'html': None};;{'cp_delete': 'Round 4', 'html': None};;"{""content"": {""cp_delete"": ""Round 4"", ""html"": null}, ""from_id"": ""ontologygod"", ""to_id"": ""robot"", ""message_id"": ""c3616377ad9ea9ea3f15258d91bd90ec""}";;{'cp_delete': 'Round 4', 'html': None};;1;41
+41;;;;;;;;;;;;;;;;;;;;;;;;;1;42
+42;;;;;;;;;;;;;;;;;;;;;;;;;1;43
+43;;;;;;;;;;;;;;;;;;;;;;;;;1;44
+44;;;;;;;;;;;;;;;;;;;;;;;;;1;45
+45;;;;;;;;;;;;;;;;;;;;;;;;;1;46
+46;{'name': 'Round 4', 'delete': 'True'};;"{""content"": {""name"": ""Round 4"", ""delete"": ""True""}, ""from_id"": ""human_selector"", ""to_id"": ""robot"", ""message_id"": ""6459d9c6840ced6522c279e97a2e787d""}";;{'name': 'Round 4', 'delete': 'True'};;;{'name': 'Round 4', 'delete': 'True'};;;{'name': 'Round 4', 'delete': 'True'};;;{'name': 'Round 4', 'delete': 'True'};;;{'name': 'Round 4', 'delete': 'True'};;;{'name': 'Round 4', 'delete': 'True'};;;{'name': 'Round 4', 'delete': 'True'};;1;47
+47;;;;;;;;;;;;;;;;;;;;;;;;;1;48
+48;;;;;;;;;;;;;;;;;;;;;;;;;1;49
+49;;;;;;;;;;;;;;;;;;;;;;;;;1;50
+50;;;;;;;;;;;;;;;;;;;;;;;;;1;51
+51;;I will stop following the Collaboration Pattern Round 4;;;I will stop following the Collaboration Pattern Round 4;;;I will stop following the Collaboration Pattern Round 4;;;I will stop following the Collaboration Pattern Round 4;;;I will stop following the Collaboration Pattern Round 4;;;I will stop following the Collaboration Pattern Round 4;;;I will stop following the Collaboration Pattern Round 4;;I will stop following the Collaboration Pattern Round 4;;"{""content"": ""I will stop following the Collaboration Pattern Round 4"", ""from_id"": ""robot"", ""to_id"": ""ontologygod"", ""message_id"": ""7e896bb4ba21ade3cd3112f9971a81b7""}";1;52
+52;;I will now follow the Collaboration Pattern CP_known.;;;I will now follow the Collaboration Pattern CP_known.;;;I will now follow the Collaboration Pattern CP_known.;;;I will now follow the Collaboration Pattern CP_known.;;;I will now follow the Collaboration Pattern CP_known.;;;I will now follow the Collaboration Pattern CP_known.;;;I will now follow the Collaboration Pattern CP_known.;;I will now follow the Collaboration Pattern CP_known.;;"{""content"": ""I will now follow the Collaboration Pattern CP_known."", ""from_id"": ""robot"", ""to_id"": ""ontologygod"", ""message_id"": ""2c4d61c6c706ff62e7f23649512ff0c7""}";1;53
+53;;;;;;;;;;;;;;;;;;;;;;;;;1;54
+54;;;;;;;;;;;;;;;;;;;;;;;;;1;55
+55;;;;;;;;;;;;;;;;;;;;;;;;;1;56
+56;;;;;;;;;;;;;;;;;;;;;;;;;1;57
+57;;;;;;;;;;;;;;;;;;;;;;;;;1;58
+58;;;;;;;;;;;;;;;;;;;;;;;;;1;59
+59;{'past_action': ['Stand still', ['Left side of field']]};;"{""content"": {""past_action"": [""Stand still"", [""Left side of field""]]}, ""from_id"": ""human_selector"", ""to_id"": ""robot"", ""message_id"": ""c51c28aeb1f0905df442714799b060b3""}";;{'past_action': ['Stand still', ['Left side of field']]};;;{'past_action': ['Stand still', ['Left side of field']]};;;{'past_action': ['Stand still', ['Left side of field']]};;;{'past_action': ['Stand still', ['Left side of field']]};;;{'past_action': ['Stand still', ['Left side of field']]};;;{'past_action': ['Stand still', ['Left side of field']]};;;{'past_action': ['Stand still', ['Left side of field']]};;1;60
+60;;;;;;;;;;;;;;;;;;;;;;;;;1;61
+61;;;;;;;;;;;;;;;;;;;;;;;;;1;62
+62;;;;;;;;;;;;;;;;;;;;;;;;;1;63
+63;;;;;;;;;;;;;;;;;;;;;;;;;1;64
+64;;;;;;;;;;;;;;;;;;;;;;;;;1;65
+65;;;;;;;;;;;;;;;;;;;;;;;;;1;66
+66;;;;;;;;;;;;;;;;;;;;;;;;;1;67
+67;;;;;;;;;;;;;;;;;;;;;;;;;1;68
+68;;;;;;;;;;;;;;;;;;;;;;;;;1;69
+69;;;;;;;;;;;;;;;;;;;;;;;;;1;70
+70;;;;;;;;;;;;;;;;;;;;;;;;;1;71
+71;;;;;;;;;;;;;;;;;;;;;;;;;1;72
+72;;;;;;;;;;;;;;;;;;;;;;;;;1;73
+73;;;;;;;;;;;;;;;;;;;;;;;;;1;74
+74;;;;;;;;;;;;;;;;;;;;;;;;;1;75
+75;;;;;;;;;;;;;;;;;;;;;;;;;1;76
+76;;;;;;;;;;;;;;;;;;;;;;;;;1;77
+77;;;;;;;;;;;;;;;;;;;;;;;;;1;78
+78;;;;;;;;;;;;;;;;;;;;;;;;;1;79
+79;{'past_action': ['Stand still', ['Left side of field']]};;"{""content"": {""past_action"": [""Stand still"", [""Left side of field""]]}, ""from_id"": ""human_selector"", ""to_id"": ""robot"", ""message_id"": ""92e2d0f1c8095f3d5f2677e09e493abf""}";;{'past_action': ['Stand still', ['Left side of field']]};;;{'past_action': ['Stand still', ['Left side of field']]};;;{'past_action': ['Stand still', ['Left side of field']]};;;{'past_action': ['Stand still', ['Left side of field']]};;;{'past_action': ['Stand still', ['Left side of field']]};;;{'past_action': ['Stand still', ['Left side of field']]};;;{'past_action': ['Stand still', ['Left side of field']]};;1;80
+80;;;;;;;;;;;;;;;;;;;;;;;;;1;81
+81;;;;;;;;;;;;;;;;;;;;;;;;;1;82
+82;;;;;;;;;;;;;;;;;;;;;;;;;1;83
+83;;;;;;;;;;;;;;;;;;;;;;;;;1;84
+84;;;;;;;;;;;;;;;;;;;;;;;;;1;85
+85;;;;;;;;;;;;;;;;;;;;;;;;;1;86
+86;;;;;;;;;;;;;;;;;;;;;;;;;1;87
+87;;;;;;;;;;;;;;;;;;;;;;;;;1;88
+88;;;;;;;;;;;;;;;;;;;;;;;;;1;89
+89;;;;;;;;;;;;;;;;;;;;;;;;;1;90
+90;;;;;;;;;;;;;;;;;;;;;;;;;1;91
+91;;;;;;;;;;;;;;;;;;;;;;;;;1;92
+92;;;;;;;;;;;;;;;;;;;;;;;;;1;93
+93;;;;;;;;;;;;;;;;;;;;;;;;;1;94
+94;;;;;;;;;;;;;;;;;;;;;;;;;1;95
+95;;;;;;;;;;;;;;;;;;;;;;;;;1;96
+96;;;;;;;;;;;;;;;;;;;;;;;;;1;97
+97;;;;;;;;;;;;;;;;;;;;;;;;;1;98
+98;;;;;;;;;;;;;;;;;;;;;;;;;1;99
+99;{'past_action': ['Stand still', ['Left side of field']]};;"{""content"": {""past_action"": [""Stand still"", [""Left side of field""]]}, ""from_id"": ""human_selector"", ""to_id"": ""robot"", ""message_id"": ""4e35481f68f6d7b608a9df81751a7b6""}";;{'past_action': ['Stand still', ['Left side of field']]};;;{'past_action': ['Stand still', ['Left side of field']]};;;{'past_action': ['Stand still', ['Left side of field']]};;;{'past_action': ['Stand still', ['Left side of field']]};;;{'past_action': ['Stand still', ['Left side of field']]};;;{'past_action': ['Stand still', ['Left side of field']]};;;{'past_action': ['Stand still', ['Left side of field']]};;1;100
+100;;;;;;;;;;;;;;;;;;;;;;;;;1;101
+101;;;;;;;;;;;;;;;;;;;;;;;;;1;102
+102;;;;;;;;;;;;;;;;;;;;;;;;;1;103
+103;;;;;;;;;;;;;;;;;;;;;;;;;1;104
+104;;;;;;;;;;;;;;;;;;;;;;;;;1;105
+105;;;;;;;;;;;;;;;;;;;;;;;;;1;106
+106;;;;;;;;;;;;;;;;;;;;;;;;;1;107
+107;;;;;;;;;;;;;;;;;;;;;;;;;1;108
+108;;;;;;;;;;;;;;;;;;;;;;;;;1;109
+109;;;;;;;;;;;;;;;;;;;;;;;;;1;110
+110;;;;;;;;;;;;;;;;;;;;;;;;;1;111
+111;;;;;;;;;;;;;;;;;;;;;;;;;1;112
+112;;;;;;;;;;;;;;;;;;;;;;;;;1;113
+113;;;;;;;;;;;;;;;;;;;;;;;;;1;114
+114;;;;;;;;;;;;;;;;;;;;;;;;;1;115
+115;;;;;;;;;;;;;;;;;;;;;;;;;1;116
+116;;;;;;;;;;;;;;;;;;;;;;;;;1;117
+117;;;;;;;;;;;;;;;;;;;;;;;;;1;118
+118;;;;;;;;;;;;;;;;;;;;;;;;;1;119
+119;{'past_action': ['Stand still', ['Left side of field']]};;"{""content"": {""past_action"": [""Stand still"", [""Left side of field""]]}, ""from_id"": ""human_selector"", ""to_id"": ""robot"", ""message_id"": ""112f68734a00a9f5921ef0929df4b2d5""}";;{'past_action': ['Stand still', ['Left side of field']]};;;{'past_action': ['Stand still', ['Left side of field']]};;;{'past_action': ['Stand still', ['Left side of field']]};;;{'past_action': ['Stand still', ['Left side of field']]};;;{'past_action': ['Stand still', ['Left side of field']]};;;{'past_action': ['Stand still', ['Left side of field']]};;;{'past_action': ['Stand still', ['Left side of field']]};;1;120
+120;;;;;;;;;;;;;;;;;;;;;;;;"{""content"": null, ""from_id"": ""robot"", ""to_id"": ""ontologygod"", ""message_id"": ""e6006c488d507ec21ccc4428fb59cc10""}";1;121
+121;;;;;;;;;;;;;;;;;;;;;;;;;1;122
+122;;;;;;;;;;;;;;;;;;;;;;;;;1;123
+123;;;;;;;;;;;;;;;;;;;;;;;;;1;124
+124;;;;;;;;;;;;;;;;;;;;;;;;;1;125
+125;;;;;;;;;;;;;;;;;;;;;;;;;1;126
+126;;;;;;;;;;;;;;;;;;;;;;;;;1;127
+127;;;;;;;;;;;;;;;;;;;;;;;;;1;128

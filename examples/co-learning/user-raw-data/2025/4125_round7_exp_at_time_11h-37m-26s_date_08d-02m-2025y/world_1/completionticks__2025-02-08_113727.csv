@@ -1,0 +1,38 @@
+tick;corrected_tick;remaining_distance;victim_harm;idle_time_robot;q_table_cps;q_table_cps_runs;q_table_basic;world_nr;tick_nr
+668;649;25;500;256;"                     CP_known  small  large rocky
+[4, 'equal', True]          0      0            0
+[4, 'equal', False]       654      0         -580
+[4, 'human', False]         0      0            0
+[3, 'human', True]          0      0            0
+[2, 'human', True]          0      0           26
+[4, 'robot', False]       362      0            0
+[3, 'human', False]         0      0            0
+[2, 'human', False]         0      0            0
+[2, 'robot', False]        36      0            0
+[3, 'robot', False]         0      0            0
+[2, 'equal', False]         0      0            0
+[4, 'robot', True]          0      0            0
+[3, 'robot', True]          0      0            0
+[1, 'robot', False]         0      0            0
+[4, 'human', True]          0      0            0
+[3, 'equal', True]          0      0            0
+[2, 'robot', True]          8      0            0
+[3, 'equal', False]         0      0            0";"                     CP_known  small  large rocky
+[4, 'equal', True]          0      0            0
+[4, 'equal', False]        18      0            2
+[4, 'human', False]         0      0            0
+[3, 'human', True]          0      0            0
+[2, 'human', True]          0      0            1
+[4, 'robot', False]         6      0            0
+[3, 'human', False]         0      0            0
+[2, 'human', False]         0      0            0
+[2, 'robot', False]         2      0            0
+[3, 'robot', False]         0      0            0
+[2, 'equal', False]         0      0            0
+[4, 'robot', True]          0      0            0
+[3, 'robot', True]          0      0            0
+[1, 'robot', False]         0      0            0
+[4, 'human', True]          0      0            0
+[3, 'equal', True]          0      0            0
+[2, 'robot', True]          1      0            0
+[3, 'equal', False]         0      0            0";;1;668

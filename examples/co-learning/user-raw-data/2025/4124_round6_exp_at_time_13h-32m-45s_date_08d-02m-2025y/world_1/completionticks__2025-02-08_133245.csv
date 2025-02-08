@@ -1,0 +1,64 @@
+tick;corrected_tick;remaining_distance;victim_harm;idle_time_robot;q_table_cps;q_table_cps_runs;q_table_basic;world_nr;tick_nr
+1780;1761;;700;5;"                     CP_known  top of rock pile  above small rocks clearing   left side  clearing order  falling 
+[4, 'equal', True]         33                 0                            0          0               0         0
+[4, 'equal', False]       751                 0                            0          0             -80         0
+[4, 'human', False]         0                 0                            0          0               0         0
+[3, 'human', True]      -1046                 0                            0          0               0         0
+[2, 'human', True]          0                 0                            0          0               0         0
+[4, 'robot', False]       362                 0                            0          0               0         0
+[3, 'human', False]         0                 0                            0          0               0         0
+[2, 'human', False]         0                 0                            0          0               0         0
+[2, 'robot', False]      -372                -8                            0          0               0         0
+[3, 'robot', False]       -53                -8                            0          0               0         0
+[2, 'equal', False]       -69                -6                            0          0               0         0
+[4, 'robot', True]        332                 0                            0          0               0         0
+[3, 'robot', True]        -49               -15                            0          0               0         0
+[1, 'robot', False]         0                 0                            0          0               0         0
+[4, 'human', True]          0                 0                            0          0               0         0
+[3, 'equal', True]          0                 0                            0          0               0         0
+[2, 'robot', True]        -11               -13                            0          0               0         0
+[3, 'equal', False]         0                 0                            0          0               0         0
+[2, 'equal', True]          0                 0                            0          0               2        -1";"                     CP_known  top of rock pile  above small rocks clearing   left side  clearing order  falling 
+[4, 'equal', True]          2                 0                            0          0               0         0
+[4, 'equal', False]        25                 0                            0          0               1         0
+[4, 'human', False]         0                 0                            0          0               0         0
+[3, 'human', True]          2                 0                            0          0               0         0
+[2, 'human', True]          0                 0                            0          0               0         0
+[4, 'robot', False]         6                 0                            0          0               0         0
+[3, 'human', False]         0                 0                            0          0               0         0
+[2, 'human', False]         0                 0                            0          0               0         0
+[2, 'robot', False]         3                 4                            0          0               0         0
+[3, 'robot', False]        24                 2                            0          0               0         0
+[2, 'equal', False]         1                 3                            0          0               0         0
+[4, 'robot', True]          5                 0                            0          0               0         0
+[3, 'robot', True]         17                 3                            0          0               0         0
+[1, 'robot', False]         0                 0                            0          0               0         0
+[4, 'human', True]          0                 0                            0          0               0         0
+[3, 'equal', True]          0                 0                            0          0               0         0
+[2, 'robot', True]          3                 2                            0          0               0         0
+[3, 'equal', False]         0                 0                            0          0               0         0
+[2, 'equal', True]          0                 0                            0          0               1         1";"                     Move back and forth  Stand Still    Pick up        Drop      Break
+[4, 'equal', False]           -27.763875   -44.011675 -11.177346  -14.878727 -43.366882
+[4, 'human', False]           -40.620109   -21.800000 -22.887177  -28.936545 -29.169625
+[4, 'human', True]             -5.050000    -9.498004  -5.461158   -4.957691  -4.825000
+[4, 'equal', True]            -21.358913   -35.446810  -2.106502  -15.651070 -58.176750
+[3, 'human', False]           -51.235849   -52.325102 -27.948053  -17.486097 -52.956430
+[3, 'human', True]            -47.236800   -12.212099  -8.486082  -50.887786 -42.635237
+[2, 'human', True]            -36.286550    -9.332000 -20.249975  -17.811302 -16.281856
+[2, 'human', False]           -23.227299   -44.986196 -52.620460  -45.633585 -49.986087
+[1, 'human', False]           -11.500000    -4.782067   1.544835    0.247822   0.000000
+[4, 'robot', False]           -15.377803   -35.875761 -45.204123 -118.817999 -36.355113
+[3, 'equal', False]           -49.186664   -12.178009 -52.629937  -58.407838 -55.091948
+[4, 'robot', True]            -43.932465   -36.114117  -7.420163  -37.762081  -9.709680
+[3, 'robot', True]            -56.209925   -51.844544 -16.880489  -14.470466 -47.556412
+[3, 'robot', False]           -79.183671   -66.227456  -9.920234  -13.736047 -53.531548
+[2, 'robot', False]           -60.377150   -52.655971 -42.113593  -38.890950 -78.370102
+[2, 'equal', False]           -77.529680    -6.402809 -47.691009  -27.310526 -51.416796
+[1, 'equal', False]            -4.852240    -4.421260  -8.257400   -8.500000  -2.500000
+[1, 'human', True]              0.000000     0.000000   0.000000  -26.000000   0.000000
+[2, 'equal', True]            -77.788414   -49.040641 -29.500000  -48.277927  -9.527923
+[2, 'robot', True]            -43.956998   -16.315459 -21.365732  -40.907483  -5.798563
+[1, 'robot', False]           -40.249819     8.515281   2.762468  -42.495209   1.071653
+[1, 'robot', True]            -51.450314   -39.944491  -8.274832   -4.669550 -27.717815
+[3, 'equal', True]            -48.602747   -42.369393 -50.776192  -51.958002  -8.337546
+[1, 'equal', True]             -4.000000   -27.750000  -1.000000    0.000000   0.000000";1;1780

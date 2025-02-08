@@ -1,0 +1,42 @@
+Type	robot
+event_time	"2024-05-07T11:26:11"
+
+Type	participant
+event_time	"2024-05-07T11:26:11"
+participant_number	4081
+
+Type	CP
+time_elapsed	3000
+event_time	"2024-05-07T11:26:11"
+cp_num	36
+ticks_lasted	1917
+participant_num	4081
+remaining_rocks	32
+cp_name	"top brown"
+victim_harm	0
+round_num	6
+
+Type	human_action_0
+event_time	"2024-05-07T11:26:11"
+location	"Above rock pile"
+action	"Stand still in <location>"
+sentence "Action: Stand still in <location>. Location: Above rock pile."
+
+
+Type	robot_action_1
+event_time	"2024-05-07T11:26:11"
+location	"Top of rock pile"
+object	"Brown rock"
+action	"Pick up <object> in <location>"
+
+Type	robot_action_2
+event_time	"2024-05-07T11:26:11"
+location	"<Right> side of field"
+object	"Brown rock"
+action	"Drop <object> in <location>"
+
+
+Type situation
+location	"Top of rock pile"
+object	"Brown rock"
+sentence_representation	"Location: Top of rock pile. Object: Brown rock. "

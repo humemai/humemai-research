@@ -1,0 +1,21 @@
+correct_tick;human_selector_sent;human_selector_received;human_selector_mssg_json;human_sent;human_received;human_mssg_json;machine_sent;machine_received;machine_mssg_json;victim_sent;victim_received;victim_mssg_json;gravitygod_sent;gravitygod_received;gravitygod_mssg_json;rewardgod_sent;rewardgod_received;rewardgod_mssg_json;ontologygod_sent;ontologygod_received;ontologygod_mssg_json;robot_sent;robot_received;robot_mssg_json;world_nr;tick_nr
+-1;;;;;;;;;;;;;;;;;;;;;;;;;1;0
+0;{'name': 'Label', 'delete': 'True'};I will now follow the Collaboration Pattern CP_known.;"{""content"": {""name"": ""Label"", ""delete"": ""True""}, ""from_id"": ""human_selector"", ""to_id"": ""robot"", ""message_id"": ""4874af77babedfe28189e27ad3cc5555""}";;I will now follow the Collaboration Pattern CP_known.;;;I will now follow the Collaboration Pattern CP_known.;;;I will now follow the Collaboration Pattern CP_known.;;;I will now follow the Collaboration Pattern CP_known.;;;I will now follow the Collaboration Pattern CP_known.;;;I will now follow the Collaboration Pattern CP_known.;;I will now follow the Collaboration Pattern CP_known.;{'name': 'Label', 'delete': 'True'};"{""content"": ""I will now follow the Collaboration Pattern CP_known."", ""from_id"": ""robot"", ""to_id"": ""ontologygod"", ""message_id"": ""d93c733195e30582be28904e4760d445""}";1;1
+1;;{'cp_delete': 'Label', 'html': None};;;{'cp_delete': 'Label', 'html': None};;;{'cp_delete': 'Label', 'html': None};;;{'cp_delete': 'Label', 'html': None};;;{'cp_delete': 'Label', 'html': None};;;{'cp_delete': 'Label', 'html': None};;{'cp_delete': 'Label', 'html': None};;"{""content"": {""cp_delete"": ""Label"", ""html"": null}, ""from_id"": ""ontologygod"", ""to_id"": ""robot"", ""message_id"": ""e653df8be6380d96abc01f1f77acf905""}";;{'cp_delete': 'Label', 'html': None};;1;2
+2;;;;;;;;;;;;;;;;;;;;;;;;;1;3
+3;;;;;;;;;;;;;;;;;;;;;;;;;1;4
+4;;;;;;;;;;;;;;;;;;;;;;;;;1;5
+5;;;;;;;;;;;;;;;;;;;;;;;;;1;6
+6;;;;;;;;;;;;;;;;;;;;;;;;;1;7
+7;;;;;;;;;;;;;;;;;;;;;;;;;1;8
+8;;;;;;;;;;;;;;;;;;;;;;;;;1;9
+9;;;;;;;;;;;;;;;;;;;;;;;;;1;10
+10;;;;;;;;;;;;;;;;;;;;;;;;;1;11
+11;;;;;;;;;;;;;;;;;;;;;;;;;1;12
+12;;;;;;;;;;;;;;;;;;;;;;;;;1;13
+13;;;;;;;;;;;;;;;;;;;;;;;;;1;14
+14;;;;;;;;;;;;;;;;;;;;;;;;;1;15
+15;;;;;;;;;;;;;;;;;;;;;;;;;1;16
+16;;;;;;;;;;;;;;;;;;;;;;;;;1;17
+17;;;;;;;;;;;;;;;;;;;;;;;;;1;18
+18;;;;;;;;;;;;;;;;;;;;;;;;;1;19

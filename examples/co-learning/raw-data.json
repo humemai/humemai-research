@@ -7,8 +7,9 @@
         "round_num": 3,
         "timestamp": "2024-05-03T13:41:23",
         "unix_timestamp": 1714736483,
-        "remaining_time": 2336,
+        "time_elapsed": 2336,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 400,
         "situation": [
             [],
@@ -55,8 +56,9 @@
         "round_num": 1,
         "timestamp": "2024-08-29T15:15:10",
         "unix_timestamp": 1724937310,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 23,
+        "success": false,
         "victim_harm": 1200,
         "situation": [
             [
@@ -131,8 +133,9 @@
         "round_num": 2,
         "timestamp": "2024-08-29T15:30:51",
         "unix_timestamp": 1724938251,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 20,
+        "success": false,
         "victim_harm": 500,
         "situation": [
             [
@@ -188,8 +191,9 @@
         "round_num": 2,
         "timestamp": "2024-08-29T15:30:51",
         "unix_timestamp": 1724938251,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 20,
+        "success": false,
         "victim_harm": 500,
         "situation": [
             [
@@ -255,8 +259,9 @@
         "round_num": 3,
         "timestamp": "2024-08-29T15:36:08",
         "unix_timestamp": 1724938568,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 31,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -322,8 +327,9 @@
         "round_num": 3,
         "timestamp": "2024-08-29T15:36:08",
         "unix_timestamp": 1724938568,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 31,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -388,8 +394,9 @@
         "round_num": 3,
         "timestamp": "2024-08-29T15:36:08",
         "unix_timestamp": 1724938568,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 31,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -475,8 +482,9 @@
         "round_num": 4,
         "timestamp": "2024-08-29T15:44:12",
         "unix_timestamp": 1724939052,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 28,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -542,8 +550,9 @@
         "round_num": 4,
         "timestamp": "2024-08-29T15:44:12",
         "unix_timestamp": 1724939052,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 28,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -638,8 +647,9 @@
         "round_num": 5,
         "timestamp": "2024-08-29T15:48:34",
         "unix_timestamp": 1724939314,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 30,
+        "success": false,
         "victim_harm": 200,
         "situation": [
             [
@@ -704,8 +714,9 @@
         "round_num": 5,
         "timestamp": "2024-08-29T15:48:34",
         "unix_timestamp": 1724939314,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 30,
+        "success": false,
         "victim_harm": 200,
         "situation": [
             [
@@ -791,8 +802,9 @@
         "round_num": 6,
         "timestamp": "2024-08-29T15:54:42",
         "unix_timestamp": 1724939682,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 16,
+        "success": false,
         "victim_harm": 100,
         "situation": [
             [],
@@ -871,8 +883,9 @@
         "round_num": 6,
         "timestamp": "2024-08-29T15:54:42",
         "unix_timestamp": 1724939682,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 16,
+        "success": false,
         "victim_harm": 100,
         "situation": [
             [
@@ -958,8 +971,9 @@
         "round_num": 6,
         "timestamp": "2024-08-29T15:54:42",
         "unix_timestamp": 1724939682,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 16,
+        "success": false,
         "victim_harm": 100,
         "situation": [
             [
@@ -1037,8 +1051,9 @@
         "round_num": 7,
         "timestamp": "2024-08-29T16:03:13",
         "unix_timestamp": 1724940193,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 19,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [],
@@ -1117,8 +1132,9 @@
         "round_num": 7,
         "timestamp": "2024-08-29T16:03:13",
         "unix_timestamp": 1724940193,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 19,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -1213,8 +1229,9 @@
         "round_num": 7,
         "timestamp": "2024-08-29T16:03:13",
         "unix_timestamp": 1724940193,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 19,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -1292,8 +1309,9 @@
         "round_num": 8,
         "timestamp": "2024-08-29T16:10:21",
         "unix_timestamp": 1724940621,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 23,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -1371,8 +1389,9 @@
         "round_num": 8,
         "timestamp": "2024-08-29T16:10:21",
         "unix_timestamp": 1724940621,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 23,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [],
@@ -1451,8 +1470,9 @@
         "round_num": 8,
         "timestamp": "2024-08-29T16:10:21",
         "unix_timestamp": 1724940621,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 23,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -1521,8 +1541,9 @@
         "round_num": 2,
         "timestamp": "2024-08-23T10:35:08",
         "unix_timestamp": 1724402108,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 34,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -1591,8 +1612,9 @@
         "round_num": 3,
         "timestamp": "2024-08-23T10:44:04",
         "unix_timestamp": 1724402644,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 28,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -1665,8 +1687,9 @@
         "round_num": 3,
         "timestamp": "2024-08-23T10:44:04",
         "unix_timestamp": 1724402644,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 28,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -1735,8 +1758,9 @@
         "round_num": 4,
         "timestamp": "2024-08-23T10:52:00",
         "unix_timestamp": 1724403120,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 9,
+        "success": false,
         "victim_harm": 600,
         "situation": [
             [
@@ -1805,8 +1829,9 @@
         "round_num": 5,
         "timestamp": "2024-08-23T11:02:22",
         "unix_timestamp": 1724403742,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 19,
+        "success": false,
         "victim_harm": 600,
         "situation": [
             [
@@ -1875,8 +1900,9 @@
         "round_num": 6,
         "timestamp": "2024-08-23T11:11:30",
         "unix_timestamp": 1724404290,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 36,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -1945,8 +1971,9 @@
         "round_num": 6,
         "timestamp": "2024-08-23T11:11:30",
         "unix_timestamp": 1724404290,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 36,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -2015,8 +2042,9 @@
         "round_num": 7,
         "timestamp": "2024-08-23T11:22:02",
         "unix_timestamp": 1724404922,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 25,
+        "success": false,
         "victim_harm": 100,
         "situation": [
             [
@@ -2085,8 +2113,9 @@
         "round_num": 8,
         "timestamp": "2024-08-23T11:29:22",
         "unix_timestamp": 1724405362,
-        "remaining_time": 2957,
+        "time_elapsed": 2957,
         "remaining_rocks": 21,
+        "success": false,
         "victim_harm": 400,
         "situation": [
             [
@@ -2155,8 +2184,9 @@
         "round_num": 8,
         "timestamp": "2024-08-23T11:29:22",
         "unix_timestamp": 1724405362,
-        "remaining_time": 2957,
+        "time_elapsed": 2957,
         "remaining_rocks": 21,
+        "success": false,
         "victim_harm": 400,
         "situation": [
             [
@@ -2212,8 +2242,9 @@
         "round_num": 8,
         "timestamp": "2024-08-23T11:29:22",
         "unix_timestamp": 1724405362,
-        "remaining_time": 2957,
+        "time_elapsed": 2957,
         "remaining_rocks": 21,
+        "success": false,
         "victim_harm": 400,
         "situation": [
             [
@@ -2290,8 +2321,9 @@
         "round_num": 1,
         "timestamp": "2024-05-07T11:09:14",
         "unix_timestamp": 1715072954,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 18,
+        "success": false,
         "victim_harm": 500,
         "situation": [
             [
@@ -2351,8 +2383,9 @@
         "round_num": 2,
         "timestamp": "2024-05-07T11:16:01",
         "unix_timestamp": 1715073361,
-        "remaining_time": 1270,
+        "time_elapsed": 1270,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 0,
         "situation": [
             [
@@ -2412,8 +2445,9 @@
         "round_num": 3,
         "timestamp": "2024-05-07T11:18:34",
         "unix_timestamp": 1715073514,
-        "remaining_time": 887,
+        "time_elapsed": 887,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 0,
         "situation": [
             [
@@ -2473,8 +2507,9 @@
         "round_num": 4,
         "timestamp": "2024-05-07T11:20:59",
         "unix_timestamp": 1715073659,
-        "remaining_time": 1123,
+        "time_elapsed": 1123,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 0,
         "situation": [
             [
@@ -2534,8 +2569,9 @@
         "round_num": 5,
         "timestamp": "2024-05-07T11:24:25",
         "unix_timestamp": 1715073865,
-        "remaining_time": 922,
+        "time_elapsed": 922,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 100,
         "situation": [
             [
@@ -2595,8 +2631,9 @@
         "round_num": 6,
         "timestamp": "2024-05-07T11:26:11",
         "unix_timestamp": 1715073971,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 32,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -2665,8 +2702,9 @@
         "round_num": 6,
         "timestamp": "2024-05-07T11:26:11",
         "unix_timestamp": 1715073971,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 32,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -2743,8 +2781,9 @@
         "round_num": 7,
         "timestamp": "2024-05-07T11:31:16",
         "unix_timestamp": 1715074276,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 37,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -2800,8 +2839,9 @@
         "round_num": 8,
         "timestamp": "2024-05-07T11:39:25",
         "unix_timestamp": 1715074765,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 30,
+        "success": false,
         "victim_harm": 200,
         "situation": [
             [
@@ -2848,8 +2888,9 @@
         "round_num": 8,
         "timestamp": "2024-05-07T11:39:25",
         "unix_timestamp": 1715074765,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 30,
+        "success": false,
         "victim_harm": 200,
         "situation": [
             [
@@ -2917,8 +2958,9 @@
         "round_num": 1,
         "timestamp": "2024-05-15T11:07:33",
         "unix_timestamp": 1715764053,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 19,
+        "success": false,
         "victim_harm": 1300,
         "situation": [
             [
@@ -2974,8 +3016,9 @@
         "round_num": 2,
         "timestamp": "2024-05-15T11:13:40",
         "unix_timestamp": 1715764420,
-        "remaining_time": 2582,
+        "time_elapsed": 2582,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 0,
         "situation": [
             [
@@ -3031,8 +3074,9 @@
         "round_num": 2,
         "timestamp": "2024-05-15T11:13:40",
         "unix_timestamp": 1715764420,
-        "remaining_time": 2582,
+        "time_elapsed": 2582,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 0,
         "situation": [
             [
@@ -3088,8 +3132,9 @@
         "round_num": 3,
         "timestamp": "2024-05-15T11:19:41",
         "unix_timestamp": 1715764781,
-        "remaining_time": 2251,
+        "time_elapsed": 2251,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 0,
         "situation": [
             [
@@ -3145,8 +3190,9 @@
         "round_num": 3,
         "timestamp": "2024-05-15T11:19:41",
         "unix_timestamp": 1715764781,
-        "remaining_time": 2251,
+        "time_elapsed": 2251,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 0,
         "situation": [
             [
@@ -3202,8 +3248,9 @@
         "round_num": 4,
         "timestamp": "2024-05-15T11:23:23",
         "unix_timestamp": 1715765003,
-        "remaining_time": 2356,
+        "time_elapsed": 2356,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 0,
         "situation": [
             [
@@ -3259,8 +3306,9 @@
         "round_num": 4,
         "timestamp": "2024-05-15T11:23:23",
         "unix_timestamp": 1715765003,
-        "remaining_time": 2356,
+        "time_elapsed": 2356,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 0,
         "situation": [
             [
@@ -3316,8 +3364,9 @@
         "round_num": 5,
         "timestamp": "2024-05-15T11:34:16",
         "unix_timestamp": 1715765656,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 28,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -3373,8 +3422,9 @@
         "round_num": 5,
         "timestamp": "2024-05-15T11:34:16",
         "unix_timestamp": 1715765656,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 28,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -3430,8 +3480,9 @@
         "round_num": 6,
         "timestamp": "2024-05-15T11:40:48",
         "unix_timestamp": 1715766048,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 26,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -3478,8 +3529,9 @@
         "round_num": 7,
         "timestamp": "2024-05-15T11:45:01",
         "unix_timestamp": 1715766301,
-        "remaining_time": 2830,
+        "time_elapsed": 2830,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 600,
         "situation": [
             [
@@ -3535,8 +3587,9 @@
         "round_num": 7,
         "timestamp": "2024-05-15T11:45:01",
         "unix_timestamp": 1715766301,
-        "remaining_time": 2830,
+        "time_elapsed": 2830,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 600,
         "situation": [
             [
@@ -3592,8 +3645,9 @@
         "round_num": 7,
         "timestamp": "2024-05-15T11:45:01",
         "unix_timestamp": 1715766301,
-        "remaining_time": 2830,
+        "time_elapsed": 2830,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 600,
         "situation": [
             [
@@ -3649,8 +3703,9 @@
         "round_num": 8,
         "timestamp": "2024-05-15T11:51:45",
         "unix_timestamp": 1715766705,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 23,
+        "success": false,
         "victim_harm": 300,
         "situation": [
             [
@@ -3710,8 +3765,9 @@
         "round_num": 8,
         "timestamp": "2024-05-15T11:51:45",
         "unix_timestamp": 1715766705,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 23,
+        "success": false,
         "victim_harm": 300,
         "situation": [
             [
@@ -3767,8 +3823,9 @@
         "round_num": 8,
         "timestamp": "2024-05-15T11:51:45",
         "unix_timestamp": 1715766705,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 23,
+        "success": false,
         "victim_harm": 300,
         "situation": [
             [
@@ -3824,8 +3881,9 @@
         "round_num": 3,
         "timestamp": "2024-06-03T11:30:34",
         "unix_timestamp": 1717407034,
-        "remaining_time": 1355,
+        "time_elapsed": 1355,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 0,
         "situation": [
             [
@@ -3920,8 +3978,9 @@
         "round_num": 4,
         "timestamp": "2024-06-03T11:35:30",
         "unix_timestamp": 1717407330,
-        "remaining_time": 2857,
+        "time_elapsed": 2857,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 0,
         "situation": [
             [
@@ -4016,8 +4075,9 @@
         "round_num": 5,
         "timestamp": "2024-06-03T11:41:45",
         "unix_timestamp": 1717407705,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 9,
+        "success": false,
         "victim_harm": 800,
         "situation": [
             [
@@ -4103,8 +4163,9 @@
         "round_num": 5,
         "timestamp": "2024-06-03T11:41:45",
         "unix_timestamp": 1717407705,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 9,
+        "success": false,
         "victim_harm": 800,
         "situation": [
             [
@@ -4199,8 +4260,9 @@
         "round_num": 6,
         "timestamp": "2024-06-03T11:50:44",
         "unix_timestamp": 1717408244,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 24,
+        "success": false,
         "victim_harm": 800,
         "situation": [
             [
@@ -4247,8 +4309,9 @@
         "round_num": 7,
         "timestamp": "2024-06-03T11:54:49",
         "unix_timestamp": 1717408489,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 27,
+        "success": false,
         "victim_harm": 700,
         "situation": [
             [
@@ -4308,8 +4371,9 @@
         "round_num": 7,
         "timestamp": "2024-06-03T11:54:49",
         "unix_timestamp": 1717408489,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 27,
+        "success": false,
         "victim_harm": 700,
         "situation": [
             [
@@ -4378,8 +4442,9 @@
         "round_num": 8,
         "timestamp": "2024-06-03T12:05:43",
         "unix_timestamp": 1717409143,
-        "remaining_time": 2237,
+        "time_elapsed": 2237,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 1900,
         "situation": [
             [
@@ -4465,8 +4530,9 @@
         "round_num": 8,
         "timestamp": "2024-06-03T12:05:43",
         "unix_timestamp": 1717409143,
-        "remaining_time": 2237,
+        "time_elapsed": 2237,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 1900,
         "situation": [
             [
@@ -4535,8 +4601,9 @@
         "round_num": 8,
         "timestamp": "2024-06-03T12:05:43",
         "unix_timestamp": 1717409143,
-        "remaining_time": 2237,
+        "time_elapsed": 2237,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 1900,
         "situation": [
             [
@@ -4596,8 +4663,9 @@
         "round_num": 2,
         "timestamp": "2024-05-31T10:27:37",
         "unix_timestamp": 1717144057,
-        "remaining_time": 1309,
+        "time_elapsed": 1309,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 0,
         "situation": [
             [
@@ -4657,8 +4725,9 @@
         "round_num": 3,
         "timestamp": "2024-05-31T10:32:08",
         "unix_timestamp": 1717144328,
-        "remaining_time": 1361,
+        "time_elapsed": 1361,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 0,
         "situation": [
             [
@@ -4718,8 +4787,9 @@
         "round_num": 4,
         "timestamp": "2024-05-31T10:37:11",
         "unix_timestamp": 1717144631,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 12,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -4779,8 +4849,9 @@
         "round_num": 4,
         "timestamp": "2024-05-31T10:37:11",
         "unix_timestamp": 1717144631,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 12,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -4881,8 +4952,9 @@
         "round_num": 6,
         "timestamp": "2024-05-31T10:49:08",
         "unix_timestamp": 1717145348,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 17,
+        "success": false,
         "victim_harm": 1000,
         "situation": [
             [
@@ -4942,8 +5014,9 @@
         "round_num": 7,
         "timestamp": "2024-05-31T10:54:19",
         "unix_timestamp": 1717145659,
-        "remaining_time": 1863,
+        "time_elapsed": 1863,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 0,
         "situation": [
             [
@@ -5003,8 +5076,9 @@
         "round_num": 1,
         "timestamp": "2024-07-02T15:12:50",
         "unix_timestamp": 1719925970,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 28,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -5108,8 +5182,9 @@
         "round_num": 1,
         "timestamp": "2024-07-02T15:12:50",
         "unix_timestamp": 1719925970,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 28,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -5174,8 +5249,9 @@
         "round_num": 2,
         "timestamp": "2024-07-02T15:32:48",
         "unix_timestamp": 1719927168,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 41,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -5240,8 +5316,9 @@
         "round_num": 2,
         "timestamp": "2024-07-02T15:32:48",
         "unix_timestamp": 1719927168,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 41,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -5345,8 +5422,9 @@
         "round_num": 3,
         "timestamp": "2024-07-02T15:40:04",
         "unix_timestamp": 1719927604,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 38,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -5450,8 +5528,9 @@
         "round_num": 4,
         "timestamp": "2024-07-02T15:48:24",
         "unix_timestamp": 1719928104,
-        "remaining_time": 2077,
+        "time_elapsed": 2077,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 0,
         "situation": [
             [
@@ -5531,8 +5610,9 @@
         "round_num": 5,
         "timestamp": "2024-07-02T15:52:00",
         "unix_timestamp": 1719928320,
-        "remaining_time": 2998,
+        "time_elapsed": 2998,
         "remaining_rocks": 11,
+        "success": false,
         "victim_harm": 1100,
         "situation": [
             [
@@ -5612,8 +5692,9 @@
         "round_num": 5,
         "timestamp": "2024-07-02T15:52:00",
         "unix_timestamp": 1719928320,
-        "remaining_time": 2998,
+        "time_elapsed": 2998,
         "remaining_rocks": 11,
+        "success": false,
         "victim_harm": 1100,
         "situation": [
             [
@@ -5706,8 +5787,9 @@
         "round_num": 6,
         "timestamp": "2024-07-02T15:59:09",
         "unix_timestamp": 1719928749,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 18,
+        "success": false,
         "victim_harm": 200,
         "situation": [
             [
@@ -5805,8 +5887,9 @@
         "round_num": 7,
         "timestamp": "2024-07-02T16:10:18",
         "unix_timestamp": 1719929418,
-        "remaining_time": 1769,
+        "time_elapsed": 1769,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 100,
         "situation": [
             [
@@ -5915,8 +5998,9 @@
         "round_num": 7,
         "timestamp": "2024-07-02T16:10:18",
         "unix_timestamp": 1719929418,
-        "remaining_time": 1769,
+        "time_elapsed": 1769,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 100,
         "situation": [
             [
@@ -6009,8 +6093,9 @@
         "round_num": 8,
         "timestamp": "2024-07-02T16:17:13",
         "unix_timestamp": 1719929833,
-        "remaining_time": 1119,
+        "time_elapsed": 1119,
         "remaining_rocks": 31,
+        "success": false,
         "victim_harm": 100,
         "situation": [
             [
@@ -6119,8 +6204,9 @@
         "round_num": 8,
         "timestamp": "2024-07-02T16:17:13",
         "unix_timestamp": 1719929833,
-        "remaining_time": 1119,
+        "time_elapsed": 1119,
         "remaining_rocks": 31,
+        "success": false,
         "victim_harm": 100,
         "situation": [
             [
@@ -6209,8 +6295,9 @@
         "round_num": 2,
         "timestamp": "2024-07-03T10:21:50",
         "unix_timestamp": 1719994910,
-        "remaining_time": 1598,
+        "time_elapsed": 1598,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 100,
         "situation": [
             [
@@ -6270,8 +6357,9 @@
         "round_num": 3,
         "timestamp": "2024-07-03T10:25:02",
         "unix_timestamp": 1719995102,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 26,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -6331,8 +6419,9 @@
         "round_num": 4,
         "timestamp": "2024-07-03T10:34:18",
         "unix_timestamp": 1719995658,
-        "remaining_time": 1313,
+        "time_elapsed": 1313,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 0,
         "situation": [
             [
@@ -6392,8 +6481,9 @@
         "round_num": 5,
         "timestamp": "2024-07-03T10:39:43",
         "unix_timestamp": 1719995983,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 27,
+        "success": false,
         "victim_harm": 400,
         "situation": [
             [
@@ -6453,8 +6543,9 @@
         "round_num": 6,
         "timestamp": "2024-07-03T10:43:10",
         "unix_timestamp": 1719996190,
-        "remaining_time": 2553,
+        "time_elapsed": 2553,
         "remaining_rocks": 10,
+        "success": false,
         "victim_harm": 300,
         "situation": [
             [
@@ -6514,8 +6605,9 @@
         "round_num": 7,
         "timestamp": "2024-07-03T10:51:18",
         "unix_timestamp": 1719996678,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 19,
+        "success": false,
         "victim_harm": 700,
         "situation": [
             [
@@ -6562,8 +6654,9 @@
         "round_num": 7,
         "timestamp": "2024-07-03T10:51:18",
         "unix_timestamp": 1719996678,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 19,
+        "success": false,
         "victim_harm": 700,
         "situation": [
             [
@@ -6623,8 +6716,9 @@
         "round_num": 8,
         "timestamp": "2024-07-03T10:59:12",
         "unix_timestamp": 1719997152,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 29,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -6684,8 +6778,9 @@
         "round_num": 1,
         "timestamp": "2024-08-19T09:35:41",
         "unix_timestamp": 1724052941,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 17,
+        "success": false,
         "victim_harm": 400,
         "situation": [
             [
@@ -6745,8 +6840,9 @@
         "round_num": 2,
         "timestamp": "2024-08-19T09:40:22",
         "unix_timestamp": 1724053222,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 21,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -6798,8 +6894,9 @@
         "round_num": 3,
         "timestamp": "2024-08-19T09:50:07",
         "unix_timestamp": 1724053807,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 7,
+        "success": false,
         "victim_harm": 1700,
         "situation": [
             [
@@ -6869,8 +6966,9 @@
         "round_num": 4,
         "timestamp": "2024-08-19T10:01:23",
         "unix_timestamp": 1724054483,
-        "remaining_time": 2741,
+        "time_elapsed": 2741,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 1000,
         "situation": [
             [
@@ -6940,8 +7038,9 @@
         "round_num": 2,
         "timestamp": "2024-07-10T15:20:47",
         "unix_timestamp": 1720617647,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 15,
+        "success": false,
         "victim_harm": 600,
         "situation": [
             [
@@ -7010,8 +7109,9 @@
         "round_num": 3,
         "timestamp": "2024-07-10T15:28:26",
         "unix_timestamp": 1720618106,
-        "remaining_time": 1857,
+        "time_elapsed": 1857,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 100,
         "situation": [
             [
@@ -7080,8 +7180,9 @@
         "round_num": 3,
         "timestamp": "2024-07-10T15:28:26",
         "unix_timestamp": 1720618106,
-        "remaining_time": 1857,
+        "time_elapsed": 1857,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 100,
         "situation": [
             [
@@ -7137,8 +7238,9 @@
         "round_num": 4,
         "timestamp": "2024-07-10T15:35:20",
         "unix_timestamp": 1720618520,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 27,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -7194,8 +7296,9 @@
         "round_num": 4,
         "timestamp": "2024-07-10T15:35:20",
         "unix_timestamp": 1720618520,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 27,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -7251,8 +7354,9 @@
         "round_num": 4,
         "timestamp": "2024-07-10T15:35:20",
         "unix_timestamp": 1720618520,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 27,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -7308,8 +7412,9 @@
         "round_num": 5,
         "timestamp": "2024-07-10T15:45:50",
         "unix_timestamp": 1720619150,
-        "remaining_time": 1359,
+        "time_elapsed": 1359,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 0,
         "situation": [
             [
@@ -7365,8 +7470,9 @@
         "round_num": 5,
         "timestamp": "2024-07-10T15:45:50",
         "unix_timestamp": 1720619150,
-        "remaining_time": 1359,
+        "time_elapsed": 1359,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 0,
         "situation": [
             [
@@ -7422,8 +7528,9 @@
         "round_num": 6,
         "timestamp": "2024-07-10T15:49:53",
         "unix_timestamp": 1720619393,
-        "remaining_time": 1177,
+        "time_elapsed": 1177,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 0,
         "situation": [
             [
@@ -7479,8 +7586,9 @@
         "round_num": 6,
         "timestamp": "2024-07-10T15:49:53",
         "unix_timestamp": 1720619393,
-        "remaining_time": 1177,
+        "time_elapsed": 1177,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 0,
         "situation": [
             [
@@ -7536,8 +7644,9 @@
         "round_num": 7,
         "timestamp": "2024-07-10T15:53:45",
         "unix_timestamp": 1720619625,
-        "remaining_time": 1771,
+        "time_elapsed": 1771,
         "remaining_rocks": 13,
+        "success": false,
         "victim_harm": 300,
         "situation": [
             [
@@ -7593,8 +7702,9 @@
         "round_num": 7,
         "timestamp": "2024-07-10T15:53:45",
         "unix_timestamp": 1720619625,
-        "remaining_time": 1771,
+        "time_elapsed": 1771,
         "remaining_rocks": 13,
+        "success": false,
         "victim_harm": 300,
         "situation": [
             [
@@ -7650,8 +7760,9 @@
         "round_num": 7,
         "timestamp": "2024-07-10T15:53:45",
         "unix_timestamp": 1720619625,
-        "remaining_time": 1771,
+        "time_elapsed": 1771,
         "remaining_rocks": 13,
+        "success": false,
         "victim_harm": 300,
         "situation": [
             [
@@ -7707,8 +7818,9 @@
         "round_num": 8,
         "timestamp": "2024-07-10T15:58:05",
         "unix_timestamp": 1720619885,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 14,
+        "success": false,
         "victim_harm": 500,
         "situation": [
             [
@@ -7764,8 +7876,9 @@
         "round_num": 8,
         "timestamp": "2024-07-10T15:58:05",
         "unix_timestamp": 1720619885,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 14,
+        "success": false,
         "victim_harm": 500,
         "situation": [
             [
@@ -7821,8 +7934,9 @@
         "round_num": 2,
         "timestamp": "2024-07-12T13:24:21",
         "unix_timestamp": 1720783461,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 8,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -7873,8 +7987,9 @@
         "round_num": 3,
         "timestamp": "2024-07-12T13:42:36",
         "unix_timestamp": 1720784556,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 10,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -7925,8 +8040,9 @@
         "round_num": 4,
         "timestamp": "2024-07-12T13:48:49",
         "unix_timestamp": 1720784929,
-        "remaining_time": 1774,
+        "time_elapsed": 1774,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 0,
         "situation": [
             [
@@ -7977,8 +8093,9 @@
         "round_num": 5,
         "timestamp": "2024-07-12T14:01:37",
         "unix_timestamp": 1720785697,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 39,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -8029,8 +8146,9 @@
         "round_num": 6,
         "timestamp": "2024-07-12T14:05:50",
         "unix_timestamp": 1720785950,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 37,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -8081,8 +8199,9 @@
         "round_num": 7,
         "timestamp": "2024-07-12T14:10:37",
         "unix_timestamp": 1720786237,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 38,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -8138,8 +8257,9 @@
         "round_num": 1,
         "timestamp": "2024-07-12T13:46:32",
         "unix_timestamp": 1720784792,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 29,
+        "success": false,
         "victim_harm": 400,
         "situation": [
             [
@@ -8193,8 +8313,9 @@
         "round_num": 3,
         "timestamp": "2024-07-12T14:05:04",
         "unix_timestamp": 1720785904,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 7,
+        "success": false,
         "victim_harm": 600,
         "situation": [
             [
@@ -8238,8 +8359,9 @@
         "round_num": 4,
         "timestamp": "2024-07-12T14:27:13",
         "unix_timestamp": 1720787233,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 23,
+        "success": false,
         "victim_harm": 200,
         "situation": [
             [
@@ -8293,8 +8415,9 @@
         "round_num": 5,
         "timestamp": "2024-07-12T14:36:58",
         "unix_timestamp": 1720787818,
-        "remaining_time": 2828,
+        "time_elapsed": 2828,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 700,
         "situation": [
             [
@@ -8363,8 +8486,9 @@
         "round_num": 5,
         "timestamp": "2024-07-12T14:36:58",
         "unix_timestamp": 1720787818,
-        "remaining_time": 2828,
+        "time_elapsed": 2828,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 700,
         "situation": [
             [
@@ -8433,8 +8557,9 @@
         "round_num": 6,
         "timestamp": "2024-07-12T14:40:24",
         "unix_timestamp": 1720788024,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 13,
+        "success": false,
         "victim_harm": 200,
         "situation": [
             [
@@ -8503,8 +8628,9 @@
         "round_num": 6,
         "timestamp": "2024-07-12T14:40:24",
         "unix_timestamp": 1720788024,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 13,
+        "success": false,
         "victim_harm": 200,
         "situation": [
             [
@@ -8575,8 +8701,9 @@
         "round_num": 7,
         "timestamp": "2024-07-12T14:47:40",
         "unix_timestamp": 1720788460,
-        "remaining_time": 1466,
+        "time_elapsed": 1466,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 0,
         "situation": [
             [
@@ -8647,8 +8774,9 @@
         "round_num": 7,
         "timestamp": "2024-07-12T14:47:40",
         "unix_timestamp": 1720788460,
-        "remaining_time": 1466,
+        "time_elapsed": 1466,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 0,
         "situation": [
             [
@@ -8717,8 +8845,9 @@
         "round_num": 8,
         "timestamp": "2024-07-12T14:49:41",
         "unix_timestamp": 1720788581,
-        "remaining_time": 2363,
+        "time_elapsed": 2363,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 0,
         "situation": [
             [
@@ -8787,8 +8916,9 @@
         "round_num": 8,
         "timestamp": "2024-07-12T14:49:41",
         "unix_timestamp": 1720788581,
-        "remaining_time": 2363,
+        "time_elapsed": 2363,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 0,
         "situation": [
             [
@@ -8859,8 +8989,9 @@
         "round_num": 2,
         "timestamp": "2024-07-23T11:34:26",
         "unix_timestamp": 1721727266,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 15,
+        "success": false,
         "victim_harm": 1000,
         "situation": [
             [
@@ -8936,8 +9067,9 @@
         "round_num": 3,
         "timestamp": "2024-07-23T11:44:24",
         "unix_timestamp": 1721727864,
-        "remaining_time": 1415,
+        "time_elapsed": 1415,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 0,
         "situation": [
             [
@@ -9013,8 +9145,9 @@
         "round_num": 4,
         "timestamp": "2024-07-23T11:46:08",
         "unix_timestamp": 1721727968,
-        "remaining_time": 1425,
+        "time_elapsed": 1425,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 0,
         "situation": [
             [
@@ -9090,8 +9223,9 @@
         "round_num": 5,
         "timestamp": "2024-07-23T11:50:00",
         "unix_timestamp": 1721728200,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 29,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -9151,8 +9285,9 @@
         "round_num": 6,
         "timestamp": "2024-07-23T11:59:46",
         "unix_timestamp": 1721728786,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 31,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -9217,8 +9352,9 @@
         "round_num": 6,
         "timestamp": "2024-07-23T11:59:46",
         "unix_timestamp": 1721728786,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 31,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -9272,8 +9408,9 @@
         "round_num": 7,
         "timestamp": "2024-07-23T12:10:32",
         "unix_timestamp": 1721729432,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 27,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -9338,8 +9475,9 @@
         "round_num": 7,
         "timestamp": "2024-07-23T12:10:32",
         "unix_timestamp": 1721729432,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 27,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -9428,8 +9566,9 @@
         "round_num": 8,
         "timestamp": "2024-07-23T12:17:49",
         "unix_timestamp": 1721729869,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 23,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -9494,8 +9633,9 @@
         "round_num": 8,
         "timestamp": "2024-07-23T12:17:49",
         "unix_timestamp": 1721729869,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 23,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -9575,8 +9715,9 @@
         "round_num": 2,
         "timestamp": "2024-07-22T09:16:01",
         "unix_timestamp": 1721632561,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 33,
+        "success": false,
         "victim_harm": 200,
         "situation": [
             [
@@ -9633,8 +9774,9 @@
         "round_num": 3,
         "timestamp": "2024-07-22T09:32:27",
         "unix_timestamp": 1721633547,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 35,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -9693,8 +9835,9 @@
         "round_num": 4,
         "timestamp": "2024-07-22T09:41:54",
         "unix_timestamp": 1721634114,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 10,
+        "success": false,
         "victim_harm": 400,
         "situation": [
             [
@@ -9753,8 +9896,9 @@
         "round_num": 2,
         "timestamp": "2024-07-18T09:55:19",
         "unix_timestamp": 1721289319,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 14,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -9814,8 +9958,9 @@
         "round_num": 3,
         "timestamp": "2024-07-18T10:04:59",
         "unix_timestamp": 1721289899,
-        "remaining_time": 2645,
+        "time_elapsed": 2645,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 1000,
         "situation": [
             [
@@ -9913,8 +10058,9 @@
         "round_num": 3,
         "timestamp": "2024-07-18T10:04:59",
         "unix_timestamp": 1721289899,
-        "remaining_time": 2645,
+        "time_elapsed": 2645,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 1000,
         "situation": [
             [
@@ -9974,8 +10120,9 @@
         "round_num": 3,
         "timestamp": "2024-07-18T10:04:59",
         "unix_timestamp": 1721289899,
-        "remaining_time": 2645,
+        "time_elapsed": 2645,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 1000,
         "situation": [
             [
@@ -10073,8 +10220,9 @@
         "round_num": 4,
         "timestamp": "2024-07-18T10:10:07",
         "unix_timestamp": 1721290207,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 15,
+        "success": false,
         "victim_harm": 300,
         "situation": [
             [
@@ -10172,8 +10320,9 @@
         "round_num": 4,
         "timestamp": "2024-07-18T10:10:07",
         "unix_timestamp": 1721290207,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 15,
+        "success": false,
         "victim_harm": 300,
         "situation": [
             [
@@ -10271,8 +10420,9 @@
         "round_num": 4,
         "timestamp": "2024-07-18T10:10:07",
         "unix_timestamp": 1721290207,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 15,
+        "success": false,
         "victim_harm": 300,
         "situation": [
             [
@@ -10332,8 +10482,9 @@
         "round_num": 4,
         "timestamp": "2024-07-18T10:10:07",
         "unix_timestamp": 1721290207,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 15,
+        "success": false,
         "victim_harm": 300,
         "situation": [
             [
@@ -10380,8 +10531,9 @@
         "round_num": 5,
         "timestamp": "2024-07-18T10:20:50",
         "unix_timestamp": 1721290850,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 27,
+        "success": false,
         "victim_harm": 300,
         "situation": [
             [
@@ -10454,8 +10606,9 @@
         "round_num": 5,
         "timestamp": "2024-07-18T10:20:50",
         "unix_timestamp": 1721290850,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 27,
+        "success": false,
         "victim_harm": 300,
         "situation": [
             [
@@ -10502,8 +10655,9 @@
         "round_num": 6,
         "timestamp": "2024-07-18T10:26:55",
         "unix_timestamp": 1721291215,
-        "remaining_time": 2267,
+        "time_elapsed": 2267,
         "remaining_rocks": 14,
+        "success": false,
         "victim_harm": 1200,
         "situation": [
             [
@@ -10576,8 +10730,9 @@
         "round_num": 6,
         "timestamp": "2024-07-18T10:26:55",
         "unix_timestamp": 1721291215,
-        "remaining_time": 2267,
+        "time_elapsed": 2267,
         "remaining_rocks": 14,
+        "success": false,
         "victim_harm": 1200,
         "situation": [
             [
@@ -10640,8 +10795,9 @@
         "round_num": 7,
         "timestamp": "2024-07-18T10:37:21",
         "unix_timestamp": 1721291841,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 23,
+        "success": false,
         "victim_harm": 300,
         "situation": [
             [
@@ -10704,8 +10860,9 @@
         "round_num": 7,
         "timestamp": "2024-07-18T10:37:21",
         "unix_timestamp": 1721291841,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 23,
+        "success": false,
         "victim_harm": 300,
         "situation": [
             [
@@ -10765,8 +10922,9 @@
         "round_num": 7,
         "timestamp": "2024-07-18T10:37:21",
         "unix_timestamp": 1721291841,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 23,
+        "success": false,
         "victim_harm": 300,
         "situation": [
             [
@@ -10830,8 +10988,9 @@
         "round_num": 8,
         "timestamp": "2024-07-18T10:44:02",
         "unix_timestamp": 1721292242,
-        "remaining_time": 2985,
+        "time_elapsed": 2985,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 0,
         "situation": [
             [
@@ -10891,8 +11050,9 @@
         "round_num": 8,
         "timestamp": "2024-07-18T10:44:02",
         "unix_timestamp": 1721292242,
-        "remaining_time": 2985,
+        "time_elapsed": 2985,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 0,
         "situation": [
             [
@@ -10952,8 +11112,9 @@
         "round_num": 8,
         "timestamp": "2024-07-18T10:44:02",
         "unix_timestamp": 1721292242,
-        "remaining_time": 2985,
+        "time_elapsed": 2985,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 0,
         "situation": [
             [
@@ -10996,8 +11157,9 @@
         "round_num": 3,
         "timestamp": "2024-07-22T09:23:00",
         "unix_timestamp": 1721632980,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 24,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -11057,8 +11219,9 @@
         "round_num": 4,
         "timestamp": "2024-07-22T09:28:26",
         "unix_timestamp": 1721633306,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 17,
+        "success": false,
         "victim_harm": 900,
         "situation": [
             [
@@ -11118,8 +11281,9 @@
         "round_num": 5,
         "timestamp": "2024-07-22T09:39:09",
         "unix_timestamp": 1721633949,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 30,
+        "success": false,
         "victim_harm": 400,
         "situation": [
             [
@@ -11188,8 +11352,9 @@
         "round_num": 6,
         "timestamp": "2024-07-22T09:47:40",
         "unix_timestamp": 1721634460,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 19,
+        "success": false,
         "victim_harm": 400,
         "situation": [
             [
@@ -11258,8 +11423,9 @@
         "round_num": 6,
         "timestamp": "2024-07-22T09:47:40",
         "unix_timestamp": 1721634460,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 19,
+        "success": false,
         "victim_harm": 400,
         "situation": [
             [
@@ -11319,8 +11485,9 @@
         "round_num": 6,
         "timestamp": "2024-07-22T09:47:40",
         "unix_timestamp": 1721634460,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 19,
+        "success": false,
         "victim_harm": 400,
         "situation": [
             [
@@ -11385,8 +11552,9 @@
         "round_num": 6,
         "timestamp": "2024-07-22T09:47:40",
         "unix_timestamp": 1721634460,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 19,
+        "success": false,
         "victim_harm": 400,
         "situation": [
             [
@@ -11479,8 +11647,9 @@
         "round_num": 6,
         "timestamp": "2024-07-22T09:47:40",
         "unix_timestamp": 1721634460,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 19,
+        "success": false,
         "victim_harm": 400,
         "situation": [
             [
@@ -11545,8 +11714,9 @@
         "round_num": 7,
         "timestamp": "2024-07-22T09:53:10",
         "unix_timestamp": 1721634790,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 24,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -11611,8 +11781,9 @@
         "round_num": 7,
         "timestamp": "2024-07-22T09:53:10",
         "unix_timestamp": 1721634790,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 24,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [],
@@ -11637,8 +11808,9 @@
         "round_num": 7,
         "timestamp": "2024-07-22T09:53:10",
         "unix_timestamp": 1721634790,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 24,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -11718,8 +11890,9 @@
         "round_num": 8,
         "timestamp": "2024-07-22T09:59:22",
         "unix_timestamp": 1721635162,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 22,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -11799,8 +11972,9 @@
         "round_num": 8,
         "timestamp": "2024-07-22T09:59:22",
         "unix_timestamp": 1721635162,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 22,
+        "success": false,
         "victim_harm": 0,
         "situation": [
             [
@@ -11860,8 +12034,9 @@
         "round_num": 1,
         "timestamp": "2024-07-30T15:10:57",
         "unix_timestamp": 1722345057,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 6,
+        "success": false,
         "victim_harm": 1200,
         "situation": [
             [
@@ -11930,8 +12105,9 @@
         "round_num": 2,
         "timestamp": "2024-07-30T15:21:13",
         "unix_timestamp": 1722345673,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 9,
+        "success": false,
         "victim_harm": 300,
         "situation": [
             [
@@ -11996,8 +12172,9 @@
         "round_num": 2,
         "timestamp": "2024-07-30T15:21:13",
         "unix_timestamp": 1722345673,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 9,
+        "success": false,
         "victim_harm": 300,
         "situation": [
             [
@@ -12066,8 +12243,9 @@
         "round_num": 3,
         "timestamp": "2024-07-30T15:30:18",
         "unix_timestamp": 1722346218,
-        "remaining_time": 2289,
+        "time_elapsed": 2289,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 800,
         "situation": [
             [
@@ -12136,8 +12314,9 @@
         "round_num": 3,
         "timestamp": "2024-07-30T15:30:18",
         "unix_timestamp": 1722346218,
-        "remaining_time": 2289,
+        "time_elapsed": 2289,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 800,
         "situation": [
             [
@@ -12202,8 +12381,9 @@
         "round_num": 4,
         "timestamp": "2024-07-30T15:50:47",
         "unix_timestamp": 1722347447,
-        "remaining_time": 2993,
+        "time_elapsed": 2993,
         "remaining_rocks": 3,
+        "success": false,
         "victim_harm": 500,
         "situation": [
             [
@@ -12258,8 +12438,9 @@
         "round_num": 4,
         "timestamp": "2024-07-30T15:50:47",
         "unix_timestamp": 1722347447,
-        "remaining_time": 2993,
+        "time_elapsed": 2993,
         "remaining_rocks": 3,
+        "success": false,
         "victim_harm": 500,
         "situation": [
             [
@@ -12324,8 +12505,9 @@
         "round_num": 4,
         "timestamp": "2024-07-30T15:50:47",
         "unix_timestamp": 1722347447,
-        "remaining_time": 2993,
+        "time_elapsed": 2993,
         "remaining_rocks": 3,
+        "success": false,
         "victim_harm": 500,
         "situation": [
             [
@@ -12398,8 +12580,9 @@
         "round_num": 5,
         "timestamp": "2024-07-30T15:57:04",
         "unix_timestamp": 1722347824,
-        "remaining_time": 1149,
+        "time_elapsed": 1149,
         "remaining_rocks": 17,
+        "success": false,
         "victim_harm": 300,
         "situation": [
             [
@@ -12454,8 +12637,9 @@
         "round_num": 5,
         "timestamp": "2024-07-30T15:57:04",
         "unix_timestamp": 1722347824,
-        "remaining_time": 1149,
+        "time_elapsed": 1149,
         "remaining_rocks": 17,
+        "success": false,
         "victim_harm": 300,
         "situation": [
             [
@@ -12520,8 +12704,9 @@
         "round_num": 5,
         "timestamp": "2024-07-30T15:57:04",
         "unix_timestamp": 1722347824,
-        "remaining_time": 1149,
+        "time_elapsed": 1149,
         "remaining_rocks": 17,
+        "success": false,
         "victim_harm": 300,
         "situation": [
             [
@@ -12594,8 +12779,9 @@
         "round_num": 6,
         "timestamp": "2024-07-30T16:00:03",
         "unix_timestamp": 1722348003,
-        "remaining_time": 1005,
+        "time_elapsed": 1005,
         "remaining_rocks": 18,
+        "success": false,
         "victim_harm": 300,
         "situation": [
             [
@@ -12650,8 +12836,9 @@
         "round_num": 6,
         "timestamp": "2024-07-30T16:00:03",
         "unix_timestamp": 1722348003,
-        "remaining_time": 1005,
+        "time_elapsed": 1005,
         "remaining_rocks": 18,
+        "success": false,
         "victim_harm": 300,
         "situation": [
             [
@@ -12724,8 +12911,9 @@
         "round_num": 6,
         "timestamp": "2024-07-30T16:00:03",
         "unix_timestamp": 1722348003,
-        "remaining_time": 1005,
+        "time_elapsed": 1005,
         "remaining_rocks": 18,
+        "success": false,
         "victim_harm": 300,
         "situation": [
             [
@@ -12790,8 +12978,9 @@
         "round_num": 7,
         "timestamp": "2024-07-30T16:03:38",
         "unix_timestamp": 1722348218,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 16,
+        "success": false,
         "victim_harm": 300,
         "situation": [
             [
@@ -12846,8 +13035,9 @@
         "round_num": 7,
         "timestamp": "2024-07-30T16:03:38",
         "unix_timestamp": 1722348218,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 16,
+        "success": false,
         "victim_harm": 300,
         "situation": [
             [
@@ -12902,8 +13092,9 @@
         "round_num": 7,
         "timestamp": "2024-07-30T16:03:38",
         "unix_timestamp": 1722348218,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 16,
+        "success": false,
         "victim_harm": 300,
         "situation": [
             [
@@ -12968,8 +13159,9 @@
         "round_num": 8,
         "timestamp": "2024-07-30T16:09:11",
         "unix_timestamp": 1722348551,
-        "remaining_time": 1907,
+        "time_elapsed": 1907,
         "remaining_rocks": 7,
+        "success": false,
         "victim_harm": 1100,
         "situation": [
             [
@@ -13024,8 +13216,9 @@
         "round_num": 8,
         "timestamp": "2024-07-30T16:09:11",
         "unix_timestamp": 1722348551,
-        "remaining_time": 1907,
+        "time_elapsed": 1907,
         "remaining_rocks": 7,
+        "success": false,
         "victim_harm": 1100,
         "situation": [
             [
@@ -13098,8 +13291,9 @@
         "round_num": 8,
         "timestamp": "2024-07-30T16:09:11",
         "unix_timestamp": 1722348551,
-        "remaining_time": 1907,
+        "time_elapsed": 1907,
         "remaining_rocks": 7,
+        "success": false,
         "victim_harm": 1100,
         "situation": [
             [
@@ -13164,8 +13358,9 @@
         "round_num": 1,
         "timestamp": "2024-08-07T10:02:41",
         "unix_timestamp": 1723017761,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 16,
+        "success": false,
         "victim_harm": 1200,
         "situation": [
             [
@@ -13212,8 +13407,9 @@
         "round_num": 2,
         "timestamp": "2024-08-07T10:08:27",
         "unix_timestamp": 1723018107,
-        "remaining_time": 1832,
+        "time_elapsed": 1832,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 100,
         "situation": [
             [
@@ -13260,8 +13456,9 @@
         "round_num": 2,
         "timestamp": "2024-08-07T10:08:27",
         "unix_timestamp": 1723018107,
-        "remaining_time": 1832,
+        "time_elapsed": 1832,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 100,
         "situation": [
             [
@@ -13308,8 +13505,9 @@
         "round_num": 2,
         "timestamp": "2024-08-07T10:08:27",
         "unix_timestamp": 1723018107,
-        "remaining_time": 1832,
+        "time_elapsed": 1832,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 100,
         "situation": [
             [
@@ -13382,8 +13580,9 @@
         "round_num": 3,
         "timestamp": "2024-08-07T10:15:16",
         "unix_timestamp": 1723018516,
-        "remaining_time": 1662,
+        "time_elapsed": 1662,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 0,
         "situation": [
             [
@@ -13456,8 +13655,9 @@
         "round_num": 3,
         "timestamp": "2024-08-07T10:15:16",
         "unix_timestamp": 1723018516,
-        "remaining_time": 1662,
+        "time_elapsed": 1662,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 0,
         "situation": [
             [
@@ -13504,8 +13704,9 @@
         "round_num": 4,
         "timestamp": "2024-08-07T10:23:02",
         "unix_timestamp": 1723018982,
-        "remaining_time": 1306,
+        "time_elapsed": 1306,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 0,
         "situation": [
             [
@@ -13552,8 +13753,9 @@
         "round_num": 4,
         "timestamp": "2024-08-07T10:23:02",
         "unix_timestamp": 1723018982,
-        "remaining_time": 1306,
+        "time_elapsed": 1306,
         "remaining_rocks": 0,
+        "success": true,
         "victim_harm": 0,
         "situation": [
             [
@@ -13626,8 +13828,9 @@
         "round_num": 5,
         "timestamp": "2024-08-07T10:25:21",
         "unix_timestamp": 1723019121,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 12,
+        "success": false,
         "victim_harm": 300,
         "situation": [
             [
@@ -13700,8 +13903,9 @@
         "round_num": 5,
         "timestamp": "2024-08-07T10:25:21",
         "unix_timestamp": 1723019121,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 12,
+        "success": false,
         "victim_harm": 300,
         "situation": [
             [
@@ -13748,8 +13952,9 @@
         "round_num": 6,
         "timestamp": "2024-08-07T10:32:50",
         "unix_timestamp": 1723019570,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 18,
+        "success": false,
         "victim_harm": 200,
         "situation": [
             [
@@ -13822,8 +14027,9 @@
         "round_num": 6,
         "timestamp": "2024-08-07T10:32:50",
         "unix_timestamp": 1723019570,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 18,
+        "success": false,
         "victim_harm": 200,
         "situation": [
             [
@@ -13870,8 +14076,9 @@
         "round_num": 6,
         "timestamp": "2024-08-07T10:32:50",
         "unix_timestamp": 1723019570,
-        "remaining_time": 3000,
+        "time_elapsed": 3000,
         "remaining_rocks": 18,
+        "success": false,
         "victim_harm": 200,
         "situation": [
             [
@@ -13918,8 +14125,9 @@
         "round_num": 7,
         "timestamp": "2024-08-07T10:41:02",
         "unix_timestamp": 1723020062,
-        "remaining_time": 2069,
+        "time_elapsed": 2069,
         "remaining_rocks": 8,
+        "success": false,
         "victim_harm": 900,
         "situation": [
             [
@@ -13966,8 +14174,9 @@
         "round_num": 7,
         "timestamp": "2024-08-07T10:41:02",
         "unix_timestamp": 1723020062,
-        "remaining_time": 2069,
+        "time_elapsed": 2069,
         "remaining_rocks": 8,
+        "success": false,
         "victim_harm": 900,
         "situation": [
             [
@@ -14014,8 +14223,9 @@
         "round_num": 8,
         "timestamp": "2024-08-07T10:44:15",
         "unix_timestamp": 1723020255,
-        "remaining_time": 2657,
+        "time_elapsed": 2657,
         "remaining_rocks": 8,
+        "success": false,
         "victim_harm": 500,
         "situation": [
             [
@@ -14062,8 +14272,9 @@
         "round_num": 8,
         "timestamp": "2024-08-07T10:44:15",
         "unix_timestamp": 1723020255,
-        "remaining_time": 2657,
+        "time_elapsed": 2657,
         "remaining_rocks": 8,
+        "success": false,
         "victim_harm": 500,
         "situation": [
             [

@@ -420,7 +420,7 @@ def get_metrics(path: str = "./user-raw-data/new/data_aggregate.csv", sep: str =
 
         dt_str, unix_time = parse_time(date, time)
 
-        remaining_time = row["corrected_tick"]
+        time_elapsed = row["corrected_tick"]
         remaining_rocks = row["remaining_rocks"]
         victim_harm = row["victim_harm"]
 
@@ -430,7 +430,7 @@ def get_metrics(path: str = "./user-raw-data/new/data_aggregate.csv", sep: str =
         if roundnr not in metrics[participant]:
             metrics[participant][roundnr] = {}
 
-        if math.isnan(remaining_time) or math.isnan(victim_harm):
+        if math.isnan(time_elapsed) or math.isnan(victim_harm):
             # this is not acceptable, so we won't include it.
             weird += 1
             continue
@@ -440,7 +440,7 @@ def get_metrics(path: str = "./user-raw-data/new/data_aggregate.csv", sep: str =
 
         metrics[participant][roundnr]["timestamp"] = dt_str
         metrics[participant][roundnr]["unix_timestamp"] = unix_time
-        metrics[participant][roundnr]["remaining_time"] = int(remaining_time)
+        metrics[participant][roundnr]["time_elapsed"] = int(time_elapsed)
         metrics[participant][roundnr]["remaining_rocks"] = int(remaining_rocks)
         metrics[participant][roundnr]["victim_harm"] = int(victim_harm)
 
@@ -473,6 +473,7 @@ def get_final_data(cp_messages_execution: dict, metrics: dict):
                 continue
 
             for round_data_ in round_data:
+
                 cp = {
                     "cp_num": cp_added,
                     "participant": participant,
@@ -481,13 +482,15 @@ def get_final_data(cp_messages_execution: dict, metrics: dict):
                     "round_num": round_num,
                     "timestamp": metrics_["timestamp"],
                     "unix_timestamp": metrics_["unix_timestamp"],
-                    "remaining_time": metrics_["remaining_time"],
+                    "time_elapsed": metrics_["time_elapsed"],
                     "remaining_rocks": metrics_["remaining_rocks"],
+                    "success": metrics_["success"],
                     "victim_harm": metrics_["victim_harm"],
                     "situation": round_data_["situation"],
                     "HumanAction": round_data_["HumanAction"],
                     "RobotAction": round_data_["RobotAction"],
                 }
+
                 data.append(cp)
                 cp_added += 1
 
@@ -563,7 +566,7 @@ def make_rdf_data_iid(
             (
                 cp_uri,
                 CO_LEARNING.hasRemainingTime,
-                Literal(cp["remaining_time"], datatype=XSD.integer),
+                Literal(cp["time_elapsed"], datatype=XSD.integer),
             )
         )
         g.add(
@@ -824,7 +827,9 @@ def visualize_graph(G, node_labels, edge_labels, output_dir, output_filename) ->
     plt.clf()
 
 
-def visualize_ttl_files_iid(directory="./rdf-data-iid", output_dir="graphs-visualized-iid") -> None:
+def visualize_ttl_files_iid(
+    directory="./rdf-data-iid", output_dir="graphs-visualized-iid"
+) -> None:
     """Process all .ttl files in the specified directory.
 
     Args:
@@ -860,7 +865,7 @@ def get_some_stats_iid(directory: str = "./rdf-data-iid") -> str:
     # Initialize lists to store statistics
     timestamps = []
     unix_timestamps = []
-    remaining_times = []
+    time_elapseds = []
     remaining_rocks = []
     victim_harms = []
     ticks_lasted = []
@@ -899,7 +904,7 @@ def get_some_stats_iid(directory: str = "./rdf-data-iid") -> str:
             if p.endswith("hasUnixTimeStamp"):
                 unix_timestamps.append(int(o))
             if p.endswith("hasRemainingTime"):
-                remaining_times.append(int(o))
+                time_elapseds.append(int(o))
             if p.endswith("hasRemainingRocks"):
                 remaining_rocks.append(int(o))
             if p.endswith("hasVictimHarm"):
@@ -934,7 +939,7 @@ def get_some_stats_iid(directory: str = "./rdf-data-iid") -> str:
         }
 
     # Remaining time statistics
-    remaining_time_stats = calculate_stats(remaining_times)
+    time_elapsed_stats = calculate_stats(time_elapseds)
 
     # Remaining rocks statistics
     remaining_rocks_stats = calculate_stats(remaining_rocks)
@@ -957,7 +962,7 @@ def get_some_stats_iid(directory: str = "./rdf-data-iid") -> str:
 
     # Return all stats as a dictionary
     return {
-        "remaining_time_stats": remaining_time_stats,
+        "time_elapsed_stats": time_elapsed_stats,
         "remaining_rocks_stats": remaining_rocks_stats,
         "victim_harm_stats": victim_harm_stats,
         "ticks_lasted": ticks_lasted_stats,

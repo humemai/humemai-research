@@ -1,0 +1,32 @@
+tick;corrected_tick;remaining_distance;victim_harm;idle_time_robot;q_table_cps;q_table_cps_runs;q_table_basic;world_nr;tick_nr
+3019;3000;28;0;634;"                     CP_known  pick_small_rocks  _brown_rock  ignore_brown_rock  CP_known_ignoring_brown  move_brown_rock
+[4, 'equal', True]    -2603.0            -361.0            0                  0                        0                0
+[4, 'equal', False]   -2360.0           -2862.0         -112                  0                        0                0
+[4, 'human', False]   -1201.0               0.0            0                  0                        0                0
+[3, 'human', True]      -49.0            -478.0           -4               -111                        0             -684
+[2, 'human', True]        0.0               0.0            0                  0                        0                0
+[4, 'robot', False]      89.0               0.0            0                  0                        0                0
+[3, 'human', False]       0.0               0.0            0                  0                        0                0
+[2, 'human', False]       0.0               0.0            0                  0                        0                0
+[2, 'robot', False]       0.0               0.0            0                  0                        0                0
+[3, 'robot', False]       0.0               0.0            0                  0                        0                0
+[2, 'equal', False]       0.0               0.0            0                  0                        0                0
+[4, 'robot', True]        0.0               0.0            0                  0                        0                0
+[3, 'robot', True]    -1448.0               0.0            0                  0                        0                0
+[1, 'robot', False]       NaN              52.0            0                  0                        0                0
+[4, 'human', True]    -2319.0               NaN            0                  0                        0                0";"                     CP_known  pick_small_rocks  _brown_rock  ignore_brown_rock  CP_known_ignoring_brown  move_brown_rock
+[4, 'equal', True]        9.0               4.0            0                  0                        0                0
+[4, 'equal', False]      16.0              19.0            3                  0                        0                0
+[4, 'human', False]       1.0               0.0            0                  0                        0                0
+[3, 'human', True]        3.0               3.0            2                  1                        0                1
+[2, 'human', True]        0.0               0.0            0                  0                        0                0
+[4, 'robot', False]       3.0               0.0            0                  0                        0                0
+[3, 'human', False]       0.0               0.0            0                  0                        0                0
+[2, 'human', False]       0.0               0.0            0                  0                        0                0
+[2, 'robot', False]       0.0               0.0            0                  0                        0                0
+[3, 'robot', False]       0.0               0.0            0                  0                        0                0
+[2, 'equal', False]       0.0               0.0            0                  0                        0                0
+[4, 'robot', True]        0.0               0.0            0                  0                        0                0
+[3, 'robot', True]        1.0               0.0            0                  0                        0                0
+[1, 'robot', False]       NaN               1.0            0                  0                        0                0
+[4, 'human', True]        6.0               NaN            0                  0                        0                0";;1;3019
