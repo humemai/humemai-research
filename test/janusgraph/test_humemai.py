@@ -13,7 +13,7 @@ class TestHumemai(unittest.TestCase):
     def setUpClass(cls) -> None:
         """Start containers, connect to Gremlin, and initialize Humemai instance."""
         cls.humemai = Humemai(
-            warmup_seconds=120,
+            warmup_seconds=300,
             container_prefix="test",
             janusgraph_public_port=8182 + 10,
             cassandra_port_9042=9042 + 10,
