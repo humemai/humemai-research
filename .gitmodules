@@ -1,3 +1,0 @@
-[submodule "examples/wikidata-as-semantic/taxonomy"]
-	path = examples/wikidata-as-semantic/taxonomy
-	url = git@github.com:humemai/taxonomy.git
