@@ -23,11 +23,15 @@ humemai = Namespace("https://humem.ai/ontology#")
 
 class Humemai:
     """
-    Memory class for managing both short-term and long-term memories.
-    Provides methods to add, retrieve, delete, cluster, and manage memories in the RDF graph.
+    Humemai class for managing both short-term and long-term memories.
+    Provides methods to add, retrieve, delete, cluster, and manage memories in the RDF
+    graph.
     """
 
     def __init__(self):
+        self.reset()
+
+    def reset(self):
         self.graph: Graph = Graph()  # Initialize RDF graph for memory storage
         self.graph.bind("humemai", humemai)
         self.current_statement_id: int = 0  # Counter to track the next unique ID
@@ -339,7 +343,7 @@ class Humemai:
         qualifiers: dict[URIRef, Union[URIRef, Literal]] = {},
         lower_time_bound: Optional[Literal] = None,
         upper_time_bound: Optional[Literal] = None,
-    ) -> Memory:
+    ) -> Humemai:
         """
         Retrieve memories with optional filtering based on the qualifiers and triple
         values, including time bounds.
@@ -353,7 +357,7 @@ class Humemai:
             upper_time_bound (Literal, optional): Upper bound for time filtering (ISO format).
 
         Returns:
-            Memory: A new Memory object containing the filtered memories.
+            Humemai: A new Humemai object containing the filtered memories.
         """
 
         # Construct SPARQL query with f-strings for dynamic filters
@@ -437,10 +441,10 @@ class Humemai:
                         qualifier_pred
                     ] = qualifier_obj
 
-        # Create a new Memory object to store the filtered results
+        # Create a new Humemai object to store the filtered results
         filtered_memory = Humemai()
 
-        # Populate the Memory object with the main triples and their qualifiers
+        # Populate the Humemai object with the main triples and their qualifiers
         for statement, data in statement_dict.items():
             subj, pred, obj = data["triple"]
             qualifiers = data["qualifiers"]
@@ -871,7 +875,7 @@ class Humemai:
         subj: URIRef,
         pred: URIRef,
         obj: URIRef,
-        working_memory: Memory,
+        working_memory: Humemai,
         specific_statement: Optional[URIRef] = None,
     ) -> None:
         """
@@ -882,7 +886,7 @@ class Humemai:
             subj (URIRef): Subject of the triple.
             pred (URIRef): Predicate of the triple.
             obj (URIRef): Object of the triple.
-            working_memory (Memory): The working memory to which the statements and qualifiers are added.
+            working_memory (Humemai): The working memory to which the statements and qualifiers are added.
             specific_statement (URIRef, optional): A specific reified statement to process, if provided.
         """
         for statement in self.graph.subjects(RDF.type, RDF.Statement):
@@ -937,13 +941,13 @@ class Humemai:
                             f"Added reified statement triple to working memory: ({statement}, {stmt_p}, {stmt_o})"
                         )
 
-    def get_short_term_memories(self) -> Memory:
+    def get_short_term_memories(self) -> Humemai:
         """
         Query the RDF graph to retrieve all short-term memories with a currentTime
         qualifier and include all associated qualifiers (e.g., location, emotion, etc.).
 
         Returns:
-            Memory: A Memory object containing all short-term memories with their qualifiers.
+            Humemai: A Humemai object containing all short-term memories with their qualifiers.
         """
         short_term_memory = Humemai()
 
@@ -1017,14 +1021,14 @@ class Humemai:
 
         return short_term_memory
 
-    def get_long_term_memories(self) -> Memory:
+    def get_long_term_memories(self) -> Humemai:
         """
         Retrieve all long-term memories from the RDF graph.
         Long-term memories are identified by the presence of either 'eventTime' or 'knownSince'
         qualifiers and the absence of a 'currentTime' qualifier.
 
         Returns:
-            Memory: A new Memory object containing all long-term memories (episodic and
+            Humemai: A new Humemai object containing all long-term memories (episodic and
             semantic).
         """
         long_term_memory = Humemai()
@@ -1055,7 +1059,7 @@ class Humemai:
         logger.debug(f"Executing SPARQL query to retrieve long-term memories:\n{query}")
         results = self.graph.query(query)
 
-        # Add the resulting triples to the new Memory object (long-term memory)
+        # Add the resulting triples to the new Humemai object (long-term memory)
         for row in results:
             subj = row.subject
             pred = row.predicate
@@ -1290,7 +1294,7 @@ class Humemai:
         trigger_node: Optional[URIRef] = None,
         hops: int = 0,
         include_all_long_term: bool = False,
-    ) -> Memory:
+    ) -> Humemai:
         """
         Retrieve working memory based on a trigger node and a specified number of hops.
         It fetches all triples within N hops from the trigger node in the long-term
@@ -1308,7 +1312,7 @@ class Humemai:
             (default: False).
 
         Returns:
-            Memory: A new Memory object containing the working memory (short-term +
+            Humemai: A new Humemai object containing the working memory (short-term +
             relevant long-term memories).
         """
         working_memory = Humemai()
