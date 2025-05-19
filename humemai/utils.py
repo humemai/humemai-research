@@ -2,8 +2,8 @@
 
 import json
 import logging
-from datetime import datetime
 import re
+from datetime import datetime
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)

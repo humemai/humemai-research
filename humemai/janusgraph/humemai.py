@@ -1,28 +1,26 @@
 """Humemai class"""
 
 import json
-import os
-from pathlib import Path
-from datetime import datetime
 import logging
+import os
+from datetime import datetime
+from pathlib import Path
+
 import nest_asyncio
-from gremlin_python.process.graph_traversal import __
-from gremlin_python.structure.graph import Graph, Vertex, Edge
-from gremlin_python.driver.driver_remote_connection import DriverRemoteConnection
-from gremlin_python.process.anonymous_traversal import traversal
-from gremlin_python.process.graph_traversal import GraphTraversalSource
-from gremlin_python.process.traversal import P, T, Direction, TextP
+from gremlin_python.driver.driver_remote_connection import \
+    DriverRemoteConnection
 from gremlin_python.driver.serializer import GraphSONSerializersV3d0
-from humemai.janusgraph.utils.docker import (
-    start_docker_compose,
-    stop_docker_compose,
-    remove_docker_compose,
-    copy_file_from_docker,
-    copy_file_to_docker,
-)
+from gremlin_python.process.anonymous_traversal import traversal
+from gremlin_python.process.graph_traversal import GraphTraversalSource, __
+from gremlin_python.process.traversal import Direction, P, T, TextP
+from gremlin_python.structure.graph import Edge, Graph, Vertex
 
-from humemai.utils import is_iso8601_datetime, write_json, read_json
-
+from humemai.janusgraph.utils.docker import (copy_file_from_docker,
+                                             copy_file_to_docker,
+                                             remove_docker_compose,
+                                             start_docker_compose,
+                                             stop_docker_compose)
+from humemai.utils import is_iso8601_datetime, read_json, write_json
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)

@@ -1,23 +1,23 @@
 """Graph learning module for co-learning."""
 
-import os
 import ast
 import json
-from glob import glob
-from collections import defaultdict
 import math
+import os
 import re
+from collections import defaultdict
 from datetime import datetime
+from glob import glob
 
-import pandas as pd
-from bs4 import BeautifulSoup
 import bs4
-from rdflib import Graph, Namespace, RDF, Literal, XSD
-from tqdm.auto import tqdm
-import rdflib
-import networkx as nx
 import matplotlib.pyplot as plt
+import networkx as nx
 import numpy as np
+import pandas as pd
+import rdflib
+from bs4 import BeautifulSoup
+from rdflib import RDF, XSD, Graph, Literal, Namespace
+from tqdm.auto import tqdm
 
 
 def parse_cp_messages(

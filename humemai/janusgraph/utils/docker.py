@@ -1,16 +1,18 @@
 """Utility functions for managing JanusGraph and Cassandra containers."""
 
-import os
 import logging
-import time
+import os
 import subprocess
+import time
+
 import docker
 import nest_asyncio
+from gremlin_python.driver.driver_remote_connection import \
+    DriverRemoteConnection
 from gremlin_python.driver.serializer import GraphSONSerializersV3d0
-from gremlin_python.driver.driver_remote_connection import DriverRemoteConnection
 from gremlin_python.process.anonymous_traversal import traversal
-from gremlin_python.structure.graph import Graph
 from gremlin_python.process.graph_traversal import GraphTraversalSource
+from gremlin_python.structure.graph import Graph
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)

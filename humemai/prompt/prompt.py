@@ -2,12 +2,11 @@
 
 import torch
 import transformers
-from .templates import (
-    text2graph_without_properties,
-    text2graph_with_properties,
-    graph2text_without_properties,
-    graph2text_with_properties,
-)
+
+from .templates import (graph2text_with_properties,
+                        graph2text_without_properties,
+                        text2graph_with_properties,
+                        text2graph_without_properties)
 
 
 def get_hf_pipeline(

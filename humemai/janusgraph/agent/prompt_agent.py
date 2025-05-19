@@ -1,17 +1,15 @@
 """PromptAgent class using JanusGraph-Cassandra as backend."""
 
-import re
 import json
+import re
 from collections import Counter
 from datetime import datetime
-from gremlin_python.structure.graph import Vertex, Edge
+
+from gremlin_python.structure.graph import Edge, Vertex
+
 from humemai.janusgraph import Humemai
+from humemai.prompt import get_hf_pipeline, graph2text, text2graph
 from humemai.utils import disable_logger
-from humemai.prompt import (
-    get_hf_pipeline,
-    text2graph,
-    graph2text,
-)
 
 
 class PromptAgent:

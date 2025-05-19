@@ -1,12 +1,8 @@
 import unittest
 from datetime import datetime, timedelta
-from humemai.memory import (
-    Memory,
-    ShortMemory,
-    LongMemory,
-    EpisodicMemory,
-    SemanticMemory,
-)
+
+from humemai.memory import (EpisodicMemory, LongMemory, Memory, SemanticMemory,
+                            ShortMemory)
 
 
 class TestMemory(unittest.TestCase):

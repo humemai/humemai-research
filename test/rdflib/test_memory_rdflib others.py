@@ -1,10 +1,12 @@
 """Test Memory class"""
 
-import unittest
 import os
+import unittest
 from datetime import datetime
 from unittest.mock import MagicMock
+
 from rdflib import RDF, XSD, BNode, Graph, Literal, Namespace, URIRef
+
 from humemai.rdflib import Humemai
 
 # Define custom namespace for humemai ontology
