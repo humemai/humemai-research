@@ -234,13 +234,13 @@ class EpisodicMemory(LongMemory):
             tail_properties (dict[str, any], optional): Properties for the tail node.
                 Defaults to an empty dict if not provided.
             edge_properties (dict[str, any], optional): Properties for the edge.
-                `event_time` is a required field.
+                `time_added` is a required field.
         """
-        assert "event_time" in edge_properties, "Edge property 'event_time' is required"
+        assert "time_added" in edge_properties, "Edge property 'time_added' is required"
 
-        if not isinstance(edge_properties["event_time"], list):
+        if not isinstance(edge_properties["time_added"], list):
             raise ValueError(
-                "The 'event_time' in edge_properties must be a list of ISO 8601 string."
+                "The 'time_added' in edge_properties must be a list of ISO 8601 string."
             )
 
         # Initialize the parent LongMemory class
@@ -293,17 +293,17 @@ class SemanticMemory(LongMemory):
             tail_properties (dict[str, any], optional): Properties for the tail node.
                 Defaults to an empty dict if not provided.
             edge_properties (dict[str, any], optional): Properties for the edge.
-                `known_since` is a required field.
+                `time_added` is a required field.
                 `derived_from` is a required field.
 
         """
         assert (
-            "known_since" in edge_properties
-        ), "Edge property 'known_since' is required"
+            "time_added" in edge_properties
+        ), "Edge property 'time_added' is required"
 
-        if not isinstance(edge_properties["known_since"], str):
+        if not isinstance(edge_properties["time_added"], str):
             raise ValueError(
-                "The 'known_since' in edge_properties must be an ISO 8601 string."
+                "The 'time_added' in edge_properties must be an ISO 8601 string."
             )
         assert (
             "derived_from" in edge_properties

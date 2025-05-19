@@ -36,7 +36,7 @@ class TestModifyEpisodicEvent(unittest.TestCase):
         # Define episodic memories with qualifiers
         episodic_qualifiers1 = {
             self.humemai.location: Literal("New York"),
-            self.humemai.eventTime: Literal(
+            self.humemai.time_added: Literal(
                 "2024-04-27T15:00:00", datatype=XSD.dateTime
             ),
             self.humemai.emotion: Literal("happy"),
@@ -45,7 +45,7 @@ class TestModifyEpisodicEvent(unittest.TestCase):
 
         episodic_qualifiers2 = {
             self.humemai.location: Literal("London"),
-            self.humemai.eventTime: Literal(
+            self.humemai.time_added: Literal(
                 "2024-04-27T17:00:00", datatype=XSD.dateTime
             ),
             self.humemai.emotion: Literal("excited"),
@@ -59,13 +59,13 @@ class TestModifyEpisodicEvent(unittest.TestCase):
         # Add short-term memories (these should not be affected by modify_episodic_event)
         short_term_qualifiers1 = {
             self.humemai.location: Literal("Berlin"),
-            self.humemai.currentTime: Literal(
+            self.humemai.current_time: Literal(
                 "2024-04-27T18:00:00", datatype=XSD.dateTime
             ),
         }
         short_term_qualifiers2 = {
             self.humemai.location: Literal("Tokyo"),
-            self.humemai.currentTime: Literal(
+            self.humemai.current_time: Literal(
                 "2024-04-27T19:00:00", datatype=XSD.dateTime
             ),
         }
@@ -217,7 +217,7 @@ class TestEvent(unittest.TestCase):
                 URIRef("https://example.org/Bob"),
             )
         ]
-        event_time = "2023-10-01T10:00:00"
+        time_added = "2023-10-01T10:00:00"
         event = URIRef("https://humem.ai/ontology#event/AI_Conference")  # Event URI
         qualifiers = {
             humemai.location: Literal("Paris"),
@@ -233,7 +233,7 @@ class TestEvent(unittest.TestCase):
         self.memory.add_episodic_memory(
             triples=triples,
             qualifiers={
-                humemai.eventTime: Literal(event_time, datatype=XSD.dateTime),
+                humemai.time_added: Literal(time_added, datatype=XSD.dateTime),
                 **qualifiers,
             },
             event_properties=event_properties,
@@ -256,15 +256,15 @@ class TestEvent(unittest.TestCase):
         self.assertEqual(len(statements), 1, "There should be one reified statement")
         statement = statements[0]
 
-        # Check eventTime qualifier
-        event_time_literal = self.memory.graph.value(statement, humemai.eventTime)
+        # Check time_added qualifier
+        time_added_literal = self.memory.graph.value(statement, humemai.time_added)
         self.assertIsNotNone(
-            event_time_literal, "Reified statement should have eventTime"
+            time_added_literal, "Reified statement should have time_added"
         )
         self.assertEqual(
-            str(event_time_literal),
-            event_time,
-            "eventTime should match the provided time",
+            str(time_added_literal),
+            time_added,
+            "time_added should match the provided time",
         )
 
         # Check location qualifier

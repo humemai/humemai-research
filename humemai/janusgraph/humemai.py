@@ -649,25 +649,16 @@ class Humemai:
         properties["num_recalled"] = 0
         current_time = properties.pop("current_time")
 
-        if action == "episodic":
-            updated_vertex = self.remove_vertex_properties(vertex, ["current_time"])
-            properties["event_time"] = current_time
-            updated_vertex = self.update_vertex_properties(vertex, properties)
-            self.logger.debug(
-                f"Moved vertex to episodic memory with ID: {updated_vertex.id}"
-            )
-
-        elif action == "semantic":
-            updated_vertex = self.remove_vertex_properties(vertex, ["current_time"])
-            properties["known_since"] = current_time
-            updated_vertex = self.update_vertex_properties(vertex, properties)
-            self.logger.debug(
-                f"Moved vertex to semantic memory with ID: {updated_vertex.id}"
-            )
-
-        else:
+        if action not in ["episodic", "semantic"]:
             self.logger.error("Invalid action. Choose from 'episodic' or 'semantic'.")
             raise ValueError("Invalid action. Choose from 'episodic' or 'semantic'.")
+
+        updated_vertex = self.remove_vertex_properties(vertex, ["current_time"])
+        properties["time_added"] = current_time
+        updated_vertex = self.update_vertex_properties(vertex, properties)
+        self.logger.debug(
+            f"Moved vertex to {action} memory with ID: {updated_vertex.id}"
+        )
 
     def move_short_term_edge(self, edge: Edge, action: str) -> None:
         """Move the short-term edge to another memory type.
@@ -689,21 +680,10 @@ class Humemai:
         properties["num_recalled"] = 0
         current_time = properties.pop("current_time")
 
-        if action == "episodic":
-            updated_edge = self.remove_edge_properties(edge, ["current_time"])
-            properties["event_time"] = current_time
-            updated_edge = self.update_edge_properties(edge, properties)
-            self.logger.debug(
-                f"Moved edge to episodic memory with ID: {updated_edge.id}"
-            )
-
-        elif action == "semantic":
-            updated_edge = self.remove_edge_properties(edge, ["current_time"])
-            properties["known_since"] = current_time
-            updated_edge = self.update_edge_properties(edge, properties)
-            self.logger.debug(
-                f"Moved edge to semantic memory with ID: {updated_edge.id}"
-            )
+        updated_edge = self.remove_edge_properties(edge, ["current_time"])
+        properties["time_added"] = current_time
+        updated_edge = self.update_edge_properties(edge, properties)
+        self.logger.debug(f"Moved edge to {action} memory with ID: {updated_edge.id}")
 
     def remove_all_short_term(self) -> None:
         """Remove all pure short-term vertices and edges.
@@ -721,9 +701,7 @@ class Humemai:
     ) -> Vertex:
         """
         Write a new long-term vertex to the graph. This is directly writing a vertex to
-        the long-term memory. It's encouraged to specify either 'episodic' or 'semantic'
-        in the properties, i.e., "event_time" or "known_since", respectively.
-        `num_recalled=0` is also added to the properties.
+        the long-term memory.
 
         Args:
             label (str): Label of the vertex.
@@ -732,18 +710,11 @@ class Humemai:
         Returns:
             Vertex: The updated vertex.
         """
-        assert (
-            "event_time" in properties or "known_since" in properties
-        ), "Event time or known since must be provided in properties."
+        assert "time_added" in properties
 
-        if "event_time" in properties:
-            assert is_iso8601_datetime(
-                properties["event_time"]
-            ), "Event time must be an ISO 8601 datetime."
-        elif "known_since" in properties:
-            assert is_iso8601_datetime(
-                properties["known_since"]
-            ), "Known since must be an ISO 8601 datetime."
+        assert is_iso8601_datetime(
+            properties["time_added"]
+        ), "time must be an ISO 8601 datetime."
 
         properties["num_recalled"] = 0
         # Step 1: Create a vertex with the given label and properties
@@ -767,18 +738,11 @@ class Humemai:
         Returns:
             Edge: The newly created edge.
         """
-        assert (
-            "event_time" in properties or "known_since" in properties
-        ), "Event time or known since must be provided in properties."
+        assert "time_added" in properties
 
-        if "event_time" in properties:
-            assert is_iso8601_datetime(
-                properties["event_time"]
-            ), "Event time must be an ISO 8601 datetime."
-        elif "known_since" in properties:
-            assert is_iso8601_datetime(
-                properties["known_since"]
-            ), "Known since must be an ISO 8601 datetime."
+        assert is_iso8601_datetime(
+            properties["time_added"]
+        ), "time must be an ISO 8601 datetime."
 
         properties["num_recalled"] = 0
         edge = self.write_edge(head_vertex, label, tail_vertex, properties)
@@ -984,24 +948,26 @@ class Humemai:
     def get_all_episodic(self) -> tuple[list[Vertex], list[Edge]]:
         """
         Retrieve all episodic vertices and edges from the graph.
+        Episodic memories have 'time_added' property but do not have 'derived_from' property.
 
         Returns:
             tuple: List of episodic vertices and edges.
         """
-        vertices = self.g.V().has("event_time").toList()
-        edges = self.g.E().has("event_time").toList()
+        vertices = self.g.V().has("time_added").hasNot("derived_from").toList()
+        edges = self.g.E().has("time_added").hasNot("derived_from").toList()
 
         return vertices, edges
 
     def get_all_semantic(self) -> tuple[list[Vertex], list[Edge]]:
         """
         Retrieve all semantic vertices and edges from the graph.
+        Semantic memories have both 'time_added' and 'derived_from' properties.
 
         Returns:
             tuple: List of semantic vertices and edges.
         """
-        vertices = self.g.V().has("known_since").toList()
-        edges = self.g.E().has("known_since").toList()
+        vertices = self.g.V().has("time_added").has("derived_from").toList()
+        edges = self.g.E().has("time_added").has("derived_from").toList()
 
         return vertices, edges
 
@@ -1009,13 +975,14 @@ class Humemai:
         self, start_time: str, end_time: str
     ) -> tuple[list[Vertex], list[Edge]]:
         """Retrieve episodic vertices and edges within a time range.
+        Episodic memories have 'time_added' property but do not have 'derived_from' property.
 
         Args:
             start_time (str): Lower bound of the time range.
             end_time (str): Upper bound of the time range.
 
         Returns:
-            list of Vertex: List of episodic vertices within the time range.
+            tuple: List of episodic vertices and edges within the time range.
         """
         assert is_iso8601_datetime(
             start_time
@@ -1026,10 +993,16 @@ class Humemai:
 
         vertices = (
             self.g.V()
-            .has("event_time", P.gte(start_time).and_(P.lte(end_time)))
+            .has("time_added", P.gte(start_time).and_(P.lte(end_time)))
+            .hasNot("derived_from")  # Episodic memories don't have derived_from
             .toList()
         )
-        edges = self.get_edges_between_vertices(vertices)
+        edges = (
+            self.g.E()
+            .has("time_added", P.gte(start_time).and_(P.lte(end_time)))
+            .hasNot("derived_from")  # Episodic memories don't have derived_from
+            .toList()
+        )
 
         return vertices, edges
 
@@ -1037,13 +1010,14 @@ class Humemai:
         self, start_time: str, end_time: str
     ) -> tuple[list[Vertex], list[Edge]]:
         """Retrieve semantic vertices and edges within a time range.
+        Semantic memories have both 'time_added' and 'derived_from' properties.
 
         Args:
             start_time (str): Lower bound of the time range.
             end_time (str): Upper bound of the time range.
 
         Returns:
-            list of Vertex: List of semantic vertices within the time range.
+            tuple: List of semantic vertices and edges within the time range.
         """
         assert is_iso8601_datetime(
             start_time
@@ -1054,11 +1028,16 @@ class Humemai:
 
         vertices = (
             self.g.V()
-            .has("known_since", P.gte(start_time).and_(P.lte(end_time)))
+            .has("time_added", P.gte(start_time).and_(P.lte(end_time)))
+            .has("derived_from")  # Semantic memories have derived_from
             .toList()
         )
-
-        edges = self.get_edges_between_vertices(vertices)
+        edges = (
+            self.g.E()
+            .has("time_added", P.gte(start_time).and_(P.lte(end_time)))
+            .has("derived_from")  # Semantic memories have derived_from
+            .toList()
+        )
 
         return vertices, edges
 

@@ -34,7 +34,7 @@ class TestMemoryRetrievalAndDeletion(unittest.TestCase):
         # Define qualifiers with URIRef keys
         self.episodic_qualifiers_1 = {
             URIRef("https://humem.ai/ontology#location"): Literal("New York"),
-            URIRef("https://humem.ai/ontology#eventTime"): Literal(
+            URIRef("https://humem.ai/ontology#time_added"): Literal(
                 "2024-04-27T15:00:00", datatype=XSD.dateTime
             ),
             URIRef("https://humem.ai/ontology#emotion"): Literal("happy"),
@@ -43,7 +43,7 @@ class TestMemoryRetrievalAndDeletion(unittest.TestCase):
 
         self.episodic_qualifiers_2 = {
             URIRef("https://humem.ai/ontology#location"): Literal("London"),
-            URIRef("https://humem.ai/ontology#eventTime"): Literal(
+            URIRef("https://humem.ai/ontology#time_added"): Literal(
                 "2024-05-01T10:00:00", datatype=XSD.dateTime
             ),
             URIRef("https://humem.ai/ontology#emotion"): Literal("excited"),
@@ -156,10 +156,10 @@ class TestMemoryRetrievalMethods(unittest.TestCase):
                 self.ex.Bob,
             )
         ]
-        current_time = Literal(datetime.now().isoformat(), datatype=XSD.dateTime)
+        current_time = Literal(datetime.now().isoformat(timespec="seconds"), datatype=XSD.dateTime)
         location = Literal("Paris")
         qualifiers_short = {
-            self.humemai.currentTime: current_time,
+            self.humemai.current_time: current_time,
             self.humemai.location: location,
         }
         self.memory.add_memory(triples_short, qualifiers_short)
@@ -175,7 +175,7 @@ class TestMemoryRetrievalMethods(unittest.TestCase):
         time_episodic = Literal("2022-05-05T10:00:00", datatype=XSD.dateTime)
         location_episodic = Literal("Paris")
         qualifiers_episodic = {
-            self.humemai.eventTime: time_episodic,
+            self.humemai.time_added: time_episodic,
             self.humemai.location: location_episodic,
         }
         self.memory.add_memory(triples_episodic, qualifiers_episodic)
@@ -191,9 +191,9 @@ class TestMemoryRetrievalMethods(unittest.TestCase):
         derived_from = Literal("research_paper_1")
         strength = Literal(5, datatype=XSD.integer)
         qualifiers_semantic = {
-            self.humemai.derivedFrom: derived_from,
+            self.humemai.derived_from: derived_from,
             self.humemai.strength: strength,
-            self.humemai.knownSince: Literal(
+            self.humemai.known_since: Literal(
                 "2023-01-01T10:00:00", datatype=XSD.dateTime
             ),
         }
@@ -215,7 +215,7 @@ class TestMemoryRetrievalMethods(unittest.TestCase):
             pred = short_term_memories.graph.value(statement, RDF.predicate)
             obj = short_term_memories.graph.value(statement, RDF.object)
             current_time = short_term_memories.graph.value(
-                statement, self.humemai.currentTime
+                statement, self.humemai.current_time
             )
 
             # Ensure this is a short-term memory
@@ -245,20 +245,20 @@ class TestMemoryRetrievalMethods(unittest.TestCase):
             subj = long_term_memories.graph.value(statement, RDF.subject)
             pred = long_term_memories.graph.value(statement, RDF.predicate)
             obj = long_term_memories.graph.value(statement, RDF.object)
-            event_time = long_term_memories.graph.value(
-                statement, self.humemai.eventTime
+            time_added = long_term_memories.graph.value(
+                statement, self.humemai.time_added
             )
             current_time = long_term_memories.graph.value(
-                statement, self.humemai.currentTime
+                statement, self.humemai.current_time
             )
             derived_from = long_term_memories.graph.value(
-                statement, self.humemai.derivedFrom
+                statement, self.humemai.derived_from
             )
 
-            # Ensure that there is no currentTime for long-term memories
+            # Ensure that there is no current_time for long-term memories
             self.assertIsNone(current_time)
 
-            if event_time:
+            if time_added:
                 episodic_found = True
                 self.assertEqual(subj, self.ex.Bob)
                 self.assertEqual(pred, self.ex.visit)

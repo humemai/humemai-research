@@ -173,23 +173,23 @@ class TestLongMemory(unittest.TestCase):
 
 class TestEpisodicMemory(unittest.TestCase):
     def test_episodic_memory_initialization(self):
-        """Test that EpisodicMemory initializes with the required `event_time` and `recalled` fields."""
-        event_time = datetime.now().isoformat(timespec="seconds")
+        """Test that EpisodicMemory initializes with the required `time_added` and `recalled` fields."""
+        time_added = datetime.now().isoformat(timespec="seconds")
         episodic_memory = EpisodicMemory(
             head_label="Person",
             tail_label="Event",
             edge_label="experienced",
             head_properties={"name": "Alice"},
             tail_properties={"event_name": "Concert"},
-            edge_properties={"event_time": [event_time]},
+            edge_properties={"time_added": [time_added]},
         )
 
-        # Ensure that `event_time` and `recalled` properties are set correctly
-        self.assertEqual(episodic_memory.edge_properties["event_time"], [event_time])
+        # Ensure that `time_added` and `recalled` properties are set correctly
+        self.assertEqual(episodic_memory.edge_properties["time_added"], [time_added])
         self.assertEqual(episodic_memory.edge_properties["num_recalled"], 0)
 
-    def test_episodic_memory_missing_event_time(self):
-        """Test that EpisodicMemory raises an AssertionError if `event_time` is missing."""
+    def test_episodic_memory_missing_time_added(self):
+        """Test that EpisodicMemory raises an AssertionError if `time_added` is missing."""
         with self.assertRaises(AssertionError) as context:
             EpisodicMemory(
                 head_label="Person",
@@ -198,17 +198,17 @@ class TestEpisodicMemory(unittest.TestCase):
                 edge_properties={"description": "Alice attended the concert"},
             )
         self.assertEqual(
-            str(context.exception), "Edge property 'event_time' is required"
+            str(context.exception), "Edge property 'time_added' is required"
         )
 
-    def test_episodic_memory_invalid_event_time(self):
-        """Test that EpisodicMemory raises a ValueError if `event_time` is not an ISO 8601 string."""
+    def test_episodic_memory_invalid_time_added(self):
+        """Test that EpisodicMemory raises a ValueError if `time_added` is not an ISO 8601 string."""
         with self.assertRaises(ValueError) as context:
             EpisodicMemory(
                 head_label="Person",
                 tail_label="Event",
                 edge_label="experienced",
-                edge_properties={"event_time": 12345},
+                edge_properties={"time_added": 12345},
             )
 
 

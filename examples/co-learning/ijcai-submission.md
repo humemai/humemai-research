@@ -41,16 +41,16 @@ with open("./raw-data.json") as f:
 humemai.remove_all_data()
 
 for data_point in tqdm(data):
-    event_time = data_point["timestamp"]
+    time_added = data_point["timestamp"]
 
-    robot_vertex = humemai.write_long_term_vertex("robot", {"event_time": event_time})
+    robot_vertex = humemai.write_long_term_vertex("robot", {"time_added": time_added})
     cp_properties = {
         "cp_num": data_point["cp_num"],
         "participant_num": data_point["participant"],
         "cp_name": data_point["cp_name"],
         "ticks_lasted": data_point["ticks_lasted"],
         "round_num": data_point["round_num"],
-        "event_time": data_point["timestamp"],
+        "time_added": data_point["timestamp"],
         "time_elapsed": data_point["time_elapsed"],
         "remaining_rocks": data_point["remaining_rocks"],
         "victim_harm": data_point["victim_harm"],
@@ -59,33 +59,33 @@ for data_point in tqdm(data):
 
     cp_vertex = humemai.write_long_term_vertex("CP", cp_properties)
     humemai.write_long_term_edge(
-        robot_vertex, "has_cp", cp_vertex, {"event_time": event_time}
+        robot_vertex, "has_cp", cp_vertex, {"time_added": time_added}
     )
 
     participant_vertex = humemai.write_long_term_vertex(
         "participant",
-        {"participant_number": data_point["participant"], "event_time": event_time},
+        {"participant_number": data_point["participant"], "time_added": time_added},
     )
     humemai.write_long_term_edge(
-        participant_vertex, "has_cp", cp_vertex, {"event_time": event_time}
+        participant_vertex, "has_cp", cp_vertex, {"time_added": time_added}
     )
 
     situation = [bar for foo in data_point["situation"] for bar in foo]
 
     if situation:
         situation_properties = {s["type"]: s["content"] for s in situation}
-        situation_properties["event_time"] = event_time
+        situation_properties["time_added"] = time_added
         situation_vertex = humemai.write_long_term_vertex(
             "situation", situation_properties
         )
         humemai.write_long_term_edge(
-            cp_vertex, "has_situation", situation_vertex, {"event_time": event_time}
+            cp_vertex, "has_situation", situation_vertex, {"time_added": time_added}
         )
 
         for idx, list_ in enumerate(data_point["HumanAction"]):
 
             if list_:
-                properties = {"event_time": event_time}
+                properties = {"time_added": time_added}
                 for action in list_:
                     properties[action["type"]] = action["content"]
                 properties["action_number"] = idx
@@ -97,13 +97,13 @@ for data_point in tqdm(data):
                     situation_vertex,
                     "has_human_action_" + str(idx),
                     human_action_vertex,
-                    {"event_time": event_time},
+                    {"time_added": time_added},
                 )
 
         for idx, list_ in enumerate(data_point["RobotAction"]):
 
             if list_:
-                properties = {"event_time": event_time}
+                properties = {"time_added": time_added}
                 for action in list_:
                     properties[action["type"]] = action["content"]
                 properties["action_number"] = idx
@@ -115,7 +115,7 @@ for data_point in tqdm(data):
                     situation_vertex,
                     "has_robot_action_" + str(idx),
                     robot_action_vertex,
-                    {"event_time": event_time},
+                    {"time_added": time_added},
                 )
 ```
 
@@ -1527,7 +1527,7 @@ humemai.get_properties(vertex)
      'action': 'Pick up <object> in <location>',
      'location': 'Top of rock pile',
      'action_number': 0,
-     'event_time': '2024-07-03T10:43:10',
+     'time_added': '2024-07-03T10:43:10',
      'object': 'Large rock'}
 
 
@@ -1554,8 +1554,8 @@ for vertex in vertices:
         print(vertex.label, foo)
 ```
 
-    situation {'num_recalled': 0, 'sentence_representation': 'Location: Top of rock pile. Object: Large rock. ', 'location': 'Top of rock pile', 'event_time': '2024-07-03T10:43:10', 'object': 'Large rock'}
-    CP {'num_recalled': 0, 'cp_num': 90, 'ticks_lasted': 183, 'participant_num': 4087, 'remaining_rocks': 10, 'success': False, 'time_elapsed': 2553, 'cp_name': 'Move', 'victim_harm': 300, 'round_num': 6, 'event_time': '2024-07-03T10:43:10'}
+    situation {'num_recalled': 0, 'sentence_representation': 'Location: Top of rock pile. Object: Large rock. ', 'location': 'Top of rock pile', 'time_added': '2024-07-03T10:43:10', 'object': 'Large rock'}
+    CP {'num_recalled': 0, 'cp_num': 90, 'ticks_lasted': 183, 'participant_num': 4087, 'remaining_rocks': 10, 'success': False, 'time_elapsed': 2553, 'cp_name': 'Move', 'victim_harm': 300, 'round_num': 6, 'time_added': '2024-07-03T10:43:10'}
     robot_action_1 Action: Drop <object> in <location>. Location: <Right> side of field. Object: Large rock. 
     robot_action_0 Action: Pick up <object> in <location>. Location: Top of rock pile. Object: Large rock. 
 

@@ -56,26 +56,20 @@ humemai:Fear rdf:type owl:NamedIndividual, humemai:Emotion ;
     rdfs:label "Fear" .
 
 ### Data Properties ###
-humemai:currentTime rdf:type owl:DatatypeProperty ;
-    rdfs:label "currentTime" ;
+humemai:current_time rdf:type owl:DatatypeProperty ;
+    rdfs:label "current_time" ;
     rdfs:domain rdf:Statement ;
     rdfs:range xsd:dateTime ;
     rdfs:comment "The current timestamp of a memory in short-term memory." .
 
-humemai:eventTime rdf:type owl:DatatypeProperty ;
-    rdfs:label "eventTime" ;
+humemai:time_added rdf:type owl:DatatypeProperty ;
+    rdfs:label "time_added" ;
     rdfs:domain rdf:Statement ;
     rdfs:range xsd:dateTime ;
     rdfs:comment "The time when an episodic memory event occurred." .
 
-humemai:knownSince rdf:type owl:DatatypeProperty ;
-    rdfs:label "knownSince" ;
-    rdfs:domain rdf:Statement ;
-    rdfs:range xsd:dateTime ;
-    rdfs:comment "The time since a semantic memory has been known." .
-
-humemai:recalled rdf:type owl:DatatypeProperty ;
-    rdfs:label "recalled" ;
+humemai:num_recalled rdf:type owl:DatatypeProperty ;
+    rdfs:label "num_recalled" ;
     rdfs:domain rdf:Statement ;
     rdfs:range humemai:PositiveInteger ;
     rdfs:comment "Indicates how many times a memory has been recalled (must be positive)." .
@@ -86,8 +80,8 @@ humemai:strength rdf:type owl:DatatypeProperty ;
     rdfs:range humemai:PositiveInteger ;
     rdfs:comment "Represents the strength of a semantic memory (must be positive)." .
 
-humemai:derivedFrom rdf:type owl:DatatypeProperty ;
-    rdfs:label "derivedFrom" ;
+humemai:derived_from rdf:type owl:DatatypeProperty ;
+    rdfs:label "derived_from" ;
     rdfs:domain rdf:Statement ;
     rdfs:range xsd:string ;
     rdfs:comment "Indicates the origin of the semantic memory (e.g., observation, conversation)." .

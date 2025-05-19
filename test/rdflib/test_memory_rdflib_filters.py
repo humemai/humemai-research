@@ -32,13 +32,13 @@ class TestMemoryTimeFilters(unittest.TestCase):
         )
 
         qualifiers1 = {
-            self.humemai.currentTime: Literal(
+            self.humemai.current_time: Literal(
                 "2024-04-27T10:00:00", datatype=XSD.dateTime
             ),
             self.humemai.location: Literal("New York"),
         }
         qualifiers2 = {
-            self.humemai.currentTime: Literal(
+            self.humemai.current_time: Literal(
                 "2024-04-27T12:00:00", datatype=XSD.dateTime
             ),
             self.humemai.location: Literal("London"),
@@ -71,7 +71,7 @@ class TestMemoryTimeFilters(unittest.TestCase):
             Literal("Ice Cream"),
         )
         qualifiers = {
-            self.humemai.currentTime: Literal(
+            self.humemai.current_time: Literal(
                 "2024-04-27T18:00:00", datatype=XSD.dateTime
             ),
             self.humemai.location: Literal("Berlin"),
@@ -112,13 +112,13 @@ class TestMemoryLocationFilters(unittest.TestCase):
             URIRef("https://example.org/person/Eve"),
         )
         qualifiers1 = {
-            self.humemai.currentTime: Literal(
+            self.humemai.current_time: Literal(
                 "2024-04-27T10:00:00", datatype=XSD.dateTime
             ),
             self.humemai.location: Literal("New York"),
         }
         qualifiers2 = {
-            self.humemai.currentTime: Literal(
+            self.humemai.current_time: Literal(
                 "2024-04-27T12:00:00", datatype=XSD.dateTime
             ),
             self.humemai.location: Literal("Berlin"),
@@ -148,7 +148,7 @@ class TestMemoryLocationFilters(unittest.TestCase):
             URIRef("https://example.org/person/Grace"),
         )
         qualifiers = {
-            self.humemai.currentTime: Literal(
+            self.humemai.current_time: Literal(
                 "2024-04-27T10:00:00", datatype=XSD.dateTime
             ),
             self.humemai.location: Literal("Paris"),
@@ -188,13 +188,13 @@ class TestMemoryEmotionFilters(unittest.TestCase):
         )
         qualifiers1 = {
             self.humemai.emotion: Literal("happy"),
-            self.humemai.currentTime: Literal(
+            self.humemai.current_time: Literal(
                 "2024-04-27T14:00:00", datatype=XSD.dateTime
             ),
         }
         qualifiers2 = {
             self.humemai.emotion: Literal("sad"),
-            self.humemai.currentTime: Literal(
+            self.humemai.current_time: Literal(
                 "2024-04-27T16:00:00", datatype=XSD.dateTime
             ),
         }

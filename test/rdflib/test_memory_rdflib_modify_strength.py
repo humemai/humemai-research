@@ -36,8 +36,8 @@ class TestMemoryModifyStrength(unittest.TestCase):
         # Add a semantic memory with strength
         qualifiers_semantic = {
             self.humemai.strength: Literal(8, datatype=XSD.integer),
-            self.humemai.derivedFrom: Literal("study"),
-            self.humemai.knownSince: Literal(
+            self.humemai.derived_from: Literal("study"),
+            self.humemai.known_since: Literal(
                 "2024-04-27T15:00:00", datatype=XSD.dateTime
             ),
         }
@@ -48,7 +48,7 @@ class TestMemoryModifyStrength(unittest.TestCase):
         # Add an episodic memory without strength (it should not have a strength value)
         qualifiers_episodic = {
             self.humemai.location: Literal("Paris"),
-            self.humemai.eventTime: Literal(
+            self.humemai.time_added: Literal(
                 "2024-04-27T15:00:00", datatype=XSD.dateTime
             ),
             self.humemai.emotion: Literal("happy"),
@@ -150,8 +150,8 @@ class TestMemoryModifyStrength(unittest.TestCase):
         # Add a second reified statement for the same semantic triple with a different strength
         qualifiers_semantic_2 = {
             self.humemai.strength: Literal(10, datatype=XSD.integer),
-            self.humemai.derivedFrom: Literal("research"),
-            self.humemai.knownSince: Literal(
+            self.humemai.derived_from: Literal("research"),
+            self.humemai.known_since: Literal(
                 "2024-04-27T15:00:00", datatype=XSD.dateTime
             ),
         }

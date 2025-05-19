@@ -35,7 +35,7 @@ class TestMemoryLongTerm(unittest.TestCase):
         qualifiers = {
             self.humemai.location: Literal("Paris"),
             self.humemai.emotion: Literal("happy"),
-            self.humemai.eventTime: Literal(
+            self.humemai.time_added: Literal(
                 "2024-04-27T15:00:00", datatype=XSD.dateTime
             ),
         }
@@ -50,14 +50,14 @@ class TestMemoryLongTerm(unittest.TestCase):
         self.assertIn("Bob", result)
         self.assertIn("location", result)
         self.assertIn("Paris", result)
-        self.assertIn("eventTime", result)
+        self.assertIn("time_added", result)
         self.assertIn("2024-04-27T15:00:00", result)
         self.assertIn("emotion", result)
         self.assertIn("happy", result)
 
     def test_add_single_semantic_memory(self) -> None:
         """
-        Test adding a single semantic memory with strength and derivedFrom qualifiers.
+        Test adding a single semantic memory with strength and derived_from qualifiers.
         """
         # Define the sample triple
         triple = (
@@ -69,13 +69,13 @@ class TestMemoryLongTerm(unittest.TestCase):
         # Define the qualifiers
         qualifiers = {
             self.humemai.strength: Literal(5, datatype=XSD.integer),
-            self.humemai.derivedFrom: Literal("textbook"),
+            self.humemai.derived_from: Literal("textbook"),
         }
-        knownSince = Literal("2024-04-27T15:00:00", datatype=XSD.dateTime)
+        known_since = Literal("2024-04-27T15:00:00", datatype=XSD.dateTime)
 
         # Add the semantic long-term memory
         self.memory.add_semantic_memory(
-            [triple], qualifiers={self.humemai.knownSince: knownSince, **qualifiers}
+            [triple], qualifiers={self.humemai.known_since: known_since, **qualifiers}
         )
 
         # Verify that the memory was added with the correct qualifiers
@@ -85,7 +85,7 @@ class TestMemoryLongTerm(unittest.TestCase):
         self.assertIn("Animal", result)
         self.assertIn("strength", result)
         self.assertIn("5", result)
-        self.assertIn("derivedFrom", result)
+        self.assertIn("derived_from", result)
         self.assertIn("textbook", result)
 
     def test_add_multiple_episodic_memories_same_triple(self) -> None:
@@ -102,7 +102,7 @@ class TestMemoryLongTerm(unittest.TestCase):
         # Define the first set of qualifiers
         qualifiers_1 = {
             self.humemai.location: Literal("Paris"),
-            self.humemai.eventTime: Literal(
+            self.humemai.time_added: Literal(
                 "2024-04-27T15:00:00", datatype=XSD.dateTime
             ),
             self.humemai.emotion: Literal("happy"),
@@ -111,7 +111,7 @@ class TestMemoryLongTerm(unittest.TestCase):
         # Define the second set of qualifiers
         qualifiers_2 = {
             self.humemai.location: Literal("London"),
-            self.humemai.eventTime: Literal(
+            self.humemai.time_added: Literal(
                 "2024-05-01T09:00:00", datatype=XSD.dateTime
             ),
             self.humemai.emotion: Literal("excited"),
@@ -152,7 +152,7 @@ class TestMemoryLongTerm(unittest.TestCase):
                 [triple],
                 qualifiers={
                     self.humemai.location: Literal("Paris"),
-                    self.humemai.eventTime: Literal(
+                    self.humemai.time_added: Literal(
                         "2024-04-27T15:30:00", datatype=XSD.dateTime
                     ),
                     self.humemai.strength: Literal(
@@ -169,7 +169,7 @@ class TestMemoryLongTerm(unittest.TestCase):
                     self.humemai.location: Literal(
                         "Paris"
                     ),  # Invalid for semantic memory
-                    self.humemai.knownSince: Literal(
+                    self.humemai.known_since: Literal(
                         "2024-04-27T15:00:00", datatype=XSD.dateTime
                     ),
                 },
@@ -195,7 +195,7 @@ class TestMemoryMoveShortTermToLongTerm(unittest.TestCase):
             ],
             qualifiers={
                 humemai.location: Literal("Paris"),
-                humemai.currentTime: Literal(
+                humemai.current_time: Literal(
                     "2023-05-05T00:00:00", datatype=XSD.dateTime
                 ),
             },
@@ -212,7 +212,7 @@ class TestMemoryMoveShortTermToLongTerm(unittest.TestCase):
             ],
             qualifiers={
                 humemai.location: Literal("London"),
-                humemai.currentTime: Literal(
+                humemai.current_time: Literal(
                     "2023-05-06T00:00:00", datatype=XSD.dateTime
                 ),
             },
@@ -245,7 +245,7 @@ class TestMemoryMoveShortTermToLongTerm(unittest.TestCase):
         self.assertEqual(obj, URIRef("https://example.org/Bob"))
         self.assertEqual(qualifiers.get(humemai.location), Literal("Paris"))
         self.assertEqual(
-            qualifiers.get(humemai.eventTime),
+            qualifiers.get(humemai.time_added),
             Literal("2023-05-05T00:00:00", datatype=XSD.dateTime),
         )
         self.assertEqual(qualifiers.get(humemai.emotion), Literal("excited"))
@@ -253,14 +253,14 @@ class TestMemoryMoveShortTermToLongTerm(unittest.TestCase):
 
     def test_move_short_term_to_long_term_semantic(self) -> None:
         """
-        Test moving a short-term memory to long-term semantic memory with strength and derivedFrom qualifiers.
+        Test moving a short-term memory to long-term semantic memory with strength and derived_from qualifiers.
         """
         # Move short-term memory to long-term semantic memory
         self.memory.move_short_term_to_semantic(
             memory_id_to_move=Literal(1),
             qualifiers={
                 humemai.strength: Literal(5),
-                humemai.derivedFrom: Literal("Observation"),
+                humemai.derived_from: Literal("Observation"),
             },
         )
 
@@ -276,4 +276,4 @@ class TestMemoryMoveShortTermToLongTerm(unittest.TestCase):
         self.assertEqual(pred, URIRef("https://example.org/saw"))
         self.assertEqual(obj, URIRef("https://example.org/Alice"))
         self.assertEqual(qualifiers.get(humemai.strength), Literal(5))
-        self.assertEqual(qualifiers.get(humemai.derivedFrom), Literal("Observation"))
+        self.assertEqual(qualifiers.get(humemai.derived_from), Literal("Observation"))

@@ -80,7 +80,7 @@ class TestAddEpisodic(unittest.TestCase):
         # Define qualifiers for episodic memories using URIRef and Literal
         episodic_qualifiers_1: dict[URIRef, Literal] = {
             humemai.location: Literal("New York"),
-            humemai.eventTime: Literal(
+            humemai.time_added: Literal(
                 "2024-04-27T15:00:00",
                 datatype=XSD.dateTime,
             ),
@@ -89,7 +89,7 @@ class TestAddEpisodic(unittest.TestCase):
         }
         episodic_qualifiers_2: dict[URIRef, Literal] = {
             humemai.location: Literal("London"),
-            humemai.eventTime: Literal(
+            humemai.time_added: Literal(
                 "2024-05-01T10:00:00",
                 datatype=XSD.dateTime,
             ),
@@ -98,7 +98,7 @@ class TestAddEpisodic(unittest.TestCase):
         }
         episodic_qualifiers_3: dict[URIRef, Literal] = {
             humemai.location: Literal("Paris"),
-            humemai.eventTime: Literal(
+            humemai.time_added: Literal(
                 "2024-05-03T14:00:00",
                 datatype=XSD.dateTime,
             ),
@@ -143,11 +143,11 @@ class TestAddEpisodic(unittest.TestCase):
 
         # Add semantic memories
         semantic_qualifiers: dict[URIRef, Literal] = {
-            humemai.knownSince: Literal(
+            humemai.known_since: Literal(
                 "2023-01-01T00:00:00",
                 datatype=XSD.dateTime,
             ),
-            humemai.derivedFrom: Literal("animal_research"),
+            humemai.derived_from: Literal("animal_research"),
             humemai.strength: Literal(5, datatype=XSD.integer),
         }
         self.memory.add_semantic_memory(
@@ -248,7 +248,7 @@ class TestAddEpisodic(unittest.TestCase):
                     working_memory.graph.predicate_objects(triple[0])
                 )
                 for pred, obj in qualifiers:
-                    if str(pred) == str(humemai.recalled):
+                    if str(pred) == str(humemai.num_recalled):
                         self.assertEqual(int(obj), 3)
 
     def test_empty_memory(self) -> None:
@@ -289,7 +289,7 @@ class TestMemoryMethods(unittest.TestCase):
             [self.short_term_triplet_1],
             qualifiers={
                 humemai.location: Literal("Paris"),
-                humemai.currentTime: Literal(
+                humemai.current_time: Literal(
                     "2023-05-05T00:00:00", datatype=XSD.dateTime
                 ),
             },
@@ -298,7 +298,7 @@ class TestMemoryMethods(unittest.TestCase):
             [self.short_term_triplet_2],
             qualifiers={
                 humemai.location: Literal("Paris"),
-                humemai.currentTime: Literal(
+                humemai.current_time: Literal(
                     "2023-05-06T00:00:00", datatype=XSD.dateTime
                 ),
             },

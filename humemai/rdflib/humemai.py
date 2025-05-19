@@ -47,7 +47,7 @@ class Humemai:
 
         Args:
             triples (list): A list of triples (subject, predicate, object) to be added.
-            qualifiers (dict): A dictionary of qualifiers (e.g., location, currentTime).
+            qualifiers (dict): A dictionary of qualifiers (e.g., location, current_time).
         """
         for subj, pred, obj in triples:
             logger.debug(f"Adding triple: ({subj}, {pred}, {obj})")
@@ -117,8 +117,24 @@ class Humemai:
             )
             return
 
-        logger.debug(f"Deleting main triple: ({subj}, {pred}, {obj})")
-        self.graph.remove((subj, pred, obj))
+        # Check if there are other reified statements with the same triple
+        other_reified_statements = []
+        for s in self.graph.subjects(RDF.type, RDF.Statement):
+            if s != statement:  # Exclude the current statement
+                s_subj = self.graph.value(s, RDF.subject)
+                s_pred = self.graph.value(s, RDF.predicate)
+                s_obj = self.graph.value(s, RDF.object)
+                if s_subj == subj and s_pred == pred and s_obj == obj:
+                    other_reified_statements.append(s)
+
+        # Only remove the main triple if no other reified statements exist
+        if not other_reified_statements:
+            logger.debug(f"Deleting main triple: ({subj}, {pred}, {obj})")
+            self.graph.remove((subj, pred, obj))
+        else:
+            logger.debug(
+                f"Other reified statements exist for triple ({subj}, {pred}, {obj}). Not deleting main triple."
+            )
 
         for p, o in list(self.graph.predicate_objects(statement)):
             self.graph.remove((statement, p, o))
@@ -169,7 +185,7 @@ class Humemai:
         logger.error(f"No memory found with ID {memory_id}")
         return None
 
-    def delete_triple(
+    def delete_main_triple(
         self, subject: URIRef, predicate: URIRef, object_: URIRef
     ) -> None:
         """
@@ -212,13 +228,15 @@ class Humemai:
             triples (list): A list of triples to add.
             qualifiers (dict, optional): Additional qualifiers to add.
         """
-        if humemai.currentTime not in qualifiers:
-            currentTime = Literal(datetime.now().isoformat(), datatype=XSD.dateTime)
-            qualifiers[humemai.currentTime] = currentTime
+        if humemai.current_time not in qualifiers:
+            current_time = Literal(
+                datetime.now().isoformat(timespec="seconds"), datatype=XSD.dateTime
+            )
+            qualifiers[humemai.current_time] = current_time
         else:
-            if qualifiers[humemai.currentTime].datatype != XSD.dateTime:
+            if qualifiers[humemai.current_time].datatype != XSD.dateTime:
                 raise ValueError(
-                    f"Invalid currentTime format: {qualifiers[humemai.currentTime]}"
+                    f"Invalid current_time format: {qualifiers[humemai.current_time]}"
                 )
 
         self.add_memory(triples, qualifiers)
@@ -227,7 +245,6 @@ class Humemai:
         self,
         triples: list[tuple[URIRef, URIRef, URIRef]],
         qualifiers: dict[URIRef, Union[URIRef, Literal]] = {},
-        event_properties: dict[URIRef, Union[URIRef, Literal]] = {},
     ) -> None:
         """
         Add episodic memories to the RDF graph, enforcing required qualifiers.
@@ -236,65 +253,34 @@ class Humemai:
             triples (list): A list of triples to add.
             qualifiers (dict, optional): Additional qualifiers to add.
                 The qualifiers can have the following in URIRef format:
-                https://humem.ai/ontology#eventTime: str,
+                https://humem.ai/ontology#time_added: str,
                 https://humem.ai/ontology#location: str,
                 https://humem.ai/ontology#emotion: str,
-                https://humem.ai/ontology#event: str,
-            event_properties (dict, optional): Additional properties for the event node.
-                The properties should be URIRef format.
         """
         forbidden_keys = [
-            humemai.currentTime,
-            humemai.knownSince,
-            humemai.strength,
-            humemai.derivedFrom,
+            humemai.current_time,
+            humemai.derived_from,
         ]
         for key in forbidden_keys:
             if key in qualifiers:
                 raise ValueError(f"{key} is not allowed for episodic memories")
 
-        if humemai.eventTime not in qualifiers:
-            raise ValueError("Missing required qualifier: eventTime")
+        if humemai.time_added not in qualifiers:
+            raise ValueError("Missing required qualifier: time_added")
 
-        if qualifiers[humemai.eventTime].datatype != XSD.dateTime:
+        if qualifiers[humemai.time_added].datatype != XSD.dateTime:
             raise ValueError(
-                f"Invalid eventTime format: {qualifiers[humemai.eventTime]}"
+                f"Invalid time_added format: {qualifiers[humemai.time_added]}"
             )
 
+        qualifiers[humemai.last_accessed] = qualifiers[humemai.time_added]
+
         # Add required qualifiers
-        qualifiers = {humemai.recalled: Literal(0, datatype=XSD.integer), **qualifiers}
+        qualifiers = {
+            humemai.num_recalled: Literal(0, datatype=XSD.integer),
+            **qualifiers,
+        }
         self.add_memory(triples, qualifiers)
-
-        if humemai.event in qualifiers:
-            self.add_event(qualifiers[humemai.event])
-
-            if event_properties:
-                self.add_event_properties(qualifiers[humemai.event], event_properties)
-
-    def add_event(self, event: URIRef) -> None:
-        """
-        Create an event node in the RDF graph with custom properties.
-
-        Args:
-            event (URIRef): The URIRef of the event.
-        """
-        if (event, None, None) not in self.graph:
-            self.graph.add((event, RDF.type, humemai.Event))
-            logger.debug(f"Event node created: {event}")
-
-    def add_event_properties(
-        self, event: URIRef, event_properties: dict[URIRef, Union[URIRef, Literal]]
-    ) -> None:
-        """
-        Add properties to an existing event node in the RDF graph.
-
-        Args:
-            event (URIRef): The URIRef of the event.
-            event_properties (dict): Additional properties for the event node.
-        """
-        for prop, value in event_properties.items():
-            self.graph.add((event, prop, value))
-            logger.debug(f"Added event property: [{event}, {prop}, {value}]")
 
     def add_semantic_memory(
         self,
@@ -308,31 +294,36 @@ class Humemai:
             triples (list): A list of triples to add.
             qualifiers (dict, optional): Additional qualifiers to add.
                 The qualifiers can have the following:
-                https://humem.ai/ontology#knownSince: str,
-                https://humem.ai/ontology#derivedFrom: str,
-                https://humem.ai/ontology#strength: int,
+                https://humem.ai/ontology#time_added: str,
+                https://humem.ai/ontology#derived_from: str,
         """
         forbidden_keys = [
             humemai.emotion,
             humemai.location,
-            humemai.event,
-            humemai.eventTime,
-            humemai.currentTime,
+            humemai.current_time,
         ]
         for key in forbidden_keys:
             if key in qualifiers:
                 raise ValueError(f"{key} is not allowed for semantic memories")
 
-        if humemai.knownSince not in qualifiers:
-            raise ValueError("Missing required qualifier: knownSince")
+        if humemai.time_added not in qualifiers:
+            raise ValueError("Missing required qualifier: time_added")
 
-        if qualifiers[humemai.knownSince].datatype != XSD.dateTime:
+        if qualifiers[humemai.time_added].datatype != XSD.dateTime:
             raise ValueError(
-                f"Invalid knownSince format: {qualifiers[humemai.knownSince]}"
+                f"Invalid time_added format: {qualifiers[humemai.time_added]}"
             )
 
+        if humemai.derived_from not in qualifiers:
+            raise ValueError("Missing required qualifier: derived_from")
+
+        qualifiers[humemai.last_accessed] = qualifiers[humemai.time_added]
+
         # Add required qualifiers
-        qualifiers = {humemai.recalled: Literal(0, datatype=XSD.integer), **qualifiers}
+        qualifiers = {
+            humemai.num_recalled: Literal(0, datatype=XSD.integer),
+            **qualifiers,
+        }
         self.add_memory(triples, qualifiers)
 
     def get_memories(
@@ -386,16 +377,14 @@ class Humemai:
         for key, value in qualifiers.items():
             query += f"?statement {key.n3()} {value.n3()} .\n"
 
-        # Add time filtering logic (for currentTime, eventTime, and knownSince)
+        # Add time filtering logic (for current_time, time_added)
         if lower_time_bound and upper_time_bound:
             time_filter = f"""
-            OPTIONAL {{ ?statement humemai:currentTime ?currentTime }}
-            OPTIONAL {{ ?statement humemai:eventTime ?eventTime }}
-            OPTIONAL {{ ?statement humemai:knownSince ?knownSince }}
+            OPTIONAL {{ ?statement humemai:current_time ?current_time }}
+            OPTIONAL {{ ?statement humemai:time_added ?time_added }}
             FILTER(
-                (?currentTime >= {lower_time_bound.n3()} && ?currentTime <= {upper_time_bound.n3()}) ||
-                (?eventTime >= {lower_time_bound.n3()} && ?eventTime <= {upper_time_bound.n3()}) ||
-                (?knownSince >= {lower_time_bound.n3()} && ?knownSince <= {upper_time_bound.n3()})
+                (?current_time >= {lower_time_bound.n3()} && ?current_time <= {upper_time_bound.n3()}) ||
+                (?time_added >= {lower_time_bound.n3()} && ?time_added <= {upper_time_bound.n3()})
             ) .
             """
             query += time_filter
@@ -476,25 +465,20 @@ class Humemai:
         """
         return len(self.graph)
 
-    def get_main_triple_count_except_event(self) -> int:
+    def get_main_triple_count(self) -> int:
         """
-        Count the number of unique memories (subject-predicate-object triples) in the
+        Count the number of main triples (subject-predicate-object triples) in the
         graph. This does not count reified statements.
 
         Returns:
-            int: The count of unique memories.
+            int: The count of main triples.
         """
-        unique_memories = set()
+        main_triple_count = 0
+        for s, p, o in self.graph:
+            if (s, RDF.type, RDF.Statement) not in self.graph:
+                main_triple_count += 1
 
-        # Iterate over reified statements and extract subject-predicate-object triples
-        for s in self.graph.subjects(RDF.type, RDF.Statement):
-            subj = self.graph.value(s, RDF.subject)
-            pred = self.graph.value(s, RDF.predicate)
-            obj = self.graph.value(s, RDF.object)
-
-            unique_memories.add((subj, pred, obj))
-
-        return len(unique_memories)
+        return main_triple_count
 
     def get_memory_count(self) -> int:
         """
@@ -509,7 +493,7 @@ class Humemai:
     def get_short_term_memory_count(self) -> int:
         """
         Count the number of short-term memories in the graph.
-        Short-term memories are reified statements that have the 'currentTime'
+        Short-term memories are reified statements that have the 'current_time'
         qualifier.
 
         Returns:
@@ -518,14 +502,13 @@ class Humemai:
         return sum(
             1
             for statement in self.graph.subjects(RDF.type, RDF.Statement)
-            if self.graph.value(statement, humemai.currentTime) is not None
+            if self.graph.value(statement, humemai.current_time) is not None
         )
 
     def get_long_term_episodic_memory_count(self) -> int:
         """
         Count the number of long-term episodic memories in the graph.
-        Long-term episodic memories are reified statements that have the 'eventTime'
-        qualifier.
+        Long-term episodic memories have time_added qualifier but no derived_from qualifier.
 
         Returns:
             int: The count of long-term episodic memories.
@@ -533,14 +516,15 @@ class Humemai:
         return sum(
             1
             for statement in self.graph.subjects(RDF.type, RDF.Statement)
-            if self.graph.value(statement, humemai.eventTime) is not None
+            if self.graph.value(statement, humemai.time_added) is not None
+            and self.graph.value(statement, humemai.derived_from) is None
+            and self.graph.value(statement, humemai.current_time) is None
         )
 
     def get_long_term_semantic_memory_count(self) -> int:
         """
         Count the number of long-term semantic memories in the graph.
-        Long-term semantic memories are reified statements that have the 'knownSince'
-        qualifier.
+        Long-term semantic memories have time_added qualifier and derived_from qualifier.
 
         Returns:
             int: The count of long-term semantic memories.
@@ -548,201 +532,28 @@ class Humemai:
         return sum(
             1
             for statement in self.graph.subjects(RDF.type, RDF.Statement)
-            if self.graph.value(statement, humemai.knownSince) is not None
+            if self.graph.value(statement, humemai.time_added) is not None
+            and self.graph.value(statement, humemai.derived_from) is not None
+            and self.graph.value(statement, humemai.current_time) is None
         )
 
     def get_long_term_memory_count(self) -> int:
         """
         Count the number of long-term memories in the graph.
-        Long-term memories are reified statements that do NOT have the 'currentTime'
-        qualifier.
+        Long-term memories are reified statements that have the 'time_added'
+        qualifier but not 'current_time' qualifier.
 
         Returns:
             int: The count of long-term memories.
         """
-        return (
-            self.get_long_term_episodic_memory_count()
-            + self.get_long_term_semantic_memory_count()
+        return sum(
+            1
+            for statement in self.graph.subjects(RDF.type, RDF.Statement)
+            if self.graph.value(statement, humemai.time_added) is not None
+            and self.graph.value(statement, humemai.current_time) is None
         )
 
-    def get_event_count(self) -> int:
-        """
-        Count the number of Event instances in the RDF graph.
-
-        Returns:
-            int: The number of Event instances.
-        """
-        return sum(1 for _ in self.graph.subjects(RDF.type, humemai.Event))
-
-    def modify_strength(
-        self,
-        filters: dict[URIRef, Union[URIRef, Literal]],
-        increment_by: Optional[int] = None,
-        multiply_by: Optional[float] = None,
-    ) -> None:
-        """
-        Modify the strength of long-term memories by incrementing/decrementing or
-        multiplying.
-
-        Args:
-            filters (dict): Filters to identify the memory, including subject,
-                predicate, object, and any qualifiers.
-            increment_by (int, optional): Increment or decrement the strength value by
-                this amount.
-            multiply_by (float, optional): Multiply the strength value by this factor.
-                Rounded to the nearest integer.
-        """
-        logger.debug(
-            f"Modifying strength with filters: {filters}, increment_by: {increment_by}, multiply_by: {multiply_by}"
-        )
-
-        subject_filter = filters.get(RDF.subject)
-
-        # Construct SPARQL query using f-strings
-        query = f"""
-        PREFIX humemai: <https://humem.ai/ontology#>
-        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-        PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-
-        SELECT ?statement ?subject ?predicate ?object ?strength
-        WHERE {{
-            ?statement rdf:type rdf:Statement ;
-                    rdf:subject ?subject ;
-                    rdf:predicate ?predicate ;
-                    rdf:object ?object ;
-                    humemai:strength ?strength .
-            FILTER(?subject = <{subject_filter}>) 
-        }}
-        """
-
-        logger.debug(f"Executing SPARQL query:\n{query}")
-
-        # Execute the query
-        results = self.graph.query(query)
-
-        # Iterate over the matching results and modify the strength for each reified statement
-        for row in results:
-            statement = row.statement
-            current_strength = int(row.strength)
-            new_strength = current_strength
-
-            logger.debug(
-                f"Processing statement: {statement}, current strength: {current_strength}"
-            )
-
-            # Apply increment/decrement if specified
-            if increment_by is not None:
-                new_strength += increment_by
-                logger.debug(
-                    f"Strength incremented by {increment_by}. New value: {new_strength}"
-                )
-
-            # Apply multiplication if specified
-            if multiply_by is not None:
-                new_strength = round(current_strength * multiply_by)
-                logger.debug(
-                    f"Strength multiplied by {multiply_by}. New value: {new_strength}"
-                )
-
-            # Ensure the strength remains a positive integer
-            new_strength = max(new_strength, 0)
-
-            # Update the graph with the new strength value for this statement
-            self.graph.set(
-                (
-                    statement,
-                    humemai.strength,
-                    Literal(new_strength, datatype=XSD.integer),
-                )
-            )
-            logger.debug(
-                f"Updated strength for statement: {statement} to {new_strength}"
-            )
-
-    def modify_episodic_event(
-        self,
-        upper_time_bound: Literal,
-        lower_time_bound: Literal,
-        new_event: URIRef,
-        subject: Optional[URIRef] = None,
-        predicate: Optional[URIRef] = None,
-        object_: Optional[URIRef] = None,
-        qualifiers: dict[URIRef, Union[URIRef, Literal]] = {},
-    ) -> None:
-        """
-        Modify the event value for episodic memories that fall within a specific time
-        range and optional filters.
-
-        Args:
-            upper_time_bound (Literal): The upper bound for time filtering (ISO format).
-            lower_time_bound (Literal): The lower bound for time filtering (ISO format).
-            new_event (URIRef): The new value for the event qualifier.
-            subject (URIRef, optional): Filter by subject URI.
-            predicate (URIRef, optional): Filter by predicate URI.
-            object_ (URIRef, optional): Filter by object URI.
-            qualifiers (dict, optional): Additional qualifiers to filter by.
-        """
-        # Construct SPARQL query
-        query = f"""
-        PREFIX humemai: <https://humem.ai/ontology#>
-        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-        PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-
-        SELECT ?statement ?subject ?predicate ?object
-        WHERE {{
-            ?statement rdf:type rdf:Statement ;
-                    rdf:subject ?subject ;
-                    rdf:predicate ?predicate ;
-                    rdf:object ?object ;
-                    humemai:eventTime ?eventTime .
-        """
-
-        # Add filters dynamically based on input using .n3() to ensure proper formatting
-        if subject is not None:
-            query += f"FILTER(?subject = {subject.n3()}) .\n"
-        if predicate is not None:
-            query += f"FILTER(?predicate = {predicate.n3()}) .\n"
-        if object_ is not None:
-            query += f"FILTER(?object = {object_.n3()}) .\n"
-
-        # Add filters for any additional qualifiers provided in the dictionary
-        for qualifier_pred, qualifier_obj in qualifiers.items():
-            query += (
-                f"FILTER(?statement {qualifier_pred.n3()} {qualifier_obj.n3()}) .\n"
-            )
-
-        # Add time range filter
-        query += f"""
-            FILTER(?eventTime >= {lower_time_bound.n3()} && ?eventTime <= {upper_time_bound.n3()}) .
-        }}
-        """
-
-        logger.debug(f"Executing SPARQL query to find episodic memories:\n{query}")
-
-        # Execute the SPARQL query
-        results = self.graph.query(query)
-
-        # Modify the event value for all matching reified statements
-        for row in results:
-            statement = row.statement
-
-            # Log the statement that will be modified
-            logger.debug(f"Modifying event for statement: {statement}")
-
-            # Set the new event value for each matching reified statement
-            self.graph.set(
-                (
-                    statement,
-                    humemai.event,
-                    new_event,
-                )
-            )
-            logger.debug(f"Set new event '{new_event}' for statement: {statement}")
-
-            # Create the event node if it doesn't exist
-            self.add_event(new_event)
-
-    def increment_recalled(
+    def increment_num_recalled(
         self,
         subject: Optional[URIRef] = None,
         predicate: Optional[URIRef] = None,
@@ -752,7 +563,7 @@ class Humemai:
         upper_time_bound: Optional[Literal] = None,
     ) -> None:
         """
-        Increment the 'recalled' value for memories (episodic or semantic) that match
+        Increment the 'num_recalled' value for memories (episodic or semantic) that match
         the filters.
 
         Args:
@@ -770,7 +581,7 @@ class Humemai:
         PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
         PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
-        SELECT ?statement ?subject ?predicate ?object ?recalled
+        SELECT ?statement ?subject ?predicate ?object ?num_recalled
         WHERE {{
             ?statement rdf:type rdf:Statement ;
                     rdf:subject ?subject ;
@@ -792,23 +603,21 @@ class Humemai:
                 f"FILTER(?statement {qualifier_pred.n3()} {qualifier_obj.n3()}) .\n"
             )
 
-        # Add time filtering logic (for currentTime, eventTime, and knownSince)
+        # Add time filtering logic (for current_time and time_added)
         if lower_time_bound and upper_time_bound:
             time_filter = f"""
-            OPTIONAL {{ ?statement humemai:currentTime ?currentTime }}
-            OPTIONAL {{ ?statement humemai:eventTime ?eventTime }}
-            OPTIONAL {{ ?statement humemai:knownSince ?knownSince }}
+            OPTIONAL {{ ?statement humemai:current_time ?current_time }}
+            OPTIONAL {{ ?statement humemai:time_added ?time_added }}
             FILTER(
-                (?currentTime >= {lower_time_bound.n3()} && ?currentTime <= {upper_time_bound.n3()}) ||
-                (?eventTime >= {lower_time_bound.n3()} && ?eventTime <= {upper_time_bound.n3()}) ||
-                (?knownSince >= {lower_time_bound.n3()} && ?knownSince <= {upper_time_bound.n3()})
+                (?current_time >= {lower_time_bound.n3()} && ?current_time <= {upper_time_bound.n3()}) ||
+                (?time_added >= {lower_time_bound.n3()} && ?time_added <= {upper_time_bound.n3()})
             ) .
             """
             query += time_filter
 
-        # Add OPTIONAL to retrieve the recalled value (if it exists)
+        # Add OPTIONAL to retrieve the num_recalled value (if it exists)
         query += """
-            OPTIONAL { ?statement humemai:recalled ?recalled }
+            OPTIONAL { ?statement humemai:num_recalled ?num_recalled }
         }
         """
 
@@ -817,30 +626,130 @@ class Humemai:
         # Execute the SPARQL query to retrieve matching reified statements
         results = self.graph.query(query)
 
-        # Iterate through the results to increment the recalled value
+        # Iterate through the results to increment the num_recalled value
         for row in results:
             statement = row.statement
-            current_recalled_value = row.recalled
+            current_num_recalled_value = row.num_recalled
 
-            if current_recalled_value is not None:
-                # If 'recalled' exists, increment it by 1
-                new_recalled_value = int(current_recalled_value) + 1
+            if current_num_recalled_value is not None:
+                # If 'num_recalled' exists, increment it by 1
+                new_num_recalled_value = int(current_num_recalled_value) + 1
             else:
-                # If 'recalled' does not exist, initialize it to 1 (default is 0)
-                new_recalled_value = 1
+                # If 'num_recalled' does not exist, initialize it to 1 (default is 0)
+                new_num_recalled_value = 1
 
-            # Update or add the new 'recalled' value in the graph
+            # Update or add the new 'num_recalled' value in the graph
             self.graph.set(
                 (
                     statement,
-                    humemai.recalled,
-                    Literal(new_recalled_value, datatype=XSD.integer),
+                    humemai.num_recalled,
+                    Literal(new_num_recalled_value, datatype=XSD.integer),
                 )
             )
 
             logger.debug(
-                f"Updated recalled for statement {statement} to {new_recalled_value}"
+                f"Updated num_recalled for statement {statement} to {new_num_recalled_value}"
             )
+
+    def update_last_accessed(
+        self,
+        subject: Optional[URIRef] = None,
+        predicate: Optional[URIRef] = None,
+        object_: Optional[URIRef] = None,
+        qualifiers: dict[URIRef, Union[URIRef, Literal]] = {},
+        new_time: Optional[Literal] = None,
+        lower_time_bound: Optional[Literal] = None,
+        upper_time_bound: Optional[Literal] = None,
+    ) -> None:
+        """
+        Update the 'last_accessed' qualifier for all statements that match the given
+        filters. This is structurally similar to 'increment_num_recalled' but instead sets
+        'last_accessed' to a new time.
+
+        Args:
+            subject (URIRef, optional): Filter by subject URI.
+            predicate (URIRef, optional): Filter by predicate URI.
+            object_ (URIRef, optional): Filter by object URI.
+            qualifiers (dict, optional): Additional qualifiers to filter by.
+            new_time (Literal, optional): The new last_accessed time to set. Must be a
+                Literal with datatype XSD.dateTime if provided.
+            lower_time_bound (Literal, optional): Lower bound for time filtering (ISO format).
+            upper_time_bound (Literal, optional): Upper bound for time filtering (ISO format).
+        """
+        logger.debug(
+            f"update_last_accessed called with subject={subject}, predicate={predicate}, "
+            f"object_={object_}, qualifiers={qualifiers}, new_time={new_time}, "
+            f"lower_time_bound={lower_time_bound}, upper_time_bound={upper_time_bound}"
+        )
+
+        # If user didn't pass a new_time, there's nothing to set
+        if new_time is None:
+            logger.warning("No new_time provided. Skipping update_last_accessed.")
+            return
+
+        # Validate new_time is an xsd:dateTime literal if you desire that restriction
+        if not (isinstance(new_time, Literal) and new_time.datatype == XSD.dateTime):
+            raise ValueError(
+                f"new_time must be an rdflib Literal with datatype XSD.dateTime. Got: {new_time}"
+            )
+
+        # Construct SPARQL query
+        query = f"""
+        PREFIX humemai: <https://humem.ai/ontology#>
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+        SELECT ?statement ?subject ?predicate ?object
+        WHERE {{
+            ?statement rdf:type rdf:Statement ;
+                    rdf:subject ?subject ;
+                    rdf:predicate ?predicate ;
+                    rdf:object ?object .
+        """
+
+        # Add filters for subject/predicate/object if provided
+        if subject is not None:
+            query += f"FILTER(?subject = {subject.n3()})\n"
+        if predicate is not None:
+            query += f"FILTER(?predicate = {predicate.n3()})\n"
+        if object_ is not None:
+            query += f"FILTER(?object = {object_.n3()})\n"
+
+        # Add filters for any additional qualifiers
+        for q_pred, q_obj in qualifiers.items():
+            # There's no direct "FILTER(?statement q_pred q_obj)" in SPARQL.
+            # Instead we require a triple like: ?statement q_pred q_obj.
+            # Then no separate FILTER needed.
+            # We'll add lines like: "?statement <uri> <obj> ."
+            query += f"?statement {q_pred.n3()} {q_obj.n3()} .\n"
+
+        # Add optional time filtering logic
+        # We'll check current_time, time_added, or last_accessed
+        if lower_time_bound and upper_time_bound:
+            query += f"""
+            OPTIONAL {{ ?statement humemai:current_time ?ct }}
+            OPTIONAL {{ ?statement humemai:time_added ?ta }}
+            OPTIONAL {{ ?statement humemai:last_accessed ?la }}
+            FILTER(
+                (?ct >= {lower_time_bound.n3()} && ?ct <= {upper_time_bound.n3()})
+                || (?ta >= {lower_time_bound.n3()} && ?ta <= {upper_time_bound.n3()})
+                || (?la >= {lower_time_bound.n3()} && ?la <= {upper_time_bound.n3()})
+            ) .
+            """
+
+        query += "}"  # close WHERE block
+
+        logger.debug(f"Executing SPARQL query:\n{query}")
+
+        # Execute the query
+        results = self.graph.query(query)
+
+        # For each matching statement, set last_accessed to new_time
+        for row in results:
+            statement = row.statement
+            logger.debug(f"Updating last_accessed for statement: {statement}")
+            self.graph.set((statement, humemai.last_accessed, new_time))
+            logger.debug(f"Set last_accessed={new_time} for statement: {statement}")
 
     def _strip_namespace(self, uri: Union[URIRef, Literal]) -> str:
         """
@@ -859,7 +768,7 @@ class Humemai:
     def is_reified_statement_short_term(self, statement: URIRef) -> bool:
         """
         Check if a given reified statement is a short-term memory by verifying if it
-        has a 'currentTime' qualifier.
+        has a 'current_time' qualifier.
 
         Args:
             statement (URIRef): The reified statement to check.
@@ -867,8 +776,8 @@ class Humemai:
         Returns:
             bool: True if it's a short-term memory, False otherwise.
         """
-        currentTime = self.graph.value(statement, humemai.currentTime)
-        return currentTime is not None
+        current_time = self.graph.value(statement, humemai.current_time)
+        return current_time is not None
 
     def _add_reified_statement_to_working_memory_and_increment_recall(
         self,
@@ -902,38 +811,38 @@ class Humemai:
             ):
                 logger.debug(f"Processing reified statement: {statement}")
 
-                # Retrieve the current recalled value
-                recalled_value = 0
-                for _, _, recalled in self.graph.triples(
-                    (statement, humemai.recalled, None)
+                # Retrieve the current num_recalled value
+                num_recalled_value = 0
+                for _, _, num_recalled in self.graph.triples(
+                    (statement, humemai.num_recalled, None)
                 ):
-                    recalled_value = int(recalled)
+                    num_recalled_value = int(num_recalled)
 
-                # Increment the recalled value in the long-term memory for this reified statement
-                new_recalled_value = recalled_value + 1
+                # Increment the num_recalled value in the long-term memory for this reified statement
+                new_num_recalled_value = num_recalled_value + 1
                 self.graph.set(
                     (
                         statement,
-                        humemai.recalled,
-                        Literal(new_recalled_value, datatype=XSD.integer),
+                        humemai.num_recalled,
+                        Literal(new_num_recalled_value, datatype=XSD.integer),
                     )
                 )
                 logger.debug(
-                    f"Updated recalled for statement {statement} to {new_recalled_value}"
+                    f"Updated num_recalled for statement {statement} to {new_num_recalled_value}"
                 )
 
                 # Now, add the updated reified statement to the working memory
                 for stmt_p, stmt_o in self.graph.predicate_objects(statement):
-                    if stmt_p == humemai.recalled:
+                    if stmt_p == humemai.num_recalled:
                         working_memory.graph.add(
                             (
                                 statement,
                                 stmt_p,
-                                Literal(new_recalled_value, datatype=XSD.integer),
+                                Literal(new_num_recalled_value, datatype=XSD.integer),
                             )
                         )
                         logger.debug(
-                            f"Added updated recalled value ({new_recalled_value}) to working memory for statement: {statement}"
+                            f"Added updated num_recalled value ({new_num_recalled_value}) to working memory for statement: {statement}"
                         )
                     else:
                         working_memory.graph.add((statement, stmt_p, stmt_o))
@@ -943,7 +852,7 @@ class Humemai:
 
     def get_short_term_memories(self) -> Humemai:
         """
-        Query the RDF graph to retrieve all short-term memories with a currentTime
+        Query the RDF graph to retrieve all short-term memories with a current_time
         qualifier and include all associated qualifiers (e.g., location, emotion, etc.).
 
         Returns:
@@ -951,7 +860,7 @@ class Humemai:
         """
         short_term_memory = Humemai()
 
-        # SPARQL query to retrieve all reified statements with a currentTime qualifier, along with other qualifiers
+        # SPARQL query to retrieve all reified statements with a current_time qualifier, along with other qualifiers
         query = """
         PREFIX humemai: <https://humem.ai/ontology#>
         PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -962,7 +871,7 @@ class Humemai:
                     rdf:subject ?subject ;
                     rdf:predicate ?predicate ;
                     rdf:object ?object ;
-                    humemai:currentTime ?currentTime .
+                    humemai:current_time ?current_time .
             OPTIONAL { ?statement ?qualifier_pred ?qualifier_obj }
         }
         """
@@ -1024,8 +933,8 @@ class Humemai:
     def get_long_term_memories(self) -> Humemai:
         """
         Retrieve all long-term memories from the RDF graph.
-        Long-term memories are identified by the presence of either 'eventTime' or 'knownSince'
-        qualifiers and the absence of a 'currentTime' qualifier.
+        Long-term memories are identified by the presence of 'time_added'
+        qualifier and the absence of a 'current_time' qualifier.
 
         Returns:
             Humemai: A new Humemai object containing all long-term memories (episodic and
@@ -1033,8 +942,8 @@ class Humemai:
         """
         long_term_memory = Humemai()
 
-        # SPARQL query to retrieve all reified statements that have either eventTime or knownSince,
-        # and do not have a currentTime qualifier
+        # SPARQL query to retrieve all reified statements that have time_added,
+        # and do not have a current_time qualifier
         query = """
         PREFIX humemai: <https://humem.ai/ontology#>
         PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -1044,15 +953,9 @@ class Humemai:
             ?statement rdf:type rdf:Statement ;
                     rdf:subject ?subject ;
                     rdf:predicate ?predicate ;
-                    rdf:object ?object .
-            FILTER NOT EXISTS { ?statement humemai:currentTime ?currentTime }
-            {
-                FILTER EXISTS { ?statement humemai:eventTime ?eventTime }
-            }
-            UNION
-            {
-                FILTER EXISTS { ?statement humemai:knownSince ?knownSince }
-            }
+                    rdf:object ?object ;
+                    humemai:time_added ?time_added .
+            FILTER NOT EXISTS { ?statement humemai:current_time ?current_time }
         }
         """
 
@@ -1075,11 +978,11 @@ class Humemai:
             long_term_memory.graph.add((reified_statement, RDF.predicate, pred))
             long_term_memory.graph.add((reified_statement, RDF.object, obj))
 
-            # Now, add all qualifiers (excluding 'currentTime')
+            # Now, add all qualifiers (excluding 'current_time')
             for qualifier_pred, qualifier_obj in self.graph.predicate_objects(
                 row.statement
             ):
-                if qualifier_pred != humemai.currentTime:
+                if qualifier_pred != humemai.current_time:
                     long_term_memory.graph.add(
                         (reified_statement, qualifier_pred, qualifier_obj)
                     )
@@ -1122,10 +1025,10 @@ class Humemai:
         Args:
             memory_type (str, optional): The type of memory to iterate over.
                 Valid values: "short_term", "long_term", "episodic", "semantic", or "all".
-                - "short_term": Short-term memories (with 'currentTime').
-                - "long_term": Long-term memories (with 'eventTime' or 'knownSince', but without 'currentTime').
-                - "episodic": Long-term episodic memories (with 'eventTime', but without 'knownSince' and 'currentTime').
-                - "semantic": Long-term semantic memories (with 'knownSince', but without 'eventTime' and 'currentTime').
+                - "short_term": Short-term memories (with 'current_time').
+                - "long_term": Long-term memories (with 'time_added', but without 'current_time').
+                - "episodic": Long-term episodic memories (with 'time_added', but without 'derived_from' and 'current_time').
+                - "semantic": Long-term semantic memories (with 'time_added' and 'derived_from', but without 'current_time').
                 - "all": Iterate over all memories (both short-term and long-term).
                 If None, defaults to "all".
 
@@ -1154,90 +1057,36 @@ class Humemai:
                     qualifiers[q_pred] = q_obj
 
             # Determine the type of memory
-            currentTime = self.graph.value(statement, humemai.currentTime)
-            eventTime = self.graph.value(statement, humemai.eventTime)
-            knownSince = self.graph.value(statement, humemai.knownSince)
+            current_time = self.graph.value(statement, humemai.current_time)
+            time_added = self.graph.value(statement, humemai.time_added)
+            derived_from = self.graph.value(statement, humemai.derived_from)
 
             # Filter based on the memory_type argument
             if memory_type == "short_term":
-                # Short-term memory has currentTime
-                if currentTime:
+                # Short-term memory has current_time
+                if current_time:
                     yield (subj, pred, obj, qualifiers)
 
             elif memory_type == "long_term":
-                # Long-term memory has either eventTime or knownSince, and no currentTime
-                if not currentTime and (eventTime or knownSince):
+                # Long-term memory has time_added, and no current_time
+                if not current_time and time_added:
                     yield (subj, pred, obj, qualifiers)
 
             elif memory_type == "episodic":
-                # Episodic memory is long-term with eventTime but no knownSince and no currentTime
-                if not currentTime and eventTime and not knownSince:
+                # Episodic memory is long-term with time_added but no derived_from and no current_time
+                if not current_time and time_added and not derived_from:
                     yield (subj, pred, obj, qualifiers)
 
             elif memory_type == "semantic":
-                # Semantic memory is long-term with knownSince but no eventTime and no currentTime
-                if not currentTime and not eventTime and knownSince:
+                # Semantic memory is long-term with time_added and derived_from but no current_time
+                if not current_time and time_added and derived_from:
                     yield (subj, pred, obj, qualifiers)
 
             elif memory_type == "all":
                 # All memories, regardless of type
                 yield (subj, pred, obj, qualifiers)
 
-    def iterate_events(self) -> URIRef:
-        """
-        Iterate over all event nodes in the RDF graph.
-
-        Yields:
-            URIRef: Each event node that is an instance of humemai:Event.
-        """
-        for event_node in self.graph.subjects(RDF.type, humemai.Event):
-            yield event_node
-
-    def print_events(self, debug: bool = False) -> Optional[str]:
-        """
-        Retrieve all triples where an Event entity is involved either as the subject or the object
-        and format them as a readable string.
-
-        Args:
-            debug (bool): If True, return the string instead of printing.
-
-        Returns:
-            str: A formatted string containing all event-related triples.
-        """
-        event_triples = []
-
-        # Find all triples where the subject is of type Event
-        for event_node in self.graph.subjects(RDF.type, humemai.Event):
-            # Get all triples where this event node is either subject or object
-            for s, p, o in self.graph.triples((event_node, None, None)):
-                event_triples.append((s, p, o))
-            for s, p, o in self.graph.triples((None, None, event_node)):
-                event_triples.append((s, p, o))
-
-        if not event_triples:
-            if debug:
-                return ""
-            else:
-                print("")
-                return
-
-        event_strings = []
-
-        for subj, pred, obj in event_triples:
-            if pred == humemai.event or pred == RDF.type:
-                continue
-            subj_str = self._strip_namespace(subj)
-            pred_str = self._strip_namespace(pred)
-            obj_str = self._strip_namespace(obj)
-            event_strings.append(f"({subj_str}, {pred_str}, {obj_str})")
-
-        if debug:
-            return "\n".join(event_strings)
-        else:
-            print("\n".join(event_strings))
-            return
-
-    def print_all_raw_triples(self, debug: bool = False) -> Optional[str]:
+    def print_raw_triples(self, debug: bool = False) -> Optional[str]:
         """
         Print all triples in the graph in a readable format.
 
@@ -1249,6 +1098,22 @@ class Humemai:
         """
         raw_triples_string = []
         for subj, pred, obj in self.graph:
+            raw_triples_string.append(f"({subj}, {pred}, {obj})")
+
+        if debug:
+            return "\n".join(raw_triples_string)
+        else:
+            print("\n".join(raw_triples_string))
+            return
+
+    def print_main_triples(self, debug: bool = False) -> Optional[str]:
+        """this counts the number of unique memories in the graph, excluding reified
+        statements"""
+        raw_triples_string = []
+
+        for subj, pred, obj in self.graph:
+            if (subj, RDF.type, RDF.Statement) in self.graph:
+                continue
             raw_triples_string.append(f"({subj}, {pred}, {obj})")
 
         if debug:
@@ -1303,7 +1168,7 @@ class Humemai:
         If `include_all_long_term` is True, all long-term memories will be included,
         regardless of the BFS traversal or hops.
 
-        For each long-term memory retrieved, the 'recalled' qualifier is incremented by 1.
+        For each long-term memory retrieved, the 'num_recalled' qualifier is incremented by 1.
 
         Args:
             trigger_node (URIRef, optional): The starting node for memory traversal.
@@ -1396,7 +1261,7 @@ class Humemai:
                     if statement not in processed_statements:
                         working_memory.graph.add((current_node, p, o))
 
-                        # Add the reified statement and increment 'recalled'
+                        # Add the reified statement and increment 'num_recalled'
                         self._add_reified_statement_to_working_memory_and_increment_recall(
                             current_node,
                             p,
@@ -1428,7 +1293,7 @@ class Humemai:
                     if statement not in processed_statements:
                         working_memory.graph.add((s, p, current_node))
 
-                        # Add the reified statement and increment 'recalled'
+                        # Add the reified statement and increment 'num_recalled'
                         self._add_reified_statement_to_working_memory_and_increment_recall(
                             s,
                             p,
@@ -1466,9 +1331,9 @@ class Humemai:
             # Check if the memory ID matches
             if memory_id == memory_id_to_move:
                 location = qualifiers_.get(humemai.location)
-                currentTime = qualifiers_.get(humemai.currentTime)
+                current_time = qualifiers_.get(humemai.current_time)
 
-                qualifiers[humemai.eventTime] = currentTime
+                qualifiers[humemai.time_added] = current_time
 
                 if location:
                     qualifiers[humemai.location] = location
@@ -1495,7 +1360,8 @@ class Humemai:
         Move the specified short-term memory to long-term semantic memory.
 
         Args:
-            memory_id_to_move (Literal): The memory ID to move from short-term to long-term.
+            memory_id_to_move (Literal): The memory ID to move from short-term to
+            long-term.
         """
         if memory_id_to_move.datatype != XSD.integer:
             raise ValueError("Memory ID must be an integer.")
@@ -1506,9 +1372,15 @@ class Humemai:
 
             # Check if the memory ID matches
             if memory_id == memory_id_to_move:
-                currentTime = qualifiers_.get(humemai.currentTime)
+                current_time = qualifiers_.get(humemai.current_time)
 
-                qualifiers[humemai.knownSince] = currentTime
+                qualifiers[humemai.time_added] = current_time
+
+                # Ensure derived_from is present for semantic memory
+                if humemai.derived_from not in qualifiers:
+                    raise ValueError(
+                        "Missing required qualifier: derived_from for semantic memory"
+                    )
 
                 # Move to long-term semantic memory
                 self.add_semantic_memory(
@@ -1521,6 +1393,20 @@ class Humemai:
                     f"Moved short-term memory with ID {memory_id_to_move} to semantic long-term memory."
                 )
                 break
+
+    def move_all_short_term_to_episodic(self) -> None:
+        """
+        Move all short-term memories to long-term episodic memory.
+        """
+        for subj, pred, obj, qualifiers in self.iterate_memories("short_term"):
+            self.move_short_term_to_episodic(qualifiers.get(humemai.memoryID))
+
+    def move_all_short_term_to_semantic(self) -> None:
+        """
+        Move all short-term memories to long-term semantic memory.
+        """
+        for subj, pred, obj, qualifiers in self.iterate_memories("short_term"):
+            self.move_short_term_to_semantic(qualifiers.get(humemai.memoryID))
 
     def clear_short_term_memories(self) -> None:
         """

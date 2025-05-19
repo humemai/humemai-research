@@ -41,7 +41,7 @@ class TestMemoryGetMemories(unittest.TestCase):
         # Add memories to the graph with proper URIRef and Literal formats
         qualifiers_episodic = {
             self.humemai.location: Literal("Paris"),
-            self.humemai.eventTime: Literal(
+            self.humemai.time_added: Literal(
                 "2024-04-27T15:00:00", datatype=XSD.dateTime
             ),
             self.humemai.emotion: Literal("happy"),
@@ -50,8 +50,8 @@ class TestMemoryGetMemories(unittest.TestCase):
 
         qualifiers_semantic = {
             self.humemai.strength: Literal(8, datatype=XSD.integer),
-            self.humemai.derivedFrom: Literal("study"),
-            self.humemai.knownSince: Literal(
+            self.humemai.derived_from: Literal("study"),
+            self.humemai.known_since: Literal(
                 "2024-04-27T15:00:00", datatype=XSD.dateTime
             ),
         }
@@ -60,7 +60,7 @@ class TestMemoryGetMemories(unittest.TestCase):
         # Short-term memory with correct qualifier structure
         short_term_qualifiers = {
             self.humemai.location: Literal("Berlin"),
-            self.humemai.currentTime: Literal(
+            self.humemai.current_time: Literal(
                 "2024-04-27T18:00:00", datatype=XSD.dateTime
             ),
         }
@@ -91,13 +91,13 @@ class TestMemoryGetMemories(unittest.TestCase):
         # Check for Alice's memory qualifiers
         self.assertIn("location", result)
         self.assertIn("Paris", result)
-        self.assertIn("eventTime", result)
+        self.assertIn("time_added", result)
         self.assertIn("2024-04-27T15:00:00", result)
         self.assertIn("emotion", result)
         self.assertIn("happy", result)
 
         # Check for Cat's memory qualifiers
-        self.assertIn("derivedFrom", result)
+        self.assertIn("derived_from", result)
         self.assertIn("study", result)
         self.assertIn("strength", result)
         self.assertIn("8", result)
@@ -198,7 +198,7 @@ class TestMemoryGetMemoryCount(unittest.TestCase):
         # Add one memory
         qualifiers_episodic = {
             self.humemai.location: Literal("Paris"),
-            self.humemai.eventTime: Literal(
+            self.humemai.time_added: Literal(
                 "2024-04-27T15:00:00", datatype=XSD.dateTime
             ),
             self.humemai.emotion: Literal("happy"),
@@ -216,7 +216,7 @@ class TestMemoryGetMemoryCount(unittest.TestCase):
         # Add the same triple multiple times with different qualifiers
         qualifiers_episodic1 = {
             self.humemai.location: Literal("Paris"),
-            self.humemai.eventTime: Literal(
+            self.humemai.time_added: Literal(
                 "2024-04-27T15:00:00", datatype=XSD.dateTime
             ),
             self.humemai.emotion: Literal("happy"),
@@ -224,7 +224,7 @@ class TestMemoryGetMemoryCount(unittest.TestCase):
 
         qualifiers_episodic2 = {
             self.humemai.location: Literal("London"),
-            self.humemai.eventTime: Literal(
+            self.humemai.time_added: Literal(
                 "2024-05-01T09:00:00", datatype=XSD.dateTime
             ),
             self.humemai.emotion: Literal("excited"),
@@ -232,7 +232,7 @@ class TestMemoryGetMemoryCount(unittest.TestCase):
 
         qualifiers_episodic3 = {
             self.humemai.location: Literal("Berlin"),
-            self.humemai.eventTime: Literal(
+            self.humemai.time_added: Literal(
                 "2024-05-10T10:30:00", datatype=XSD.dateTime
             ),
             self.humemai.emotion: Literal("nervous"),
@@ -258,7 +258,7 @@ class TestMemoryGetMemoryCount(unittest.TestCase):
         # Add multiple unique triples
         qualifiers_episodic = {
             self.humemai.location: Literal("Paris"),
-            self.humemai.eventTime: Literal(
+            self.humemai.time_added: Literal(
                 "2024-04-27T15:00:00", datatype=XSD.dateTime
             ),
             self.humemai.emotion: Literal("happy"),
@@ -266,8 +266,8 @@ class TestMemoryGetMemoryCount(unittest.TestCase):
 
         qualifiers_semantic = {
             self.humemai.strength: Literal(8, datatype=XSD.integer),
-            self.humemai.derivedFrom: Literal("study"),
-            self.humemai.knownSince: Literal(
+            self.humemai.derived_from: Literal("study"),
+            self.humemai.known_since: Literal(
                 "2024-04-27T15:00:00", datatype=XSD.dateTime
             ),
         }
@@ -278,7 +278,7 @@ class TestMemoryGetMemoryCount(unittest.TestCase):
         # Short-term memory
         short_term_qualifiers = {
             self.humemai.location: Literal("Berlin"),
-            self.humemai.currentTime: Literal(
+            self.humemai.current_time: Literal(
                 "2024-04-27T18:00:00", datatype=XSD.dateTime
             ),
         }
@@ -297,7 +297,7 @@ class TestMemoryGetMemoryCount(unittest.TestCase):
         # Add the same triple multiple times with different qualifiers
         qualifiers_episodic1 = {
             self.humemai.location: Literal("Paris"),
-            self.humemai.eventTime: Literal(
+            self.humemai.time_added: Literal(
                 "2024-04-27T15:00:00", datatype=XSD.dateTime
             ),
             self.humemai.emotion: Literal("happy"),
@@ -305,7 +305,7 @@ class TestMemoryGetMemoryCount(unittest.TestCase):
 
         qualifiers_episodic2 = {
             self.humemai.location: Literal("London"),
-            self.humemai.eventTime: Literal(
+            self.humemai.time_added: Literal(
                 "2024-05-01T09:00:00", datatype=XSD.dateTime
             ),
             self.humemai.emotion: Literal("excited"),
@@ -313,8 +313,8 @@ class TestMemoryGetMemoryCount(unittest.TestCase):
 
         qualifiers_semantic = {
             self.humemai.strength: Literal(8, datatype=XSD.integer),
-            self.humemai.derivedFrom: Literal("study"),
-            self.humemai.knownSince: Literal(
+            self.humemai.derived_from: Literal("study"),
+            self.humemai.known_since: Literal(
                 "2024-04-27T15:00:00", datatype=XSD.dateTime
             ),
         }
@@ -326,7 +326,7 @@ class TestMemoryGetMemoryCount(unittest.TestCase):
 
         short_term_qualifiers = {
             self.humemai.location: Literal("Berlin"),
-            self.humemai.currentTime: Literal(
+            self.humemai.current_time: Literal(
                 "2024-04-27T18:00:00", datatype=XSD.dateTime
             ),
         }

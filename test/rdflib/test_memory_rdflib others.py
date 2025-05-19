@@ -36,7 +36,7 @@ class TestIncrementRecalled(unittest.TestCase):
         # Define episodic and semantic qualifiers
         episodic_qualifiers = {
             self.humemai.location: Literal("New York"),
-            self.humemai.eventTime: Literal(
+            self.humemai.time_added: Literal(
                 "2024-04-27T15:00:00", datatype=XSD.dateTime
             ),
             self.humemai.emotion: Literal("happy"),
@@ -44,11 +44,11 @@ class TestIncrementRecalled(unittest.TestCase):
         }
 
         semantic_qualifiers = {
-            self.humemai.knownSince: Literal(
+            self.humemai.known_since: Literal(
                 "2024-04-27T15:00:00", datatype=XSD.dateTime
             ),
             self.humemai.strength: Literal(5, datatype=XSD.integer),
-            self.humemai.derivedFrom: Literal("study"),
+            self.humemai.derived_from: Literal("study"),
         }
 
         # Add episodic and semantic memories
@@ -62,7 +62,7 @@ class TestIncrementRecalled(unittest.TestCase):
         Test incrementing the recalled value multiple times for both episodic and semantic memories.
         """
         # Increment recalled values once
-        self.memory.increment_recalled()
+        self.memory.increment_num_recalled()
 
         # Retrieve the updated memory system after first increment
         result = self.memory.print_memories(True)
@@ -71,7 +71,7 @@ class TestIncrementRecalled(unittest.TestCase):
         self.assertIn("'1'", result)
 
         # Increment recalled values again
-        self.memory.increment_recalled()
+        self.memory.increment_num_recalled()
 
         # Retrieve the updated memory system after second increment
         result = self.memory.print_memories(True)
@@ -80,7 +80,7 @@ class TestIncrementRecalled(unittest.TestCase):
         self.assertIn("'2'", result)
 
         # Increment recalled values a third time
-        self.memory.increment_recalled()
+        self.memory.increment_num_recalled()
 
         # Retrieve the updated memory system after third increment
         result = self.memory.print_memories(True)
@@ -126,7 +126,7 @@ class TestRefiedMemory(unittest.TestCase):
         self.memory.graph.triples.return_value = [
             (
                 self.reified_statement,
-                URIRef("https://humem.ai/ontology#recalled"),
+                URIRef("https://humem.ai/ontology#num_recalled"),
                 Literal(1, datatype=XSD.integer),
             )
         ]
@@ -136,7 +136,7 @@ class TestRefiedMemory(unittest.TestCase):
             if statement == self.reified_statement:
                 return [
                     (
-                        URIRef("https://humem.ai/ontology#recalled"),
+                        URIRef("https://humem.ai/ontology#num_recalled"),
                         Literal(2, datatype=XSD.integer),
                     )
                 ]
@@ -153,7 +153,7 @@ class TestRefiedMemory(unittest.TestCase):
         self.memory.graph.set.assert_called_with(
             (
                 self.reified_statement,
-                URIRef("https://humem.ai/ontology#recalled"),
+                URIRef("https://humem.ai/ontology#num_recalled"),
                 Literal(2, datatype=XSD.integer),
             )
         )
@@ -162,7 +162,7 @@ class TestRefiedMemory(unittest.TestCase):
         self.working_memory.graph.add.assert_any_call(
             (
                 self.reified_statement,
-                URIRef("https://humem.ai/ontology#recalled"),
+                URIRef("https://humem.ai/ontology#num_recalled"),
                 Literal(2, datatype=XSD.integer),
             )
         )
@@ -184,7 +184,7 @@ class TestRefiedMemory(unittest.TestCase):
             if statement == self.reified_statement:
                 return [
                     (
-                        URIRef("https://humem.ai/ontology#recalled"),
+                        URIRef("https://humem.ai/ontology#num_recalled"),
                         Literal(1, datatype=XSD.integer),
                     )
                 ]
@@ -201,7 +201,7 @@ class TestRefiedMemory(unittest.TestCase):
         self.memory.graph.set.assert_called_with(
             (
                 self.reified_statement,
-                URIRef("https://humem.ai/ontology#recalled"),
+                URIRef("https://humem.ai/ontology#num_recalled"),
                 Literal(1, datatype=XSD.integer),
             )
         )
@@ -210,7 +210,7 @@ class TestRefiedMemory(unittest.TestCase):
         self.working_memory.graph.add.assert_any_call(
             (
                 self.reified_statement,
-                URIRef("https://humem.ai/ontology#recalled"),
+                URIRef("https://humem.ai/ontology#num_recalled"),
                 Literal(1, datatype=XSD.integer),
             )
         )
@@ -245,7 +245,7 @@ class TestRefiedMemory(unittest.TestCase):
             if statement == specific_statement:
                 return [
                     (
-                        URIRef("https://humem.ai/ontology#recalled"),
+                        URIRef("https://humem.ai/ontology#num_recalled"),
                         Literal(1, datatype=XSD.integer),
                     )
                 ]
@@ -266,7 +266,7 @@ class TestRefiedMemory(unittest.TestCase):
         self.memory.graph.set.assert_called_once_with(
             (
                 specific_statement,
-                URIRef("https://humem.ai/ontology#recalled"),
+                URIRef("https://humem.ai/ontology#num_recalled"),
                 Literal(1, datatype=XSD.integer),
             )
         )
@@ -275,7 +275,7 @@ class TestRefiedMemory(unittest.TestCase):
         self.working_memory.graph.add.assert_called_once_with(
             (
                 specific_statement,
-                URIRef("https://humem.ai/ontology#recalled"),
+                URIRef("https://humem.ai/ontology#num_recalled"),
                 Literal(1, datatype=XSD.integer),
             )
         )
@@ -324,14 +324,14 @@ class TestRefiedMemory(unittest.TestCase):
             [
                 (
                     self.reified_statement,
-                    URIRef("https://humem.ai/ontology#recalled"),
+                    URIRef("https://humem.ai/ontology#num_recalled"),
                     Literal(1, datatype=XSD.integer),
                 )
             ],
             [
                 (
                     reified_statement_2,
-                    URIRef("https://humem.ai/ontology#recalled"),
+                    URIRef("https://humem.ai/ontology#num_recalled"),
                     Literal(1, datatype=XSD.integer),
                 )
             ],
@@ -342,7 +342,7 @@ class TestRefiedMemory(unittest.TestCase):
             if statement in [self.reified_statement, reified_statement_2]:
                 return [
                     (
-                        URIRef("https://humem.ai/ontology#recalled"),
+                        URIRef("https://humem.ai/ontology#num_recalled"),
                         Literal(2, datatype=XSD.integer),
                     )
                 ]
@@ -360,14 +360,14 @@ class TestRefiedMemory(unittest.TestCase):
             unittest.mock.call(
                 (
                     self.reified_statement,
-                    URIRef("https://humem.ai/ontology#recalled"),
+                    URIRef("https://humem.ai/ontology#num_recalled"),
                     Literal(2, datatype=XSD.integer),
                 )
             ),
             unittest.mock.call(
                 (
                     reified_statement_2,
-                    URIRef("https://humem.ai/ontology#recalled"),
+                    URIRef("https://humem.ai/ontology#num_recalled"),
                     Literal(2, datatype=XSD.integer),
                 )
             ),
@@ -379,14 +379,14 @@ class TestRefiedMemory(unittest.TestCase):
             unittest.mock.call(
                 (
                     self.reified_statement,
-                    URIRef("https://humem.ai/ontology#recalled"),
+                    URIRef("https://humem.ai/ontology#num_recalled"),
                     Literal(2, datatype=XSD.integer),
                 )
             ),
             unittest.mock.call(
                 (
                     reified_statement_2,
-                    URIRef("https://humem.ai/ontology#recalled"),
+                    URIRef("https://humem.ai/ontology#num_recalled"),
                     Literal(2, datatype=XSD.integer),
                 )
             ),
@@ -408,13 +408,13 @@ class TestRefiedMemory(unittest.TestCase):
         def triples_side_effect(query):
             if query == (
                 self.reified_statement,
-                URIRef("https://humem.ai/ontology#recalled"),
+                URIRef("https://humem.ai/ontology#num_recalled"),
                 None,
             ):
                 return [
                     (
                         self.reified_statement,
-                        URIRef("https://humem.ai/ontology#recalled"),
+                        URIRef("https://humem.ai/ontology#num_recalled"),
                         Literal(1, datatype=XSD.integer),
                     )
                 ]
@@ -428,7 +428,7 @@ class TestRefiedMemory(unittest.TestCase):
             if statement == self.reified_statement:
                 return [
                     (
-                        URIRef("https://humem.ai/ontology#recalled"),
+                        URIRef("https://humem.ai/ontology#num_recalled"),
                         Literal(2, datatype=XSD.integer),
                     ),
                     (
@@ -462,7 +462,7 @@ class TestRefiedMemory(unittest.TestCase):
         self.memory.graph.set.assert_called_with(
             (
                 self.reified_statement,
-                URIRef("https://humem.ai/ontology#recalled"),
+                URIRef("https://humem.ai/ontology#num_recalled"),
                 Literal(2, datatype=XSD.integer),
             )
         )
@@ -472,7 +472,7 @@ class TestRefiedMemory(unittest.TestCase):
             unittest.mock.call(
                 (
                     self.reified_statement,
-                    URIRef("https://humem.ai/ontology#recalled"),
+                    URIRef("https://humem.ai/ontology#num_recalled"),
                     Literal(2, datatype=XSD.integer),
                 )
             ),
@@ -538,14 +538,14 @@ class TestRefiedMemory(unittest.TestCase):
             [
                 (
                     self.reified_statement,
-                    URIRef("https://humem.ai/ontology#recalled"),
+                    URIRef("https://humem.ai/ontology#num_recalled"),
                     Literal(1, datatype=XSD.integer),
                 )
             ],
             [
                 (
                     reified_statement_2,
-                    URIRef("https://humem.ai/ontology#recalled"),
+                    URIRef("https://humem.ai/ontology#num_recalled"),
                     Literal(1, datatype=XSD.integer),
                 )
             ],
@@ -556,7 +556,7 @@ class TestRefiedMemory(unittest.TestCase):
             if statement in [self.reified_statement, reified_statement_2]:
                 return [
                     (
-                        URIRef("https://humem.ai/ontology#recalled"),
+                        URIRef("https://humem.ai/ontology#num_recalled"),
                         Literal(2, datatype=XSD.integer),
                     )
                 ]
@@ -574,14 +574,14 @@ class TestRefiedMemory(unittest.TestCase):
             unittest.mock.call(
                 (
                     self.reified_statement,
-                    URIRef("https://humem.ai/ontology#recalled"),
+                    URIRef("https://humem.ai/ontology#num_recalled"),
                     Literal(2, datatype=XSD.integer),
                 )
             ),
             unittest.mock.call(
                 (
                     reified_statement_2,
-                    URIRef("https://humem.ai/ontology#recalled"),
+                    URIRef("https://humem.ai/ontology#num_recalled"),
                     Literal(2, datatype=XSD.integer),
                 )
             ),
@@ -593,14 +593,14 @@ class TestRefiedMemory(unittest.TestCase):
             unittest.mock.call(
                 (
                     self.reified_statement,
-                    URIRef("https://humem.ai/ontology#recalled"),
+                    URIRef("https://humem.ai/ontology#num_recalled"),
                     Literal(2, datatype=XSD.integer),
                 )
             ),
             unittest.mock.call(
                 (
                     reified_statement_2,
-                    URIRef("https://humem.ai/ontology#recalled"),
+                    URIRef("https://humem.ai/ontology#num_recalled"),
                     Literal(2, datatype=XSD.integer),
                 )
             ),
@@ -626,7 +626,7 @@ class TestMemorySaveLoad(unittest.TestCase):
             [(ex.Alice, ex.met, ex.Bob)],
             {
                 humemai.location: Literal("New York"),
-                humemai.currentTime: Literal(
+                humemai.current_time: Literal(
                     "2024-04-27T15:00:00", datatype=XSD.dateTime
                 ),
             },
@@ -635,7 +635,7 @@ class TestMemorySaveLoad(unittest.TestCase):
             [(ex.Alice, ex.met, ex.Bob)],
             {
                 humemai.location: Literal("New York"),
-                humemai.currentTime: Literal(
+                humemai.current_time: Literal(
                     "2024-04-27T16:00:00", datatype=XSD.dateTime
                 ),
             },
@@ -645,7 +645,7 @@ class TestMemorySaveLoad(unittest.TestCase):
             [(ex.Bob, ex.knows, ex.Alice)],
             {
                 humemai.location: Literal("Paris"),
-                humemai.currentTime: Literal(
+                humemai.current_time: Literal(
                     "2024-05-01T10:00:00", datatype=XSD.dateTime
                 ),
             },
@@ -656,7 +656,7 @@ class TestMemorySaveLoad(unittest.TestCase):
             [(ex.Alice, ex.attended, ex.Conference)],
             {
                 humemai.location: Literal("London"),
-                humemai.eventTime: Literal(
+                humemai.time_added: Literal(
                     "2023-09-15T10:00:00", datatype=XSD.dateTime
                 ),
                 humemai.emotion: Literal("excited"),
@@ -667,7 +667,7 @@ class TestMemorySaveLoad(unittest.TestCase):
             [(ex.Alice, ex.spokeWith, ex.Charlie)],
             {
                 humemai.location: Literal("London"),
-                humemai.eventTime: Literal(
+                humemai.time_added: Literal(
                     "2023-09-15T11:00:00", datatype=XSD.dateTime
                 ),
                 humemai.emotion: Literal("happy"),
@@ -678,7 +678,7 @@ class TestMemorySaveLoad(unittest.TestCase):
             [(ex.Alice, ex.spokeWith, ex.Charlie)],
             {
                 humemai.location: Literal("London"),
-                humemai.eventTime: Literal(
+                humemai.time_added: Literal(
                     "2023-09-15T11:00:00", datatype=XSD.dateTime
                 ),
                 humemai.emotion: Literal("sad"),
@@ -690,9 +690,9 @@ class TestMemorySaveLoad(unittest.TestCase):
         self.memory.add_memory(
             [(ex.Dog, ex.hasType, ex.Animal)],
             {
-                humemai.derivedFrom: Literal("research_paper_1"),
+                humemai.derived_from: Literal("research_paper_1"),
                 humemai.strength: Literal(5, datatype=XSD.integer),
-                humemai.knownSince: Literal(
+                humemai.known_since: Literal(
                     "2023-09-15T10:00:00", datatype=XSD.dateTime
                 ),
             },
@@ -700,9 +700,9 @@ class TestMemorySaveLoad(unittest.TestCase):
         self.memory.add_memory(
             [(ex.Cat, ex.hasType, ex.Animal)],
             {
-                humemai.derivedFrom: Literal("research_paper_2"),
+                humemai.derived_from: Literal("research_paper_2"),
                 humemai.strength: Literal(4, datatype=XSD.integer),
-                humemai.knownSince: Literal(
+                humemai.known_since: Literal(
                     "2023-09-15T10:00:00", datatype=XSD.dateTime
                 ),
             },

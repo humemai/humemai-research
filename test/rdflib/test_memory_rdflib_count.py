@@ -62,7 +62,7 @@ class TestMemoryCounts(unittest.TestCase):
         Test counts after adding a single memory with one reified statement.
         """
         qualifiers = {
-            self.humemai.currentTime: Literal("2024-04-27T10:00:00"),
+            self.humemai.current_time: Literal("2024-04-27T10:00:00"),
             self.humemai.location: Literal("New York"),
         }
         self.memory.add_memory([self.triple1], qualifiers)
@@ -83,15 +83,15 @@ class TestMemoryCounts(unittest.TestCase):
         Test counts after adding the same triple multiple times with different qualifiers.
         """
         qualifiers1 = {
-            self.humemai.currentTime: Literal("2024-04-27T10:00:00"),
+            self.humemai.current_time: Literal("2024-04-27T10:00:00"),
             self.humemai.location: Literal("New York"),
         }
         qualifiers2 = {
-            self.humemai.currentTime: Literal("2024-04-27T12:00:00"),
+            self.humemai.current_time: Literal("2024-04-27T12:00:00"),
             self.humemai.location: Literal("London"),
         }
         qualifiers3 = {
-            self.humemai.currentTime: Literal("2024-04-27T14:00:00"),
+            self.humemai.current_time: Literal("2024-04-27T14:00:00"),
             self.humemai.location: Literal("Paris"),
         }
 
@@ -115,15 +115,15 @@ class TestMemoryCounts(unittest.TestCase):
         Test counts after adding multiple unique triples with multiple reified statements each.
         """
         qualifiers1 = {
-            self.humemai.currentTime: Literal("2024-04-27T10:00:00"),
+            self.humemai.current_time: Literal("2024-04-27T10:00:00"),
             self.humemai.location: Literal("New York"),
         }
         qualifiers2 = {
-            self.humemai.currentTime: Literal("2024-04-27T12:00:00"),
+            self.humemai.current_time: Literal("2024-04-27T12:00:00"),
             self.humemai.location: Literal("London"),
         }
         qualifiers3 = {
-            self.humemai.currentTime: Literal("2024-04-27T14:00:00"),
+            self.humemai.current_time: Literal("2024-04-27T14:00:00"),
             self.humemai.location: Literal("Paris"),
         }
 
@@ -157,11 +157,11 @@ class TestMemoryCounts(unittest.TestCase):
         Test that deleting a triple removes all its reified statements.
         """
         qualifiers1 = {
-            self.humemai.currentTime: Literal("2024-04-27T10:00:00"),
+            self.humemai.current_time: Literal("2024-04-27T10:00:00"),
             self.humemai.location: Literal("New York"),
         }
         qualifiers2 = {
-            self.humemai.currentTime: Literal("2024-04-27T12:00:00"),
+            self.humemai.current_time: Literal("2024-04-27T12:00:00"),
             self.humemai.location: Literal("London"),
         }
 
@@ -183,7 +183,7 @@ class TestMemoryCounts(unittest.TestCase):
         )
 
         # Delete triple1
-        self.memory.delete_triple(*self.triple1)
+        self.memory.delete_main_triple(*self.triple1)
 
         # Counts after deletion
         self.assertEqual(
@@ -202,7 +202,7 @@ class TestMemoryCounts(unittest.TestCase):
         Test that deleting a non-existent triple does not affect the counts.
         """
         qualifiers = {
-            self.humemai.currentTime: Literal("2024-04-27T10:00:00"),
+            self.humemai.current_time: Literal("2024-04-27T10:00:00"),
             self.humemai.location: Literal("New York"),
         }
         self.memory.add_memory([self.triple1], qualifiers)
@@ -225,7 +225,7 @@ class TestMemoryCounts(unittest.TestCase):
         )
 
         # Attempt to delete the non-existent triple
-        self.memory.delete_triple(*non_existent_triple)
+        self.memory.delete_main_triple(*non_existent_triple)
 
         # Counts should remain unchanged
         self.assertEqual(
@@ -267,11 +267,11 @@ class TestMemoryCounts(unittest.TestCase):
         Test triple and memory counts after adding and deleting multiple triples.
         """
         qualifiers1 = {
-            self.humemai.currentTime: Literal("2024-04-27T10:00:00"),
+            self.humemai.current_time: Literal("2024-04-27T10:00:00"),
             self.humemai.location: Literal("New York"),
         }
         qualifiers2 = {
-            self.humemai.currentTime: Literal("2024-04-27T12:00:00"),
+            self.humemai.current_time: Literal("2024-04-27T12:00:00"),
             self.humemai.location: Literal("London"),
         }
 
@@ -293,7 +293,7 @@ class TestMemoryCounts(unittest.TestCase):
         )
 
         # Delete triple1
-        self.memory.delete_triple(*self.triple1)
+        self.memory.delete_main_triple(*self.triple1)
 
         # Counts after deletion
         self.assertEqual(
@@ -308,7 +308,7 @@ class TestMemoryCounts(unittest.TestCase):
         )
 
         # Delete triple2
-        self.memory.delete_triple(*self.triple2)
+        self.memory.delete_main_triple(*self.triple2)
 
         # Counts after deleting all triples
         self.assertEqual(

@@ -24,7 +24,7 @@ class TestMemory(unittest.TestCase):
             URIRef("https://example.org/person/Bob"),
         )
         qualifiers = {
-            humemai.currentTime: Literal("2024-04-27T10:00:00", datatype=XSD.dateTime),
+            humemai.current_time: Literal("2024-04-27T10:00:00", datatype=XSD.dateTime),
             humemai.location: Literal("New York"),
         }
 
@@ -33,7 +33,7 @@ class TestMemory(unittest.TestCase):
 
         # Verify memory has been added correctly
         result = self.memory.print_memories(True)
-        expected = "(Alice, knows, Bob, {'memoryID': '0', 'currentTime': '2024-04-27T10:00:00', 'location': 'New York'})"
+        expected = "(Alice, knows, Bob, {'memoryID': '0', 'current_time': '2024-04-27T10:00:00', 'location': 'New York'})"
 
         self.assertIn(expected, result)
 
@@ -46,11 +46,11 @@ class TestMemory(unittest.TestCase):
         )
 
         qualifiers1 = {
-            humemai.currentTime: Literal("2024-04-27T10:00:00", datatype=XSD.dateTime),
+            humemai.current_time: Literal("2024-04-27T10:00:00", datatype=XSD.dateTime),
             humemai.location: Literal("New York"),
         }
         qualifiers2 = {
-            humemai.currentTime: Literal("2024-04-27T12:00:00", datatype=XSD.dateTime),
+            humemai.current_time: Literal("2024-04-27T12:00:00", datatype=XSD.dateTime),
             humemai.location: Literal("London"),
         }
 
@@ -61,8 +61,8 @@ class TestMemory(unittest.TestCase):
         # Verify that both reified statements are stored
         result = self.memory.print_memories(True)
 
-        expected1 = "(Alice, knows, Bob, {'memoryID': '0', 'currentTime': '2024-04-27T10:00:00', 'location': 'New York'})"
-        expected2 = "(Alice, knows, Bob, {'memoryID': '1', 'currentTime': '2024-04-27T12:00:00', 'location': 'London'})"
+        expected1 = "(Alice, knows, Bob, {'memoryID': '0', 'current_time': '2024-04-27T10:00:00', 'location': 'New York'})"
+        expected2 = "(Alice, knows, Bob, {'memoryID': '1', 'current_time': '2024-04-27T12:00:00', 'location': 'London'})"
 
         # Ensure both entries are present
         self.assertIn(expected1, result)
@@ -77,11 +77,11 @@ class TestMemory(unittest.TestCase):
         )
 
         qualifiers1 = {
-            humemai.currentTime: Literal("2024-04-27T10:00:00", datatype=XSD.dateTime),
+            humemai.current_time: Literal("2024-04-27T10:00:00", datatype=XSD.dateTime),
             humemai.location: Literal("New York"),
         }
         qualifiers2 = {
-            humemai.currentTime: Literal("2024-04-27T12:00:00", datatype=XSD.dateTime),
+            humemai.current_time: Literal("2024-04-27T12:00:00", datatype=XSD.dateTime),
             humemai.location: Literal("London"),
         }
 
@@ -125,7 +125,7 @@ class TestMemoryDelete(unittest.TestCase):
 
         # Define qualifiers for the first triple with Literal values
         self.qualifiers1 = {
-            self.humemai.currentTime: Literal(
+            self.humemai.current_time: Literal(
                 "2024-04-27T10:00:00", datatype=XSD.dateTime
             ),
             self.humemai.location: Literal("New York"),
@@ -133,7 +133,7 @@ class TestMemoryDelete(unittest.TestCase):
 
         # Define qualifiers for the second triple with Literal values
         self.qualifiers2 = {
-            self.humemai.currentTime: Literal(
+            self.humemai.current_time: Literal(
                 "2024-04-27T11:00:00", datatype=XSD.dateTime
             ),
             self.humemai.location: Literal("Paris"),
@@ -150,7 +150,7 @@ class TestMemoryDelete(unittest.TestCase):
         self.assertIn("location", before_delete)
 
         # Delete the triple (Alice knows Bob)
-        self.memory.delete_triple(*self.triple1)
+        self.memory.delete_main_triple(*self.triple1)
 
         after_delete = self.memory.print_memories(True)
         self.assertNotIn("Alice", after_delete)
@@ -161,10 +161,10 @@ class TestMemoryDelete(unittest.TestCase):
         self.assertIn("Bob", after_delete)
         self.assertIn("location", after_delete)
 
-    def test_delete_triple_with_multiple_qualifiers(self) -> None:
+    def test_delete_main_triple_with_multiple_qualifiers(self) -> None:
         """Test deleting a memory with multiple qualifiers."""
         qualifiers_additional = {
-            self.humemai.currentTime: Literal(
+            self.humemai.current_time: Literal(
                 "2024-04-27T14:00:00", datatype=XSD.dateTime
             ),
             self.humemai.location: Literal("London"),
@@ -176,7 +176,7 @@ class TestMemoryDelete(unittest.TestCase):
         self.assertIn("London", before_delete)
 
         # Delete the triple (Alice knows Bob)
-        self.memory.delete_triple(*self.triple1)
+        self.memory.delete_main_triple(*self.triple1)
 
         after_delete = self.memory.print_memories(True)
         self.assertNotIn("New York", after_delete)
@@ -195,13 +195,13 @@ class TestMemoryDelete(unittest.TestCase):
         self.assertNotIn("David", before_delete)
 
         # Attempt to delete the non-existent triple
-        self.memory.delete_triple(*non_existent_triple)
+        self.memory.delete_main_triple(*non_existent_triple)
 
         # Verify that the graph is unchanged
         after_delete = self.memory.print_memories(True)
         self.assertEqual(before_delete, after_delete)
 
-    def test_delete_triple_with_no_qualifiers(self) -> None:
+    def test_delete_main_triple_with_no_qualifiers(self) -> None:
         """Test deleting a memory that has no qualifiers (just a main triple)."""
         simple_triple = (
             URIRef("https://example.org/person/Charlie"),
@@ -213,7 +213,7 @@ class TestMemoryDelete(unittest.TestCase):
         before_delete = self.memory.print_memories(True)
         self.assertIn("Charlie", before_delete)
 
-        self.memory.delete_triple(*simple_triple)
+        self.memory.delete_main_triple(*simple_triple)
 
         after_delete = self.memory.print_memories(True)
         self.assertNotIn("Charlie", after_delete)
@@ -256,7 +256,7 @@ class TestMemoryDelete(unittest.TestCase):
         # Define episodic and semantic qualifiers with URIRef keys
         self.episodic_qualifiers_1 = {
             URIRef("https://humem.ai/ontology#location"): Literal("New York"),
-            URIRef("https://humem.ai/ontology#eventTime"): Literal(
+            URIRef("https://humem.ai/ontology#time_added"): Literal(
                 "2024-04-27T15:00:00", datatype=XSD.dateTime
             ),
             URIRef("https://humem.ai/ontology#emotion"): Literal("happy"),
@@ -264,7 +264,7 @@ class TestMemoryDelete(unittest.TestCase):
         }
         self.episodic_qualifiers_2 = {
             URIRef("https://humem.ai/ontology#location"): Literal("London"),
-            URIRef("https://humem.ai/ontology#eventTime"): Literal(
+            URIRef("https://humem.ai/ontology#time_added"): Literal(
                 "2024-05-01T10:00:00", datatype=XSD.dateTime
             ),
             URIRef("https://humem.ai/ontology#emotion"): Literal("excited"),
@@ -272,7 +272,7 @@ class TestMemoryDelete(unittest.TestCase):
         }
         self.episodic_qualifiers_3 = {
             URIRef("https://humem.ai/ontology#location"): Literal("Paris"),
-            URIRef("https://humem.ai/ontology#eventTime"): Literal(
+            URIRef("https://humem.ai/ontology#time_added"): Literal(
                 "2024-05-05T18:00:00", datatype=XSD.dateTime
             ),
             URIRef("https://humem.ai/ontology#emotion"): Literal("curious"),
@@ -280,13 +280,13 @@ class TestMemoryDelete(unittest.TestCase):
         }
 
         self.semantic_qualifiers_1 = {
-            URIRef("https://humem.ai/ontology#derivedFrom"): Literal("animal_research"),
+            URIRef("https://humem.ai/ontology#derived_from"): Literal("animal_research"),
             URIRef("https://humem.ai/ontology#strength"): Literal(
                 5, datatype=XSD.integer
             ),
         }
         self.semantic_qualifiers_2 = {
-            URIRef("https://humem.ai/ontology#derivedFrom"): Literal("pet_database"),
+            URIRef("https://humem.ai/ontology#derived_from"): Literal("pet_database"),
             URIRef("https://humem.ai/ontology#strength"): Literal(
                 10, datatype=XSD.integer
             ),
@@ -337,7 +337,7 @@ class TestMemoryDelete(unittest.TestCase):
         memory_4 = self.memory.get_memory_by_id(Literal(4, datatype=XSD.integer))
         self.assertIn(
             "animal_research",
-            memory_4["qualifiers"][URIRef("https://humem.ai/ontology#derivedFrom")],
+            memory_4["qualifiers"][URIRef("https://humem.ai/ontology#derived_from")],
         )  # Check semantic memory
 
         memory_6 = self.memory.get_memory_by_id(Literal(6, datatype=XSD.integer))
@@ -360,7 +360,7 @@ class TestMemoryDelete(unittest.TestCase):
 
     def test_triple_deletion(self) -> None:
         """Test deleting a triple and all associated memories."""
-        self.memory.delete_triple(*self.triples[0])
+        self.memory.delete_main_triple(*self.triples[0])
 
         # Both Memory ID 0 and 1 refer to the triple (Alice, met, Bob), so they should be deleted
         self.assertIsNone(
@@ -383,10 +383,10 @@ class TestMemoryDelete(unittest.TestCase):
         )  # 5 unique triples
         self.assertEqual(self.memory.get_memory_count(), 7)  # 7 reified memories
 
-    def test_delete_triple_and_memory_count(self) -> None:
+    def test_delete_main_triple_and_memory_count(self) -> None:
         """Test memory and triple count after deleting a triple."""
         # Delete triple (Alice, met, Bob) and ensure memory count is updated
-        self.memory.delete_triple(*self.triples[0])
+        self.memory.delete_main_triple(*self.triples[0])
         self.assertEqual(
             self.memory.get_main_triple_count_except_event(), 4
         )  # 1 triple removed
@@ -402,7 +402,7 @@ class TestMemoryDeleteWithTime(unittest.TestCase):
         self.memory = Humemai()
         self.humemai = Namespace("https://humem.ai/ontology#")
 
-    def test_delete_triple_with_time_filter(self) -> None:
+    def test_delete_main_triple_with_time_filter(self) -> None:
         """
         Test deleting a memory that has a time qualifier.
         """
@@ -412,7 +412,7 @@ class TestMemoryDeleteWithTime(unittest.TestCase):
             URIRef("https://example.org/person/Mary"),
         )
         qualifiers = {
-            self.humemai.currentTime: Literal(
+            self.humemai.current_time: Literal(
                 "2024-04-27T12:00:00", datatype=XSD.dateTime
             ),
             self.humemai.location: Literal("Paris"),
@@ -427,7 +427,7 @@ class TestMemoryDeleteWithTime(unittest.TestCase):
         self.assertIn("Luke", result_before)
 
         # Delete the memory
-        self.memory.delete_triple(*triple)
+        self.memory.delete_main_triple(*triple)
 
         # Verify the memory is no longer there after deletion
         result_after = self.memory.print_memories(True)
@@ -454,7 +454,7 @@ class TestInvalidInputHandling(unittest.TestCase):
             URIRef("https://example.org/person/Ivan"),
         )
         invalid_qualifiers = {
-            self.humemai.currentTime: "04-27-2024 10:00:00",  # Invalid format
+            self.humemai.current_time: "04-27-2024 10:00:00",  # Invalid format
             self.humemai.location: "Paris",
         }
 
@@ -481,18 +481,18 @@ class TestMemoryInvalidQualifiers(unittest.TestCase):
             URIRef("https://example.org/person/Kate"),
         )
 
-        # Missing 'eventTime' which is essential for episodic memory
+        # Missing 'time_added' which is essential for episodic memory
         qualifiers = {
             self.humemai.location: Literal("Paris"),
             self.humemai.emotion: Literal("happy"),
         }
 
-        # Adding an episodic memory without the required 'eventTime' qualifier should raise a ValueError
+        # Adding an episodic memory without the required 'time_added' qualifier should raise a ValueError
         with self.assertRaises(ValueError) as context:
             self.memory.add_episodic_memory([triple], qualifiers=qualifiers)
 
         self.assertIn(
-            "Missing required qualifier: eventTime",
+            "Missing required qualifier: time_added",
             str(context.exception),
         )
 
@@ -517,7 +517,7 @@ class TestMemoryIteration(unittest.TestCase):
             triples=triples_short_term,
             qualifiers={
                 humemai.location: Literal("Paris"),
-                humemai.currentTime: Literal(
+                humemai.current_time: Literal(
                     "2023-05-05T10:00:00", datatype=XSD.dateTime
                 ),
             },
@@ -535,7 +535,7 @@ class TestMemoryIteration(unittest.TestCase):
             triples=triples_episodic,
             qualifiers={
                 humemai.location: Literal("Paris"),
-                humemai.eventTime: Literal(
+                humemai.time_added: Literal(
                     "2023-05-06T10:00:00", datatype=XSD.dateTime
                 ),
                 humemai.emotion: Literal("happy"),
@@ -553,10 +553,10 @@ class TestMemoryIteration(unittest.TestCase):
         self.memory.add_semantic_memory(
             triples=triples_semantic,
             qualifiers={
-                humemai.knownSince: Literal(
+                humemai.known_since: Literal(
                     "2023-01-01T00:00:00", datatype=XSD.dateTime
                 ),
-                humemai.derivedFrom: Literal("research_paper_1"),
+                humemai.derived_from: Literal("research_paper_1"),
                 humemai.strength: Literal(5, datatype=XSD.integer),
             },
         )
@@ -573,7 +573,7 @@ class TestMemoryIteration(unittest.TestCase):
             self.assertEqual(subj, URIRef("https://example.org/Alice"))
             self.assertEqual(pred, URIRef("https://example.org/meet"))
             self.assertEqual(obj, URIRef("https://example.org/Bob"))
-            self.assertIn(humemai.currentTime, qualifiers)
+            self.assertIn(humemai.current_time, qualifiers)
 
         self.assertEqual(
             short_term_count, 1, "There should be exactly 1 short-term memory."
@@ -612,7 +612,7 @@ class TestMemoryIteration(unittest.TestCase):
             self.assertEqual(subj, URIRef("https://example.org/Bob"))
             self.assertEqual(pred, URIRef("https://example.org/visit"))
             self.assertEqual(obj, URIRef("https://example.org/Paris"))
-            self.assertIn(humemai.eventTime, qualifiers)
+            self.assertIn(humemai.time_added, qualifiers)
 
         self.assertEqual(
             episodic_count, 1, "There should be exactly 1 episodic memory."
@@ -630,7 +630,7 @@ class TestMemoryIteration(unittest.TestCase):
             self.assertEqual(subj, URIRef("https://example.org/Charlie"))
             self.assertEqual(pred, URIRef("https://example.org/hasType"))
             self.assertEqual(obj, URIRef("https://example.org/Human"))
-            self.assertIn(humemai.derivedFrom, qualifiers)
+            self.assertIn(humemai.derived_from, qualifiers)
 
         self.assertEqual(
             semantic_count, 1, "There should be exactly 1 semantic memory."

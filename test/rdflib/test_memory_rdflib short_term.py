@@ -30,10 +30,10 @@ class TestMemoryShortTerm(unittest.TestCase):
             URIRef("https://example.org/relationship/knows"),
             URIRef("https://example.org/person/Bob"),
         )
-        currentTime = Literal("2024-04-27T10:00:00", datatype=XSD.dateTime)
+        current_time = Literal("2024-04-27T10:00:00", datatype=XSD.dateTime)
         qualifiers = {
             self.humemai.location: Literal("New York"),
-            self.humemai.currentTime: currentTime,
+            self.humemai.current_time: current_time,
         }
 
         # Add the short-term memory
@@ -43,8 +43,8 @@ class TestMemoryShortTerm(unittest.TestCase):
         result = self.memory.print_memories(True)
         self.assertIn("Alice", result)
 
-        # Check for 'currentTime' and 'location'
-        self.assertIn("currentTime", result)
+        # Check for 'current_time' and 'location'
+        self.assertIn("current_time", result)
         self.assertIn("2024-04-27T10:00:00", result)
         self.assertIn("location", result)
         self.assertIn("New York", result)
@@ -64,7 +64,7 @@ class TestMemoryShortTerm(unittest.TestCase):
         qualifiers = {self.humemai.location: location}
 
         # Capture the current time before adding the memory
-        before_time = datetime.now()
+        before_time = datetime.now().isoformat(timespec="seconds")
 
         # Add the short-term memory without specifying time
         self.memory.add_short_term_memory([triple], qualifiers)
@@ -75,23 +75,23 @@ class TestMemoryShortTerm(unittest.TestCase):
         self.assertIn("location", result)
         self.assertIn("Berlin", result)
 
-        # Ensure the currentTime was added automatically
-        self.assertIn("currentTime", result)
+        # Ensure the current_time was added automatically
+        self.assertIn("current_time", result)
 
-        # Extract all dynamically assigned currentTime values from the graph
+        # Extract all dynamically assigned current_time values from the graph
         current_times_in_graph = list(
-            self.memory.graph.objects(None, self.humemai.currentTime)
+            self.memory.graph.objects(None, self.humemai.current_time)
         )
 
-        # Verify that one of the currentTime values is close to the current time
-        after_time = datetime.now()
+        # Verify that one of the current_time values is close to the current time
+        after_time = datetime.now().isoformat(timespec="seconds")
 
         self.assertTrue(
             any(
-                before_time <= datetime.fromisoformat(str(current_time)) <= after_time
+                before_time <= current_time <= after_time
                 for current_time in current_times_in_graph
             ),
-            "The currentTime should be within the expected range.",
+            "The current_time should be within the expected range.",
         )
 
     def test_add_multiple_short_term_memories(self) -> None:
@@ -111,10 +111,10 @@ class TestMemoryShortTerm(unittest.TestCase):
                 Literal("Chocolate"),
             ),
         ]
-        currentTime = Literal("2024-04-28T09:00:00", datatype=XSD.dateTime)
+        current_time = Literal("2024-04-28T09:00:00", datatype=XSD.dateTime)
         qualifiers = {
             self.humemai.location: Literal("Tokyo"),
-            self.humemai.currentTime: currentTime,
+            self.humemai.current_time: current_time,
         }
 
         # Add the short-term memory with multiple triples
@@ -125,7 +125,7 @@ class TestMemoryShortTerm(unittest.TestCase):
         self.assertIn("David", result)
         self.assertIn("Eve", result)
         self.assertIn("Chocolate", result)
-        self.assertIn("currentTime", result)
+        self.assertIn("current_time", result)
         self.assertIn("2024-04-28T09:00:00", result)
         self.assertIn("location", result)
         self.assertIn("Tokyo", result)
@@ -144,11 +144,11 @@ class TestGetShortTerm(unittest.TestCase):
         self.obj = URIRef("https://example.org/person/Bob")
 
         # Qualifiers for the short-term memory
-        self.currentTime_qualifier = URIRef("https://humem.ai/ontology#currentTime")
+        self.current_time_qualifier = URIRef("https://humem.ai/ontology#current_time")
         self.location_qualifier = URIRef("https://humem.ai/ontology#location")
         self.emotion_qualifier = URIRef("https://humem.ai/ontology#emotion")
 
-        self.currentTime_literal = Literal("2024-10-03T15:00:00", datatype=XSD.dateTime)
+        self.current_time_literal = Literal("2024-10-03T15:00:00", datatype=XSD.dateTime)
         self.location_literal = Literal("New York", datatype=XSD.string)
         self.emotion_literal = Literal("happy", datatype=XSD.string)
 
@@ -163,8 +163,8 @@ class TestGetShortTerm(unittest.TestCase):
         self.memory.graph.add(
             (
                 self.reified_statement,
-                self.currentTime_qualifier,
-                self.currentTime_literal,
+                self.current_time_qualifier,
+                self.current_time_literal,
             )
         )
         self.memory.graph.add(
@@ -175,7 +175,7 @@ class TestGetShortTerm(unittest.TestCase):
         )
 
     def testget_short_term_memories(self) -> None:
-        """Test that short-term memories with currentTime are correctly retrieved and added to the Memory object."""
+        """Test that short-term memories with current_time are correctly retrieved and added to the Memory object."""
         # Call the method to retrieve short-term memories
         short_term_memory = self.memory.get_short_term_memories()
 
@@ -183,7 +183,7 @@ class TestGetShortTerm(unittest.TestCase):
         # Check if the triple (Alice, met, Bob) was added
         self.assertIn((self.subj, self.pred, self.obj), short_term_memory.graph)
 
-        # Check if the reified statement with qualifiers (currentTime, location, emotion) was added
+        # Check if the reified statement with qualifiers (current_time, location, emotion) was added
         reified_statements = list(
             short_term_memory.graph.triples((None, RDF.type, RDF.Statement))
         )
@@ -204,7 +204,7 @@ class TestGetShortTerm(unittest.TestCase):
 
         # Check if the correct qualifiers were added
         self.assertIn(
-            (reified_statement, self.currentTime_qualifier, self.currentTime_literal),
+            (reified_statement, self.current_time_qualifier, self.current_time_literal),
             short_term_memory.graph,
         )
         self.assertIn(
@@ -234,7 +234,7 @@ class TestGetShortTerm(unittest.TestCase):
         # Clear the graph and set up a partial reified statement with only some qualifiers (no emotion)
         self.memory.graph = Graph()
 
-        # Add the reified statement with only currentTime and location qualifiers
+        # Add the reified statement with only current_time and location qualifiers
         self.memory.graph.add((self.reified_statement, RDF.type, RDF.Statement))
         self.memory.graph.add((self.reified_statement, RDF.subject, self.subj))
         self.memory.graph.add((self.reified_statement, RDF.predicate, self.pred))
@@ -242,8 +242,8 @@ class TestGetShortTerm(unittest.TestCase):
         self.memory.graph.add(
             (
                 self.reified_statement,
-                self.currentTime_qualifier,
-                self.currentTime_literal,
+                self.current_time_qualifier,
+                self.current_time_literal,
             )
         )
         self.memory.graph.add(
@@ -276,7 +276,7 @@ class TestGetShortTerm(unittest.TestCase):
 
         # Check the available qualifiers (no emotion)
         self.assertIn(
-            (reified_statement, self.currentTime_qualifier, self.currentTime_literal),
+            (reified_statement, self.current_time_qualifier, self.current_time_literal),
             short_term_memory.graph,
         )
         self.assertIn(

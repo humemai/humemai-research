@@ -107,12 +107,12 @@ class TestHumemai(unittest.TestCase):
         self.assertEqual(len(edges), 2)
         for vertex in vertices:
             self.assertIn("current_time", self.humemai.get_properties(vertex))
-            self.assertNotIn("event_time", self.humemai.get_properties(vertex))
+            self.assertNotIn("time_added", self.humemai.get_properties(vertex))
             self.assertNotIn("known_since", self.humemai.get_properties(vertex))
             self.assertNotIn("num_recalled", self.humemai.get_properties(vertex))
         for edge in edges:
             self.assertIn("current_time", self.humemai.get_properties(edge))
-            self.assertNotIn("event_time", self.humemai.get_properties(edge))
+            self.assertNotIn("time_added", self.humemai.get_properties(edge))
             self.assertNotIn("known_since", self.humemai.get_properties(edge))
             self.assertNotIn("num_recalled", self.humemai.get_properties(edge))
 
@@ -121,12 +121,12 @@ class TestHumemai(unittest.TestCase):
         self.assertEqual(len(edges), 1)
         for vertex in vertices:
             self.assertNotIn("current_time", self.humemai.get_properties(vertex))
-            self.assertIn("event_time", self.humemai.get_properties(vertex))
+            self.assertIn("time_added", self.humemai.get_properties(vertex))
             self.assertNotIn("known_since", self.humemai.get_properties(vertex))
             self.assertIn("num_recalled", self.humemai.get_properties(vertex))
         for edge in edges:
             self.assertNotIn("current_time", self.humemai.get_properties(edge))
-            self.assertIn("event_time", self.humemai.get_properties(edge))
+            self.assertIn("time_added", self.humemai.get_properties(edge))
             self.assertNotIn("known_since", self.humemai.get_properties(edge))
             self.assertIn("num_recalled", self.humemai.get_properties(edge))
 
@@ -135,12 +135,12 @@ class TestHumemai(unittest.TestCase):
         self.assertEqual(len(edges), 1)
         for vertex in vertices:
             self.assertNotIn("current_time", self.humemai.get_properties(vertex))
-            self.assertIn("event_time", self.humemai.get_properties(vertex))
+            self.assertIn("time_added", self.humemai.get_properties(vertex))
             self.assertNotIn("known_since", self.humemai.get_properties(vertex))
             self.assertIn("num_recalled", self.humemai.get_properties(vertex))
         for edge in edges:
             self.assertNotIn("current_time", self.humemai.get_properties(edge))
-            self.assertIn("event_time", self.humemai.get_properties(edge))
+            self.assertIn("time_added", self.humemai.get_properties(edge))
             self.assertNotIn("known_since", self.humemai.get_properties(edge))
             self.assertIn("num_recalled", self.humemai.get_properties(edge))
 
@@ -183,12 +183,12 @@ class TestHumemai(unittest.TestCase):
         self.assertEqual(len(edges), 2)
         for vertex in vertices:
             self.assertIn("current_time", self.humemai.get_properties(vertex))
-            self.assertNotIn("event_time", self.humemai.get_properties(vertex))
+            self.assertNotIn("time_added", self.humemai.get_properties(vertex))
             self.assertNotIn("known_since", self.humemai.get_properties(vertex))
             self.assertNotIn("num_recalled", self.humemai.get_properties(vertex))
         for edge in edges:
             self.assertIn("current_time", self.humemai.get_properties(edge))
-            self.assertNotIn("event_time", self.humemai.get_properties(edge))
+            self.assertNotIn("time_added", self.humemai.get_properties(edge))
             self.assertNotIn("known_since", self.humemai.get_properties(edge))
             self.assertNotIn("num_recalled", self.humemai.get_properties(edge))
 
@@ -197,12 +197,12 @@ class TestHumemai(unittest.TestCase):
         self.assertEqual(len(edges), 1)
         for vertex in vertices:
             self.assertNotIn("current_time", self.humemai.get_properties(vertex))
-            self.assertIn("event_time", self.humemai.get_properties(vertex))
+            self.assertIn("time_added", self.humemai.get_properties(vertex))
             self.assertNotIn("known_since", self.humemai.get_properties(vertex))
             self.assertIn("num_recalled", self.humemai.get_properties(vertex))
         for edge in edges:
             self.assertNotIn("current_time", self.humemai.get_properties(edge))
-            self.assertIn("event_time", self.humemai.get_properties(edge))
+            self.assertIn("time_added", self.humemai.get_properties(edge))
             self.assertNotIn("known_since", self.humemai.get_properties(edge))
             self.assertIn("num_recalled", self.humemai.get_properties(edge))
 
@@ -211,12 +211,12 @@ class TestHumemai(unittest.TestCase):
         self.assertEqual(len(edges), 1)
         for vertex in vertices:
             self.assertNotIn("current_time", self.humemai.get_properties(vertex))
-            self.assertIn("event_time", self.humemai.get_properties(vertex))
+            self.assertIn("time_added", self.humemai.get_properties(vertex))
             self.assertNotIn("known_since", self.humemai.get_properties(vertex))
             self.assertIn("num_recalled", self.humemai.get_properties(vertex))
         for edge in edges:
             self.assertNotIn("current_time", self.humemai.get_properties(edge))
-            self.assertIn("event_time", self.humemai.get_properties(edge))
+            self.assertIn("time_added", self.humemai.get_properties(edge))
             self.assertNotIn("known_since", self.humemai.get_properties(edge))
             self.assertIn("num_recalled", self.humemai.get_properties(edge))
 
@@ -250,12 +250,12 @@ class TestHumemai(unittest.TestCase):
         self.assertEqual(len(edges), 1)
         for vertex in vertices:
             self.assertNotIn("current_time", self.humemai.get_properties(vertex))
-            self.assertIn("event_time", self.humemai.get_properties(vertex))
+            self.assertIn("time_added", self.humemai.get_properties(vertex))
             self.assertNotIn("known_since", self.humemai.get_properties(vertex))
             self.assertIn("num_recalled", self.humemai.get_properties(vertex))
         for edge in edges:
             self.assertNotIn("current_time", self.humemai.get_properties(edge))
-            self.assertIn("event_time", self.humemai.get_properties(edge))
+            self.assertIn("time_added", self.humemai.get_properties(edge))
             self.assertNotIn("known_since", self.humemai.get_properties(edge))
             self.assertIn("num_recalled", self.humemai.get_properties(edge))
 
@@ -264,12 +264,12 @@ class TestHumemai(unittest.TestCase):
         self.assertEqual(len(edges), 2)
         for vertex in vertices:
             self.assertNotIn("current_time", self.humemai.get_properties(vertex))
-            self.assertNotIn("event_time", self.humemai.get_properties(vertex))
+            self.assertNotIn("time_added", self.humemai.get_properties(vertex))
             self.assertIn("num_recalled", self.humemai.get_properties(vertex))
             self.assertIn("known_since", self.humemai.get_properties(vertex))
         for edge in edges:
             self.assertNotIn("current_time", self.humemai.get_properties(edge))
-            self.assertNotIn("event_time", self.humemai.get_properties(edge))
+            self.assertNotIn("time_added", self.humemai.get_properties(edge))
             self.assertIn("num_recalled", self.humemai.get_properties(edge))
             self.assertIn("known_since", self.humemai.get_properties(edge))
 
@@ -280,10 +280,10 @@ class TestHumemai(unittest.TestCase):
         timestamp = datetime.now().isoformat(timespec="seconds")
 
         vertex_a = self.humemai.write_long_term_vertex(
-            "Alice", {"event_time": timestamp, "foo": 123}
+            "Alice", {"time_added": timestamp, "foo": 123}
         )
         vertex_b = self.humemai.write_long_term_vertex(
-            "Bob", {"event_time": timestamp, "known_since": timestamp, "foo": 234}
+            "Bob", {"time_added": timestamp, "known_since": timestamp, "foo": 234}
         )
         vertex_c = self.humemai.write_long_term_vertex(
             "Charlie", {"known_since": timestamp, "foo": 345}
@@ -293,13 +293,13 @@ class TestHumemai(unittest.TestCase):
             vertex_a,
             "knows",
             vertex_b,
-            {"event_time": timestamp, "foo": 234},
+            {"time_added": timestamp, "foo": 234},
         )
         edge_bc = self.humemai.write_long_term_edge(
             vertex_b,
             "likes",
             vertex_c,
-            {"event_time": timestamp, "known_since": timestamp, "foo": 234},
+            {"time_added": timestamp, "known_since": timestamp, "foo": 234},
         )
 
         edge_cb = self.humemai.write_long_term_edge(
@@ -326,10 +326,10 @@ class TestHumemai(unittest.TestCase):
         self.assertEqual(len(edges), 2)
         for vertice in vertices:
             self.assertIn("num_recalled", self.humemai.get_properties(vertice))
-            self.assertIn("event_time", self.humemai.get_properties(vertice))
+            self.assertIn("time_added", self.humemai.get_properties(vertice))
         for edge in edges:
             self.assertIn("num_recalled", self.humemai.get_properties(edge))
-            self.assertIn("event_time", self.humemai.get_properties(edge))
+            self.assertIn("time_added", self.humemai.get_properties(edge))
 
         vertices, edges = self.humemai.get_all_semantic()
         self.assertEqual(len(vertices), 2)
@@ -346,20 +346,20 @@ class TestHumemai(unittest.TestCase):
 
         self.humemai.remove_all_data()
         vertex_alice = self.humemai.write_long_term_vertex(
-            "Alice", {"event_time": "2021-01-01T00:00:00"}
+            "Alice", {"time_added": "2021-01-01T00:00:00"}
         )
         vertex_bob = self.humemai.write_long_term_vertex(
-            "Bob", {"event_time": "2021-01-02T01:10:00"}
+            "Bob", {"time_added": "2021-01-02T01:10:00"}
         )
         vertex_charlie = self.humemai.write_long_term_vertex(
-            "Charlie", {"event_time": "2021-01-03T02:20:00"}
+            "Charlie", {"time_added": "2021-01-03T02:20:00"}
         )
         vertex_david = self.humemai.write_long_term_vertex(
-            "David", {"event_time": "2021-01-04T03:30:00"}
+            "David", {"time_added": "2021-01-04T03:30:00"}
         )
 
         edge_ab = self.humemai.write_long_term_edge(
-            vertex_alice, "knows", vertex_bob, {"event_time": "2021-01-01T00:00:00"}
+            vertex_alice, "knows", vertex_bob, {"time_added": "2021-01-01T00:00:00"}
         )
 
         start_time = "2021-01-01T00:00:00"
@@ -437,7 +437,7 @@ class TestHumemai(unittest.TestCase):
         current_time = datetime.now().isoformat(timespec="seconds")
 
         vertex_d = self.humemai.write_vertex("D", {"current_time": current_time})
-        vertex_a = self.humemai.write_vertex("A", {"event_time": current_time})
+        vertex_a = self.humemai.write_vertex("A", {"time_added": current_time})
         vertex_b = self.humemai.write_vertex("B", {"current_time": current_time})
         vertex_f = self.humemai.write_vertex(
             "F", {"known_since": current_time, "current_time": current_time}
@@ -447,7 +447,7 @@ class TestHumemai(unittest.TestCase):
         vertex_g = self.humemai.write_vertex("G", {"known_since": current_time})
 
         edge_da = self.humemai.write_edge(
-            vertex_d, "works_at", vertex_a, {"event_time": current_time, "foo": 123}
+            vertex_d, "works_at", vertex_a, {"time_added": current_time, "foo": 123}
         )
         edge_ab = self.humemai.write_edge(
             vertex_a, "owns", vertex_b, {"current_time": current_time}
@@ -466,7 +466,7 @@ class TestHumemai(unittest.TestCase):
             "knows",
             vertex_e,
             {
-                "event_time": current_time,
+                "time_added": current_time,
                 "known_since": current_time,
                 "current_time": current_time,
             },
