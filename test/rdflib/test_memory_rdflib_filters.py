@@ -51,11 +51,11 @@ class TestMemoryTimeFilters(unittest.TestCase):
         self.memory.add_memory([triple], qualifiers2)
 
         # Retrieve memories within a time range
-        lower_time_bound = Literal("2024-04-27T09:00:00", datatype=XSD.dateTime)
-        upper_time_bound = Literal("2024-04-27T11:00:00", datatype=XSD.dateTime)
+        lower_time_added_bound = Literal("2024-04-27T09:00:00", datatype=XSD.dateTime)
+        upper_time_added_bound = Literal("2024-04-27T11:00:00", datatype=XSD.dateTime)
         filtered_memory = self.memory.get_memories(
-            lower_time_bound=lower_time_bound,
-            upper_time_bound=upper_time_bound,
+            lower_time_added_bound=lower_time_added_bound,
+            upper_time_added_bound=upper_time_added_bound,
         )
 
         # Verify only the memory within the time range is retrieved
@@ -83,11 +83,11 @@ class TestMemoryTimeFilters(unittest.TestCase):
         self.memory.add_memory([triple], qualifiers)
 
         # Retrieve memories within a time range where this memory does not fall
-        lower_time_bound = Literal("2024-04-27T09:00:00", datatype=XSD.dateTime)
-        upper_time_bound = Literal("2024-04-27T17:00:00", datatype=XSD.dateTime)
+        lower_time_added_bound = Literal("2024-04-27T09:00:00", datatype=XSD.dateTime)
+        upper_time_added_bound = Literal("2024-04-27T17:00:00", datatype=XSD.dateTime)
         filtered_memory = self.memory.get_memories(
-            lower_time_bound=lower_time_bound,
-            upper_time_bound=upper_time_bound,
+            lower_time_added_bound=lower_time_added_bound,
+            upper_time_added_bound=upper_time_added_bound,
         )
 
         # Ensure no memories are returned

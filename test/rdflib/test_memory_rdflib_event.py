@@ -78,14 +78,14 @@ class TestModifyEpisodicEvent(unittest.TestCase):
         """
         Test that only episodic memories within the time range have their event modified.
         """
-        lower_time_bound = Literal("2024-04-27T00:00:00", datatype=XSD.dateTime)
-        upper_time_bound = Literal("2024-04-28T00:00:00", datatype=XSD.dateTime)
+        lower_time_added_bound = Literal("2024-04-27T00:00:00", datatype=XSD.dateTime)
+        upper_time_added_bound = Literal("2024-04-28T00:00:00", datatype=XSD.dateTime)
         new_event = Literal("Updated Event for Conference")
 
         # Modify the event for episodic memories within the time range
         self.memory.modify_episodic_event(
-            lower_time_bound=lower_time_bound,
-            upper_time_bound=upper_time_bound,
+            lower_time_added_bound=lower_time_added_bound,
+            upper_time_added_bound=upper_time_added_bound,
             new_event=new_event,
         )
 
@@ -105,14 +105,14 @@ class TestModifyEpisodicEvent(unittest.TestCase):
         """
         Test that memories outside the specified time range are not modified.
         """
-        lower_time_bound = Literal("2024-04-26T00:00:00", datatype=XSD.dateTime)
-        upper_time_bound = Literal("2024-04-27T12:00:00", datatype=XSD.dateTime)
+        lower_time_added_bound = Literal("2024-04-26T00:00:00", datatype=XSD.dateTime)
+        upper_time_added_bound = Literal("2024-04-27T12:00:00", datatype=XSD.dateTime)
         new_event = Literal("Updated Event")
 
         # Modify the event for episodic memories (which shouldn't modify anything)
         self.memory.modify_episodic_event(
-            lower_time_bound=lower_time_bound,
-            upper_time_bound=upper_time_bound,
+            lower_time_added_bound=lower_time_added_bound,
+            upper_time_added_bound=upper_time_added_bound,
             new_event=new_event,
         )
 
@@ -128,14 +128,14 @@ class TestModifyEpisodicEvent(unittest.TestCase):
         """
         Test that only episodic long-term memories are modified, and short-term memories are unaffected.
         """
-        lower_time_bound = Literal("2024-04-27T00:00:00", datatype=XSD.dateTime)
-        upper_time_bound = Literal("2024-04-28T00:00:00", datatype=XSD.dateTime)
+        lower_time_added_bound = Literal("2024-04-27T00:00:00", datatype=XSD.dateTime)
+        upper_time_added_bound = Literal("2024-04-28T00:00:00", datatype=XSD.dateTime)
         new_event = Literal("Conference Event Update")
 
         # Modify episodic memories
         self.memory.modify_episodic_event(
-            lower_time_bound=lower_time_bound,
-            upper_time_bound=upper_time_bound,
+            lower_time_added_bound=lower_time_added_bound,
+            upper_time_added_bound=upper_time_added_bound,
             new_event=new_event,
         )
 
@@ -155,14 +155,14 @@ class TestModifyEpisodicEvent(unittest.TestCase):
         """
         Test that multiple episodic memories within the time range are modified.
         """
-        lower_time_bound = Literal("2024-04-27T00:00:00", datatype=XSD.dateTime)
-        upper_time_bound = Literal("2024-04-28T00:00:00", datatype=XSD.dateTime)
+        lower_time_added_bound = Literal("2024-04-27T00:00:00", datatype=XSD.dateTime)
+        upper_time_added_bound = Literal("2024-04-28T00:00:00", datatype=XSD.dateTime)
         new_event = Literal("Global Event Update")
 
         # Modify the event for episodic memories
         self.memory.modify_episodic_event(
-            lower_time_bound=lower_time_bound,
-            upper_time_bound=upper_time_bound,
+            lower_time_added_bound=lower_time_added_bound,
+            upper_time_added_bound=upper_time_added_bound,
             new_event=new_event,
         )
 
@@ -178,14 +178,14 @@ class TestModifyEpisodicEvent(unittest.TestCase):
         """
         Test that episodic memories can be modified with additional filters (e.g., subject).
         """
-        lower_time_bound = Literal("2024-04-27T00:00:00", datatype=XSD.dateTime)
-        upper_time_bound = Literal("2024-04-28T00:00:00", datatype=XSD.dateTime)
+        lower_time_added_bound = Literal("2024-04-27T00:00:00", datatype=XSD.dateTime)
+        upper_time_added_bound = Literal("2024-04-28T00:00:00", datatype=XSD.dateTime)
         new_event = Literal("Filtered Event Update")
 
         # Modify the event for episodic memories with a subject filter (only Alice's memory)
         self.memory.modify_episodic_event(
-            lower_time_bound=lower_time_bound,
-            upper_time_bound=upper_time_bound,
+            lower_time_added_bound=lower_time_added_bound,
+            upper_time_added_bound=upper_time_added_bound,
             new_event=new_event,
             subject=URIRef("https://example.org/person/Alice"),
         )

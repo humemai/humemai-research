@@ -331,8 +331,8 @@ class Humemai:
         predicate: Optional[URIRef] = None,
         object_: Optional[URIRef] = None,
         qualifiers: dict[URIRef, Union[URIRef, Literal]] = {},
-        lower_time_bound: Optional[Literal] = None,
-        upper_time_bound: Optional[Literal] = None,
+        lower_time_added_bound: Optional[Literal] = None,
+        upper_time_added_bound: Optional[Literal] = None,
     ) -> Humemai:
         """
         Retrieve memories with optional filtering based on the qualifiers and triple
@@ -343,8 +343,8 @@ class Humemai:
             predicate (URIRef, optional): Filter by predicate URI.
             object_ (URIRef, optional): Filter by object URI.
             qualifiers (dict, optional): Additional qualifiers to filter by.
-            lower_time_bound (Literal, optional): Lower bound for time filtering (ISO format).
-            upper_time_bound (Literal, optional): Upper bound for time filtering (ISO format).
+            lower_time_added_bound (Literal, optional): Lower bound for time filtering (ISO format).
+            upper_time_added_bound (Literal, optional): Upper bound for time filtering (ISO format).
 
         Returns:
             Humemai: A new Humemai object containing the filtered memories.
@@ -377,13 +377,13 @@ class Humemai:
             query += f"?statement {key.n3()} {value.n3()} .\n"
 
         # Add time filtering logic (for current_time, time_added)
-        if lower_time_bound and upper_time_bound:
+        if lower_time_added_bound and upper_time_added_bound:
             time_filter = f"""
             OPTIONAL {{ ?statement humemai:current_time ?current_time }}
             OPTIONAL {{ ?statement humemai:time_added ?time_added }}
             FILTER(
-                (?current_time >= {lower_time_bound.n3()} && ?current_time <= {upper_time_bound.n3()}) ||
-                (?time_added >= {lower_time_bound.n3()} && ?time_added <= {upper_time_bound.n3()})
+                (?current_time >= {lower_time_added_bound.n3()} && ?current_time <= {upper_time_added_bound.n3()}) ||
+                (?time_added >= {lower_time_added_bound.n3()} && ?time_added <= {upper_time_added_bound.n3()})
             ) .
             """
             query += time_filter
@@ -558,8 +558,8 @@ class Humemai:
         predicate: Optional[URIRef] = None,
         object_: Optional[URIRef] = None,
         qualifiers: dict[URIRef, Union[URIRef, Literal]] = {},
-        lower_time_bound: Optional[Literal] = None,
-        upper_time_bound: Optional[Literal] = None,
+        lower_time_added_bound: Optional[Literal] = None,
+        upper_time_added_bound: Optional[Literal] = None,
     ) -> None:
         """
         Increment the 'num_recalled' value for memories (episodic or semantic) that match
@@ -570,59 +570,60 @@ class Humemai:
             predicate (URIRef, optional): Filter by predicate URI.
             object_ (URIRef, optional): Filter by object URI.
             qualifiers (dict, optional): Additional qualifiers to filter by.
-            lower_time_bound (Literal, optional): Lower bound for time filtering (ISO format).
-            upper_time_bound (Literal, optional): Upper bound for time filtering (ISO format).
+            lower_time_added_bound (Literal, optional): Lower bound for time filtering
+                (ISO format).
+            upper_time_added_bound (Literal, optional): Upper bound for time filtering
+                (ISO format).
         """
 
-        # Construct SPARQL query
-        query = f"""
+        # Construct base SPARQL query
+        query = """
         PREFIX humemai: <https://humem.ai/ontology#>
         PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
         PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
-        SELECT ?statement ?subject ?predicate ?object ?num_recalled
-        WHERE {{
-            ?statement rdf:type rdf:Statement ;
-                    rdf:subject ?subject ;
-                    rdf:predicate ?predicate ;
-                    rdf:object ?object .
+        SELECT ?statement ?num_recalled
+        WHERE {
+            ?statement rdf:type rdf:Statement .
         """
 
-        # Add filters dynamically based on input using .n3() to format correctly
+        # Add subject/predicate/object constraints directly if provided
         if subject is not None:
-            query += f"FILTER(?subject = {subject.n3()}) .\n"
+            query += f"?statement rdf:subject {subject.n3()} .\n"
+        else:
+            query += "?statement rdf:subject ?subject .\n"
+
         if predicate is not None:
-            query += f"FILTER(?predicate = {predicate.n3()}) .\n"
+            query += f"?statement rdf:predicate {predicate.n3()} .\n"
+        else:
+            query += "?statement rdf:predicate ?predicate .\n"
+
         if object_ is not None:
-            query += f"FILTER(?object = {object_.n3()}) .\n"
+            query += f"?statement rdf:object {object_.n3()} .\n"
+        else:
+            query += "?statement rdf:object ?object .\n"
 
-        # Add filters for any additional qualifiers provided in the dictionary
+        # Add all qualifiers as direct triple patterns
         for qualifier_pred, qualifier_obj in qualifiers.items():
-            query += (
-                f"FILTER(?statement {qualifier_pred.n3()} {qualifier_obj.n3()}) .\n"
-            )
+            query += f"?statement {qualifier_pred.n3()} {qualifier_obj.n3()} .\n"
 
-        # Add time filtering logic (for current_time and time_added)
-        if lower_time_bound and upper_time_bound:
-            time_filter = f"""
-            OPTIONAL {{ ?statement humemai:current_time ?current_time }}
-            OPTIONAL {{ ?statement humemai:time_added ?time_added }}
-            FILTER(
-                (?current_time >= {lower_time_bound.n3()} && ?current_time <= {upper_time_bound.n3()}) ||
-                (?time_added >= {lower_time_bound.n3()} && ?time_added <= {upper_time_bound.n3()})
-            ) .
+        # Add time filtering with required time_added
+        if lower_time_added_bound and upper_time_added_bound:
+            query += f"""
+            ?statement humemai:time_added ?time_added .
+            FILTER(?time_added >= {lower_time_added_bound.n3()} && 
+                   ?time_added <= {upper_time_added_bound.n3()})
             """
-            query += time_filter
 
-        # Add OPTIONAL to retrieve the num_recalled value (if it exists)
+        # Require num_recalled to exist
         query += """
-            OPTIONAL { ?statement humemai:num_recalled ?num_recalled }
+            ?statement humemai:num_recalled ?num_recalled .
         }
         """
 
         logger.debug(f"Executing SPARQL query:\n{query}")
 
-        # Execute the SPARQL query to retrieve matching reified statements
+        # Execute the SPARQL query to retrieve matching statements
         results = self.graph.query(query)
 
         # Iterate through the results to increment the num_recalled value
@@ -630,14 +631,10 @@ class Humemai:
             statement = row.statement
             current_num_recalled_value = row.num_recalled
 
-            if current_num_recalled_value is not None:
-                # If 'num_recalled' exists, increment it by 1
-                new_num_recalled_value = int(current_num_recalled_value) + 1
-            else:
-                # If 'num_recalled' does not exist, initialize it to 1 (default is 0)
-                new_num_recalled_value = 1
+            # Increment the num_recalled value by 1
+            new_num_recalled_value = int(current_num_recalled_value) + 1
 
-            # Update or add the new 'num_recalled' value in the graph
+            # Update the num_recalled value in the graph
             self.graph.set(
                 (
                     statement,
@@ -657,13 +654,13 @@ class Humemai:
         object_: Optional[URIRef] = None,
         qualifiers: dict[URIRef, Union[URIRef, Literal]] = {},
         new_time: Optional[Literal] = None,
-        lower_time_bound: Optional[Literal] = None,
-        upper_time_bound: Optional[Literal] = None,
+        lower_time_added_bound: Optional[Literal] = None,
+        upper_time_added_bound: Optional[Literal] = None,
     ) -> None:
         """
         Update the 'last_accessed' qualifier for all statements that match the given
-        filters. This is structurally similar to 'increment_num_recalled' but instead sets
-        'last_accessed' to a new time.
+        filters. This is structurally similar to 'increment_num_recalled' but instead
+        sets 'last_accessed' to a new time.
 
         Args:
             subject (URIRef, optional): Filter by subject URI.
@@ -672,68 +669,64 @@ class Humemai:
             qualifiers (dict, optional): Additional qualifiers to filter by.
             new_time (Literal, optional): The new last_accessed time to set. Must be a
                 Literal with datatype XSD.dateTime if provided.
-            lower_time_bound (Literal, optional): Lower bound for time filtering (ISO format).
-            upper_time_bound (Literal, optional): Upper bound for time filtering (ISO format).
+            lower_time_added_bound (Literal, optional): Lower bound for time_added
+                filtering (ISO format).
+            upper_time_added_bound (Literal, optional): Upper bound for time_added
+                filtering (ISO format).
         """
         logger.debug(
             f"update_last_accessed called with subject={subject}, predicate={predicate}, "
             f"object_={object_}, qualifiers={qualifiers}, new_time={new_time}, "
-            f"lower_time_bound={lower_time_bound}, upper_time_bound={upper_time_bound}"
+            f"lower_time_added_bound={lower_time_added_bound}, upper_time_added_bound={upper_time_added_bound}"
         )
 
         # If user didn't pass a new_time, there's nothing to set
         if new_time is None:
-            logger.warning("No new_time provided. Skipping update_last_accessed.")
-            return
+            raise ValueError("new_time must be provided to update last_accessed.")
 
-        # Validate new_time is an xsd:dateTime literal if you desire that restriction
+        # Validate new_time is an xsd:dateTime literal
         if not (isinstance(new_time, Literal) and new_time.datatype == XSD.dateTime):
             raise ValueError(
                 f"new_time must be an rdflib Literal with datatype XSD.dateTime. Got: {new_time}"
             )
 
-        # Construct SPARQL query
-        query = f"""
+        # Construct base SPARQL query
+        query = """
         PREFIX humemai: <https://humem.ai/ontology#>
         PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
         PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
-        SELECT ?statement ?subject ?predicate ?object
-        WHERE {{
-            ?statement rdf:type rdf:Statement ;
-                    rdf:subject ?subject ;
-                    rdf:predicate ?predicate ;
-                    rdf:object ?object .
+        SELECT ?statement
+        WHERE {
+            ?statement rdf:type rdf:Statement .
         """
 
-        # Add filters for subject/predicate/object if provided
+        # Add subject/predicate/object constraints directly if provided
         if subject is not None:
-            query += f"FILTER(?subject = {subject.n3()})\n"
-        if predicate is not None:
-            query += f"FILTER(?predicate = {predicate.n3()})\n"
-        if object_ is not None:
-            query += f"FILTER(?object = {object_.n3()})\n"
+            query += f"?statement rdf:subject {subject.n3()} .\n"
+        else:
+            query += "?statement rdf:subject ?subject .\n"
 
-        # Add filters for any additional qualifiers
+        if predicate is not None:
+            query += f"?statement rdf:predicate {predicate.n3()} .\n"
+        else:
+            query += "?statement rdf:predicate ?predicate .\n"
+
+        if object_ is not None:
+            query += f"?statement rdf:object {object_.n3()} .\n"
+        else:
+            query += "?statement rdf:object ?object .\n"
+
+        # Add all qualifiers as direct triple patterns
         for q_pred, q_obj in qualifiers.items():
-            # There's no direct "FILTER(?statement q_pred q_obj)" in SPARQL.
-            # Instead we require a triple like: ?statement q_pred q_obj.
-            # Then no separate FILTER needed.
-            # We'll add lines like: "?statement <uri> <obj> ."
             query += f"?statement {q_pred.n3()} {q_obj.n3()} .\n"
 
-        # Add optional time filtering logic
-        # We'll check current_time, time_added, or last_accessed
-        if lower_time_bound and upper_time_bound:
+        # Add time filtering with required time_added
+        if lower_time_added_bound and upper_time_added_bound:
             query += f"""
-            OPTIONAL {{ ?statement humemai:current_time ?ct }}
-            OPTIONAL {{ ?statement humemai:time_added ?ta }}
-            OPTIONAL {{ ?statement humemai:last_accessed ?la }}
-            FILTER(
-                (?ct >= {lower_time_bound.n3()} && ?ct <= {upper_time_bound.n3()})
-                || (?ta >= {lower_time_bound.n3()} && ?ta <= {upper_time_bound.n3()})
-                || (?la >= {lower_time_bound.n3()} && ?la <= {upper_time_bound.n3()})
-            ) .
+            ?statement humemai:time_added ?time_added .
+            FILTER(?time_added >= {lower_time_added_bound.n3()} && 
+                   ?time_added <= {upper_time_added_bound.n3()})
             """
 
         query += "}"  # close WHERE block
