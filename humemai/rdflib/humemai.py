@@ -1146,6 +1146,50 @@ class Humemai:
             print("\n".join(memory_strings))
             return
 
+    def to_list(self) -> list[list[Union[str, dict[str, Any]]]]:
+        """
+        Return all memories as a Python list of lists. Each entry is:
+            [ subject_str, predicate_str, object_str, { qualifier_name: qualifier_value, … } ]
+
+        - subject_str/predicate_str/object_str: the local name (last segment of the URI).
+        - qualifier_name: local name (e.g. "memoryID", "current_time", etc.).
+        - qualifier_value: coerced to int (for XSD.integer), str (for dateTime), or stripped URI.
+        """
+        result: list[list[Union[str, dict[str, Any]]]] = []
+
+        for subj, pred, obj, qualifiers in self.iterate_memories("all"):
+            subj_str = self._strip_namespace(subj)
+            pred_str = self._strip_namespace(pred)
+            obj_str  = self._strip_namespace(obj)
+
+            qdict: dict[str, Any] = {}
+            for qpred, qobj in qualifiers.items():
+                qname = self._strip_namespace(qpred)
+                # If it's an XSD.integer‐typed Literal, coerce to Python int
+                if isinstance(qobj, Literal) and qobj.datatype == XSD.integer:
+                    try:
+                        qdict[qname] = int(qobj)
+                        continue
+                    except Exception:
+                        pass
+
+                # If it's an XSD.dateTime‐typed Literal, keep as ISO string
+                if isinstance(qobj, Literal) and qobj.datatype == XSD.dateTime:
+                    qdict[qname] = str(qobj)
+                    continue
+
+                # If it's a URIRef, strip namespace to get local name
+                if isinstance(qobj, URIRef):
+                    qdict[qname] = self._strip_namespace(qobj)
+                    continue
+
+                # Otherwise, fallback to plain string
+                qdict[qname] = str(qobj)
+
+            result.append([subj_str, pred_str, obj_str, qdict])
+
+        return result
+
     def get_working_memory(
         self,
         trigger_node: Optional[URIRef] = None,
