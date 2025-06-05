@@ -7,7 +7,7 @@ import collections
 import logging
 import os
 from datetime import datetime
-from typing import Optional, Union
+from typing import Optional, Union, Any
 
 from rdflib import BNode, Graph, Literal, Namespace, URIRef
 from rdflib.namespace import RDF, XSD
@@ -1160,7 +1160,7 @@ class Humemai:
         for subj, pred, obj, qualifiers in self.iterate_memories("all"):
             subj_str = self._strip_namespace(subj)
             pred_str = self._strip_namespace(pred)
-            obj_str  = self._strip_namespace(obj)
+            obj_str = self._strip_namespace(obj)
 
             qdict: dict[str, Any] = {}
             for qpred, qobj in qualifiers.items():
