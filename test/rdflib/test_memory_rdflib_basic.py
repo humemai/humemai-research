@@ -35,7 +35,7 @@ class TestMemory(unittest.TestCase):
 
         # Verify memory has been added correctly
         result = self.memory.print_memories(True)
-        expected = "(Alice, knows, Bob, {'memoryID': '0', 'current_time': '2024-04-27T10:00:00', 'location': 'New York'})"
+        expected = "(Alice, knows, Bob, {'memory_id': '0', 'current_time': '2024-04-27T10:00:00', 'location': 'New York'})"
 
         self.assertIn(expected, result)
 
@@ -63,8 +63,8 @@ class TestMemory(unittest.TestCase):
         # Verify that both reified statements are stored
         result = self.memory.print_memories(True)
 
-        expected1 = "(Alice, knows, Bob, {'memoryID': '0', 'current_time': '2024-04-27T10:00:00', 'location': 'New York'})"
-        expected2 = "(Alice, knows, Bob, {'memoryID': '1', 'current_time': '2024-04-27T12:00:00', 'location': 'London'})"
+        expected1 = "(Alice, knows, Bob, {'memory_id': '0', 'current_time': '2024-04-27T10:00:00', 'location': 'New York'})"
+        expected2 = "(Alice, knows, Bob, {'memory_id': '1', 'current_time': '2024-04-27T12:00:00', 'location': 'London'})"
 
         # Ensure both entries are present
         self.assertIn(expected1, result)

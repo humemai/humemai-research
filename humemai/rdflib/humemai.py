@@ -69,7 +69,7 @@ class Humemai:
             self.graph.add((statement, RDF.predicate, pred))
             self.graph.add((statement, RDF.object, obj))
             self.graph.add(
-                (statement, humemai.memoryID, Literal(unique_id, datatype=XSD.integer))
+                (statement, humemai.memory_id, Literal(unique_id, datatype=XSD.integer))
             )  # Add the unique ID
 
             logger.debug(f"Reified statement created: {statement} with ID {unique_id}")
@@ -98,7 +98,7 @@ class Humemai:
             raise ValueError(f"memory_id must be a Literal with datatype XSD.integer")
 
         statement: Optional[URIRef] = None
-        for stmt in self.graph.subjects(humemai.memoryID, memory_id):
+        for stmt in self.graph.subjects(humemai.memory_id, memory_id):
             statement = stmt
             break
 
@@ -158,7 +158,7 @@ class Humemai:
             qualifiers).
         """
         for stmt in self.graph.subjects(
-            humemai.memoryID, Literal(memory_id, datatype=XSD.integer)
+            humemai.memory_id, Literal(memory_id, datatype=XSD.integer)
         ):
             subj = self.graph.value(stmt, RDF.subject)
             pred = self.graph.value(stmt, RDF.predicate)
@@ -1152,7 +1152,7 @@ class Humemai:
             [ subject_str, predicate_str, object_str, { qualifier_name: qualifier_value, … } ]
 
         - subject_str/predicate_str/object_str: the local name (last segment of the URI).
-        - qualifier_name: local name (e.g. "memoryID", "current_time", etc.).
+        - qualifier_name: local name (e.g. "memory_id", "current_time", etc.).
         - qualifier_value: coerced to int (for XSD.integer), str (for dateTime), or stripped URI.
         """
         result: list[list[Union[str, dict[str, Any]]]] = []
@@ -1362,7 +1362,7 @@ class Humemai:
 
         # Iterate through the short-term memories
         for subj, pred, obj, qualifiers_ in self.iterate_memories("short_term"):
-            memory_id = qualifiers_.get(humemai.memoryID)
+            memory_id = qualifiers_.get(humemai.memory_id)
 
             # Check if the memory ID matches
             if memory_id == memory_id_to_move:
@@ -1404,7 +1404,7 @@ class Humemai:
 
         # Iterate through the short-term memories
         for subj, pred, obj, qualifiers_ in self.iterate_memories("short_term"):
-            memory_id = qualifiers_.get(humemai.memoryID)
+            memory_id = qualifiers_.get(humemai.memory_id)
 
             # Check if the memory ID matches
             if memory_id == memory_id_to_move:
@@ -1435,21 +1435,21 @@ class Humemai:
         Move all short-term memories to long-term episodic memory.
         """
         for subj, pred, obj, qualifiers in self.iterate_memories("short_term"):
-            self.move_short_term_to_episodic(qualifiers.get(humemai.memoryID))
+            self.move_short_term_to_episodic(qualifiers.get(humemai.memory_id))
 
     def move_all_short_term_to_semantic(self) -> None:
         """
         Move all short-term memories to long-term semantic memory.
         """
         for subj, pred, obj, qualifiers in self.iterate_memories("short_term"):
-            self.move_short_term_to_semantic(qualifiers.get(humemai.memoryID))
+            self.move_short_term_to_semantic(qualifiers.get(humemai.memory_id))
 
     def clear_short_term_memories(self) -> None:
         """
         Clear all short-term memories from the memory system.
         """
         for subj, pred, obj, qualifiers in self.iterate_memories("short_term"):
-            memory_id = qualifiers.get(humemai.memoryID)
+            memory_id = qualifiers.get(humemai.memory_id)
 
             self.delete_memory(memory_id)
             logger.debug(f"Cleared short-term memory with ID {memory_id}.")

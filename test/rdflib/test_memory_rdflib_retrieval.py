@@ -70,7 +70,7 @@ class TestMemoryRetrievalAndDeletion(unittest.TestCase):
 
         # Extract memory IDs from the retrieved memories
         memory_ids = [
-            int(retrieved_memories.graph.value(statement, humemai.memoryID))
+            int(retrieved_memories.graph.value(statement, humemai.memory_id))
             for statement in retrieved_memories.graph.subjects(RDF.type, RDF.Statement)
         ]
 
@@ -88,7 +88,7 @@ class TestMemoryRetrievalAndDeletion(unittest.TestCase):
 
         # Extract memory IDs from the retrieved memories
         memory_ids_to_delete = [
-            int(retrieved_memories.graph.value(statement, humemai.memoryID))
+            int(retrieved_memories.graph.value(statement, humemai.memory_id))
             for statement in retrieved_memories.graph.subjects(RDF.type, RDF.Statement)
         ]
 
@@ -114,7 +114,7 @@ class TestMemoryRetrievalAndDeletion(unittest.TestCase):
         }
         retrieved_memories = self.memory.get_memories(qualifiers=location_qualifier)
         memory_ids_to_delete = [
-            int(retrieved_memories.graph.value(statement, humemai.memoryID))
+            int(retrieved_memories.graph.value(statement, humemai.memory_id))
             for statement in retrieved_memories.graph.subjects(RDF.type, RDF.Statement)
         ]
         for memory_id in memory_ids_to_delete:
