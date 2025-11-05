@@ -11,7 +11,3 @@ We study how machines can store, retrieve, and reason over structured memory gra
 - **Memory Management:** Learning what to remember, summarize, or forget across time.  
 - **Graph-Based Reasoning:** Querying and updating symbolic–neural hybrid memories.  
 - **Reinforcement Learning & Knowledge Graphs:** Using RL to induce hierarchies and explore knowledge structures.
-
-## Related Projects
-
-- [agent-room-env-v3](https://github.com/humemai/agent-room-env-v3) — Temporal graph-based environment for reasoning agents.  
