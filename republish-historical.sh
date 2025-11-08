@@ -87,6 +87,12 @@ for version in "${ordered_versions[@]}"; do
         find . -path ./cassandra_data -prune -o -name "*.py" -type f -exec sed -i 's/import humemai/import humemai_research/g' {} \; 2>/dev/null || true
     fi
     
+    # Update README badge URLs
+    echo "Updating README badges..."
+    if [ -f "README.md" ]; then
+        sed -i 's|badge.fury.io/py/humemai|badge.fury.io/py/humemai-research|g' README.md
+    fi
+    
     # Create a commit for this version
     git add -A
     git commit -m "Republish v$post_version with historical code to humemai-research on PyPI" || true
