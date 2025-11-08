@@ -41,7 +41,7 @@ cp .github/workflows/publish-pypi.yml /tmp/publish-pypi.yml.backup
 
 for version in "${ordered_versions[@]}"; do
     commit="${versions[$version]}"
-    post_version="${version}.post1"
+    post_version="${version}.post2"
     echo ""
     echo "========================================"
     echo "Processing v$post_version from commit $commit"
@@ -53,9 +53,12 @@ for version in "${ordered_versions[@]}"; do
         # Check if 'humemai' folder exists (old structure) and rename it properly
     if [ -d "humemai" ] && [ ! -d "humemai_research" ]; then
         echo "Renaming humemai/ to humemai_research/..."
+        # Stage all files in humemai/ for removal
+        git ls-files humemai/ | xargs -r git rm --cached
+        # Now physically rename the directory  
         mv humemai humemai_research
-        git add humemai_research
-        git rm -r --cached humemai 2>/dev/null || true
+        # Stage all files in the new location
+        git add humemai_research/
     elif [ -d "humemai_research/humemai" ]; then
         echo "Fixing nested structure: moving humemai_research/humemai/ contents up..."
         # Move contents up one level
