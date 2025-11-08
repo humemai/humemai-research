@@ -33,7 +33,7 @@ ordered_versions=("1.0.0" "1.0.1" "1.0.2" "1.0.3" "1.0.4" "1.1.0" "1.1.1" "1.1.2
 
 # Save the current workflow file
 echo "Saving current workflow file..."
-cp .github/workflows/publish-to-pypi.yaml /tmp/publish-pypi.yml.backup
+cp .github/workflows/publish-pypi.yml /tmp/publish-pypi.yml.backup
 
 for version in "${ordered_versions[@]}"; do
     commit="${versions[$version]}"
