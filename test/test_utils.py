@@ -3,7 +3,7 @@ import unittest
 from tempfile import NamedTemporaryFile
 from unittest.mock import patch
 
-from humemai.utils import (argmax, get_duplicate_dicts, list_duplicates_of,
+from humemai_research.utils import (argmax, get_duplicate_dicts, list_duplicates_of,
                            load_questions, merge_lists, read_data, read_json,
                            read_pickle, read_yaml, remove_timestamp,
                            write_json, write_pickle, write_yaml)

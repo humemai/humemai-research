@@ -2,7 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/614376180.svg)](https://zenodo.org/doi/10.5281/zenodo.10876440)
 [![PyPI
-version](https://badge.fury.io/py/humemai.svg)](https://badge.fury.io/py/humemai)
+version](https://badge.fury.io/py/humemai-research.svg)](https://badge.fury.io/py/humemai-research)
 
 This repo hosts a package `humemai`, a human-like memory systems that are modeled with
 knowledge knoweldge graphs (KGs). At the moment they are nothing but a Python list of
