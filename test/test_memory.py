@@ -1,6 +1,6 @@
 import unittest
 from datetime import datetime, timedelta
-from humemai.memory import (
+from humemai_research.memory import (
     Memory,
     ShortMemory,
     LongMemory,

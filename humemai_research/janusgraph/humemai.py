@@ -13,7 +13,7 @@ from gremlin_python.process.anonymous_traversal import traversal
 from gremlin_python.process.graph_traversal import GraphTraversalSource
 from gremlin_python.process.traversal import P, T, Direction, TextP
 from gremlin_python.driver.serializer import GraphSONSerializersV3d0
-from humemai.janusgraph.utils.docker import (
+from humemai_research.janusgraph.utils.docker import (
     start_docker_compose,
     stop_docker_compose,
     remove_docker_compose,
@@ -21,7 +21,7 @@ from humemai.janusgraph.utils.docker import (
     copy_file_to_docker,
 )
 
-from humemai.utils import is_iso8601_datetime, write_json, read_json
+from humemai_research.utils import is_iso8601_datetime, write_json, read_json
 
 
 # Configure logging
