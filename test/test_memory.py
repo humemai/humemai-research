@@ -2,7 +2,7 @@ import random
 import unittest
 from copy import deepcopy
 
-from humemai.memory import LongMemory, Memory, MemorySystems, ShortMemory
+from humemai_research.memory import LongMemory, Memory, MemorySystems, ShortMemory
 
 
 class TestMemory(unittest.TestCase):
