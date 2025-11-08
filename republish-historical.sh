@@ -56,10 +56,15 @@ for version in "${ordered_versions[@]}"; do
     sed -i 's/^name = humemai$/name = humemai-research/' setup.cfg
     sed -i 's|github.com/humemai/humemai|github.com/humemai/humemai-research|g' setup.cfg
     
-    # Add the workflow file
+    # Remove old workflow file if it exists and add new one
     echo "Adding publish-pypi.yml workflow..."
     mkdir -p .github/workflows
+    rm -f .github/workflows/publish-to-pypi.yaml
     cp /tmp/publish-pypi.yml.backup .github/workflows/publish-pypi.yml
+    
+    # Remove cassandra data files
+    echo "Removing cassandra data files..."
+    rm -rf cassandra_data/ examples/*/cassandra_data/ 2>/dev/null || true
     
     # Update all Python imports if humemai folder existed
     if [ -d "humemai_research" ]; then
