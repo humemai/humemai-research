@@ -1,6 +1,6 @@
 # HumemAI Research
 
-HumemAI Research explores **human-like memory systems** for AI — combining **episodic** (experience-based) and **semantic** (knowledge-based) memory models.
+HumemAI Research explores **human-like memory** for AI — combining **episodic** (experience-based) and **semantic** (knowledge-based) memory models.
 
 We study how machines can store, retrieve, and reason over structured memory graphs built from text, tables, and user interactions.
 
