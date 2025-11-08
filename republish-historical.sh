@@ -41,7 +41,7 @@ cp .github/workflows/publish-pypi.yml /tmp/publish-pypi.yml.backup
 
 for version in "${ordered_versions[@]}"; do
     commit="${versions[$version]}"
-    post_version="${version}.post0"
+    post_version="${version}.post1"
     echo ""
     echo "========================================"
     echo "Processing v$post_version from commit $commit"
