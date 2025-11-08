@@ -1,7 +1,7 @@
 import random
 import unittest
 
-from humemai.utils import *
+from humemai_research.utils import *
 
 
 class UtilsTest(unittest.TestCase):

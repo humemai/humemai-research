@@ -3,7 +3,7 @@ import random
 import unittest
 from collections import Counter
 
-from humemai.memory import (EpisodicMemory, Memory, MemorySystems,
+from humemai_research.memory import (EpisodicMemory, Memory, MemorySystems,
                             SemanticMemory, ShortMemory)
 
 
