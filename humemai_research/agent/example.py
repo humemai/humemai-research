@@ -6,7 +6,7 @@ from dateutil import parser
 import spacy
 from rdflib import Namespace, URIRef, Literal, XSD
 
-from humemai import MemorySystem
+from humemai_research import MemorySystem
 
 # Define the custom namespace for the ontology
 humemai = Namespace("https://humem.ai/ontology#")

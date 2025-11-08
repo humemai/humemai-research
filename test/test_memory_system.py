@@ -4,7 +4,7 @@ from datetime import datetime
 from rdflib import RDF, Literal, Namespace, URIRef
 from rdflib.namespace import XSD
 
-from humemai import MemorySystem
+from humemai_research import MemorySystem
 
 # Define the custom namespace for the ontology
 humemai = Namespace("https://humem.ai/ontology#")
