@@ -53,12 +53,12 @@ for version in "${ordered_versions[@]}"; do
         # Check if 'humemai' folder exists (old structure) and rename it properly
     if [ -d "humemai" ] && [ ! -d "humemai_research" ]; then
         echo "Renaming humemai/ to humemai_research/..."
-        # Stage all files in humemai/ for removal
-        git ls-files humemai/ | xargs -r git rm --cached
-        # Now physically rename the directory  
-        mv humemai humemai_research
-        # Stage all files in the new location
-        git add humemai_research/
+        # Rename each file individually using git mv to preserve history
+        for file in $(git ls-files humemai/); do
+            newfile=$(echo $file | sed 's|^humemai/|humemai_research/|')
+            mkdir -p $(dirname $newfile)
+            git mv $file $newfile
+        done
     elif [ -d "humemai_research/humemai" ]; then
         echo "Fixing nested structure: moving humemai_research/humemai/ contents up..."
         # Move contents up one level
