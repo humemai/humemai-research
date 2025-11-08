@@ -37,15 +37,16 @@ cp .github/workflows/publish-pypi.yml /tmp/publish-pypi.yml.backup
 
 for version in "${ordered_versions[@]}"; do
     commit="${versions[$version]}"
+    post_version="${version}.post0"
     echo ""
     echo "========================================"
-    echo "Processing v$version from commit $commit"
+    echo "Processing v$post_version from commit $commit"
     echo "========================================"
     
     # Checkout the original commit
     git checkout $commit
     
-    # Check if 'humemai' folder exists (old structure) and rename it properly
+        # Check if 'humemai' folder exists (old structure) and rename it properly
     if [ -d "humemai" ] && [ ! -d "humemai_research" ]; then
         echo "Renaming humemai/ to humemai_research/..."
         mv humemai humemai_research
@@ -62,6 +63,7 @@ for version in "${ordered_versions[@]}"; do
     # Update setup.cfg - change package name and URLs
     echo "Updating setup.cfg..."
     sed -i 's/^name = humemai$/name = humemai-research/' setup.cfg
+    sed -i "s/^version = .*$/version = $post_version/" setup.cfg
     sed -i 's|github.com/humemai/humemai|github.com/humemai/humemai-research|g' setup.cfg
     
     # Remove old workflow file if it exists and add new one
@@ -83,19 +85,19 @@ for version in "${ordered_versions[@]}"; do
     
     # Create a commit for this version
     git add -A
-    git commit -m "Republish v$version with historical code to humemai-research on PyPI" || true
+    git commit -m "Republish v$post_version with historical code to humemai-research on PyPI" || true
     
     # Tag it
-    git tag -f v$version
+    git tag -f v$post_version
     
     # Push the tag (which will trigger the workflow)
-    git push origin refs/tags/v$version -f
+    git push origin refs/tags/v$post_version -f
     
     # Delete old release and create new one
-    gh release delete v$version --yes 2>/dev/null || echo "No existing release to delete"
-    gh release create v$version --title "v$version" --notes "Release v$version with original historical code, republished to \`humemai-research\` on PyPI."
+    gh release delete v$post_version --yes 2>/dev/null || echo "No existing release to delete"
+    gh release create v$post_version --title "v$post_version" --notes "Release v$post_version with original historical code, republished to \`humemai-research\` on PyPI."
     
-    echo "✓ v$version processed and released"
+    echo "✓ v$post_version processed and released"
     
     # Wait a bit between releases to avoid overwhelming the API
     sleep 15
