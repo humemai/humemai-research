@@ -2,7 +2,7 @@
 
 import unittest
 from datetime import datetime
-from humemai.janusgraph import Humemai
+from humemai_research.janusgraph import Humemai
 
 
 class TestHumemai(unittest.TestCase):

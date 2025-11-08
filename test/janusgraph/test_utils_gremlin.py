@@ -9,13 +9,13 @@ from gremlin_python.driver.driver_remote_connection import DriverRemoteConnectio
 from gremlin_python.process.anonymous_traversal import traversal
 from gremlin_python.structure.graph import Graph
 
-from humemai.janusgraph.utils.docker import (
+from humemai_research.janusgraph.utils.docker import (
     start_containers,
     stop_containers,
     remove_containers,
 )
 
-from humemai.janusgraph.utils.gremlin import (
+from humemai_research.janusgraph.utils.gremlin import (
     remove_all_data,
     get_all_vertices,
     get_all_edges,

@@ -4,9 +4,9 @@ import re
 import json
 from datetime import datetime
 from gremlin_python.structure.graph import Vertex, Edge
-from humemai.janusgraph import Humemai
-from humemai.utils import disable_logger
-from humemai.prompt import (
+from humemai_research.janusgraph import Humemai
+from humemai_research.utils import disable_logger
+from humemai_research.prompt import (
     get_hf_pipeline,
     text2graph,
     graph2text,
