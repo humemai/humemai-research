@@ -2,7 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/614376180.svg)](https://zenodo.org/doi/10.5281/zenodo.10876440)
 [![PyPI
-version](https://badge.fury.io/py/humemai.svg)](https://badge.fury.io/py/humemai)
+version](https://badge.fury.io/py/humemai-research.svg)](https://badge.fury.io/py/humemai-research)
 
 <div align="center">
     <img src="./figures/humemai-with-text-below.png" alt="Image" style="width: 50%; max-width: 600px;">
