@@ -94,6 +94,6 @@
 ## [`graph-learning-humemai.ipynb`](./graph-learning-humemai.ipynb)
 
 - We use the python humemai package to store data
-  - `pip install humemai==2.4.1`
+  - `pip install humemai-research==2.4.1`
 - The data is stored in a graph database
 - We try to find the most representative CP with graph learning
