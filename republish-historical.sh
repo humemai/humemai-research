@@ -48,7 +48,9 @@ for version in "${ordered_versions[@]}"; do
     # Check if 'humemai' folder exists (old structure) and rename it properly
     if [ -d "humemai" ] && [ ! -d "humemai_research" ]; then
         echo "Renaming humemai/ to humemai_research/..."
-        git mv humemai humemai_research
+        mv humemai humemai_research
+        git add humemai_research
+        git rm -r --cached humemai 2>/dev/null || true
     elif [ -d "humemai_research/humemai" ]; then
         echo "Fixing nested structure: moving humemai_research/humemai/ contents up..."
         # Move contents up one level
