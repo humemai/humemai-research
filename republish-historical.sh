@@ -4,6 +4,10 @@ set -e
 # This script republishes all historical versions with their actual original code
 # Each version will be checked out from its original commit, renamed, and published
 
+# Get the repository root directory
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$REPO_ROOT"
+
 # Array of versions and their original commits
 declare -A versions=(
     ["1.0.0"]="4f51ab3"
