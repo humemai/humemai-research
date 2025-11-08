@@ -45,10 +45,16 @@ for version in "${ordered_versions[@]}"; do
     # Checkout the original commit
     git checkout $commit
     
-    # Check if 'humemai' folder exists (old structure)
-    if [ -d "humemai" ]; then
+    # Check if 'humemai' folder exists (old structure) and rename it properly
+    if [ -d "humemai" ] && [ ! -d "humemai_research" ]; then
         echo "Renaming humemai/ to humemai_research/..."
-        git mv humemai humemai_research || mv humemai humemai_research
+        git mv humemai humemai_research
+    elif [ -d "humemai_research/humemai" ]; then
+        echo "Fixing nested structure: moving humemai_research/humemai/ contents up..."
+        # Move contents up one level
+        mv humemai_research/humemai/* humemai_research/ 2>/dev/null || true
+        mv humemai_research/humemai/.* humemai_research/ 2>/dev/null || true  
+        rm -rf humemai_research/humemai
     fi
     
     # Update setup.cfg - change package name and URLs
