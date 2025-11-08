@@ -1,13 +1,15 @@
-# Supplementary material for IJCAI 2025 — Improving Human-Robot Teamwork in Urban Search and Rescue Through Knowledge Graph-Based Episodic Memory Learning
+# Supplementary material for AAAI 2026 — Improving Human-Robot Teamwork in Urban Search and Rescue Through Knowledge Graph-Based Episodic Memory Learning
 
+All the experiments were carried out on a single machine (AMD Ryzen 9 7950X 16-Core
+Processor with 128GB memory, Ubuntu 22.04, and RTX 4060 Ti with 16GB)
 
-## Start HumemAI
+## Start AnonymousPackage
 
-HumemAI is a python package for JanusGraph
-
+AnonymousPackage is a python package for JanusGraph. The original package name is
+anonymized for blind submission
 
 ```python
-from humemai.utils import disable_logger
+from anonymous_package.utils import disable_logger
 
 disable_logger()
 
@@ -18,32 +20,31 @@ from gremlin_python.process.graph_traversal import __
 from gremlin_python.process.traversal import P, T, Direction
 
 import json
-from humemai.janusgraph import Humemai
+from anonymous_package.janusgraph import AnonymousPackage
 from tqdm.auto import tqdm
 
-humemai = Humemai()
-humemai.connect()
+anonymous_package = AnonymousPackage()
+anonymous_package.connect()
 
 
-from humemai.utils import disable_logger
+from anonymous_package.utils import disable_logger
 
 disable_logger()
 ```
 
-## Write the co-learning data to HumemAI
-
+## Write the co-learning data to AnonymousPackage
 
 ```python
 with open("./raw-data.json") as f:
     data = json.load(f)
 
 
-humemai.remove_all_data()
+anonymous_package.remove_all_data()
 
 for data_point in tqdm(data):
     time_added = data_point["timestamp"]
 
-    robot_vertex = humemai.write_long_term_vertex("robot", {"time_added": time_added})
+    robot_vertex = anonymous_package.write_long_term_vertex("robot", {"time_added": time_added})
     cp_properties = {
         "cp_num": data_point["cp_num"],
         "participant_num": data_point["participant"],
@@ -57,16 +58,16 @@ for data_point in tqdm(data):
         "success": data_point["success"],
     }
 
-    cp_vertex = humemai.write_long_term_vertex("CP", cp_properties)
-    humemai.write_long_term_edge(
+    cp_vertex = anonymous_package.write_long_term_vertex("CP", cp_properties)
+    anonymous_package.write_long_term_edge(
         robot_vertex, "has_cp", cp_vertex, {"time_added": time_added}
     )
 
-    participant_vertex = humemai.write_long_term_vertex(
+    participant_vertex = anonymous_package.write_long_term_vertex(
         "participant",
         {"participant_number": data_point["participant"], "time_added": time_added},
     )
-    humemai.write_long_term_edge(
+    anonymous_package.write_long_term_edge(
         participant_vertex, "has_cp", cp_vertex, {"time_added": time_added}
     )
 
@@ -75,10 +76,10 @@ for data_point in tqdm(data):
     if situation:
         situation_properties = {s["type"]: s["content"] for s in situation}
         situation_properties["time_added"] = time_added
-        situation_vertex = humemai.write_long_term_vertex(
+        situation_vertex = anonymous_package.write_long_term_vertex(
             "situation", situation_properties
         )
-        humemai.write_long_term_edge(
+        anonymous_package.write_long_term_edge(
             cp_vertex, "has_situation", situation_vertex, {"time_added": time_added}
         )
 
@@ -90,10 +91,10 @@ for data_point in tqdm(data):
                     properties[action["type"]] = action["content"]
                 properties["action_number"] = idx
 
-                human_action_vertex = humemai.write_long_term_vertex(
+                human_action_vertex = anonymous_package.write_long_term_vertex(
                     "human_action", properties
                 )
-                humemai.write_long_term_edge(
+                anonymous_package.write_long_term_edge(
                     situation_vertex,
                     "has_human_action_" + str(idx),
                     human_action_vertex,
@@ -108,10 +109,10 @@ for data_point in tqdm(data):
                     properties[action["type"]] = action["content"]
                 properties["action_number"] = idx
 
-                robot_action_vertex = humemai.write_long_term_vertex(
+                robot_action_vertex = anonymous_package.write_long_term_vertex(
                     "robot_action", properties
                 )
-                humemai.write_long_term_edge(
+                anonymous_package.write_long_term_edge(
                     situation_vertex,
                     "has_robot_action_" + str(idx),
                     robot_action_vertex,
@@ -119,63 +120,60 @@ for data_point in tqdm(data):
                 )
 ```
 
-    100%|██████████| 211/211 [00:02<00:00, 92.28it/s]
-
+    100%|██████████| 211/211
 
 ### Visualize all 211 collaboration patterns (CPs) as knowledge graphs (KGs)
-![g.V().png](./figures/g.V().png)
 
+![g.V().png](<./figures/g.V().png>)
 
 ### Visualize an example CP (#36)
 
 ![cp_36.png](./figures/cp_36.png)
 
-
 ## Get some stats
-
 
 ```python
 from gremlin_python.process.traversal import TextP
 
 ticks_lasted_min = (
-    humemai.g.V().hasLabel("CP").values("ticks_lasted").order().limit(1).next()
+    anonymous_package.g.V().hasLabel("CP").values("ticks_lasted").order().limit(1).next()
 )
 
 ticks_lasted_max = (
-    humemai.g.V().hasLabel("CP").values("ticks_lasted").order().tail(1).next()
+    anonymous_package.g.V().hasLabel("CP").values("ticks_lasted").order().tail(1).next()
 )
 
 time_elapsed_min = (
-    humemai.g.V().hasLabel("CP").values("time_elapsed").order().limit(1).next()
+    anonymous_package.g.V().hasLabel("CP").values("time_elapsed").order().limit(1).next()
 )
 
 time_elapsed_max = (
-    humemai.g.V().hasLabel("CP").values("time_elapsed").order().tail(1).next()
+    anonymous_package.g.V().hasLabel("CP").values("time_elapsed").order().tail(1).next()
 )
 
 remaining_rocks_min = (
-    humemai.g.V().hasLabel("CP").values("remaining_rocks").order().limit(1).next()
+    anonymous_package.g.V().hasLabel("CP").values("remaining_rocks").order().limit(1).next()
 )
 
 remaining_rocks_max = (
-    humemai.g.V().hasLabel("CP").values("remaining_rocks").order().tail(1).next()
+    anonymous_package.g.V().hasLabel("CP").values("remaining_rocks").order().tail(1).next()
 )
 
 victim_harm_min = (
-    humemai.g.V().hasLabel("CP").values("victim_harm").order().limit(1).next()
+    anonymous_package.g.V().hasLabel("CP").values("victim_harm").order().limit(1).next()
 )
 
 victim_harm_max = (
-    humemai.g.V().hasLabel("CP").values("victim_harm").order().tail(1).next()
+    anonymous_package.g.V().hasLabel("CP").values("victim_harm").order().tail(1).next()
 )
 
-success_min = humemai.g.V().hasLabel("CP").values("success").order().limit(1).next()
+success_min = anonymous_package.g.V().hasLabel("CP").values("success").order().limit(1).next()
 
-success_max = humemai.g.V().hasLabel("CP").values("success").order().tail(1).next()
+success_max = anonymous_package.g.V().hasLabel("CP").values("success").order().tail(1).next()
 
-round_num_min = humemai.g.V().hasLabel("CP").values("round_num").order().limit(1).next()
+round_num_min = anonymous_package.g.V().hasLabel("CP").values("round_num").order().limit(1).next()
 
-round_num_max = humemai.g.V().hasLabel("CP").values("round_num").order().tail(1).next()
+round_num_max = anonymous_package.g.V().hasLabel("CP").values("round_num").order().tail(1).next()
 
 print(f"{'Description':<20}{'Min':<10}{'Max':<10}")
 print(f"{'-' * 40}")
@@ -187,18 +185,16 @@ print(f"{'Success:':<20}{success_min:<10}{success_max:<10}")
 print(f"{'Round number:':<20}{round_num_min:<10}{round_num_max:<10}")
 ```
 
-    Description         Min       Max       
+    Description         Min       Max
     ----------------------------------------
-    Ticks lasted:       1         3018      
-    Time elapsed:       887       3000      
-    Remaining rocks:    0         41        
-    Victim harm:        0         1900      
-    Success:            0         1         
-    Round number:       1         8         
-
+    Ticks lasted:       1         3018
+    Time elapsed:       887       3000
+    Remaining rocks:    0         41
+    Victim harm:        0         1900
+    Success:            0         1
+    Round number:       1         8
 
 ## Write the vector representations of the nodes to the database
-
 
 ```python
 import numpy as np
@@ -224,14 +220,14 @@ def turn_properties_into_string(properties):
     return to_return
 
 
-situation_vertices = humemai.g.V().hasLabel("situation").toList()
+situation_vertices = anonymous_package.g.V().hasLabel("situation").toList()
 for situation_vertex in tqdm(situation_vertices):
     # Get situation node details
     situation_label = situation_vertex.label
-    situation_properties = humemai.get_properties(situation_vertex)
+    situation_properties = anonymous_package.get_properties(situation_vertex)
     situation_properties_str = turn_properties_into_string(situation_properties)
     situation_properties_vector = model.encode(situation_properties_str)
-    humemai.update_vertex_properties(
+    anonymous_package.update_vertex_properties(
         situation_vertex,
         {
             "sentence_representation": situation_properties_str,
@@ -241,10 +237,10 @@ for situation_vertex in tqdm(situation_vertices):
 
     # Get the connected cp vertex
     cp_vertex = (
-        humemai.g.V(situation_vertex).inE().hasLabel("has_situation").outV().next()
+        anonymous_package.g.V(situation_vertex).inE().hasLabel("has_situation").outV().next()
     )
     cp_label = cp_vertex.label
-    cp_properties = humemai.get_properties(cp_vertex)
+    cp_properties = anonymous_package.get_properties(cp_vertex)
     cp_properties_vector = np.array(
         [
             cp_properties["ticks_lasted"] / ticks_lasted_max,
@@ -255,7 +251,7 @@ for situation_vertex in tqdm(situation_vertices):
             cp_properties["round_num"] / round_num_max,
         ]
     )
-    humemai.update_vertex_properties(
+    anonymous_package.update_vertex_properties(
         cp_vertex,
         {
             "vector_representation": json.dumps(cp_properties_vector.tolist()),
@@ -264,19 +260,19 @@ for situation_vertex in tqdm(situation_vertices):
 
     # Get human action vertices
     human_actions = (
-        humemai.g.V(situation_vertex)
+        anonymous_package.g.V(situation_vertex)
         .outE()
         .hasLabel(TextP.containing("has_human_action"))
         .inV()
         .toList()
     )
     for human_action in human_actions:
-        human_action_properties = humemai.get_properties(human_action)
+        human_action_properties = anonymous_package.get_properties(human_action)
         human_action_properties_str = turn_properties_into_string(
             human_action_properties
         )
         human_action_properties_vector = model.encode(human_action_properties_str)
-        humemai.update_vertex_properties(
+        anonymous_package.update_vertex_properties(
             human_action,
             {
                 "sentence_representation": human_action_properties_str,
@@ -288,19 +284,19 @@ for situation_vertex in tqdm(situation_vertices):
 
     # Get robot action vertices
     robot_actions = (
-        humemai.g.V(situation_vertex)
+        anonymous_package.g.V(situation_vertex)
         .outE()
         .hasLabel(TextP.containing("has_robot_action"))
         .inV()
         .toList()
     )
     for robot_action in robot_actions:
-        robot_action_properties = humemai.get_properties(robot_action)
+        robot_action_properties = anonymous_package.get_properties(robot_action)
         robot_action_properties_str = turn_properties_into_string(
             robot_action_properties
         )
         robot_action_properties_vector = model.encode(robot_action_properties_str)
-        humemai.update_vertex_properties(
+        anonymous_package.update_vertex_properties(
             robot_action,
             {
                 "sentence_representation": robot_action_properties_str,
@@ -311,8 +307,7 @@ for situation_vertex in tqdm(situation_vertices):
         )
 ```
 
-    100%|██████████| 209/209 [00:07<00:00, 27.29it/s]
-
+    100%|██████████| 209/209
 
 ## Get the stuff, e.g., adjacency matrix, from the graphs for GNN
 
@@ -345,8 +340,6 @@ for situation_vertex in tqdm(situation_vertices):
 | has_robot_action_3 | 7         |
 | has_robot_action_4 | 8         |
 
-
-
 ```python
 import torch
 import torch.nn.functional as F
@@ -368,12 +361,12 @@ elif relation_mode == "include_self_loop":
 elif relation_mode == "include_self_loop_and_inv":
     num_edge_types = 2 * num_original_edge_types + 1
 
-situation_vertices = humemai.g.V().hasLabel("situation").toList()
+situation_vertices = anonymous_package.g.V().hasLabel("situation").toList()
 
 dataset = []
 for situation_vertex in tqdm(situation_vertices):
 
-    vertices, edges = humemai.get_within_hops([situation_vertex], 1)
+    vertices, edges = anonymous_package.get_within_hops([situation_vertex], 1)
 
     node_features = torch.zeros(len(vertices), big_dim)
     edge_index = []
@@ -383,7 +376,7 @@ for situation_vertex in tqdm(situation_vertices):
 
     # Extract labels
     vertex_labels = [vertex.label for vertex in vertices]
-    vertex_properties = [humemai.get_properties(vertex) for vertex in vertices]
+    vertex_properties = [anonymous_package.get_properties(vertex) for vertex in vertices]
     inV_labels = [edge.inV.label for edge in edges]
     outV_labels = [edge.outV.label for edge in edges]
     edge_labels = [edge.label for edge in edges]
@@ -431,7 +424,7 @@ for situation_vertex in tqdm(situation_vertices):
             raise ValueError(f"Unknown vertex label: {v}")
 
         feats = torch.tensor(
-            json.loads(humemai.get_properties(vertices[idx])["vector_representation"])
+            json.loads(anonymous_package.get_properties(vertices[idx])["vector_representation"])
         )
         if feats.shape[0] == big_dim:
             node_features[idx] = feats
@@ -505,7 +498,6 @@ for situation_vertex in tqdm(situation_vertices):
 ```
 
 ## Visualize the vectors (before training)
-
 
 ```python
 import numpy as np
@@ -606,8 +598,8 @@ success = []
 round_num = []
 
 for vertex in situation_vertices:
-    cp_vertex = humemai.g.V(vertex).inE("has_situation").outV().next()
-    properties = humemai.get_properties(cp_vertex)
+    cp_vertex = anonymous_package.g.V(vertex).inE("has_situation").outV().next()
+    properties = anonymous_package.get_properties(cp_vertex)
     ticks_lasted.append(properties["ticks_lasted"])
     time_elapsed.append(properties["time_elapsed"])
     remaining_rocks.append(properties["remaining_rocks"])
@@ -654,19 +646,11 @@ for cluster_id in range(num_clusters):
 
 ```
 
-    100%|██████████| 209/209 [00:00<00:00, 35599.80it/s]
+    100%|██████████| 209/209
 
+![png](figures/aaai-submission_14_1.png)
 
-    
-![png](ijcai-submission_files/ijcai-submission_13_1.png)
-    
-
-
-
-    
-![png](ijcai-submission_files/ijcai-submission_13_2.png)
-    
-
+![png](figures/aaai-submission_14_2.png)
 
     Cluster 2: (count: 54)
     Ticks lasted: 625
@@ -675,7 +659,7 @@ for cluster_id in range(num_clusters):
     Victim harm: 362
     Success: 0.3888888888888889
     Round num: 5
-    
+
     Cluster 1: (count: 49)
     Ticks lasted: 1174
     Time elapsed: 2810
@@ -683,7 +667,7 @@ for cluster_id in range(num_clusters):
     Victim harm: 271
     Success: 0.2857142857142857
     Round num: 4
-    
+
     Cluster 4: (count: 35)
     Ticks lasted: 1086
     Time elapsed: 2568
@@ -691,7 +675,7 @@ for cluster_id in range(num_clusters):
     Victim harm: 291
     Success: 0.2857142857142857
     Round num: 5
-    
+
     Cluster 0: (count: 39)
     Ticks lasted: 1134
     Time elapsed: 2671
@@ -699,7 +683,7 @@ for cluster_id in range(num_clusters):
     Victim harm: 305
     Success: 0.23076923076923078
     Round num: 5
-    
+
     Cluster 3: (count: 32)
     Ticks lasted: 737
     Time elapsed: 2686
@@ -707,11 +691,8 @@ for cluster_id in range(num_clusters):
     Victim harm: 284
     Success: 0.09375
     Round num: 5
-    
-
 
 ## Define classes and functions for training RGCN
-
 
 ```python
 import torch
@@ -909,7 +890,6 @@ def train_rgcn(
 
 ## Train!
 
-
 ```python
 import matplotlib.pyplot as plt
 
@@ -978,7 +958,6 @@ plt.show()
     Mode include_self_loop_and_inv, Epoch 1, Loss: 2.3562, Accuracy: 0.1307
 
 
-
     Mode include_self_loop_and_inv, Epoch 100, Loss: 0.4520, Accuracy: 0.8890
     Mode include_self_loop_and_inv, Epoch 199, Loss: 0.2752, Accuracy: 0.9170
     Mode include_self_loop_and_inv, Epoch 298, Loss: 0.2256, Accuracy: 0.9253
@@ -1000,17 +979,11 @@ plt.show()
     Mode include_self_loop_and_inv, Epoch 1882, Loss: 0.0999, Accuracy: 0.9554
     Mode include_self_loop_and_inv, Epoch 1981, Loss: 0.0984, Accuracy: 0.9554
 
-
-
-    
-![png](ijcai-submission_files/ijcai-submission_17_3.png)
-    
-
+![png](figures/aaai-submission_18_3.png)
 
 ## Visualize again (after training)
 
 ### Represent every graph as one vector by the mean of the node_features
-
 
 ```python
 node_features = []
@@ -1105,8 +1078,8 @@ success = []
 round_num = []
 
 for vertex in situation_vertices:
-    cp_vertex = humemai.g.V(vertex).inE("has_situation").outV().next()
-    properties = humemai.get_properties(cp_vertex)
+    cp_vertex = anonymous_package.g.V(vertex).inE("has_situation").outV().next()
+    properties = anonymous_package.get_properties(cp_vertex)
     ticks_lasted.append(properties["ticks_lasted"])
     time_elapsed.append(properties["time_elapsed"])
     remaining_rocks.append(properties["remaining_rocks"])
@@ -1155,9 +1128,9 @@ for cluster_id in range(num_clusters):
 # Output the closest data points for each cluster
 for cluster_id, point_idx in enumerate(closest_points):
     cp_vertex = (
-        humemai.g.V(situation_vertices[point_idx]).inE("has_situation").outV().next()
+        anonymous_package.g.V(situation_vertices[point_idx]).inE("has_situation").outV().next()
     )
-    cp_num = humemai.get_properties(cp_vertex)["cp_num"]
+    cp_num = anonymous_package.get_properties(cp_vertex)["cp_num"]
     print(f"Closest point to centroid of Cluster {cluster_id}: CP {cp_num}")
 
 import pandas as pd
@@ -1214,19 +1187,11 @@ df_clusters = pd.DataFrame(
 df_clusters
 ```
 
-    100%|██████████| 209/209 [00:01<00:00, 202.63it/s]
+    100%|██████████| 209/209
 
+![png](figures/aaai-submission_20_1.png)
 
-    
-![png](ijcai-submission_files/ijcai-submission_19_1.png)
-    
-
-
-
-    
-![png](ijcai-submission_files/ijcai-submission_19_2.png)
-    
-
+![png](figures/aaai-submission_20_2.png)
 
     Cluster 4: (count: 43)
     Ticks lasted: 896
@@ -1235,7 +1200,7 @@ df_clusters
     Victim harm: 355
     Success: 0.18604651162790697
     Round num: 5
-    
+
     Cluster 0: (count: 62)
     Ticks lasted: 1344
     Time elapsed: 2716
@@ -1243,7 +1208,7 @@ df_clusters
     Victim harm: 291
     Success: 0.24193548387096775
     Round num: 5
-    
+
     Cluster 3: (count: 30)
     Ticks lasted: 608
     Time elapsed: 2869
@@ -1251,7 +1216,7 @@ df_clusters
     Victim harm: 246
     Success: 0.16666666666666666
     Round num: 4
-    
+
     Cluster 1: (count: 38)
     Ticks lasted: 581
     Time elapsed: 2133
@@ -1259,7 +1224,7 @@ df_clusters
     Victim harm: 318
     Success: 0.42105263157894735
     Round num: 5
-    
+
     Cluster 2: (count: 36)
     Ticks lasted: 970
     Time elapsed: 2607
@@ -1267,16 +1232,12 @@ df_clusters
     Victim harm: 311
     Success: 0.3611111111111111
     Round num: 5
-    
+
     Closest point to centroid of Cluster 0: CP 194
     Closest point to centroid of Cluster 1: CP 90
     Closest point to centroid of Cluster 2: CP 124
     Closest point to centroid of Cluster 3: CP 166
     Closest point to centroid of Cluster 4: CP 153
-
-
-
-
 
 <div>
 <style scoped>
@@ -1291,6 +1252,7 @@ df_clusters
     .dataframe thead th {
         text-align: right;
     }
+
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -1366,9 +1328,6 @@ df_clusters
 </table>
 </div>
 
-
-
-
 ```python
 import numpy as np
 
@@ -1378,17 +1337,17 @@ cluster_cp_dict = {}
 for cluster_id in range(num_clusters):
     # Get indices of points belonging to the current cluster
     cluster_indices = np.where(cluster_labels == cluster_id)[0]
-    
+
     # Collect CP numbers for all points in the cluster
     cp_nums = []
     for idx in cluster_indices:
-        cp_vertex = humemai.g.V(situation_vertices[idx]).inE("has_situation").outV().next()
-        cp_num = humemai.get_properties(cp_vertex)["cp_num"]
+        cp_vertex = anonymous_package.g.V(situation_vertices[idx]).inE("has_situation").outV().next()
+        cp_num = anonymous_package.get_properties(cp_vertex)["cp_num"]
         cp_nums.append(cp_num)
 
     # Store them in the dictionary (optional)
     cluster_cp_dict[cluster_id] = cp_nums
-    
+
     # Print them if desired
     print(f"All CP numbers in Cluster {cluster_id}: {cp_nums}")
 
@@ -1403,8 +1362,8 @@ for key, val in cluster_cp_dict.items():
 
     # Collect labels
     for cp_num in val:
-        vertices, edges = humemai.get_within_hops(
-            [humemai.g.V().has("cp_num", cp_num).outE().inV().next()],
+        vertices, edges = anonymous_package.get_within_hops(
+            [anonymous_package.g.V().has("cp_num", cp_num).outE().inV().next()],
             1
         )
         for vertex in vertices:
@@ -1450,7 +1409,7 @@ for key, val in cluster_cp_dict.items():
     Vertex labels (descending order with percentages):
       robot_action: 71 (63.96%)
       human_action: 40 (36.04%)
-    
+
     Edge labels (descending order with percentages):
       has_robot_action_0: 62 (55.86%)
       has_human_action_0: 30 (27.03%)
@@ -1459,23 +1418,23 @@ for key, val in cluster_cp_dict.items():
       has_robot_action_3: 3 (2.70%)
       has_robot_action_4: 3 (2.70%)
       has_human_action_2: 2 (1.80%)
-    -------------------------------------------------- 
-    
+    --------------------------------------------------
+
     Cluster 1:
     Vertex labels (descending order with percentages):
       robot_action: 78 (100.00%)
-    
+
     Edge labels (descending order with percentages):
       has_robot_action_1: 38 (48.72%)
       has_robot_action_0: 38 (48.72%)
       has_robot_action_2: 2 (2.56%)
-    -------------------------------------------------- 
-    
+    --------------------------------------------------
+
     Cluster 2:
     Vertex labels (descending order with percentages):
       robot_action: 110 (95.65%)
       human_action: 5 (4.35%)
-    
+
     Edge labels (descending order with percentages):
       has_robot_action_1: 36 (31.30%)
       has_robot_action_0: 36 (31.30%)
@@ -1483,25 +1442,25 @@ for key, val in cluster_cp_dict.items():
       has_robot_action_3: 7 (6.09%)
       has_human_action_1: 4 (3.48%)
       has_human_action_2: 1 (0.87%)
-    -------------------------------------------------- 
-    
+    --------------------------------------------------
+
     Cluster 3:
     Vertex labels (descending order with percentages):
       robot_action: 48 (61.54%)
       human_action: 30 (38.46%)
-    
+
     Edge labels (descending order with percentages):
       has_human_action_0: 30 (38.46%)
       has_robot_action_1: 30 (38.46%)
       has_robot_action_2: 16 (20.51%)
       has_robot_action_3: 2 (2.56%)
-    -------------------------------------------------- 
-    
+    --------------------------------------------------
+
     Cluster 4:
     Vertex labels (descending order with percentages):
       robot_action: 99 (60.37%)
       human_action: 65 (39.63%)
-    
+
     Edge labels (descending order with percentages):
       has_human_action_0: 43 (26.22%)
       has_robot_action_1: 43 (26.22%)
@@ -1510,44 +1469,23 @@ for key, val in cluster_cp_dict.items():
       has_robot_action_2: 7 (4.27%)
       has_robot_action_3: 7 (4.27%)
       has_human_action_2: 2 (1.22%)
-    -------------------------------------------------- 
-    
-
-
+    --------------------------------------------------
 
 ```python
-humemai.get_properties(vertex)
-```
-
-
-
-
-    {'num_recalled': 0,
-     'sentence_representation': 'Action: Pick up <object> in <location>. Location: Top of rock pile. Object: Large rock. ',
-     'action': 'Pick up <object> in <location>',
-     'location': 'Top of rock pile',
-     'action_number': 0,
-     'time_added': '2024-07-03T10:43:10',
-     'object': 'Large rock'}
-
-
-
-
-```python
-vertices, edges = humemai.get_within_hops(
-    [humemai.g.V().has("cp_num", 90).outE().inV().next()], 1
+vertices, edges = anonymous_package.get_within_hops(
+    [anonymous_package.g.V().has("cp_num", 90).outE().inV().next()], 1
 )
 
 for vertex in vertices:
     try:
         print(
-            vertex.label + "_" + str(humemai.get_properties(vertex)["action_number"]),
-            humemai.get_properties(vertex)["sentence_representation"],
+            vertex.label + "_" + str(anonymous_package.get_properties(vertex)["action_number"]),
+            anonymous_package.get_properties(vertex)["sentence_representation"],
         )
     except:
         foo = {
             key: val
-            for key, val in humemai.get_properties(vertex).items()
+            for key, val in anonymous_package.get_properties(vertex).items()
             if key != "vector_representation"
         }
 
@@ -1556,9 +1494,78 @@ for vertex in vertices:
 
     situation {'num_recalled': 0, 'sentence_representation': 'Location: Top of rock pile. Object: Large rock. ', 'location': 'Top of rock pile', 'time_added': '2024-07-03T10:43:10', 'object': 'Large rock'}
     CP {'num_recalled': 0, 'cp_num': 90, 'ticks_lasted': 183, 'participant_num': 4087, 'remaining_rocks': 10, 'success': False, 'time_elapsed': 2553, 'cp_name': 'Move', 'victim_harm': 300, 'round_num': 6, 'time_added': '2024-07-03T10:43:10'}
-    robot_action_1 Action: Drop <object> in <location>. Location: <Right> side of field. Object: Large rock. 
-    robot_action_0 Action: Pick up <object> in <location>. Location: Top of rock pile. Object: Large rock. 
-
+    robot_action_1 Action: Drop <object> in <location>. Location: <Right> side of field. Object: Large rock.
+    robot_action_0 Action: Pick up <object> in <location>. Location: Top of rock pile. Object: Large rock.
 
 ### Final CP chosen
+
 ![cp_90.png](./figures/cp_90.png)
+
+```python
+import scipy.stats as stats
+import numpy as np
+
+# Your data
+n = 8 * 20  # 160 observations per group
+mean_1 = 0.257
+std_1 = 0.439
+mean_2 = 0.413
+std_2 = 0.494
+
+# Calculate pooled standard error
+pooled_std = np.sqrt(((n-1)*std_1**2 + (n-1)*std_2**2) / (2*n - 2))
+standard_error = pooled_std * np.sqrt(2/n)
+
+# Calculate t-statistic
+t_stat = (mean_2 - mean_1) / standard_error
+
+# Degrees of freedom
+df = 2*n - 2
+
+# One-tailed p-value (since you want to show mean_2 > mean_1)
+p_value = 1 - stats.t.cdf(t_stat, df)
+
+print(f"t-statistic: {t_stat:.4f}")
+print(f"p-value (one-tailed): {p_value:.6f}")
+print(f"Effect size (Cohen's d): {(mean_2 - mean_1) / pooled_std:.4f}")
+
+# Add confidence interval for the difference
+import scipy.stats as stats
+import numpy as np
+
+# Calculate 95% confidence interval for the difference
+diff = mean_2 - mean_1
+margin_error = stats.t.ppf(0.975, df) * standard_error
+ci_lower = diff - margin_error
+ci_upper = diff + margin_error
+
+print(f"\nDifference in means: {diff:.3f}")
+print(f"95% CI for difference: [{ci_lower:.3f}, {ci_upper:.3f}]")
+print(f"Percentage improvement: {((mean_2 - mean_1) / mean_1 * 100):.1f}%\n")
+
+
+# Summary for reporting
+print("=== STATISTICAL RESULTS SUMMARY ===")
+print(f"Group 1 (baseline): {mean_1:.1%} success rate (SD = {std_1:.3f})")
+print(f"Group 2 (treatment): {mean_2:.1%} success rate (SD = {std_2:.3f})")
+print(f"Difference: {diff:.3f} ({((mean_2 - mean_1) / mean_1 * 100):.1f}% improvement)")
+print(f"95% CI: [{ci_lower:.3f}, {ci_upper:.3f}]")
+print(f"t({df}) = {t_stat:.3f}, p = {p_value:.4f} (one-tailed)")
+print(f"Effect size (Cohen's d) = {(mean_2 - mean_1) / pooled_std:.3f}")
+```
+
+    t-statistic: 2.9858
+    p-value (one-tailed): 0.001524
+    Effect size (Cohen's d): 0.3338
+
+    Difference in means: 0.156
+    95% CI for difference: [0.053, 0.259]
+    Percentage improvement: 60.7%
+
+    === STATISTICAL RESULTS SUMMARY ===
+    Group 1 (baseline): 25.7% success rate (SD = 0.439)
+    Group 2 (treatment): 41.3% success rate (SD = 0.494)
+    Difference: 0.156 (60.7% improvement)
+    95% CI: [0.053, 0.259]
+    t(318) = 2.986, p = 0.0015 (one-tailed)
+    Effect size (Cohen's d) = 0.334

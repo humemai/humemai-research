@@ -4,6 +4,20 @@ HumemAI Research explores **human-like memory systems** for AI — combining **e
 
 We study how machines can store, retrieve, and reason over structured memory graphs built from text, tables, and user interactions.
 
+## Installation
+
+```bash
+pip install humemai-research
+```
+
+## Usage
+
+```python
+from humemai_research.rdflib import Humemai
+# or
+from humemai_research.janusgraph import Humemai
+```
+
 ## Research Areas
 
 - **Episodic Memory:** Representing conversations and experiences as temporal property graphs.  

@@ -13,8 +13,8 @@ jobs:
       # Checkout the code without submodules
       - name: Checkout repository without submodules
         run: |
-          git clone --depth 1 https://github.com/humemai/humemai.git humemai
-          cd humemai
+          git clone --depth 1 https://github.com/humemai/humemai-research.git humemai-research
+          cd humemai-research
           git checkout ${{ github.ref_name }}
 
       # Install Docker
@@ -48,9 +48,9 @@ jobs:
           python -m pip install --upgrade pip setuptools wheel pytest
 
       # Install the package from the cloned repository
-      - name: Install humemai package
+      - name: Install humemai-research package
         run: |
-          cd humemai
+          cd humemai-research
           python -m pip install .
 
       # Run pytest
@@ -58,5 +58,5 @@ jobs:
         env:
           DOCKER_BUILDKIT: 1
         run: |
-          cd humemai
+          cd humemai-research
           python -m pytest .
