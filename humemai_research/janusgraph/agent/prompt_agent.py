@@ -7,9 +7,9 @@ from datetime import datetime
 
 from gremlin_python.structure.graph import Edge, Vertex
 
-from humemai_research.janusgraph import Humemai
-from humemai_research.prompt import get_hf_pipeline, graph2text, text2graph
-from humemai_research.utils import disable_logger
+from humemai_research_research.janusgraph import Humemai
+from humemai_research_research.prompt import get_hf_pipeline, graph2text, text2graph
+from humemai_research_research.utils import disable_logger
 
 
 class PromptAgent:

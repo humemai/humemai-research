@@ -7,7 +7,7 @@ from unittest.mock import MagicMock
 
 from rdflib import RDF, XSD, BNode, Graph, Literal, Namespace, URIRef
 
-from humemai_research.rdflib import Humemai
+from humemai_research_research.rdflib import Humemai
 
 # Define custom namespace for humemai ontology
 humemai = Namespace("https://humem.ai/ontology#")

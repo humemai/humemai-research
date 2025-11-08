@@ -3,7 +3,7 @@
 import json
 import re
 
-from humemai_research.prompt import graph2text
+from humemai_research_research.prompt import graph2text
 
 from .prompt_agent import PromptAgent
 
