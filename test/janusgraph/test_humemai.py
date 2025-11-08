@@ -5,7 +5,7 @@ from datetime import datetime
 
 from gremlin_python.process.graph_traversal import __
 
-from humemai.janusgraph import Humemai
+from humemai_research.janusgraph import Humemai
 
 
 class TestHumemai(unittest.TestCase):
