@@ -2,7 +2,7 @@ import unittest
 
 import numpy as np
 
-from humemai.policy import *
+from humemai_research.policy import *
 
 
 class PolicyTest(unittest.TestCase):
