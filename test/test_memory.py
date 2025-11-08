@@ -2,7 +2,7 @@ import itertools
 import random
 import unittest
 
-from humemai.memory import *
+from humemai_research.memory import *
 
 
 class MemoryTest(unittest.TestCase):
