@@ -15,12 +15,12 @@ from gremlin_python.process.graph_traversal import GraphTraversalSource, __
 from gremlin_python.process.traversal import Direction, P, T, TextP
 from gremlin_python.structure.graph import Edge, Graph, Vertex
 
-from humemai.janusgraph.utils.docker import (copy_file_from_docker,
+from humemai_research.janusgraph.utils.docker import (copy_file_from_docker,
                                              copy_file_to_docker,
                                              remove_docker_compose,
                                              start_docker_compose,
                                              stop_docker_compose)
-from humemai.utils import is_iso8601_datetime, read_json, write_json
+from humemai_research.utils import is_iso8601_datetime, read_json, write_json
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
