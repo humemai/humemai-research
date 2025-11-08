@@ -5,7 +5,7 @@ from datetime import datetime
 from rdflib import RDF, Literal, Namespace, URIRef
 from rdflib.namespace import XSD
 
-from humemai import MemorySystem  # Assuming MemorySystem is defined in humemai module
+from humemai_research import MemorySystem  # Assuming MemorySystem is defined in humemai module
 
 
 # Define the custom namespace for the ontology
