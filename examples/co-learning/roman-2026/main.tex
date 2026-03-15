@@ -39,10 +39,10 @@
 \usepackage{makecell}
 \usepackage{multirow}
 \usepackage{subcaption}
+\usepackage[hidelinks]{hyperref}
 
-\title{\LARGE \bf
-Improving Human-Robot Teamwork in Urban Search and Rescue Through Knowledge Graph-Based Episodic Memory Learning
-}
+\title{\LARGE \bf Improving Human-Robot Teamwork in Urban Search and Rescue Through
+Episodic Memory of Prior Collaboration}
 
 
 \author{Taewoon Kim$^{1}$, Emma van Zoelen$^{2}$, and Mark Neerincx$^{2}$%
@@ -63,16 +63,21 @@ Improving Human-Robot Teamwork in Urban Search and Rescue Through Knowledge Grap
 
 
 \begin{abstract}
-Effective human–robot teamwork demands that robots adapt on the fly to volatile, co‑evolving human behavior. In MATRX USAR simulations, performance rises when humans label and share collaboration patterns (CPs) with the robot via chat. This study aims to advance human-robot collaboration by developing an episodic long-term memory that integrates and maintains these patterns in a dedicated ontology-based Knowledge Graph (KG). We apply graph representation self-supervised learning to cluster these memories, identifying the most representative and effective experiences. Unlike previous approaches where robots start with an empty memory state, we initialize the robot’s memory with these insights, enabling it to retain knowledge. On 160 trials, seeding the robot with a single, automatically chosen CP lifts rescue success from 25.7\% to 41.3\% and cuts average task time by 283s.
+Effective human-robot teamwork requires robots to adapt to partners, situations, and
+task dynamics from the start of an interaction. In the MATRX Urban Search and Rescue
+(USAR) environment, people can externalize collaboration patterns (CPs) they discover
+during teamwork through a chat and reflection interface. We study whether a robot can
+use such prior team experience to become a better teammate in future interactions. To
+this end, we represent historical CPs as knowledge-graph episodic memories and use graph
+representation learning with a node-classification objective to identify a
+representative and effective memory for reuse. We then initialize the robot with this
+memory before a new collaboration episode begins. Across 20 participants and 160
+round-level observations, initializing the robot with a single automatically selected
+prior CP increases rescue success from 25.7\% to 41.3\% and reduces average task time
+by 283 seconds. The strongest gains appear at the
+beginning of interaction, suggesting that reusable episodic memory can help robots enter
+collaboration with more effective task knowledge and support smoother early teamwork.
 \end{abstract}
-
-% Uncomment the following to link to your code, datasets, an extended version or similar.
-% You must keep this block between (not within) the abstract and the main body of the paper.
-% \begin{links}
-%     \link{Code}{https://aaai.org/example/code}
-%     \link{Datasets}{https://aaai.org/example/datasets}
-%     \link{Extended version}{https://aaai.org/example/extended-version}
-% \end{links}
 
 \section{Introduction}
 \label{sec:introduction}
@@ -122,28 +127,67 @@ Effective human–robot teamwork demands that robots adapt on the fly to volatil
 \label{fig:usar-interaction}
 \end{figure}
 
+Industrial robots usually work in static settings with limited human
+contact~\cite{IFR2023}, but labour shortages and hazardous tasks are driving a shift
+toward teammate-style autonomy~\cite{MarketsandMarkets2024}. In these settings, robots
+are expected not only to execute actions correctly, but also to coordinate with humans
+as partners who have evolving goals, preferences, and working
+styles~\cite{Nikolaidis,Smith2024HumanAutonomyTeaming,Haripriyan2024TeamDynamics}.
+Disaster response is a particularly demanding example: assistive robots are being
+developed to help rescue teams navigate debris, locate survivors, and deliver supplies
+in hazardous environments~\cite{Moosavi2024,Betta2024RescuerPerceptions}.
 
+Despite their potential, assistive robots face substantial challenges in adapting to
+human partners. Unlike traditional robots operating in controlled environments, they
+must interpret human intentions, adjust to changing situations, and learn from past
+interactions. Prior work in human-robot teaming has emphasized the importance of mutual
+adaptation, shared understanding, and team-level coordination mechanisms that help
+robots align with their partners over
+time~\cite{Nikolaidis,ChaconQuesada2024SharedMentalModels,Haripriyan2024TeamDynamics}.
 
-Industrial robots usually work in static settings with little human contact~\cite{IFR2023}, but labour shortages and hazardous tasks are driving a shift toward teammate‑style autonomy~\cite{MarketsandMarkets2024}. For example, in disaster response, assistive robots are being developed to assist rescue teams by navigating debris, locating survivors, and delivering supplies in hazardous environments~\cite{Moosavi2024}.
+One approach to studying these issues is the MATRX Urban Search and Rescue (USAR)
+environment~\cite{matrx_2023,vanZoelen2021}, a virtual simulation where a human and a
+collaborative robot work together to rescue victims. Previous studies have shown that
+robots in this setting can adapt to human behavior over time, improving teamwork
+efficiency. Notably, when human participants can specify collaboration patterns (CPs)
+and communicate through a chat interface, coordination improves and rescue operations
+become more effective~\cite{10.1145/3434074.3446354,vanZoelen2021,vanZoelen2022}. In
+this context, CPs are defined as human-robot actions conditioned on situations (see
+Fig.~\ref{fig:usar-cp}).
 
-Despite their potential, assistive robots face significant challenges in adapting to human partners. Unlike traditional robots operating in controlled environments, assistive robots must interpret human intentions, adjust to dynamic situations, and learn from past interactions. Human behavior is dynamic and variable, requiring assistive robots to process ambiguous cues, coordinate effectively, and refine their decision-making over time. These complexities make real-time adaptation difficult, highlighting the need for learning mechanisms that enable assistive robots to build and utilize memory from prior experiences.
-
-One approach to studying human-robot collaboration is the MATRX Urban Search and Rescue (USAR) environment~\cite{matrx_2023,vanZoelen2021}, a virtual simulation where a collaborative robot and a human work together to rescue victims. Previous studies have demonstrated that robots in this setting can adapt to human behavior over time, improving teamwork efficiency. Notably, allowing human participants to specify collaboration patterns (CPs) and communicate through a chat interface has been shown to enhance coordination, leading to more effective rescue operations~\cite{10.1145/3434074.3446354,vanZoelen2021,vanZoelen2022}. In this context, CPs are defined as human-robot actions conditioned on situations (See Fig~\ref{fig:usar-cp}).
-
-Shared memory has long been recognized as a key element in fostering mutual understanding between humans and robots~\cite{Miraglia2024Shared}. Building on this concept, we leverage past experimental data as episodic long-term memories that capture previous human-robot collaborations~\cite{https://doi.org/10.48550/arxiv.2204.01611,Kim_Cochez_Francois-Lavet_Neerincx_Vossen_2023}. To distill the most representative and effective experiences, we apply graph representation learning to cluster these episodic memories. Rather than beginning each episode with an empty memory state, we initialize the robot’s memory with the most representative episodic memory at the start of every experiment. This augmentation equips the robot with valuable collaborative insights, ultimately enhancing its adaptation speed and overall teamwork efficiency.
+Shared memory has long been recognized as a key element in fostering mutual
+understanding between humans and robots~\cite{Miraglia2024Shared}. Building on this
+idea, we treat previously observed CPs as episodic long-term memories of prior
+collaboration and ask whether a robot can carry forward a useful team experience into a
+new interaction. To do so, we represent past CPs as knowledge-graph memories and use
+graph representation learning with node-type supervision to identify a representative
+and effective memory for reuse. Instead of starting each episode with an empty memory
+state, the robot begins with a selected prior collaboration pattern. In this way, the
+contribution of the method is not only better memory organization, but also a robot that
+can enter a new interaction with more useful prior team knowledge. Because the reused
+experience remains an explicit CP rather than opaque policy parameters, the approach
+also preserves an inspectable link between prior teamwork and later robot behavior.
 
 To summarize, our main contributions are as follows:
 
 \begin{itemize}
-    \item \textbf{Knowledge Graph--Based Representation:} We convert existing collaboration patterns (CPs), originally stored in TypeDB, into a property graph using JanusGraph. This enables better visualization, efficient querying with Gremlin, and native support for edge and node properties, making it well-suited for relationship modeling and graph-based learning.
+    \item \textbf{Episodic Team Memory Representation:} We represent collaboration
+    patterns (CPs) from prior human-robot interactions as knowledge-graph episodic
+    memories, preserving situational context, action structure, and task outcomes in a
+    form that can be reused across episodes.
     
-    \item \textbf{Self-Supervised Graph Learning:} We show that self-supervised graph learning allows for learning meaningful representations of CPs, which can then be used for clustering to identify the most relevant collaboration patterns.
+    \item \textbf{Selecting Reusable Prior Experience:} We use graph representation
+    learning with node-type supervision to organize historical CPs and identify a
+    representative prior collaboration pattern to initialize the robot before a new
+    interaction begins.
 
 
-    \item \textbf{Memory Initialization Yields Gains:} Pre‑loading the best‑in‑cluster CP raises success by 60.7\% and reduces the average task time by 283s.
+    \item \textbf{Improved Early-Team Performance:} Initializing the robot with a
+    selected prior memory raises success by 60.7\%, reduces average task time by 283 seconds,
+    and yields the largest gains at the beginning of collaboration, when teams are still
+    orienting to the task.
         
 \end{itemize}
-
 
 \section{Background}
 \label{sec:background}
@@ -151,48 +195,73 @@ To summarize, our main contributions are as follows:
 \subsection{MATRX Urban Search and Rescue (USAR)}
 \label{sec:usar}
 
+The MATRX Urban Search and Rescue (USAR) environment~\cite{matrx_2023,vanZoelen2021}
+simulates a USAR scenario where a collaborative virtual robot and a human must work
+together to rescue a victim. Figure~\ref{fig:usar-main} provides an example screenshot
+of the environment, while Figure~\ref{fig:usar-interaction} illustrates the features of
+the user interface used for human-robot communication. The CPs were originally stored in
+TypeDB~\cite{typeql2024}, which uses an entity-relation model for human-robot
+interactions. 
 
-The MATRX Urban Search and Rescue (USAR) environment~\cite{matrx_2023,vanZoelen2021} simulates a USAR scenario where a collaborative virtual robot and a human must work together to rescue a victim. Figure~\ref{fig:usar-main} provides an example screenshot of the environment, while Figure~\ref{fig:usar-interaction} illustrates the features of the user interface used for human-robot communication. The CPs were originally stored in TypeDB~\cite{typeql2024}, which uses an entity-relation model for human-robot interactions. 
+The team objective is to free a buried victim by removing rubble in front of the victim
+and opening an access route from one side, while minimizing elapsed time and avoiding
+additional harm from falling rocks~\cite{vanZoelen2021}. The task is intentionally
+asymmetric: the robot can manipulate both small and large rocks, whereas the human is
+more limited physically but can better anticipate side effects such as rock falls and
+unsafe removals~\cite{vanZoelen2021,vanZoelen2025thesis}. This asymmetry makes the task
+genuinely collaborative rather than a simple division of identical actions.
 
-The participants begin with a practice round, followed by eight real rounds of varying difficulty. They can define any CPs they find necessary, which will remain available throughout all rounds unless they choose to modify or remove them.
+The participants begin with a practice round, followed by eight real rounds of varying
+difficulty. More specifically, the study design uses five runs of an easier level,
+followed by three runs of a harder level that introduces a brown rock whose placement can
+make rescue impossible if handled poorly~\cite{vanZoelen2021}. This repeated structure
+was designed to let human and robot adapt over time, so that emergent strategies and
+collaboration patterns can be observed across rounds~\cite{vanZoelen2021,vanZoelen2025thesis}.
+Participants can define any CPs they find necessary, which remain available throughout
+the rounds unless they choose to modify or remove them. Later work added reflective
+communication support so that teams could explicitly externalize and discuss such
+emergent collaboration patterns through a shared ontology and chat interface~\cite{10.1145/3434074.3446354,vanZoelen2022}.
 
 \subsection{Knowledge Graphs (KGs)}
 \label{sec:kg}
 
-A KG is a directed graph $\mathcal{G} = (\mathcal{V}, \mathcal{R}, \mathcal{E})$, where $\mathcal{V}$ represents entities, $\mathcal{R}$ denotes relations, and $\mathcal{E} \subseteq \mathcal{V} \times \mathcal{R} \times \mathcal{V}$ consists of edges that define the relationships between entities. Each edge $(v_i, r_k, v_j)$ indicates that a relation $r_k$ exists from entity $v_i$ to entity $v_j$~\cite{10.1145/3447772}.
-
-KGs are typically implemented using one of two major models: Resource Description Framework (RDF) graphs~\cite{Lanthaler:14:RCA} and property graphs. RDF-based KGs represent data as triples \texttt{(subject, predicate, object)}, facilitating semantic reasoning and interoperability across different systems. For example:
-
-\begin{quote}
-    \texttt{(:Alice, :knows, :Bob)}
-\end{quote}
-
-This structure represents the fact that ``Alice knows Bob'' but does not directly store additional details such as when or how they met. 
-
-In contrast, property graphs allow both nodes and edges to have attributes, making them more expressive for complex relationships. In a property graph model, the same knowledge can be represented as:
-
-\begin{quote}
-    \texttt{(Alice)-[knows \{since: "2020", location: "Amsterdam"\}]->(Bob)}
-\end{quote}
-
-Here, the edge \texttt{knows} has properties such as \textit{timestamp} \texttt{(since: "2020")} and \textit{location} \texttt{(location: "Amsterdam")}, which provide richer contextual information. 
-
-In this work, we opted for a property graph model using JanusGraph~\cite{janusgraph_2024} due to its better visualization support, efficient querying with Gremlin, and native support for edge and node properties, which are crucial for modeling CPs in our scenario.
-
+A KG is a directed graph $\mathcal{G} = (\mathcal{V}, \mathcal{R}, \mathcal{E})$, where
+$\mathcal{V}$ represents entities, $\mathcal{R}$ denotes relations, and $\mathcal{E}
+\subseteq \mathcal{V} \times \mathcal{R} \times \mathcal{V}$ consists of edges that
+define the relationships between entities. Each edge $(v_i, r_k, v_j)$ indicates that a
+relation $r_k$ exists from entity $v_i$ to entity $v_j$~\cite{10.1145/3447772}. While
+RDF graphs emphasize subject-predicate-object triples and
+interoperability~\cite{Lanthaler:14:RCA}, we use a property graph model implemented in
+JanusGraph~\cite{janusgraph_2024}, which allows both nodes and edges to carry attributes
+and supports efficient querying with Gremlin, making it well-suited for capturing the
+situational and action structure of CPs.
 
 \subsection{Graph Neural Networks (GNNs)}
 \label{sec:gnn}
 
-GNNs are deep learning models designed for graph-structured data~\cite{4700287}. A graph is represented as $\mathcal{G} = (\mathcal{V}, \mathcal{E})$, where $\mathcal{V}$ is a set of nodes and $\mathcal{E}$ is a set of edges connecting these nodes. Nodes and edges can have associated features, denoted as $x_v$ and $x_{uv}$, respectively.
-
-Graph Convolutional Networks (GCNs) extend traditional convolution operations to graphs by updating each node's feature representation based on its neighbors:
+GNNs are deep learning models designed for graph-structured data~\cite{4700287}. They
+update each node's representation by aggregating features from its neighbors through
+successive message-passing layers, making them well-suited for tasks involving complex
+relational structures such as KG reasoning and graph representation learning. In our
+setting, this means that a node representation can reflect not only local attributes but
+also the surrounding situation and action context through neighborhood-based graph
+convolution. In the original Graph Convolutional Network (GCN), neighbor information is
+aggregated without distinguishing edge or relation types~\cite{DBLP:journals/corr/KipfW16}.
+Relational Graph Convolutional Networks (RGCNs) extend this idea by introducing
+relation-specific transformations for typed edges~\cite{schlichtkrull2017modelingrelationaldatagraph}.
+For an RGCN layer, a standard update is
 \[
-\bm{g}_v^{(k)} = f\left( \sum_{u \in \mathcal{N}(v)} \bm{W}^{(k)} \bm{g}_u^{(k-1)} \right)
+\mathbf{h}_v^{(\ell+1)} = \sigma\!\left( \sum_{r \in \mathcal{R}} \sum_{u \in \mathcal{N}_v^r}
+\frac{1}{c_{v,r}} \mathbf{W}_r^{(\ell)} \mathbf{h}_u^{(\ell)} + \mathbf{W}_0^{(\ell)}
+\mathbf{h}_v^{(\ell)} \right),
 \]
-where \( \bm{g}_v^{(k)} \) represents the feature vector of node \( v \) at the \( k \)-th layer, \( \mathcal{N}(v) \) denotes the neighbors of node \( v \), \( \bm{W}^{(k)} \) is the weight matrix for the \( k \)-th layer, and \( f \) is an activation function. This spatial approach focuses on aggregating information from local neighborhoods, differing from the spectral methods originally proposed in~\cite{DBLP:journals/corr/KipfW16}.
-
-GNNs are crucial for tasks involving complex relational structures, such as KG reasoning and graph representation learning.
-
+where $\mathbf{h}_v^{(\ell)}$ is the representation of node $v$ at layer $\ell$,
+$\mathcal{N}_v^r$ denotes the neighbors connected to $v$ by relation type $r$,
+$\mathbf{W}_r^{(\ell)}$ is a relation-specific weight matrix, $c_{v,r}$ is a
+normalization constant, $\mathbf{W}_0^{(\ell)}$ is the weight matrix for the self-node
+contribution, and $\sigma$ is a nonlinearity. In our setting, the edge labels serve as
+relation types that determine how messages are passed; we do not learn separate
+edge-state updates beyond these relation-specific transformations.
 
 \begin{figure}[tb]
 \centering
@@ -215,7 +284,7 @@ GNNs are crucial for tasks involving complex relational structures, such as KG r
 \begin{subfigure}[b]{\columnwidth}
     \centering
     \includegraphics[width=0.75\columnwidth]{figures/cp_36.png}
-    \caption{A visualization of an example CP. This knowledge graph (KG) has seven nodes: one \texttt{robot}, \texttt{participant}, \texttt{cp}, and \texttt{situation}, along with one \texttt{human\_action} and two \texttt{robot\_action} nodes. While all CPs share the same core structure, the number of \texttt{human\_action} and \texttt{robot\_action} nodes varies, as annotators define action sequences for the human and robot. A KG structure allows for this flexibility, handling dynamic node and edge counts, including varying number of \texttt{has\_human\_action} and \texttt{has\_robot\_action} edges.}
+    \caption{A visualization of an example CP. This knowledge graph (KG) has seven nodes: one \texttt{robot}, \texttt{participant}, \texttt{cp}, and \texttt{situation}, along with one \texttt{human\_action} and two \texttt{robot\_action} nodes. While all CPs share the same core structure, the number of \texttt{human\_action} and \texttt{robot\_action} nodes varies, as annotators define action sequences for the human and robot. This graph representation naturally accommodates such variable-length collaborative routines.}
     \label{fig:cp_36_visualized}
 \end{subfigure}
 
@@ -230,14 +299,41 @@ GNNs are crucial for tasks involving complex relational structures, such as KG r
 \subsection{Ontology Engineering}
 \label{sec:ontology}
 
-Because CP graphs have variable topology, we represent them as property graphs rather than force‑fitting them into fixed‑length Euclidean vectors, thus retaining full relational context.
+Because CP graphs have variable topology, we represent them as property graphs rather
+than force‑fitting them into fixed‑length Euclidean vectors, thus retaining full
+relational context.
 
-Our ontology defines six entity types: \texttt{robot}, \texttt{participant}, \texttt{cp}, \texttt{situation}, \texttt{robot\_action}, and \texttt{human\_action}. Each entity is represented as a node with associated properties. Relationships between entities are captured through four edge types: \texttt{has\_cp}, \texttt{has\_situation}, \texttt{has\_robot\_action}, and \texttt{has\_human\_action}, each of which can also store relevant properties. This structure provides a flexible and expressive representation of CPs, allowing detailed analysis of human-robot interactions.
+Our ontology defines six entity types: \texttt{robot}, \texttt{participant},
+\texttt{cp}, \texttt{situation}, \texttt{robot\_action}, and \texttt{human\_action}.
+Each entity is represented as a node with associated properties. Relationships between
+entities are captured through four edge families: \texttt{has\_cp},
+\texttt{has\_situation}, \texttt{has\_robot\_action}, and \texttt{has\_human\_action},
+each of which can also store relevant properties. For descriptive summaries, we annotate
+action edges with their sequence index (e.g., \texttt{has\_robot\_action\_0}) to show
+their order within a CP. Conceptually, however, these are still instances of the same
+two action-edge families: human-action edges always link a CP to a human action, and
+robot-action edges always link a CP to a robot action. In other words, the index tells
+us whether an action happened first, second, or later, but it does not change the basic
+meaning of the edge in the ontology.
 
-From the previous studies, we have collected 209 CPs. Figure~\ref{fig:cp_visualization} visualizes them. We used the JanusGraph-Visualizer~\cite{janusgraph_2024}. 
+For graph learning, we make a more fine-grained distinction and treat these indexed
+action relations as different relation labels. The reason is simple: the encoder should
+be able to tell apart an early action from a later one, since action order is part of
+the collaboration pattern. If all robot-action edges shared one label, then ``first
+robot action'' and ``later robot action'' would look identical to the RGCN. Therefore,
+the encoder uses nine directed relation labels in total: one \texttt{has\_situation}
+label, three \texttt{has\_human\_action\_k} labels, and five
+\texttt{has\_robot\_action\_k} labels.
+
+From the previous studies, we have collected 209 CPs. Figure~\ref{fig:cp_visualization}
+visualizes them. We used the JanusGraph-Visualizer~\cite{janusgraph_2024}. 
 
 
-Table~\ref{tab:cp_properties} lists the node properties of the example CP visualized in Figure~\ref{fig:cp_36_visualized}. The \texttt{cp} node properties ``time\_elapsed'', ``remaining\_rocks'', ``victim\_harm'', and ``success'', serve as round-level performance metrics. While not CP-specific, we assume that if the human-robot team performs well in a round, the CPs used contribute to that success.
+Table~\ref{tab:cp_properties} lists the node properties of the example CP visualized in
+Figure~\ref{fig:cp_36_visualized}. The \texttt{cp} node properties ``time\_elapsed'',
+``remaining\_rocks'', ``victim\_harm'', and ``success'', serve as round-level
+performance metrics. While not CP-specific, we assume that if the human-robot team
+performs well in a round, the CPs used contribute to that success.
 
 \begin{table}[tb]
     \centering
@@ -248,9 +344,9 @@ Table~\ref{tab:cp_properties} lists the node properties of the example CP visual
         \midrule
         \texttt{robot} &  \\
         \midrule
-        \texttt{participant} & participant\_number: 4081 \\
+        \texttt{participant} & participant\_number: 4,081 \\
         \midrule
-        \texttt{cp} & time\_elapsed: 3000, \newline event\_time: ``2024-05-07T11:26:11'', \newline cp\_num: 36, \newline ticks\_lasted: 1917, \newline participant\_num: 4081, \newline remaining\_rocks: 32, \newline cp\_name: ``top brown'', \newline victim\_harm: 0, \newline success: false \newline round\_num: 6 \\
+        \texttt{cp} & time\_elapsed: 3,000, \newline event\_time: ``2024-05-07T11:26:11'', \newline cp\_num: 36, \newline ticks\_lasted: 1,917, \newline participant\_num: 4,081, \newline remaining\_rocks: 32, \newline cp\_name: ``top brown'', \newline victim\_harm: 0, \newline success: false \newline round\_num: 6 \\
         \midrule
         \texttt{situation} & location: ``Top of rock pile'', \newline object: ``Brown rock'' \\
         \midrule
@@ -265,60 +361,142 @@ Table~\ref{tab:cp_properties} lists the node properties of the example CP visual
     \label{tab:cp_properties}
 \end{table}
 
-\subsection{Self-Supervised Learning on Graphs}
+\subsection{Graph Representation Learning on CP Graphs}
 \label{sec:graph_learning}
 
-Choosing a CP by raw score alone ignores the situational and action context that produced that score. A high-performing CP in one scenario may not generalize to others. To address this, we cluster CPs using self-supervised graph learning, capturing both performance and structural similarities. This enables us to identify the most representative and effective CPs for improved collaboration. 
+Choosing a CP by raw score alone ignores the situational and action context that
+produced that score. A high-performing CP in one scenario may not generalize to others.
+To address this, we cluster CPs using graph representation learning, capturing both
+performance and structural similarities. This enables us to identify a representative
+and effective CP for reuse. 
 
-Since our CPs are structured as KGs, we use a Relational Graph Convolutional Network (RGCN)~\cite{schlichtkrull2017modelingrelationaldatagraph} to learn meaningful representations. Unlike standard GNNs, RGCN incorporates edge types (e.g., \texttt{has\_cp}, \texttt{has\_human\_action}), which capture essential relational information. Through message passing, RGCN iteratively updates node features, allowing interactions between entities to shape their representations. To enable self-supervised learning, we perform node classification by adding a linear layer with softmax on top of the final RGCN layer. Each node belongs to a predefined class (e.g., \texttt{participant}, \texttt{situation}, \texttt{human\_action}), and the model learns to predict these labels. The message-passing mechanism ensures that gradients propagate beyond individual nodes, influencing their neighbors and refining the entire graph representation.
+Since our CPs are structured as KGs, we use a Relational Graph Convolutional Network
+(RGCN)~\cite{schlichtkrull2017modelingrelationaldatagraph} to learn meaningful
+representations. Unlike standard GNNs, RGCN incorporates edge types (e.g.,
+\texttt{has\_cp}, \texttt{has\_human\_action}), which capture essential relational
+information. Through message passing, RGCN iteratively updates node features, allowing
+interactions between entities to shape their representations. We train the encoder with
+a node-classification objective by adding a single linear classifier on top of the
+final RGCN layer. Each node belongs to one of ten predefined classes used in our
+dataset: one \texttt{cp} class, one \texttt{situation} class, three human-action-stage
+classes, and five robot-action-stage classes. Thus, our
+representation learning uses supervision derived from the CP schema rather than a fully
+self-supervised objective. The message-passing mechanism ensures that gradients
+propagate beyond individual nodes, influencing their neighbors and refining the entire
+graph representation. In the implementation, the encoder itself is nonlinear because a
+ReLU activation is applied between the first and second RGCN layers; the input
+projection and the final classification head are linear.
 
-As shown in Table~\ref{tab:cp_properties}, node properties contain various features, requiring transformation into fixed-length vectors for RGCN compatibility. For \texttt{cp} nodes, we concatenate six numerical features (``time\_elapsed'', ``ticks\_lasted'', ``remaining\_rocks'', ``victim\_harm'', ``success'', and ``round\_num''), normalizing each by its maximum value to scale them between 0 and 1. For \texttt{situation}, \texttt{human\_action}, and \texttt{robot\_action} nodes, we concatenate string attributes into natural language sentences (e.g., \texttt{human\_action\_0} in the example would be ``Action: Stand still in \textless location\textgreater. Location: Above rock pile.'') and encode them using Sentence-BERT~\cite{reimers2019sentencebertsentenceembeddingsusing} to obtain numerical vector representations. Since the \texttt{cp} node vectors are shorter than the others, we apply a learnable projection matrix to transform them to the same dimensionality as the vectors for \texttt{situation}, \texttt{human\_action}, and \texttt{robot\_action} nodes.
+As shown in Table~\ref{tab:cp_properties}, node properties contain various features,
+requiring transformation into fixed-length vectors for RGCN compatibility. For
+\texttt{cp} nodes, we concatenate six numerical features (``time\_elapsed'',
+``ticks\_lasted'', ``remaining\_rocks'', ``victim\_harm'', ``success'', and
+``round\_num''), normalizing each by its maximum value to scale them between 0 and 1.
+For \texttt{situation}, \texttt{human\_action}, and \texttt{robot\_action} nodes, we
+concatenate string attributes into natural language sentences (e.g.,
+\texttt{human\_action\_0} in the example would be ``Action: Stand still in \textless
+location\textgreater. Location: Above rock pile.'') and encode them using Sentence
+Bidirectional Encoder Representations from Transformers
+(Sentence-BERT)~\cite{reimers2019sentencebertsentenceembeddingsusing} to obtain
+numerical vector representations. Since the \texttt{cp} node vectors are shorter than
+the others, we apply a learnable projection matrix to transform them to the same
+dimensionality as the vectors for \texttt{situation}, \texttt{human\_action}, and
+\texttt{robot\_action} nodes. Concretely, if node $v$ is a low-dimensional
+\texttt{cp} node with input $\mathbf{x}_v \in \mathbb{R}^{d_s}$, we first project it as
+$\tilde{\mathbf{x}}_v = \mathbf{W}_{\mathrm{up}} \mathbf{x}_v$,
+where $\mathbf{W}_{\mathrm{up}} \in \mathbb{R}^{d_b \times d_s}$ maps it into the common
+$d_b$-dimensional feature space used by the other node types. This is a single linear
+projection, not a deeper MLP.
 
-We optimize RGCN using cross-entropy loss for node classification. Let \( f_{\theta} \) represent the entire model, including RGCN and the linear classifier. Given a CP (KG) \( \mathcal{G} \) with node features \( X \) and adjacency matrix \( A \), the predicted class distribution for a node \( v \) is:
-
-\[
-\hat{y}_v = \text{softmax}(f_{\theta}(\mathcal{G}, X, A)_v)
-\]
-
-where \( f_{\theta} \) processes the entire graph structure, and \( \theta \) includes all trainable parameters. The loss function is:
+We optimize RGCN using cross-entropy loss for node classification. Let \( f_{\theta} \)
+represent the entire model, including RGCN and the linear classifier. Given a CP (KG) \(
+\mathcal{G} \) with node-feature matrix \( X \) and graph connectivity \( A \), the predicted
+class distribution for a node \( v \) is computed from the final RGCN embedding
+\(\mathbf{h}_v^{(2)}\) as $\mathbf{z}_v = \mathbf{W}_{\mathrm{cls}} \mathbf{h}_v^{(2)}$
+and $\hat{\mathbf{y}}_v = \mathrm{softmax}(\mathbf{z}_v)$, where
+$\mathbf{W}_{\mathrm{cls}}$ denotes the single linear classification head.
+Equivalently, \( f_{\theta} \) denotes the full model consisting of the input
+projection, two RGCN layers, and this classifier. The loss
+function is:
 
 \[
 \mathcal{L} = - \mathbb{E}_{(v, c) \sim \mathcal{D}_\text{train}} \left[ \log \hat{y}_{v, c} \right]
 \]
 
-where \(\mathcal{D}_\text{train}\) represents the empirical distribution of training samples, and \(C\) is the number of node classes. 
+where \(\mathcal{D}_\text{train}\) represents the empirical distribution of training
+samples, \(\hat{y}_{v,c}\) denotes the predicted probability assigned to the true class
+\(c\) of node \(v\), and \(C\) is the number of node classes. 
 
-The message-passing mechanism propagates updates across the graph, refining node representations based on their connectivity. Consecutive human actions (e.g., \texttt{human\_action\_0}, \texttt{human\_action\_1}, \texttt{human\_action\_2}) and robot actions (e.g., \texttt{robot\_action\_0} to \texttt{robot\_action\_4}) are treated as distinct classes, as they represent different stages within an action sequence. Thus, we set \(C = 10\). See Figure~\ref{fig:rgcn} for a visualization of one forward pass of the RGCN-based neural network.
+The message-passing mechanism propagates updates across the graph, refining node
+representations based on their connectivity. Action stages are treated as distinct node
+classes so that the encoder can distinguish early from later steps within a
+collaboration pattern. In total, we use \(C = 10\) node classes. See
+Figure~\ref{fig:rgcn} for a visualization of one forward pass of the RGCN-based neural
+network. After training, we obtain a graph-level embedding for each CP graph
+\(\mathcal{G}_i = (\mathcal{V}_i, \mathcal{E}_i)\) by mean pooling its final node
+embeddings,
+\[
+\mathbf{g}_i = \frac{1}{|\mathcal{V}_i|} \sum_{v \in \mathcal{V}_i} \mathbf{h}_v^{(2)},
+\]
+where \(|\mathcal{V}_i|\) is the number of nodes in graph \(\mathcal{G}_i\). These
+pooled graph embeddings are the vectors that we cluster with K-means.
 
 \begin{figure}[tb]
 \centering
 \includegraphics[width=\columnwidth]{figures/rgcn-co-learning.pdf}
-\caption{A forward pass of the RGCN-based neural network. The last layer (Linear + Softmax) outputs the categorical distributions which are combined with the ground truths to compute the cross entropy loss.}
+\caption{A forward pass of the RGCN-based neural network. Low-dimensional \texttt{cp} node features are first linearly projected to the common feature space, and a single linear classifier with softmax is applied to the final RGCN node embeddings to compute the cross-entropy loss.}
 \label{fig:rgcn}
 \end{figure}
 
-After the self-supervised learning phase, we use the learned graph representations to cluster the CPs. From these clusters, we select the most representative CP, which we then use to initialize the robot’s memory. This enables the robot to start with the ``best'' episodic memory, providing it with structured prior knowledge. We then conduct human-robot interaction experiments in the same MATRX collaborative environment to evaluate the impact of this memory augmentation on task performance metrics.
+After this representation-learning phase, we use the learned graph representations to
+cluster the CPs. From these clusters, we select one centroid-nearest representative CP,
+which we then use to initialize the robot's episodic memory. This selected CP is not a
+learned control policy. Rather, it is a structured memory item containing a situation
+and an associated action sequence that is preloaded before a new trial begins. During
+execution, the robot continues to use the existing MATRX control framework, but it can
+reuse the preloaded CP when the current situation matches the stored condition. We then
+conduct human-robot interaction experiments in the same MATRX collaborative environment
+to evaluate the impact of this memory augmentation on task performance metrics. An
+additional advantage of this design is transparency: the transferred prior remains a
+human-readable situation-action structure that can be inspected, discussed, and revised,
+rather than a latent policy update that is difficult for teammates or designers to
+interpret.
 
 \section{Experiments}
 \label{sec:experiments}
 
-The two‑layer RGCN (128,874 parameters, ReLU activations) trained for 2,000 epochs on all 209 CP graphs in a single 30s CPU run; code and hyper‑parameters are in the supplementary material, along with a recorded game play and raw data. See Figure~\ref{fig:training} for the training loss, which steadily decreases over epochs, while the accuracy increases, indicating effective learning and convergence of the model.
+The two‑layer RGCN (128,874 parameters, ReLU activations) trained for 2,000 epochs on
+all 209 CP graphs in a single 30s CPU run; code and hyper‑parameters are in the
+supplementary material, along with a recorded game play and raw data. See
+Figure~\ref{fig:training} for the training loss, which steadily decreases over epochs,
+while the accuracy increases, indicating effective learning and convergence of the
+model.
 
 \begin{figure}[tb]
 \centering
-\includegraphics[width=\columnwidth]{figures/Training_Loss_and_Accuracy.pdf}
+\includegraphics[width=\columnwidth]{figures/Training_Loss_and_Accuracy.png}
 \caption{Cross entropy loss and accuracy of the training data. After 2,000 epochs, the loss dropped to 0.0948 while the accuracy went up to 95.5\%.}
 \label{fig:training}
 \end{figure}
 
-After training, we obtain the final vector representation of each CP by averaging the node representations (before the classification layer) within each graph. We then apply the K-means clustering algorithm to group CPs based on Euclidean distance. Figure~\ref{fig:cluster} illustrates the clusters before and after training, with t-SNE~\cite{NIPS2002_6150ccc6} used for 2D visualization. It can be seen that the self‑supervised GNN learns the meaningful representations to cluster CPs. The number of CPs in the clusters are 62, 38, 36, 30, and 43, respectively.
+After training, we obtain the final vector representation of each CP by averaging the
+node representations (before the classification layer) within each graph. We then apply
+the K-means clustering algorithm to group CPs based on Euclidean distance.
+Figure~\ref{fig:cluster} illustrates the clusters before and after training, with
+t-distributed stochastic neighbor embedding (t-SNE)~\cite{vanDerMaaten2008TSNE} used for
+2D visualization. The learned RGCN representations produce clusters that are more
+interpretable than those obtained from raw \texttt{cp} node features alone. The number
+of CPs in the clusters are 62, 38, 36, 30, and 43, respectively. We set $K=5$, where
+$K$ is the number of K-means clusters, based on exploratory inspection of cluster
+interpretability and balance; this was a heuristic design choice rather than a tuned
+optimum.
 
 \begin{figure}[tb]
 \centering
 
 \begin{subfigure}[b]{\columnwidth}
     \centering
-    \includegraphics[width=0.66\columnwidth]{figures/t-SNE with K-Means Clusters, Before GNN Training.pdf}
+    \includegraphics[width=0.85\columnwidth]{figures/t-SNE with K-Means Clusters, Before GNN Training.png}
     \caption{5 clusters of CPs before training. Since there are not yet GNN-based vector representations for the CPs, we used the \texttt{cp} node features as vectors.}
     \label{fig:cluster_before_training}
 \end{subfigure}
@@ -327,17 +505,21 @@ After training, we obtain the final vector representation of each CP by averagin
 
 \begin{subfigure}[b]{\columnwidth}
     \centering
-    \includegraphics[width=0.66\columnwidth]{figures/t-SNE with K-Means Clusters, After GNN Training.pdf}
+    \includegraphics[width=0.85\columnwidth]{figures/t-SNE with K-Means Clusters, After GNN Training.png}
     \caption{5 clusters of CPs after training. The vectors used here are the means of the last RGCN layer node representations.}
     \label{fig:cluster_after_training}
 \end{subfigure}
 
-\caption{K-means clustering results before and after training, visualized using t-distributed stochastic neighbor embedding (t-SNE) to map high-dimensional vectors into 2D space. $K=5$ was chosen.}
+\caption{K-means clustering results before and after training, visualized using t-SNE. $K=5$ was chosen.}
 \label{fig:cluster}
 \end{figure}
 
 
-Table~\ref{tab:cluster_stats} presents the performance metrics for each cluster. Notably, Cluster 1 exhibits a higher success rate, suggesting that participants using CPs from this cluster were more likely to rescue the victim. While the other metrics remain important, we emphasize success rate since saving the victim is considered the most critical outcome.
+Table~\ref{tab:cluster_stats} presents the performance metrics for each cluster.
+Notably, Cluster 1 exhibits a higher success rate, suggesting that participants using
+CPs from this cluster were more likely to rescue the victim. While the other metrics
+remain important, we emphasize success rate since saving the victim is considered the
+most critical outcome.
 
 \begin{table}[tb]
     \centering
@@ -345,13 +527,13 @@ Table~\ref{tab:cluster_stats} presents the performance metrics for each cluster.
     \resizebox{\columnwidth}{!}{ % Rescale table
     \begin{tabular}{lcccc}
         \toprule
-        \textbf{Cluster} & \makecell{\textbf{Time} \\ \textbf{Elapsed}} & \makecell{\textbf{Remaining} \\ \textbf{Rocks}} & \makecell{\textbf{Victim} \\ \textbf{Harm}} & \makecell{\textbf{Sucess} \\ \textbf{Rate}} \\
+        \textbf{Cluster} & \makecell{\textbf{Time} \\ \textbf{Elapsed}} & \makecell{\textbf{Remaining} \\ \textbf{Rocks}} & \makecell{\textbf{Victim} \\ \textbf{Harm}} & \makecell{\textbf{Success} \\ \textbf{Rate}} \\
         \midrule
-        Cluster 0 & 2716 (+120) & 16 (+1.0) & 291 (-14) & 24\% (-3\%) \\
-        Cluster 1 & 2133 (-462) & 11 (-3.9) & 318 (+11) & 42\% (+15\%) \\
-        Cluster 2 & 2607 (+12) & 11 (-3.2) & 311 (+4) & 36\% (+9\%) \\
-        Cluster 3 & 2869 (+273) & 18 (+3.9) & 246 (-60) & 17\% (-11\%) \\
-        Cluster 4 & 2629 (+33) & 16 (+1.9) & 355 (+49) & 19\% (-9\%) \\
+        Cluster 0 & 2,716 (+120) & 16 (+1.0) & 291 (-14) & 24\% (-3\%) \\
+        Cluster 1 & 2,133 (-462) & 11 (-3.9) & 318 (+11) & 42\% (+15\%) \\
+        Cluster 2 & 2,607 (+12) & 11 (-3.2) & 311 (+4) & 36\% (+9\%) \\
+        Cluster 3 & 2,869 (+273) & 18 (+3.9) & 246 (-60) & 17\% (-11\%) \\
+        Cluster 4 & 2,629 (+33) & 16 (+1.9) & 355 (+49) & 19\% (-9\%) \\
         \bottomrule
     \end{tabular}
     }
@@ -359,7 +541,14 @@ Table~\ref{tab:cluster_stats} presents the performance metrics for each cluster.
     \label{tab:cluster_stats}
 \end{table}
 
-Table~\ref{tab:cluster_edges} presents the edge types and their frequencies for the CPs in each cluster. Notably, the action edges in Cluster 1 are simpler than those in other clusters, as it contains fewer distinct action types. Of the 78 total edges across all CPs in Cluster 1, the majority involve two consecutive robot actions. This suggests that Cluster 1 not only represents a simpler interaction pattern but also grants greater autonomy to the robot. While robot actions are typically conditioned on human actions, the lower presence of human action edges in this cluster indicates that the robot's behavior is less dependent on human input.
+Table~\ref{tab:cluster_edges} presents the edge types and their frequencies for the CPs
+in each cluster. Notably, the action edges in Cluster 1 are simpler than those in other
+clusters, as it contains fewer distinct action types. Of the 78 total edges across all
+CPs in Cluster 1, the majority involve two consecutive robot actions. This suggests that
+Cluster 1 not only represents a simpler interaction pattern but also grants greater
+autonomy to the robot. While robot actions are typically conditioned on human actions,
+the lower presence of human action edges in this cluster indicates that the robot's
+behavior is less dependent on human input.
 
 \begin{table}[tb]
     \centering
@@ -412,11 +601,24 @@ Table~\ref{tab:cluster_edges} presents the edge types and their frequencies for 
 \end{table}
 
 
-Considering both performance and structural simplicity, we identified Cluster 1 as the most meaningful set of CPs. It represents a minimal yet effective CP, where the robot operates with greater autonomy while maintaining efficiency. We selected the CP closest to the cluster center (by Euclidean distance) as our final choice, as it best represents the defining characteristics of Cluster 1 and serves as the most typical example of its CP.
+Considering both success rate and structural simplicity, we heuristically selected
+Cluster 1 as the cluster from which to draw a reusable CP. It represents a minimal yet
+effective interaction pattern, where the robot operates with greater autonomy while
+maintaining efficiency. We then selected the CP closest to the cluster center (by
+Euclidean distance) as our final choice, using it as the centroid-nearest representative
+of that cluster as a proof-of-concept exemplar-selection procedure rather than claiming
+it to be globally optimal.
 
-Table~\ref{tab:final_cp} presents the final selected CP. Notably, this CP consists of only two consecutive robot actions without any human actions. This suggests that, in this scenario, the robot operates independently, executing its tasks without relying on human input. Compared to other CPs that typically involve human actions, this CP grants the robot greater autonomy in decision-making and task execution. Specifically, this CP directs the robot to move large rocks near the victim. Since only the robot can handle large rocks, this pattern effectively delegates the heavy lifting to the robot while allowing the human to focus on other tasks as they see fit.
+Table~\ref{tab:final_cp} presents the final selected CP. Notably, this CP consists of
+only two consecutive robot actions without any human actions. This suggests that, in
+this scenario, the robot operates independently, executing its tasks without relying on
+human input. Compared to other CPs that typically involve human actions, this CP grants
+the robot greater autonomy in decision-making and task execution. Specifically, this CP
+directs the robot to move large rocks near the victim. Since only the robot can handle
+large rocks, this pattern effectively delegates the heavy lifting to the robot while
+allowing the human to focus on other tasks as they see fit.
 
-\begin{table}[h]
+\begin{table}[tb]
     \centering
     \renewcommand{\arraystretch}{1.2}
     \setlength{\tabcolsep}{5pt}
@@ -440,7 +642,16 @@ Table~\ref{tab:final_cp} presents the final selected CP. Notably, this CP consis
     \label{tab:final_cp}
 \end{table}
 
-We initialize the robot's memory with the final CP and conduct the MATRX USAR experiment under the same conditions as the previous study, with the only difference being the inclusion of the preloaded memory. We recruited 20 student participants from our university. All experiments were conducted online.\footnote{The experiment involving human participants was approved by our university's ethics committee (ID anonymized).}
+We initialize the robot's memory with the final CP and conduct the MATRX USAR experiment
+under the same conditions as the previous study, with the only difference being the
+inclusion of the preloaded memory. The historical memory pool contains 209 previously
+collected CPs from earlier MATRX studies and is treated here as a fixed offline memory
+source. The robot is initialized with only one selected CP at test time. The same
+selected CP is reused for all participants in the memory-initialized condition, so the
+evaluation tests transfer of one shared prior team experience rather than per-user
+personalization. We recruited 20 student participants from our university. All
+experiments were conducted online.\footnote{The experiment involving human participants
+was approved by our university's ethics committee (ID anonymized).}
 
 \begin{table*}[tb]
     \centering
@@ -459,61 +670,128 @@ We initialize the robot's memory with the final CP and conduct the MATRX USAR ex
     & \textbf{\makecell{W/o Memory \\ Initialized}} & \textbf{\makecell{With Memory \\ Initialized}} 
     & \textbf{\makecell{W/o Memory \\ Initialized}} & \textbf{\makecell{With Memory \\ Initialized}} \\
     \midrule
-    1  & 3000 (0)   & 2458 (626)  & 18.2 (6.0)   & 5.8 (8.0)   & 733 (512)  & 160 (320)  & 0.0\% (0.0\%)    & 55.0\% (51.0\%)  \\
-    2  & 2677 (604) & 2304 (644)  & 14.5 (13.3)  & 5.3 (8.1)   & 324 (387)  & 255 (349)  & 28.5\% (46.3\%)  & 65.0\% (48.9\%)  \\
-    3  & 2410 (707) & 2192 (732)  & 10.4 (13.7)  & 3.5 (7.3)   & 257 (457)  & 465 (589)  & 52.4\% (51.1\%)  & 75.0\% (44.4\%)  \\
-    4  & 2475 (699) & 2150 (672)  & 7.9 (9.5)    & 3.5 (7.0)   & 286 (408)  & 160 (201)  & 47.6\% (51.2\%)  & 75.0\% (44.4\%)  \\
-    5  & 2493 (722) & 2300 (720)  & 15.9 (12.0)  & 12.0 (9.5)  & 457 (383)  & 470 (508)  & 23.8\% (43.6\%)  & 30.0\% (47.0\%)  \\
-    6  & 2590 (630) & 2593 (545)  & 19.0 (9.6)   & 14.0 (7.7)  & 476 (648)  & 520 (393)  & 4.7\% (21.8\%)   & 15.0\% (36.6\%)  \\
-    7  & 2503 (555) & 1994 (784)  & 15.5 (11.9)  & 17.1 (6.9)  & 310 (319)  & 880 (635)  & 23.8\% (43.6\%)  & 5.0\% (22.4\%)   \\
-    8  & 2558 (545) & 2448 (660)  & 14.5 (11.4)  & 12.5 (6.9)  & 535 (701)  & 1190 (679) & 25.0\% (44.4\%)  & 10.0\% (30.8\%)  \\
+    1  & 3,000 (0)   & 2,458 (626)  & 18.2 (6.0)   & 5.8 (8.0)   & 733 (512)  & 160 (320)  & 0.0\% (0.0\%)    & 55.0\% (51.0\%)  \\
+    2  & 2,677 (604) & 2,304 (644)  & 14.5 (13.3)  & 5.3 (8.1)   & 324 (387)  & 255 (349)  & 28.5\% (46.3\%)  & 65.0\% (48.9\%)  \\
+    3  & 2,410 (707) & 2,192 (732)  & 10.4 (13.7)  & 3.5 (7.3)   & 257 (457)  & 465 (589)  & 52.4\% (51.1\%)  & 75.0\% (44.4\%)  \\
+    4  & 2,475 (699) & 2,150 (672)  & 7.9 (9.5)    & 3.5 (7.0)   & 286 (408)  & 160 (201)  & 47.6\% (51.2\%)  & 75.0\% (44.4\%)  \\
+    5  & 2,493 (722) & 2,300 (720)  & 15.9 (12.0)  & 12.0 (9.5)  & 457 (383)  & 470 (508)  & 23.8\% (43.6\%)  & 30.0\% (47.0\%)  \\
+    6  & 2,590 (630) & 2,593 (545)  & 19.0 (9.6)   & 14.0 (7.7)  & 476 (648)  & 520 (393)  & 4.7\% (21.8\%)   & 15.0\% (36.6\%)  \\
+    7  & 2,503 (555) & 1,994 (784)  & 15.5 (11.9)  & 17.1 (6.9)  & 310 (319)  & 880 (635)  & 23.8\% (43.6\%)  & 5.0\% (22.4\%)   \\
+    8  & 2,558 (545) & 2,448 (660)  & 14.5 (11.4)  & 12.5 (6.9)  & 535 (701)  & 1,190 (679) & 25.0\% (44.4\%)  & 10.0\% (30.8\%)  \\
     \midrule
-    \textbf{Overall} 
-    & 2588 (613)  & \textbf{2305 (686)}  
+    \textbf{Average} 
+    & 2,588 (613)  & \textbf{2,305 (686)}  
     & 14.5 (11.4) & \textbf{9.2 (9.1)}  
     & \textbf{422 (504)}   & 513 (583)  
     & 25.7\% (43.9\%)  & \textbf{41.3\% (49.4\%)}  \\
     \bottomrule
     \end{tabular}
     }
-    \caption{Comparison of the robot without initialized memory and the robot with initialized memory. 
-    Values are presented as \textit{Average (std)}, where standard deviation is in parentheses. 
-    Success rate is reported as a percentage (\%), where higher is better; lower is better for the other metrics. 
-    Both the robot without memory and the robot with initialized memory were evaluated using 20 samples (participants) each. Better values for each metric are shown in \textbf{bold}.}
+    \caption{Comparison of the robot without initialized memory and the robot with initialized memory. Values are presented as \textit{Average (std)}. Success rate is reported as a percentage (\%), where higher is better; lower is better for the other metrics. Better values for each metric are shown in \textbf{bold}.}
     \label{tab:comparison} 
 \end{table*}
 
-Table~\ref{tab:comparison} shows that the robot with initialized memory consistently outperforms the one without it, except in ``victim\_harm,'' likely due to accidental rock falls when removing large rocks. Statistical analysis confirms this improvement is significant: with $n = 8 \times 20 = 160$ observations per group, the success rate increased from 25.7\% to 41.3\% (a 60.7\% relative improvement), with $t(318) = 2.986$, $p = 0.0015$ (one-tailed), and Cohen's $d = 0.334$. The 95\% confidence interval [5.3\%, 25.9\%] excludes zero, confirming the reliability of our findings. Notably, the most significant improvement occurs in Round 1, where participants are still unfamiliar with the environment. Since the robot begins with prior knowledge from past interactions, it can immediately engage in effective collaboration, providing a smoother start for the human-robot team.
+Table~\ref{tab:comparison} shows that the robot with initialized memory consistently
+outperforms the one without it, except in ``victim\_harm,'' likely due to accidental
+rock falls when removing large rocks. Across the 160 round-level observations, the
+success rate increased from 25.7\% to 41.3\% (a 60.7\% relative improvement). We treat
+this comparison as descriptive evidence because rounds are repeated within participants.
+Notably, the most significant improvement occurs in Round 1, where participants are
+still unfamiliar with the environment. This early-round pattern is important because it
+suggests that the benefit comes before substantial within-session human adaptation can
+occur. Since the robot begins with prior knowledge from past interactions, it can
+immediately engage in effective collaboration, providing a smoother start for the
+human-robot team. This matters because the initial rounds are precisely when shared
+routines have not yet been established; helping the team start in a more coordinated
+state can therefore reduce the early coordination cost.
 
-Interestingly, the selected CP (Table~\ref{tab:final_cp}) does not reference the ``Brown rock,'' which only appears in later rounds (Rounds 5–8). Despite this, the robot with initialized memory continues to facilitate better performance in most of the rounds, except 7 and 8. This suggests that the chosen CP captures a generally effective collaboration strategy, enabling the robot to adapt even in scenarios it has not explicitly encountered before.
+Interestingly, the selected CP (Table~\ref{tab:final_cp}) does not reference the ``Brown
+rock,'' which only appears in later rounds (Rounds 5–8). Despite this, the robot with
+initialized memory continues to facilitate better performance in most of the rounds,
+except 7 and 8. This suggests that the chosen CP captures a generally effective
+collaboration strategy, enabling the robot to adapt even in scenarios it has not
+explicitly encountered before.
 
 \section{Related Work}
 \label{sec:related_work}
 
-Our work builds on several research strands, including human-like memory in agents, KG representations for complex relational data, graph neural networks for structured learning, and human-robot collaboration in challenging environments such as urban search and rescue (USAR). In this section, we discuss these lines of research and position our contribution in relation to existing approaches.
+Our work sits at the intersection of memory-based agents, human-robot teaming,
+co-learning, and prior MATRX USAR research. Below, we position the paper relative to
+these strands and emphasize where our contribution differs.
 
-Our work is inspired by the concept of agents' episodic memory, where past experiences are stored and reactivated to guide future actions. Early approaches, drawing on cognitive science, used symbolic and rule-based systems to mimic human memory functions in agents. More recent methods, such as those by Parisotto et al.~\cite{pmlr-v70-pritzel17a} and Rebuffi et al.~\cite{chaudhry2019efficientlifelonglearningagem}, employ deep learning to capture and encode complex interaction patterns, enabling agents to both recall and generalize from previous experiences. We extend these ideas by representing episodic memories as KGs, providing a structured format that captures performance metrics and contextual details of human-agent collaborations, thereby facilitating more effective retrieval and application of prior experiences in challenging scenarios.
+Prior work on episodic memory and continual learning has shown that storing and revisiting
+past experience can support faster adaptation and incremental improvement~\cite{pmlr-v70-pritzel17a,chaudhry2019efficientlifelonglearningagem}.
+Related agent-memory architectures have also separated episodic from semantic memory and,
+more recently, represented temporally evolving knowledge in graph form for sequential
+decision-making~\cite{https://doi.org/10.48550/arxiv.2204.01611,Kim_Cochez_Francois-Lavet_Neerincx_Vossen_2023,kim2026temporalknowledgegraphmemorypartially}.
+These works motivate the broader idea that memory should help future decision-making,
+but they do not address the specific problem studied here: how to carry forward a prior
+human-robot collaboration pattern into a new team episode. Our work differs in both
+what is stored and how it is reused. Rather than retaining generic experiences or latent
+policy updates, we represent prior human-robot collaboration patterns as explicit
+knowledge-graph memories containing situation, action-order, and outcome information,
+and we select one representative memory for reuse at test time. The contribution is
+therefore not a general memory architecture, but a concrete mechanism for transferring
+an inspectable prior team experience into a new collaboration episode.
 
-Kim et al.~\cite{https://doi.org/10.48550/arxiv.2204.01611,Kim_Cochez_Francois-Lavet_Neerincx_Vossen_2023} adopted a cognitive science-inspired approach to develop a human-like memory system. Their agents incorporate both episodic and semantic memory components. In their framework, episodic memory captures the agent's direct experiences, while semantic memory encompasses general factual knowledge—information that can be acquired through learning or provided by human experts.
+Research on human-robot teaming has emphasized mutual adaptation, shared understanding,
+team dynamics, trust, and broader human-autonomy teaming requirements~\cite{Nikolaidis,Haripriyan2024TeamDynamics,ChaconQuesada2024SharedMentalModels,Smith2024HumanAutonomyTeaming}.
+Related co-learning work has explored user feedback, models of human decision making,
+reinforcement learning, and transparency in interactive AI systems~\cite{Kumar2024CoLearning,DBLP:journals/corr/abs-2003-01156,WenskovitchInteractiveAD}.
+These studies explain why robots should adapt to human partners, but they typically
+focus on adaptation during interaction. In contrast, our emphasis is on pre-interaction
+transfer: the robot begins with a selected prior collaboration pattern before meeting a
+new partner. This distinction matters because our method targets the earliest stage of
+collaboration, when shared routines have not yet formed. In that sense, the paper is
+less about learning a better online policy during a session and more about improving
+how the robot enters the session in the first place.
 
-Self-supervised learning is central to modern large language models like BERT~\cite{DBLP:journals/corr/abs-1810-04805} and GPT-3~\cite{DBLP:journals/corr/abs-2005-14165}, which capture rich contextual information from unlabeled data by reconstructing or predicting missing parts (e.g., via masked language modeling or next-token prediction). Similarly, self-supervised techniques in graph neural networks enable the extraction of meaningful embeddings from inherently unlabeled node data. These learned representations, which capture structural and relational nuances, can then be leveraged for downstream tasks such as clustering. In our work, we use self-supervised graph learning to derive robust representations of episodic memory KGs, facilitating efficient clustering of CPs.
+Within urban search and rescue, prior MATRX-based studies showed that teams can
+externalize collaboration patterns through ontology-supported interfaces and chat, and
+that these patterns are useful for analyzing human-robot co-adaptation over repeated
+rounds~\cite{10.1145/3434074.3446354,vanZoelen2021,vanZoelen2022}. Complementary work
+has also examined how rescuers perceive robotic teammates in disaster
+scenarios~\cite{Betta2024RescuerPerceptions}. Our work builds directly on this line,
+but changes the role of CPs: instead of treating them only as reflective artifacts or
+descriptive interaction traces, we turn them into reusable episodic memories. We then
+use graph representation learning to cluster these memories and select a representative
+CP for reuse, linking prior collaboration analysis to improved performance in later
+human-robot teamwork. This is the key distinction from the earlier MATRX studies: the
+same ontology-backed CPs are no longer only analyzed after interaction, but are reused
+before interaction to shape future collaboration.
 
-Collaborative learning in human-robot teams has emerged as a pivotal factor for enabling mutual adaptation and shared understanding in dynamic task environments. Baxter et al.~\cite{Baxter2017RobotEP} demonstrated that personalized interactions between robots and human learners can significantly enhance educational outcomes, setting the stage for further exploration into adaptive team behaviors. Building on this, Belpaeme et al.~\cite{Belpaeme2018} provided comprehensive guidelines for designing social robots that effectively serve as second language tutors, emphasizing the importance of interactive, adaptive strategies. Complementing these efforts, Nikolaidis et al.~\cite{Nikolaidis} investigated mutual adaptation in collaborative tasks, offering experimental evidence that both humans and robots benefit from continuous reciprocal learning. Moreover, Holstein et al.~\cite{Holstein} introduced a conceptual framework for human-AI hybrid adaptivity in educational settings, highlighting how effective communication and adaptive strategies can jointly drive collaborative learning. These studies collectively underscore the potential of leveraging mutual adaptation to foster robust and resilient human-robot partnerships.
-
-Collaborative work has further enriched our understanding of human-robot co-learning. For instance, Shafti et al.~\cite{DBLP:journals/corr/abs-2003-01156} demonstrated effective human-robot collaboration through reinforcement learning in real-world scenarios, while Wenskovitch et al.~\cite{WenskovitchInteractiveAD} addressed the challenge of transparency in interactive AI systems, emphasizing the need for interpretable decision-making in collaborative settings. Moreover, Gao et al.~\cite{gao} explored personalized human-robot co-adaptation in instructional environments, highlighting how tailored interaction strategies can enhance mutual learning. These studies complement the aforementioned works by providing diverse perspectives on designing adaptive, communicative, and transparent systems for robust human-robot collaboration.
-
-Recent work by van Zoelen et al.~\cite{10.1145/3434074.3446354,vanZoelen2021,vanZoelen2022} systematically identified recurring interaction patterns in human-robot co-adaptation using the MATRX USAR environment. Their study distinguishes between stable situations and sudden adaptations, offering a behavioral framework that captures the dynamics of mutual adaptation in team settings. These insights underscore the context-dependent nature of co-learning and provide a valuable foundation for designing systems that support effective human-robot interactions. Building on this work, our approach integrates KG-based representations of episodic memory with self-supervised graph learning, enabling efficient clustering and retrieval of these interaction patterns to enhance team-level performance in dynamic environments.
-
-
-\section{Conclusion}
+\section{Conclusion and Limitations}
 \label{sec:conclusion}
 
 
-We showed that initializing a USAR robot with a single collaboration pattern stored as a knowledge‑graph episodic memory, learned by self‑supervised relational GNNs, can boost human–robot teamwork. In 160 MATRX trials the seeded robot raised victim‑rescue success from 25.7\% to 41.3\% and cut average task time by 283s. However, the study also comes with some limitations. It was limited to simulation with 20 student participants, one CP drawn from the best cluster, and a domain‑specific ontology; budget constraints precluded testing other cluster exemplars, and victim‑harm sometimes increased when the robot moved heavy debris. Future work will pursue online growth / pruning of the episodic memory and transfer to other collaborative domains.
+We showed that initializing a USAR robot with a single prior collaboration pattern
+stored as a knowledge-graph episodic memory can improve human-robot teamwork. Across
+20 participants and 160 round-level observations, the memory-initialized robot raised
+victim-rescue success from 25.7\% to 41.3\% and cut average task time by 283 seconds, with
+the largest gains appearing early in interaction. These results suggest that robots can
+benefit from entering a new task with reusable knowledge distilled from earlier
+collaborations rather than starting from an empty memory state. More specifically, the
+contribution is a simple test-time memory initialization mechanism: prior team
+experience is encoded once, selected offline, and reused at the start of a new
+collaboration episode. More broadly, the paper argues for a view of robot learning
+that is compatible with human-robot symbiosis: prior experience should not only
+improve behavior, but remain inspectable enough to support communication, shared
+understanding, and iterative refinement by human teammates.
+
+The study nevertheless has limitations. It was conducted in simulation with 20 student
+participants, used one centroid-nearest representative CP drawn from a heuristically
+selected cluster, and relied on a domain-specific ontology; budget constraints also
+precluded testing other cluster exemplars, and victim harm sometimes increased when the
+robot moved heavy debris. Future work will examine online memory growth and pruning,
+compare multiple candidate memories, test alternative cluster choices, and evaluate
+whether reusable episodic team memory also improves human-centered outcomes such as
+trust, coordination quality, cognitive load, and perceived fluency. In physically and
+mentally demanding contexts like disaster response, this kind of pre-aligned structural
+task knowledge may reduce cognitive burden on human operators and therefore merits
+direct measurement in future studies.
 
 \bibliographystyle{ieeetr}
 \bibliography{references}
-
 
 
 \end{document}
